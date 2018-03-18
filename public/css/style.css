@@ -1,0 +1,339 @@
+a {
+  text-decoration: none !important; }
+
+.header {
+  height: 80px;
+  width: calc(100% - 80px);
+  display: inline-block;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  z-index: 3;
+  background: #fff; }
+  .header img {
+    max-height: 60px;
+    margin-left: 20px;
+    margin-top: 10px; }
+  .header ul {
+    display: inline-block;
+    vertical-align: bottom;
+    margin: 0;
+    float: right; }
+    .header ul li {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 30px 15px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      color: #000;
+      position: relative; }
+      .header ul li .fa-angle-down {
+        position: absolute;
+        right: 0;
+        bottom: 30px; }
+      .header ul li .fa-angle-right {
+        position: absolute;
+        right: 15px;
+        top: 20px; }
+      .header ul li .sub-menu {
+        display: none;
+        position: absolute;
+        padding-left: 0;
+        padding-top: 0;
+        top: 80px;
+        width: max-content;
+        border-top: 2px solid #337ab7;
+        background: #fff; }
+        .header ul li .sub-menu li {
+          display: block;
+          font-family: 'Montserrat', sans-serif;
+          padding: 15px 40px 15px 20px;
+          border-bottom: 1px solid #ccc;
+          color: #000;
+          position: relative; }
+          .header ul li .sub-menu li a {
+            text-transform: none;
+            font-weight: normal; }
+          .header ul li .sub-menu li .sub-menu2 {
+            display: none;
+            position: absolute;
+            left: calc(100% + 5px);
+            top: 5px;
+            padding-left: 0;
+            padding-top: 0;
+            width: max-content;
+            border-top: 2px solid #337ab7;
+            background: #fff; }
+        .header ul li .sub-menu li:hover a {
+          color: #337ab7; }
+      .header ul li a {
+        color: #000; }
+    .header ul li:hover {
+      color: #337ab7; }
+    .header ul .login {
+      padding: 30px 25px;
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      text-transform: uppercase;
+      font-weight: bold;
+      background: #337ab7;
+      margin-left: 30px;
+      cursor: pointer;
+      color: #fff; }
+      .header ul .login i {
+        margin-right: 10px;
+        font-size: 16px; }
+
+.slider .owl-item {
+  height: 650px; }
+  .slider .owl-item .item {
+    background-size: cover;
+    background-position: center;
+    height: 100%; }
+.slider .owl-nav {
+  position: absolute;
+  top: calc((100% - 70px) / 2);
+  width: 100%; }
+  .slider .owl-nav .owl-prev, .slider .owl-nav .owl-next {
+    display: inline-block;
+    color: #fff;
+    font-size: 50px;
+    margin-left: 20px; }
+  .slider .owl-nav .owl-next {
+    float: right;
+    margin-right: 20px; }
+.slider .owl-dots {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center; }
+  .slider .owl-dots .owl-dot {
+    width: 15px;
+    height: 15px;
+    margin: 0 10px;
+    display: inline-block;
+    background: transparent;
+    border: 2px solid #337ab7;
+    border-radius: 50%; }
+  .slider .owl-dots .owl-dot.active {
+    background: #337ab7; }
+
+.course-wrapper {
+  padding: 50px 0; }
+  .course-wrapper .title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 40px; }
+    .course-wrapper .title .border-wrapper .border {
+      display: inline-block;
+      width: 80px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #337ab7; }
+  .course-wrapper .object-wrapper {
+    height: 420px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    align-items: center;
+    display: flex; }
+    .course-wrapper .object-wrapper .object {
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+      transition: all .2s ease-in-out;
+      position: absolute; }
+    .course-wrapper .object-wrapper .bg1 {
+      background: rgba(2, 179, 228, 0.49);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0; }
+    .course-wrapper .object-wrapper .bg2 {
+      background: rgba(1, 183, 186, 0.6); }
+    .course-wrapper .object-wrapper .bg3 {
+      background: rgba(169, 81, 237, 0.7); }
+    .course-wrapper .object-wrapper .bg4 {
+      background: rgba(125, 151, 173, 0.8); }
+    .course-wrapper .object-wrapper .bg5 {
+      background: rgba(255, 84, 131, 0.7); }
+    .course-wrapper .object-wrapper .text-wrapper {
+      width: 100%;
+      z-index: 2;
+      text-align: center;
+      color: #fff; }
+      .course-wrapper .object-wrapper .text-wrapper .title {
+        font-weight: bold;
+        font-size: 25px;
+        margin-bottom: 0; }
+      .course-wrapper .object-wrapper .text-wrapper .text {
+        font-size: 17px;
+        font-weight: bold; }
+  .course-wrapper .object-wrapper:hover .object {
+    transform: scale(1.1); }
+  .course-wrapper .row-wrapper {
+    margin-bottom: 20px; }
+  .course-wrapper .width50 {
+    width: calc(50% - 10px);
+    height: 200px; }
+  .course-wrapper .mr20 {
+    margin-right: 20px; }
+  .course-wrapper .p10 {
+    padding: 0 10px; }
+
+.footer {
+  background: #ddd;
+  padding: 40px 0 10px; }
+  .footer img {
+    max-width: 90%; }
+  .footer .title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px; }
+  .footer .text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px; }
+  .footer .copyright {
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-style: italic; }
+
+#myLoginModal a {
+  text-decoration: none !important; }
+#myLoginModal input::-webkit-input-placeholder {
+  color: #fff !important; }
+#myLoginModal input:-moz-placeholder {
+  /* Firefox 18- */
+  color: #fff !important; }
+#myLoginModal input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #fff !important; }
+#myLoginModal input:-ms-input-placeholder {
+  color: #fff !important; }
+#myLoginModal .modal-dialog {
+  background: transparent;
+  width: 450px;
+  margin: 80px auto; }
+  @media screen and (max-width: 768px) {
+    #myLoginModal .modal-dialog {
+      margin: 80px 10px;
+      width: calc(100% - 20px); } }
+  #myLoginModal .modal-dialog .modal-content {
+    background: transparent;
+    box-shadow: none;
+    border: 0; }
+    #myLoginModal .modal-dialog .modal-content .main-agileits {
+      font-family: 'Sirin Stencil', cursive;
+      position: relative;
+      width: 100%;
+      background: #333;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center center;
+      z-index: 1;
+      background-image: url("../img/login-bg.jpg");
+      background-position: center bottom; }
+      #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile {
+        background: rgba(4, 4, 4, 0.56);
+        -webkit-box-shadow: 0px 35px 44px -22px rgba(0, 0, 0, 0.72);
+        -moz-box-shadow: 0px 35px 44px -22px rgba(0, 0, 0, 0.72);
+        box-shadow: 0px 35px 44px -22px #1f181b;
+        padding: 60px 30px; }
+        #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form {
+          margin: 0 auto;
+          width: 100%; }
+          #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form h2 {
+            color: #fff;
+            font-size: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            margin-top: 0;
+            font-family: 'Sirin Stencil', cursive; }
+          #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .icon-w3 {
+            display: inline-block;
+            position: absolute;
+            right: 20px;
+            top: 16px; }
+            #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .icon-w3 i {
+              color: #fff;
+              font-size: 20px; }
+          #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 {
+            position: relative;
+            margin-bottom: 20px; }
+            #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input[type="text"], #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input[type="password"], #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input[type="email"] {
+              outline: none;
+              font-size: 15px;
+              color: #ffffff;
+              padding: 15px 40px 15px 10px;
+              letter-spacing: 2px;
+              width: 100%;
+              border: none;
+              border: 1px solid #DCCBCF;
+              -webkit-appearance: none;
+              margin-bottom: 10px;
+              background: transparent;
+              font-family: 'Sirin Stencil', cursive; }
+            #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .error {
+              color: red; }
+            #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .success {
+              color: #8BC34A;
+              text-align: center; }
+          #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"] {
+            background: #fff;
+            color: #000;
+            outline: none;
+            display: block;
+            margin: 0 auto;
+            border: none;
+            cursor: pointer;
+            padding: 7px 35px;
+            font-size: 16px;
+            margin-top: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: 'Sirin Stencil', cursive;
+            transition: 0.3s all;
+            -webkit-transition: 0.3s all;
+            -moz-transition: 0.3s all;
+            -o-transition: 0.3s all;
+            -ms-transition: 0.3s all; }
+          #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"]:hover {
+            background: #4CAF50;
+            color: #ffffff;
+            transition: 0.3s all;
+            -webkit-transition: 0.3s all;
+            -moz-transition: 0.3s all;
+            -o-transition: 0.3s all;
+            -ms-transition: 0.3s all; }
+          #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .p-bottom-w3ls, #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .p-bottom-w3ls1 {
+            font-size: 16px;
+            color: #eee;
+            margin-top: 0em;
+            text-align: center;
+            text-transform: none;
+            float: left;
+            font-family: 'Sirin Stencil', cursive; }
+            @media screen and (max-width: 768px) {
+              #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .p-bottom-w3ls, #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .p-bottom-w3ls1 {
+                float: none; } }
+            #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .p-bottom-w3ls button, #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .p-bottom-w3ls1 button {
+              background: transparent;
+              border: 0;
+              color: #8BC34A;
+              outline: none;
+              text-decoration: none; }
+          #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .p-bottom-w3ls1 {
+            float: right; }
+            @media screen and (max-width: 768px) {
+              #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .p-bottom-w3ls1 {
+                float: none; } }
+
+/*# sourceMappingURL=style.css.map */
