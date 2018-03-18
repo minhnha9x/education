@@ -55,7 +55,7 @@
             </li>
             <li><a href="">Về chúng tôi</a></li>
             <li><a href="">Liên hệ</a></li>
-                @if( Auth::check() )
+                @if( Auth::check() ) 
                     <div class="login" onclick="location.href = './logout'">
                         <i class="fas fa-unlock-alt"></i>HI,{{ Auth::user()->name }}
                     </div>
@@ -174,7 +174,7 @@
                                 </div>
                             @endif
                             <div class="form-sub-w3">
-                                <input type="text" class="form-control" id="email" placeholder="Email" name="email" value="{{old('email')}}">
+                                <input type="text" id="email" placeholder="Email" name="email" value="{{old('email')}}">
                                 <div class="icon-w3">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </div>
@@ -183,15 +183,19 @@
                                  @endif
                             </div>
                             <div class="form-sub-w3">
-                                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                                <input type="password" id="password" placeholder="Password" name="password">
                                 <div class="icon-w3">
                                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                                 </div>
                                 @if($errors->has('password'))
                                     <p style="color:red">{{$errors->first('password')}}</p>
-                                @endif                                
+                                @endif
                             </div>
                             {!! csrf_field() !!}
+                            <div class="clearfix">
+                                <p class="p-bottom-w3ls">Forgot Password?<button id="login_lost_btn" type="button">Click here</button></p>
+                                <p class="p-bottom-w3ls1">New User?<button id="login_register_btn" type="button">Register here</button></p>
+                            </div>
                             <div class="submit-w3l">
                                 <input type="submit" value="Login">
                             </div>
@@ -291,5 +295,10 @@
     $('#login-btn').click(function(){
         $('#myLoginModal').modal('show', 300);
     })
+    @if($errors->has('email') || $errors->has('password') || $errors->has('errorlogin'))
+    {
+    	$('#myLoginModal').modal('show', 300);
+    }
+    @endif
 </script>
 </html>
