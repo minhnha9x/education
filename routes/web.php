@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// login logout
 Route::post('login','LoginController@postLogin');
 Route::get('/logout', 'LoginController@logout');
 Route::get('/', function () {
