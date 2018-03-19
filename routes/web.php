@@ -15,3 +15,6 @@ Route::get('/logout', 'LoginController@logout');
 Route::get('/', function () {
     return view('homepage');
 });
+Route::get('/admin', function () {
+    return view('adminpage');
+});

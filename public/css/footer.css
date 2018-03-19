@@ -1,0 +1,21 @@
+.footer {
+  background: #ddd;
+  padding: 40px 0 10px; }
+  .footer img {
+    max-width: 90%; }
+  .footer .title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px; }
+  .footer .text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px; }
+  .footer .copyright {
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-style: italic; }
+
+/*# sourceMappingURL=footer.css.map */

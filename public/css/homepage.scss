@@ -1,0 +1,128 @@
+.slider {
+	.owl-item {
+		height: 650px;
+		.item {
+			background-size: cover;
+			background-position: center;
+			height: 100%;
+		}
+	}
+	.owl-nav {
+		position: absolute;
+		top: calc((100% - 70px) / 2);
+		width: 100%;
+		.owl-prev, .owl-next {
+			display: inline-block;
+			color: #fff;
+			font-size: 50px;
+			margin-left: 20px;
+		}
+		.owl-next {
+			float: right;
+			margin-right: 20px;
+		}
+	}
+	.owl-dots {
+		position: absolute;
+		bottom: 10px;
+		width: 100%;
+		text-align: center;
+		.owl-dot {
+			width: 15px;
+			height: 15px;
+			margin: 0 10px;
+			display: inline-block;
+			background: transparent;
+			border: 2px solid #337ab7;
+			border-radius: 50%;
+		}
+		.owl-dot.active {
+			background: #337ab7;
+		}
+	}
+}
+.course-wrapper {
+	padding: 50px 0;
+	.title {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 35px;
+		text-align: center;
+		margin-bottom: 40px;
+		.border-wrapper {
+			.border {
+				display: inline-block;
+				width: 80px;
+				margin-bottom: 20px;
+				border-bottom: 2px solid #337ab7;
+			}
+		}
+	}
+	.object-wrapper {
+		height: 420px;
+		position: relative;
+		cursor: pointer;
+		overflow: hidden;
+		align-items: center;
+		display: flex;
+		.object {
+			background-size: cover;
+			width: 100%;
+			height: 100%;
+			transition: all .2s ease-in-out;
+			position: absolute;
+		}
+		.bg1 {
+			background: rgba(2,179,228,0.49);
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.bg2 {
+			background: rgba(1,183,186,0.60);
+		}
+		.bg3 {
+			background: rgba(169, 81, 237, 0.7);
+		}
+		.bg4 {
+			background: rgba(125, 151, 173, 0.8);
+		}
+		.bg5 {
+			background: rgba(255, 84, 131, 0.7);
+		}
+		.text-wrapper {
+			width: 100%;
+			z-index: 2;
+			text-align: center;
+			color: #fff;
+			.title {
+				font-weight: bold;
+				font-size: 25px;
+				margin-bottom: 0;
+			}
+			.text {
+				font-size: 17px;
+				font-weight: bold;
+			}
+		}
+	}
+	.object-wrapper:hover{
+		.object {
+			transform: scale(1.1);
+		}
+	}
+	.row-wrapper {
+		margin-bottom: 20px;
+	}
+	.width50 {
+		width: calc(50% - 10px);
+		height: 200px;
+	}
+	.mr20 {
+		margin-right: 20px;
+	}
+	.p10 {
+		padding: 0 10px;
+	}
+}

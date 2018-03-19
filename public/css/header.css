@@ -19,6 +19,14 @@ a {
     vertical-align: bottom;
     margin: 0;
     float: right; }
+    .header ul .fa-angle-down {
+      position: absolute;
+      right: 0;
+      bottom: 30px; }
+    .header ul .fa-angle-right {
+      position: absolute;
+      right: 15px;
+      top: 20px; }
     .header ul li {
       display: inline-block;
       font-size: 14px;
@@ -29,14 +37,6 @@ a {
       font-family: 'Montserrat', sans-serif;
       color: #000;
       position: relative; }
-      .header ul li .fa-angle-down {
-        position: absolute;
-        right: 0;
-        bottom: 30px; }
-      .header ul li .fa-angle-right {
-        position: absolute;
-        right: 15px;
-        top: 20px; }
       .header ul li .sub-menu {
         display: none;
         position: absolute;
@@ -54,13 +54,12 @@ a {
           color: #000;
           position: relative; }
           .header ul li .sub-menu li a {
-            text-transform: none;
-            font-weight: normal; }
+            text-transform: capitalize; }
           .header ul li .sub-menu li .sub-menu2 {
             display: none;
             position: absolute;
-            left: calc(100% + 5px);
-            top: 5px;
+            left: 100%;
+            top: -2px;
             padding-left: 0;
             padding-top: 0;
             width: max-content;
@@ -72,6 +71,8 @@ a {
         color: #000; }
     .header ul li:hover {
       color: #337ab7; }
+      .header ul li:hover a {
+        color: #337ab7; }
     .header ul .login {
       padding: 30px 25px;
       display: inline-block;
@@ -86,124 +87,46 @@ a {
       .header ul .login i {
         margin-right: 10px;
         font-size: 16px; }
-
-.slider .owl-item {
-  height: 650px; }
-  .slider .owl-item .item {
-    background-size: cover;
-    background-position: center;
-    height: 100%; }
-.slider .owl-nav {
-  position: absolute;
-  top: calc((100% - 70px) / 2);
-  width: 100%; }
-  .slider .owl-nav .owl-prev, .slider .owl-nav .owl-next {
-    display: inline-block;
-    color: #fff;
-    font-size: 50px;
-    margin-left: 20px; }
-  .slider .owl-nav .owl-next {
-    float: right;
-    margin-right: 20px; }
-.slider .owl-dots {
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-  text-align: center; }
-  .slider .owl-dots .owl-dot {
-    width: 15px;
-    height: 15px;
-    margin: 0 10px;
-    display: inline-block;
-    background: transparent;
-    border: 2px solid #337ab7;
-    border-radius: 50%; }
-  .slider .owl-dots .owl-dot.active {
-    background: #337ab7; }
-
-.course-wrapper {
-  padding: 50px 0; }
-  .course-wrapper .title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 35px;
-    text-align: center;
-    margin-bottom: 40px; }
-    .course-wrapper .title .border-wrapper .border {
-      display: inline-block;
-      width: 80px;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #337ab7; }
-  .course-wrapper .object-wrapper {
-    height: 420px;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    align-items: center;
-    display: flex; }
-    .course-wrapper .object-wrapper .object {
-      background-size: cover;
-      width: 100%;
-      height: 100%;
-      transition: all .2s ease-in-out;
-      position: absolute; }
-    .course-wrapper .object-wrapper .bg1 {
-      background: rgba(2, 179, 228, 0.49);
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0; }
-    .course-wrapper .object-wrapper .bg2 {
-      background: rgba(1, 183, 186, 0.6); }
-    .course-wrapper .object-wrapper .bg3 {
-      background: rgba(169, 81, 237, 0.7); }
-    .course-wrapper .object-wrapper .bg4 {
-      background: rgba(125, 151, 173, 0.8); }
-    .course-wrapper .object-wrapper .bg5 {
-      background: rgba(255, 84, 131, 0.7); }
-    .course-wrapper .object-wrapper .text-wrapper {
-      width: 100%;
-      z-index: 2;
-      text-align: center;
-      color: #fff; }
-      .course-wrapper .object-wrapper .text-wrapper .title {
+    .header ul .acc-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding-right: 40px;
+      height: 80px;
+      float: right;
+      padding-left: 30px; }
+      .header ul .acc-wrapper .avatar {
+        width: 50px;
+        height: 50px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+        vertical-align: middle;
+        display: inline-block;
+        margin-right: 15px; }
+      .header ul .acc-wrapper .loged {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
         font-weight: bold;
-        font-size: 25px;
-        margin-bottom: 0; }
-      .course-wrapper .object-wrapper .text-wrapper .text {
-        font-size: 17px;
-        font-weight: bold; }
-  .course-wrapper .object-wrapper:hover .object {
-    transform: scale(1.1); }
-  .course-wrapper .row-wrapper {
-    margin-bottom: 20px; }
-  .course-wrapper .width50 {
-    width: calc(50% - 10px);
-    height: 200px; }
-  .course-wrapper .mr20 {
-    margin-right: 20px; }
-  .course-wrapper .p10 {
-    padding: 0 10px; }
-
-.footer {
-  background: #ddd;
-  padding: 40px 0 10px; }
-  .footer img {
-    max-width: 90%; }
-  .footer .title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px; }
-  .footer .text {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px; }
-  .footer .copyright {
-    margin-top: 20px;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-style: italic; }
+        display: inline-block;
+        text-transform: capitalize; }
+      .header ul .acc-wrapper .fas {
+        bottom: 30px;
+        right: 25px; }
+      .header ul .acc-wrapper ul {
+        display: none;
+        padding: 0;
+        position: absolute;
+        top: 80px;
+        right: 25px;
+        background: #fff;
+        border-top: 2px solid #337ab7; }
+        .header ul .acc-wrapper ul li {
+          display: block;
+          text-transform: capitalize;
+          padding: 10px 20px;
+          border-bottom: 1px solid #ccc; }
 
 #myLoginModal a {
   text-decoration: none !important; }
@@ -336,4 +259,4 @@ a {
               #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .p-bottom-w3ls1 {
                 float: none; } }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=header.css.map */
