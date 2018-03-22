@@ -2,6 +2,7 @@
     <title>{{ $title }}</title>
     <link href="./css/header.css" rel="stylesheet" type="text/css">
     <link href="./css/font.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="./css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="./css/owl.carousel.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" crossorigin="anonymous">
@@ -16,7 +17,7 @@
 </head>
 
     <div class="header">
-        <a href=""><img src="./img/logo.png"></a>
+        <a href="/"><img src="./img/logo.png"></a>
         <ul class='menu'>
             <li>
                 Khóa học
@@ -164,7 +165,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
     <script type="text/javascript">
         $('.menu > li').hover(function(){
             $(this).find('.sub-menu').slideToggle(200);
@@ -175,21 +175,28 @@
         $('.acc-wrapper').hover(function(){
             $(this).find('ul').fadeToggle(200);
         })
-        $(window).scroll(function (event) {
-            var scroll = $(window).scrollTop();
-            if (scroll > 40) {
-                $('.header').css('width', '100%');
-                $('.header').css('position', 'fixed');
-                $('.header').css('top', '0');
-                $('.header').css('left', '0');
-            }
-            else {
-                $('.header').css('width', 'calc(100% - 80px)');
-                $('.header').css('position', 'absolute');
-                $('.header').css('top', '40px');
-                $('.header').css('left', '40px');
-            }
-        });
+        @if ($position == 'top')
+            $(window).scroll(function (event) {
+                var scroll = $(window).scrollTop();
+                if (scroll > 40) {
+                    $('.header').css('width', '100%');
+                    $('.header').css('position', 'fixed');
+                    $('.header').css('top', '0');
+                    $('.header').css('left', '0');
+                }
+                else {
+                    $('.header').css('width', 'calc(100% - 80px)');
+                    $('.header').css('position', 'absolute');
+                    $('.header').css('top', '40px');
+                    $('.header').css('left', '40px');
+                }
+            });
+        @else
+            $('.header').css('width', '100%');
+            $('.header').css('position', 'fixed');
+            $('.header').css('top', '0');
+            $('.header').css('left', '0');
+        @endif
         $('#login-btn').click(function(){
             $('#myLoginModal').modal('show', 300);
         })
