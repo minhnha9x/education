@@ -165,7 +165,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
     <script type="text/javascript">
         $('.menu > li').hover(function(){
             $(this).find('.sub-menu').slideToggle(200);
