@@ -1,6 +1,8 @@
 <link href="./css/homepage.css" rel="stylesheet" type="text/css">
  
-@include('header', [$title='Education Page'])
+<div class="homepage">
+	@include('header', [$title='Education Page', $position='top'])
+
 	<div id="fb-root"></div>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -9,6 +11,7 @@
       js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.12&appId=1614788861874943&autoLogAppEvents=1';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
+    
     <div class="slider">
         <div class="owl-carousel owl-theme">
             <div class="item" style="background-image: url('./img/banner1.jpg')"></div>
@@ -75,6 +78,8 @@
         </div>
     </div>
     @include('footer')
+</div>
+
 <script type="text/javascript">
     $('.owl-carousel').owlCarousel({
         autoplay: 4000,

@@ -1,3 +1,4 @@
+$blue: #337ab7;
 a {
 	text-decoration: none !important;
 }
@@ -10,6 +11,7 @@ a {
 	left: 40px;
 	z-index: 3;
 	background: #fff;
+	border-bottom: 1px solid #ccc;
 	img {
 		max-height: 60px;
 		margin-left: 20px;
@@ -47,7 +49,7 @@ a {
 				padding-top: 0;
 				top: 80px;
 				width: max-content;
-				border-top: 2px solid #337ab7;
+				border-top: 2px solid $blue;
 				background: #fff;
 				li {
 					display: block;
@@ -67,13 +69,13 @@ a {
 						padding-left: 0;
 						padding-top: 0;
 						width: max-content;
-						border-top: 2px solid #337ab7;
+						border-top: 2px solid $blue;
 						background: #fff;
 					}
 				}
 				li:hover {
 					a {
-						color: #337ab7;
+						color: $blue;
 					}
 				}
 			}
@@ -83,9 +85,9 @@ a {
 			}
 		}
 		li:hover {
-			color: #337ab7;
+			color: $blue;
 			a {
-				color: #337ab7;
+				color: $blue;
 			}
 		}
 		.login {
@@ -95,7 +97,7 @@ a {
 			font-size: 14px;
 			text-transform: uppercase;
 			font-weight: bold;
-			background: #337ab7;
+			background: $blue;
 			margin-left: 30px;
 			cursor: pointer;
 			color: #fff;
@@ -141,7 +143,7 @@ a {
 				top: 80px;
 				right: 25px;
 				background: #fff;
-				border-top: 2px solid #337ab7;
+				border-top: 2px solid $blue;
 				li {
 					display: block;
 					text-transform: capitalize;

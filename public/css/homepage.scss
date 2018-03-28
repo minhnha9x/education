@@ -1,3 +1,4 @@
+$blue: #337ab7;
 .slider {
 	.owl-item {
 		height: 650px;
@@ -33,11 +34,11 @@
 			margin: 0 10px;
 			display: inline-block;
 			background: transparent;
-			border: 2px solid #337ab7;
+			border: 2px solid $blue;
 			border-radius: 50%;
 		}
 		.owl-dot.active {
-			background: #337ab7;
+			background: $blue;
 		}
 	}
 }
@@ -53,7 +54,7 @@
 				display: inline-block;
 				width: 80px;
 				margin-bottom: 20px;
-				border-bottom: 2px solid #337ab7;
+				border-bottom: 2px solid $blue;
 			}
 		}
 	}
