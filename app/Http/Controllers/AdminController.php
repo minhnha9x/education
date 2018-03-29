@@ -16,6 +16,13 @@ class AdminController extends Controller
         ->groupBy('course.id')
         ->get();
         $data = array('courses' => $courses);
+
+        $subjects = DB::table('subject')
+        ->select('subject.*', DB::raw('count(course.id) as count'))
+        ->leftjoin('course', 'course.subject', 'subject.id')
+        ->groupBy('subject.id')
+        ->get();
+        $data = array('courses' => $courses, 'subjects' => $subjects);
         return view('adminpage')->with($data);
     }
 }
