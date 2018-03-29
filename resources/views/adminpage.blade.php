@@ -1,9 +1,3 @@
-<?php
-namespace App\Http\Controllers;
-
-use Illuminate\Support\Facades\DB; 
-?>
-
 <link href="./css/adminpage.css" rel="stylesheet" type="text/css">
 
 <div class="adminpage">
@@ -26,7 +20,8 @@ use Illuminate\Support\Facades\DB;
             @include('coursemanager')
         </div>
         <div id="menu2" class="tab-pane fade">
-            @include('class_manager')
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
         <div id="menu3" class="tab-pane fade">
             @include('subject_manager')

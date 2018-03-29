@@ -1,0 +1,28 @@
+.subjectpage {
+  padding-top: 140px; }
+  .subjectpage .title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 50px; }
+  .subjectpage .course-wrapper {
+    display: flex;
+    margin-bottom: 40px; }
+    .subjectpage .course-wrapper .img {
+      height: 180px;
+      width: 300px;
+      background-size: cover !important;
+      background-position: center !important;
+      margin-right: 30px; }
+    .subjectpage .course-wrapper .info {
+      width: calc(100% - 300px);
+      color: #2d2a2a; }
+      .subjectpage .course-wrapper .info .name {
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        margin-bottom: 10px; }
+      .subjectpage .course-wrapper .info .desc {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px; }
+
+/*# sourceMappingURL=subjectpage.css.map */

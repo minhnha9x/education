@@ -93,7 +93,10 @@
       font-family: 'Roboto', sans-serif;
       font-size: 15px; }
       .adminpage .tab-content .tab-pane table td, .adminpage .tab-content .tab-pane table th {
-        text-align: center; }
+        text-align: center;
+        text-transform: capitalize; }
+      .adminpage .tab-content .tab-pane table p {
+        margin-bottom: 0; }
       .adminpage .tab-content .tab-pane table .action {
         text-align: center; }
         .adminpage .tab-content .tab-pane table .action a {
@@ -101,61 +104,59 @@
           cursor: pointer; }
           .adminpage .tab-content .tab-pane table .action a i {
             margin-right: 5px; }
-    .adminpage .tab-content .tab-pane #editModal a {
+    .adminpage .tab-content .tab-pane #courseModal a {
       text-decoration: none !important; }
-    .adminpage .tab-content .tab-pane #editModal input::-webkit-input-placeholder {
-      color: #fff !important; }
-    .adminpage .tab-content .tab-pane #editModal input:-moz-placeholder {
+    .adminpage .tab-content .tab-pane #courseModal input::-webkit-input-placeholder, .adminpage .tab-content .tab-pane #courseModal textarea::-webkit-input-placeholder {
+      color: #040404 !important; }
+    .adminpage .tab-content .tab-pane #courseModal input:-moz-placeholder, .adminpage .tab-content .tab-pane #courseModal textarea:-moz-placeholder {
       /* Firefox 18- */
-      color: #fff !important; }
-    .adminpage .tab-content .tab-pane #editModal input::-moz-placeholder {
+      color: #040404 !important; }
+    .adminpage .tab-content .tab-pane #courseModal input::-moz-placeholder, .adminpage .tab-content .tab-pane #courseModal textarea::-moz-placeholder {
       /* Firefox 19+ */
-      color: #fff !important; }
-    .adminpage .tab-content .tab-pane #editModal input:-ms-input-placeholder {
-      color: #fff !important; }
-    .adminpage .tab-content .tab-pane #editModal .modal-dialog {
+      color: #040404 !important; }
+    .adminpage .tab-content .tab-pane #courseModal input:-ms-input-placeholder, .adminpage .tab-content .tab-pane #courseModal textarea:-ms-input-placeholder {
+      color: #040404 !important; }
+    .adminpage .tab-content .tab-pane #courseModal .modal-dialog {
       background: transparent;
       width: 650px;
       margin: 50px auto; }
-      .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content {
+      .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content {
         background: transparent;
         box-shadow: none;
         border: 0; }
-        .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits {
+        .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits {
           font-family: 'Roboto', sans-serif;
           position: relative;
           width: 100%;
-          background: #333;
+          background: #fff;
           overflow: hidden;
           background-size: cover;
           background-position: center center;
           z-index: 1;
-          background-image: url("../img/login-bg.jpg");
           background-position: center bottom; }
-          .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile {
-            background: rgba(4, 4, 4, 0.56);
+          .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile {
+            background: #ff;
             -webkit-box-shadow: 0px 35px 44px -22px rgba(0, 0, 0, 0.72);
             -moz-box-shadow: 0px 35px 44px -22px rgba(0, 0, 0, 0.72);
             box-shadow: 0px 35px 44px -22px #1f181b;
             padding: 60px 30px; }
-            .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form {
+            .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form {
               margin: 0 auto;
               width: 100%; }
-              .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form h2 {
-                color: #fff;
+              .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form h2 {
+                color: #040404;
                 font-size: 25px;
                 text-align: center;
                 margin-bottom: 40px;
                 letter-spacing: 2px;
-                margin-top: 0;
-                font-family: 'Sirin Stencil', cursive; }
-              .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 {
+                margin-top: 0; }
+              .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 {
                 position: relative;
                 margin-bottom: 20px; }
-                .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input, .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 select, .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 textarea {
+                .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input, .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 select, .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 textarea {
                   outline: none;
                   font-size: 15px;
-                  color: #ffffff;
+                  color: #000;
                   padding: 15px 10px;
                   letter-spacing: 2px;
                   width: 100%;
@@ -165,16 +166,16 @@
                   background: transparent;
                   font-family: 'Roboto', sans-serif;
                   text-transform: capitalize; }
-                  .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input option, .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 select option, .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 textarea option {
+                  .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input option, .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 select option, .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 textarea option {
                     color: initial; }
-                .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .error {
+                .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .error {
                   color: red; }
-                .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .success {
+                .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .success {
                   color: #8BC34A;
                   text-align: center; }
-              .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"] {
-                background: #fff;
-                color: #000;
+              .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"] {
+                background: #337ab7;
+                color: #fff;
                 outline: none;
                 float: right;
                 border: none;
@@ -189,7 +190,7 @@
                 -moz-transition: 0.3s all;
                 -o-transition: 0.3s all;
                 -ms-transition: 0.3s all; }
-              .adminpage .tab-content .tab-pane #editModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"]:hover {
+              .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"]:hover {
                 background: #4CAF50;
                 color: #ffffff;
                 transition: 0.3s all;
