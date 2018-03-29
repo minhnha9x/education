@@ -26,8 +26,7 @@ use Illuminate\Support\Facades\DB;
             @include('coursemanager')
         </div>
         <div id="menu2" class="tab-pane fade">
-            <h3>Menu 1</h3>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            @include('class_manager')
         </div>
         <div id="menu3" class="tab-pane fade">
             @include('subject_manager')
