@@ -16,3 +16,6 @@ Route::get('/', function () {
     return view('homepage');
 });
 Route::get('/admin', 'AdminController@getData');
+Route::get('/subject_{id}', 'SubjectController@get');
+Route::get('/getcourse{id}', 'AdminController@getCourse');
+Route::post('/addcourse', 'AdminController@addCourse');

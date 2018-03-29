@@ -18,7 +18,7 @@
     margin-right: 20px; }
 .slider .owl-dots {
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
   width: 100%;
   text-align: center; }
   .slider .owl-dots .owl-dot {
@@ -49,14 +49,20 @@
     position: relative;
     cursor: pointer;
     overflow: hidden;
-    align-items: center;
-    display: flex; }
+    align-items: center; }
+    .course-wrapper .object-wrapper a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center; }
     .course-wrapper .object-wrapper .object {
       background-size: cover;
       width: 100%;
       height: 100%;
       transition: all .2s ease-in-out;
-      position: absolute; }
+      position: absolute;
+      top: 0; }
     .course-wrapper .object-wrapper .bg1 {
       background: rgba(2, 179, 228, 0.49);
       width: 100%;
@@ -76,7 +82,8 @@
       width: 100%;
       z-index: 2;
       text-align: center;
-      color: #fff; }
+      color: #fff;
+      position: absolute; }
       .course-wrapper .object-wrapper .text-wrapper .title {
         font-weight: bold;
         font-size: 25px;

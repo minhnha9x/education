@@ -105,6 +105,10 @@ $blue: #337ab7;
 				font-size: 15px;
 				td, th {
 					text-align: center;
+					text-transform: capitalize;
+				}
+				p {
+					margin-bottom: 0;
 				}
 				.action {
 					text-align: center;
@@ -117,21 +121,21 @@ $blue: #337ab7;
 					}
 				}
 			}
-			#editModal {
+			#courseModal {
 				a {
 					text-decoration:none !important;
 				}
-				input::-webkit-input-placeholder {
-					color: #fff !important;
+				input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+					color: #040404 !important;
 				}
-				input:-moz-placeholder { /* Firefox 18- */
-					color: #fff !important;  
+				input:-moz-placeholder, textarea:-moz-placeholder { /* Firefox 18- */
+					color: #040404 !important;  
 				}
-				input::-moz-placeholder {  /* Firefox 19+ */
-					color: #fff !important;  
+				input::-moz-placeholder, textarea::-moz-placeholder {  /* Firefox 19+ */
+					color: #040404 !important;  
 				}
-				input:-ms-input-placeholder {  
-					color: #fff !important;  
+				input:-ms-input-placeholder, textarea:-ms-input-placeholder {  
+					color: #040404 !important;  
 				}
 				.modal-dialog {
 					background: transparent;
@@ -145,15 +149,15 @@ $blue: #337ab7;
 						    font-family: 'Roboto', sans-serif;
 							position: relative;
 							width: 100%;
-							background: #333;
+							background: #fff;
 							overflow: hidden;
 							background-size: cover;
 							background-position: center center;
 							z-index: 1;
-							background-image: url('../img/login-bg.jpg');
+							//background-image: url('../img/login-bg.jpg');
 							background-position: center bottom;
 						    .form-w3-agile {
-							    background: rgba(4, 4, 4, 0.56);
+							    background: #ff;
 							    -webkit-box-shadow: 0px 35px 44px -22px rgba(0,0,0,0.72);
 							    -moz-box-shadow: 0px 35px 44px -22px rgba(0,0,0,0.72);
 							    box-shadow: 0px 35px 44px -22px #1f181b;
@@ -162,13 +166,12 @@ $blue: #337ab7;
 								    margin: 0 auto;
 								    width: 100%;
 								    h2 {
-									    color: #fff;
+									    color: #040404;
 									    font-size: 25px;
 									    text-align: center;
 									    margin-bottom: 40px;
 									    letter-spacing: 2px;
 									    margin-top: 0;
-									    font-family: 'Sirin Stencil', cursive;
 									}
 									.form-sub-w3{
 										position:relative;
@@ -176,7 +179,7 @@ $blue: #337ab7;
 									    input, select, textarea {
 										    outline: none;
 										    font-size: 15px;
-										    color: #ffffff;
+										    color: #000;
 										    padding: 15px 10px;
 										    letter-spacing: 2px;
 										    width: 100%;
@@ -199,8 +202,8 @@ $blue: #337ab7;
 										}
 									}
 									input[type="submit"] {
-									    background: #fff;
-									    color: #000;
+									    background: $blue;
+									    color: #fff;
 									    outline: none;
 									    float: right;
 									    border: none;

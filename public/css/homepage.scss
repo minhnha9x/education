@@ -25,7 +25,7 @@ $blue: #337ab7;
 	}
 	.owl-dots {
 		position: absolute;
-		bottom: 10px;
+		bottom: 20px;
 		width: 100%;
 		text-align: center;
 		.owl-dot {
@@ -64,13 +64,20 @@ $blue: #337ab7;
 		cursor: pointer;
 		overflow: hidden;
 		align-items: center;
-		display: flex;
+		a {
+			display: block;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+		}
 		.object {
 			background-size: cover;
 			width: 100%;
 			height: 100%;
 			transition: all .2s ease-in-out;
 			position: absolute;
+			top: 0;
 		}
 		.bg1 {
 			background: rgba(2,179,228,0.49);
@@ -97,6 +104,7 @@ $blue: #337ab7;
 			z-index: 2;
 			text-align: center;
 			color: #fff;
+			position: absolute;
 			.title {
 				font-weight: bold;
 				font-size: 25px;
