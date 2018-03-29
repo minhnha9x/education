@@ -35,7 +35,10 @@ class AdminController extends Controller
         $employees = DB::table('employee')
         ->get();
 
-        $data = array('courses' => $courses, 'subjects' => $subjects, 'all_class' => $class, 'employees' => $employees);
+        $offices = DB::table('office')
+        ->get();
+
+        $data = array('courses' => $courses, 'subjects' => $subjects, 'all_class' => $class, 'employees' => $employees, 'offices' => $offices);
         return view('adminpage')->with($data);
     }
     public function getCourse($id) {

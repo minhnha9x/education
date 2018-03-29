@@ -18,7 +18,7 @@
 			 	</td>
 			 	<td>{{$course->subject}}</td>
 			 	<td>{{$course->total_of_period}}</td>
-			 	<td></td>
+			 	<td>{{$course->count}}</td>
 			 	<td>{{number_format($course->price)}} VNĐ</td>
 			 	<td class="action">
 			 		<a class='edit' data-name="Sửa khóa học" data-id='{{$course->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
