@@ -29,7 +29,10 @@ class AdminController extends Controller
         ->orderby('course.name')
         ->get();
 
-        $data = array('courses' => $courses, 'subjects' => $subjects, 'all_class' => $class);
+        $employees = DB::table('employee')
+        ->get();
+
+        $data = array('courses' => $courses, 'subjects' => $subjects, 'all_class' => $class, 'employees' => $employees);
 
         return view('adminpage')->with($data);
     }
