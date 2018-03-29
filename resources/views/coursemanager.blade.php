@@ -14,14 +14,14 @@
 		@foreach ($courses as $course)
 		    <tr>
 			 	<td>
-			 		<a href="./course/{{$course->ID}}" target='_blank'>{{$course->name}}</a>
+			 		<a href="./course/{{$course->id}}" target='_blank'>{{$course->name}}</a>
 			 	</td>
 			 	<td>{{$course->subject}}</td>
 			 	<td></td>
 			 	<td>{{number_format($course->price)}} VNĐ</td>
 			 	<td></td>
 			 	<td class="action">
-			 		<a id='edit' data-name="Sửa khóa học" data-id='{{$course->ID}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
+			 		<a id='edit' data-name="Sửa khóa học" data-id='{{$course->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
 			 	</td>
 			</tr>
 		@endforeach
