@@ -16,6 +16,9 @@
 			 	<td>
 			 		<a href="./course/{{$course->id}}" target='_blank'>{{$course->name}}</a>
 			 	</td>
+                <script>
+                    console.log(<?= json_encode($course); ?>);
+                </script>
 			 	<td>{{$course->subject}}</td>
 			 	<td></td>
 			 	<td>{{number_format($course->price)}} VNĐ</td>
