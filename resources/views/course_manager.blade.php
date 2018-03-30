@@ -21,7 +21,7 @@
 			 	<td>{{$course->count}}</td>
 			 	<td>{{number_format($course->price)}} VNĐ</td>
 			 	<td class="action">
-			 		<a class='edit' data-name="Sửa khóa học" data-id='{{$course->id}}'><i class="fas fa-edit"></i>Sửa</a><a href="{{url('deletecourse') . $course->id}}"><i class="fas fa-trash-alt"></i>Xóa</a>
+			 		<a class='edit' data-name="Sửa khóa học" data-id='{{$course->id}}'><i class="fas fa-edit"></i>Sửa</a><a href="{{url('deletecourse') . $course->id}}" onclick="return confirm('Are you sure you want to delete this course?');"><i class="fas fa-trash-alt"></i>Xóa</a>
 			 	</td>
 			</tr>
 		@endforeach
@@ -32,7 +32,7 @@
         <div class="modal-content">
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
-                    <form accept="" ction="{{url('addcourse')}}" method="POST" role="form">
+                    <form method="POST" role="form">
                         <h2 id="form-title"></h2>
                         <div class="form-sub-w3 col-md-6">
                             <input type="text" placeholder="Tên khóa học" name="name">
@@ -129,6 +129,7 @@
         });
     });
     $('#addcourse').click(function(){
+    	$('#courseModal form').attr('action', '{{url('addcourse')}}');
     	$('#form-title').text($(this).data('name'));
     	$('#form-button').val($(this).data('name'));
     	$('#courseModal input[name="name"]').val("");
