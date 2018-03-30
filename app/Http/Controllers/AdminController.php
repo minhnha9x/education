@@ -75,4 +75,12 @@ class AdminController extends Controller
         $course->save();
         return back()->withInput();
     }
+    public function getClassFromCourse($id) {
+        $course = DB::table('class')
+        ->select("*")
+        ->where('course', $id)
+        ->get();
+        $data = $course->toJson();
+        return $data;
+    }
 }

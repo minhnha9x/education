@@ -133,6 +133,8 @@
     	$('#form-button').val($(this).data('name'));
     	$('#courseModal input[name="name"]').val("");
 		$('#courseModal input[name="price"]').val("");
+		$('#courseModal input[name="total_of_period"]').val("");
+		$('#courseModal textarea[name="description"]').val("");
         $('#courseModal').modal('show', 300);
     })
 </script>

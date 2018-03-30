@@ -1,5 +1,6 @@
 .subjectpage {
-  padding-top: 140px; }
+  padding-top: 140px;
+  padding-bottom: 40px; }
   .subjectpage .title {
     font-family: 'Montserrat', sans-serif;
     font-size: 35px;
@@ -7,7 +8,8 @@
     margin-bottom: 50px; }
   .subjectpage .course-wrapper {
     display: flex;
-    margin-bottom: 40px; }
+    margin-bottom: 40px;
+    cursor: pointer; }
     .subjectpage .course-wrapper .img {
       height: 180px;
       width: 300px;
@@ -24,5 +26,62 @@
       .subjectpage .course-wrapper .info .desc {
         font-family: 'Roboto', sans-serif;
         font-size: 16px; }
+      .subjectpage .course-wrapper .info .price {
+        margin-top: 10px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 17px;
+        font-weight: bold;
+        color: #337ab7; }
+  .subjectpage .right .img {
+    order: 2;
+    margin-right: 0;
+    margin-left: 30px; }
+  .subjectpage .right .info {
+    text-align: right; }
+  .subjectpage #classModal a {
+    text-decoration: none !important; }
+  .subjectpage #classModal input::-webkit-input-placeholder, .subjectpage #classModal textarea::-webkit-input-placeholder {
+    color: #040404 !important; }
+  .subjectpage #classModal input:-moz-placeholder, .subjectpage #classModal textarea:-moz-placeholder {
+    /* Firefox 18- */
+    color: #040404 !important; }
+  .subjectpage #classModal input::-moz-placeholder, .subjectpage #classModal textarea::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #040404 !important; }
+  .subjectpage #classModal input:-ms-input-placeholder, .subjectpage #classModal textarea:-ms-input-placeholder {
+    color: #040404 !important; }
+  .subjectpage #classModal .modal-dialog {
+    background: transparent;
+    width: 650px;
+    margin: 50px auto; }
+    .subjectpage #classModal .modal-dialog .modal-content {
+      background: transparent;
+      box-shadow: none;
+      border: 0; }
+      .subjectpage #classModal .modal-dialog .modal-content .main-agileits {
+        font-family: 'Roboto', sans-serif;
+        position: relative;
+        width: 100%;
+        background: #fff;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center center;
+        z-index: 1;
+        background-position: center bottom; }
+        .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile {
+          background: #ff;
+          -webkit-box-shadow: 0px 35px 44px -22px rgba(0, 0, 0, 0.72);
+          -moz-box-shadow: 0px 35px 44px -22px rgba(0, 0, 0, 0.72);
+          box-shadow: 0px 35px 44px -22px #1f181b;
+          padding: 40px 30px 20px; }
+          .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile h2 {
+            color: #040404;
+            font-size: 25px;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            margin-top: 0; }
+          .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile table td, .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile table th {
+            text-align: center; }
 
 /*# sourceMappingURL=subjectpage.css.map */

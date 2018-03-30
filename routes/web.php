@@ -21,3 +21,5 @@ Route::get('/getcoursefromsub{id}', 'AdminController@getCourseFromSub');
 Route::get('/getcourse{id}', 'AdminController@getCourse');
 Route::get('/deletecourse{id}', 'AdminController@deleteCourse');
 Route::post('/addcourse', 'AdminController@addCourse');
+
+Route::get('/getclassfromcourse{id}', 'AdminController@getClassFromCourse');
