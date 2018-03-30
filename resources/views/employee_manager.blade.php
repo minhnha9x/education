@@ -14,7 +14,7 @@
         @foreach ($employees as $employee)
             <tr>
                 <script>
-                    console.log(<?= json_encode($employee); ?>);
+                    //console.log(<?= json_encode($employee); ?>);
                 </script>
                 <td>{{$employee->id}}</td>
                 <td>{{$employee->name}}</td>

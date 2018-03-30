@@ -13,7 +13,7 @@
         @foreach ($subjects as $subject)
             <tr>
                 <script>
-                    console.log(<?= json_encode($subject); ?>);
+                    //console.log(<?= json_encode($subject); ?>);
                 </script>
                 <td>{{$subject->id}}</td>
                 <td>{{$subject->name}}</td>

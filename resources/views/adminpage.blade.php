@@ -17,7 +17,7 @@
 
     <div class="tab-content">
         <div id="menu1" class="tab-pane fade in active">
-            @include('coursemanager')
+            @include('course_manager')
         </div>
         <div id="menu2" class="tab-pane fade">
             @include('class_manager')

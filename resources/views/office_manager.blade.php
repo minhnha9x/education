@@ -15,7 +15,7 @@
         @foreach ($offices as $office)
             <tr>
                 <script>
-                    console.log(<?= json_encode($office); ?>);
+                    //console.log(<?= json_encode($office); ?>);
                 </script>
                 <td>{{$office->id}}</td>
                 <td>{{$office->name}}</td>

@@ -14,7 +14,7 @@
         @foreach ($all_class as $class)
             <tr>
                 <script>
-                    console.log(<?= json_encode($class); ?>);
+                   //console.log(<?= json_encode($class); ?>);
                 </script>
                 <td>{{$class->id}}</td>
                 <td>{{$class->start_date}}</td>

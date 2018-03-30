@@ -17,5 +17,7 @@ Route::get('/', function () {
 });
 Route::get('/admin', 'AdminController@getData');
 Route::get('/subject_{id}', 'SubjectController@get');
+Route::get('/getcoursefromsub{id}', 'AdminController@getCourseFromSub');
 Route::get('/getcourse{id}', 'AdminController@getCourse');
+Route::get('/deletecourse{id}', 'AdminController@deleteCourse');
 Route::post('/addcourse', 'AdminController@addCourse');
