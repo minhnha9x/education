@@ -25,26 +25,39 @@ class AdminController extends Controller
         ->leftjoin('course', 'course.subject', 'subject.id')
         ->groupBy('subject.id')
         ->get();
-        $data = array('courses' => $courses, 'subjects' => $subjects);
+
+        $class = DB::table('class')
+        ->select('class.*', 'course.name as course')
+        ->leftjoin('course', 'course.id', 'class.course')
+        ->orderby('course.name')
+        ->get();
+
+        $employees = DB::table('employee')
+        ->get();
+
+        $offices = DB::table('office')
+        ->get();
+
+        $data = array('courses' => $courses, 'subjects' => $subjects, 'all_class' => $class, 'employees' => $employees, 'offices' => $offices);
         return view('adminpage')->with($data);
     }
     public function getCourse($id) {
-    	$course = DB::table('course')
+        $course = DB::table('course')
         ->select('course.*', 'subject.name as subject')
         ->where('course.id', $id)
         ->join('subject', 'course.subject', '=', 'subject.id')
         ->get();
-    	$data = $course->toJson();
-    	return $data;
+        $data = $course->toJson();
+        return $data;
     }
     public function addCourse(Request $request) {
-    	$course = new Course;
-    	$course->name = $request->name;
-    	$course->subject = $request->subject;
-    	$course->price = $request->price;
-    	//$course->description = $request->description;
-    	//$course->created_at = new DateTime();
-    	$course->save();
-    	return view('adminpage');
+        $course = new Course;
+        $course->name = $request->name;
+        $course->subject = $request->subject;
+        $course->price = $request->price;
+        //$course->description = $request->description;
+        //$course->created_at = new DateTime();
+        $course->save();
+        return view('adminpage');
     }
 }
