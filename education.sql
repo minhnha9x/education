@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 29, 2018 lúc 04:30 PM
--- Phiên bản máy phục vụ: 10.1.30-MariaDB
--- Phiên bản PHP: 7.2.2
+-- Thời gian đã tạo: Th3 30, 2018 lúc 11:19 AM
+-- Phiên bản máy phục vụ: 10.1.31-MariaDB
+-- Phiên bản PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `education`
 --
+CREATE DATABASE IF NOT EXISTS `education` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `education`;
 
 -- --------------------------------------------------------
 
@@ -60,7 +62,7 @@ CREATE TABLE `course` (
   `price` bigint(20) NOT NULL,
   `certificate_required` bigint(20) DEFAULT NULL,
   `total_of_period` bigint(20) NOT NULL,
-  `description` varchar(200) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
   `img_url` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -69,9 +71,9 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`id`, `name`, `subject`, `price`, `certificate_required`, `total_of_period`, `description`, `img_url`) VALUES
-(1, 'English for fresher', 1, 50000000, NULL, 50, NULL, NULL),
-(2, 'English for fresher 2', 1, 2000000, 1, 60, NULL, NULL),
-(3, 'English for fresher 3', 1, 300000, 2, 20, NULL, NULL),
+(1, 'English for fresher', 1, 50000000, NULL, 50, 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/course1.jpg'),
+(2, 'English for fresher 2', 1, 2000000, 1, 60, 'Sed porttitor lectus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.', './img/course2.jpg'),
+(3, 'English for fresher 3', 1, 3000000, 2, 20, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lorem ut libero malesuada feugiat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.Quisque velit nisi, pretium ut lacinia in, elementum id enim. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.', './img/course3.jpg'),
 (4, 'Basic Maths', 2, 2000000, NULL, 30, NULL, NULL),
 (5, 'Advance Maths', 2, 300000, 4, 50, NULL, NULL),
 (6, 'Art for beginer', 3, 6000000, NULL, 30, NULL, NULL),
@@ -178,22 +180,11 @@ INSERT INTO `main_teacher` (`id`, `degree`) VALUES
 
 CREATE TABLE `office` (
   `id` bigint(20) NOT NULL,
-  `address` char(100) NOT NULL,
-  `location` varchar(300) NOT NULL,
+  `address` char(1) NOT NULL,
+  `location` char(1) NOT NULL,
   `phone` bigint(20) NOT NULL,
-  `mail` char(100) NOT NULL,
-  `name` varchar(200) NOT NULL
+  `mail` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Đang đổ dữ liệu cho bảng `office`
---
-
-INSERT INTO `office` (`id`, `address`, `location`, `phone`, `mail`, `name`) VALUES
-(1, 'Trung Tam Anh Ngu B.E.N, Le Dai Hanh, phuong 15, Quan 11, Ho Chi Minh', 'https://www.google.com/maps/place/Trung+T%C3%A2m+Anh+Ng%E1%BB%AF+B.E.N/@10.7693669,106.6504617,17z/data=!3m1!4b1!4m5!3m4!1s0x31752e9552b97111:0x3e81a87c9948d39e!8m2!3d10.7693669!4d106.6526504', 1332546548, 'anhnguBen@gmail.com', 'Trung Tam Anh Ngu B.E.N'),
-(2, 'Trung Tam Ve Sang Tao Wow Art Quan 11 Lac Long Quan phuong 10 Tan Binh Ho Chi Minh', 'https://www.google.com/maps/place/Trung+T%C3%A2m+V%E1%BA%BD+S%C3%A1ng+T%E1%BA%A1o+Wow+Art+Qu%E1%BA%ADn+11/@10.7649565,106.640477,17z/data=!3m1!4b1!4m5!3m4!1s0x31752e90cb12a473:0x4a615d2ca3247431!8m2!3d10.7649565!4d106.6426657', 166326414, 'wowart@gmail.com', 'Trung Tam Ve Sang Tao Wow Art'),
-(3, 'Trung Tam Am Nhac FASOL Luy Ban Bich Tan Thoi Hoa Tan Phu Ho Chi Minh', 'https://www.google.com/maps/place/Trung+T%C3%A2m+%C3%82m+Nh%E1%BA%A1c+FASOL/@10.7668763,106.6297982,17z/data=!3m1!4b1!4m5!3m4!1s0x31752e9e6035f40d:0x42fb1314b4fbf63c!8m2!3d10.7668763!4d106.6319869', 91564856, 'fasolmusic@gmail.com', 'Trung Tam Am Nhac FASOL'),
-(4, 'Trung tam toan TITAN EDUCATION Mac Dinh Chi Da Kao Quan 1 Ho Chi Minh', 'https://www.google.com/maps/place/Trung+t%C3%A2m+to%C3%A1n+TITAN+EDUCATION/@10.7883586,106.6936165,17z/data=!3m1!4b1!4m5!3m4!1s0x31752f499401b65b:0x8978b8f612b5e3b6!8m2!3d10.7883586!4d106.6958052', 904221635, 'titaneducation@gmail.com', 'Trung tam toan TITAN EDUCATION');
 
 -- --------------------------------------------------------
 
@@ -355,15 +346,8 @@ INSERT INTO `subject` (`id`, `name`, `description`) VALUES
 
 CREATE TABLE `teaching_assistant` (
   `id` bigint(20) NOT NULL,
-  `degree` varchar(100) NOT NULL
+  `degree` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Đang đổ dữ liệu cho bảng `teaching_assistant`
---
-
-INSERT INTO `teaching_assistant` (`id`, `degree`) VALUES
-(4, 'Master of assistant');
 
 -- --------------------------------------------------------
 
@@ -565,7 +549,7 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT cho bảng `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `course_room`
@@ -595,7 +579,7 @@ ALTER TABLE `main_teacher`
 -- AUTO_INCREMENT cho bảng `office`
 --
 ALTER TABLE `office`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `office_main_teacher`
@@ -667,7 +651,7 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT cho bảng `teaching_assistant`
 --
 ALTER TABLE `teaching_assistant`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
