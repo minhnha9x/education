@@ -55,7 +55,7 @@
                 </div>
                 <div class="row-wrapper" style="display: flex">
                     <div class="object-wrapper width50 mr20">
-                        <a href="./subject_4">
+                        <a>
                             <div class="object" style="background-image: url('./img/object4.jpg')"></div>
                             <div class="bg1 bg4"></div>
                             <div class="text-wrapper">
@@ -65,7 +65,7 @@
                         </a>
                     </div>
                     <div class="object-wrapper width50">
-                        <a href="./subject_5">
+                        <a href="./subject_4">
                             <div class="object" style="background-image: url('./img/object5.jpg')"></div>
                             <div class="bg1 bg5"></div>
                             <div class="text-wrapper">

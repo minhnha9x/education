@@ -2,7 +2,9 @@
 
 <div class="subjectpage container">
 	@include('header', [$title='Subject Page', $position='normal'])
-
+    <script>
+       console.log(<?= json_encode($subject); ?>);
+    </script>
 	<div class="title">
 		Các khóa học {{$subject->name}}
 	</div>

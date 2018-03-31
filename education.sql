@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 30, 2018 lúc 11:19 AM
--- Phiên bản máy phục vụ: 10.1.31-MariaDB
--- Phiên bản PHP: 7.2.3
+-- Thời gian đã tạo: Th3 31, 2018 lúc 04:43 AM
+-- Phiên bản máy phục vụ: 10.1.30-MariaDB
+-- Phiên bản PHP: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `education`
 --
-CREATE DATABASE IF NOT EXISTS `education` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `education`;
 
 -- --------------------------------------------------------
 
@@ -71,15 +69,15 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`id`, `name`, `subject`, `price`, `certificate_required`, `total_of_period`, `description`, `img_url`) VALUES
-(1, 'English for fresher', 1, 50000000, NULL, 50, 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/course1.jpg'),
+(1, 'English for fresher', 1, 5000000, NULL, 50, 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/course1.jpg'),
 (2, 'English for fresher 2', 1, 2000000, 1, 60, 'Sed porttitor lectus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.', './img/course2.jpg'),
 (3, 'English for fresher 3', 1, 3000000, 2, 20, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lorem ut libero malesuada feugiat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.Quisque velit nisi, pretium ut lacinia in, elementum id enim. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.', './img/course3.jpg'),
-(4, 'Basic Maths', 2, 2000000, NULL, 30, NULL, NULL),
-(5, 'Advance Maths', 2, 300000, 4, 50, NULL, NULL),
-(6, 'Art for beginer', 3, 6000000, NULL, 30, NULL, NULL),
-(7, 'Piano', 4, 600000, 9, 40, NULL, NULL),
-(8, 'Guitar', 4, 4000000, 9, 30, NULL, NULL),
-(9, 'Music Theory', 4, 60000000, NULL, 40, NULL, NULL);
+(4, 'Basic Maths', 2, 2000000, NULL, 30, 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/maths1.jpg'),
+(5, 'Advance Maths', 2, 3000000, 4, 50, 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/maths2.jpg'),
+(6, 'Art for beginer', 3, 6000000, NULL, 30, 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/art1.jpg'),
+(7, 'Piano', 4, 6000000, 9, 40, 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/piano1.jpg'),
+(8, 'Guitar', 4, 4000000, 9, 30, 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/guita1.jpg'),
+(9, 'Music Theory', 4, 6000000, NULL, 40, 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/music1.jpg');
 
 -- --------------------------------------------------------
 
@@ -92,6 +90,27 @@ CREATE TABLE `course_room` (
   `course` bigint(20) NOT NULL,
   `room` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `course_room`
+--
+
+INSERT INTO `course_room` (`id`, `course`, `room`) VALUES
+(1, 5, 1),
+(2, 4, 1),
+(3, 8, 2),
+(4, 7, 2),
+(5, 1, 3),
+(6, 2, 3),
+(7, 3, 4),
+(8, 1, 4),
+(9, 9, 5),
+(10, 8, 5),
+(11, 4, 6),
+(12, 5, 6),
+(13, 7, 7),
+(14, 8, 7),
+(15, 6, 8);
 
 -- --------------------------------------------------------
 
@@ -111,9 +130,24 @@ CREATE TABLE `course_ta` (
 --
 
 CREATE TABLE `course_teacher` (
-  `subject` bigint(20) NOT NULL,
+  `course` bigint(20) NOT NULL,
   `teacher` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `course_teacher`
+--
+
+INSERT INTO `course_teacher` (`course`, `teacher`) VALUES
+(1, 2),
+(2, 2),
+(3, 2),
+(4, 1),
+(5, 1),
+(6, 5),
+(7, 4),
+(8, 4),
+(9, 4);
 
 -- --------------------------------------------------------
 
@@ -170,6 +204,8 @@ CREATE TABLE `main_teacher` (
 
 INSERT INTO `main_teacher` (`id`, `degree`) VALUES
 (1, 'Professor'),
+(2, 'Senior Lecturer'),
+(4, 'Musician'),
 (5, 'Artist');
 
 -- --------------------------------------------------------
@@ -180,11 +216,22 @@ INSERT INTO `main_teacher` (`id`, `degree`) VALUES
 
 CREATE TABLE `office` (
   `id` bigint(20) NOT NULL,
-  `address` char(1) NOT NULL,
-  `location` char(1) NOT NULL,
+  `address` char(100) NOT NULL,
+  `location` varchar(300) NOT NULL,
   `phone` bigint(20) NOT NULL,
-  `mail` char(1) NOT NULL
+  `mail` char(100) NOT NULL,
+  `name` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `office`
+--
+
+INSERT INTO `office` (`id`, `address`, `location`, `phone`, `mail`, `name`) VALUES
+(1, 'Trung Tam Anh Ngu B.E.N, Le Dai Hanh, phuong 15, Quan 11, Ho Chi Minh', 'https://www.google.com/maps/place/Trung+T%C3%A2m+Anh+Ng%E1%BB%AF+B.E.N/@10.7693669,106.6504617,17z/data=!3m1!4b1!4m5!3m4!1s0x31752e9552b97111:0x3e81a87c9948d39e!8m2!3d10.7693669!4d106.6526504', 1332546548, 'anhnguBen@gmail.com', 'Trung Tam Anh Ngu B.E.N'),
+(2, 'Trung Tam Ve Sang Tao Wow Art Quan 11 Lac Long Quan phuong 10 Tan Binh Ho Chi Minh', 'https://www.google.com/maps/place/Trung+T%C3%A2m+V%E1%BA%BD+S%C3%A1ng+T%E1%BA%A1o+Wow+Art+Qu%E1%BA%ADn+11/@10.7649565,106.640477,17z/data=!3m1!4b1!4m5!3m4!1s0x31752e90cb12a473:0x4a615d2ca3247431!8m2!3d10.7649565!4d106.6426657', 166326414, 'wowart@gmail.com', 'Trung Tam Ve Sang Tao Wow Art'),
+(3, 'Trung Tam Am Nhac FASOL Luy Ban Bich Tan Thoi Hoa Tan Phu Ho Chi Minh', 'https://www.google.com/maps/place/Trung+T%C3%A2m+%C3%82m+Nh%E1%BA%A1c+FASOL/@10.7668763,106.6297982,17z/data=!3m1!4b1!4m5!3m4!1s0x31752e9e6035f40d:0x42fb1314b4fbf63c!8m2!3d10.7668763!4d106.6319869', 91564856, 'fasolmusic@gmail.com', 'Trung Tam Am Nhac FASOL'),
+(4, 'Trung tam toan TITAN EDUCATION Mac Dinh Chi Da Kao Quan 1 Ho Chi Minh', 'https://www.google.com/maps/place/Trung+t%C3%A2m+to%C3%A1n+TITAN+EDUCATION/@10.7883586,106.6936165,17z/data=!3m1!4b1!4m5!3m4!1s0x31752f499401b65b:0x8978b8f612b5e3b6!8m2!3d10.7883586!4d106.6958052', 904221635, 'titaneducation@gmail.com', 'Trung tam toan TITAN EDUCATION');
 
 -- --------------------------------------------------------
 
@@ -197,6 +244,16 @@ CREATE TABLE `office_main_teacher` (
   `teacher` bigint(20) NOT NULL,
   `office` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `office_main_teacher`
+--
+
+INSERT INTO `office_main_teacher` (`id`, `teacher`, `office`) VALUES
+(1, 5, 2),
+(2, 4, 3),
+(3, 1, 4),
+(4, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -276,6 +333,20 @@ CREATE TABLE `room` (
   `max_student` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Đang đổ dữ liệu cho bảng `room`
+--
+
+INSERT INTO `room` (`id`, `office`, `max_student`) VALUES
+(1, 4, 50),
+(2, 3, 30),
+(3, 1, 40),
+(4, 1, 30),
+(5, 3, 60),
+(6, 4, 45),
+(7, 2, 35),
+(8, 2, 30);
+
 -- --------------------------------------------------------
 
 --
@@ -346,8 +417,15 @@ INSERT INTO `subject` (`id`, `name`, `description`) VALUES
 
 CREATE TABLE `teaching_assistant` (
   `id` bigint(20) NOT NULL,
-  `degree` bigint(20) NOT NULL
+  `degree` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `teaching_assistant`
+--
+
+INSERT INTO `teaching_assistant` (`id`, `degree`) VALUES
+(4, 'Master of assistant');
 
 -- --------------------------------------------------------
 
@@ -413,7 +491,7 @@ ALTER TABLE `course_ta`
 -- Chỉ mục cho bảng `course_teacher`
 --
 ALTER TABLE `course_teacher`
-  ADD PRIMARY KEY (`subject`,`teacher`),
+  ADD PRIMARY KEY (`course`,`teacher`),
   ADD KEY `course_teacher_fk1` (`teacher`);
 
 --
@@ -549,13 +627,13 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT cho bảng `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `course_room`
 --
 ALTER TABLE `course_room`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `employee`
@@ -573,19 +651,19 @@ ALTER TABLE `exam`
 -- AUTO_INCREMENT cho bảng `main_teacher`
 --
 ALTER TABLE `main_teacher`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `office`
 --
 ALTER TABLE `office`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `office_main_teacher`
 --
 ALTER TABLE `office_main_teacher`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `office_ta`
@@ -621,7 +699,7 @@ ALTER TABLE `register`
 -- AUTO_INCREMENT cho bảng `room`
 --
 ALTER TABLE `room`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `room_schedule`
@@ -651,7 +729,7 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT cho bảng `teaching_assistant`
 --
 ALTER TABLE `teaching_assistant`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
@@ -695,7 +773,7 @@ ALTER TABLE `course_ta`
 -- Các ràng buộc cho bảng `course_teacher`
 --
 ALTER TABLE `course_teacher`
-  ADD CONSTRAINT `course_teacher_fk0` FOREIGN KEY (`subject`) REFERENCES `course` (`id`),
+  ADD CONSTRAINT `course_teacher_fk0` FOREIGN KEY (`course`) REFERENCES `course` (`id`),
   ADD CONSTRAINT `course_teacher_fk1` FOREIGN KEY (`teacher`) REFERENCES `main_teacher` (`id`);
 
 --
