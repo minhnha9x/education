@@ -71,6 +71,16 @@ a {
 						width: max-content;
 						border-top: 2px solid $blue;
 						background: #fff;
+						li {
+							a {
+								color: #000;
+							}
+						}
+						li:hover {
+							a {
+								color: $blue;
+							}
+						}
 					}
 				}
 				li:hover {
@@ -86,9 +96,6 @@ a {
 		}
 		li:hover {
 			color: $blue;
-			a {
-				color: $blue;
-			}
 		}
 		.login {
 			padding: 30px 25px;

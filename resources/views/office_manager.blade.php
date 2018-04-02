@@ -1,4 +1,4 @@
-<div id="addcourse" class="addbutton hvr-sweep-to-right" data-name="Thêm khóa học">Thêm văn phòng</div>
+<div id="addcourse" class="addbutton hvr-sweep-to-right" data-name="Thêm khóa học">Thêm Trung tâm</div>
 <table id="example" class="table table-bordered table-hover">
     <thead>
         <tr>

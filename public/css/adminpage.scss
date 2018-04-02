@@ -106,12 +106,14 @@ $blue: #337ab7;
 				td, th {
 					text-align: center;
 					text-transform: capitalize;
+					vertical-align: middle;
 				}
 				p {
 					margin-bottom: 0;
 				}
 				.action {
 					text-align: center;
+					white-space: nowrap;
 					a {
 						margin: 0 10px;
 						cursor: pointer;

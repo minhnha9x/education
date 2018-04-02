@@ -94,11 +94,13 @@
       font-size: 15px; }
       .adminpage .tab-content .tab-pane table td, .adminpage .tab-content .tab-pane table th {
         text-align: center;
-        text-transform: capitalize; }
+        text-transform: capitalize;
+        vertical-align: middle; }
       .adminpage .tab-content .tab-pane table p {
         margin-bottom: 0; }
       .adminpage .tab-content .tab-pane table .action {
-        text-align: center; }
+        text-align: center;
+        white-space: nowrap; }
         .adminpage .tab-content .tab-pane table .action a {
           margin: 0 10px;
           cursor: pointer; }

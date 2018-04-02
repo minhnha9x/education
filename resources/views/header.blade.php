@@ -1,3 +1,22 @@
+@php
+    $courses = DB::table('course')
+    ->select('course.*', 'subject.name as subject', 'subject.id as subjectid', 'course2.name as certificate_required', DB::raw('count(class.id) as count'))
+    ->leftjoin('subject', 'course.subject', '=', 'subject.id')
+    ->leftjoin('course as course2', 'course.certificate_required', '=', 'course2.id')
+    ->leftjoin('class', 'class.course', '=', 'course.id')
+    ->groupBy('course.id')
+    ->get();
+
+    $subjects = DB::table('subject')
+    ->select('subject.*', DB::raw('count(course.id) as count'))
+    ->leftjoin('course', 'course.subject', 'subject.id')
+    ->groupBy('subject.id')
+    ->get();
+
+    $offices = DB::table('office')
+    ->get();
+@endphp
+
 <head>
     <title>{{ $title }}</title>
     <link href="./css/header.css" rel="stylesheet" type="text/css">
@@ -24,24 +43,27 @@
                 Khóa học
                 <i class="fas fa-angle-down"></i>
                 <ul class="sub-menu">
-                    <li>
-                        <a href="">Tiếng Anh<i class="fas fa-angle-right"></i></a>
-                        <ul class='sub-menu2'>
-                            <li><a href="">Tiếng Anh 1</a></li>
-                            <li><a href="">Tiếng Anh 2</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="">Tin Học<i class="fas fa-angle-right"></i></a></li>
-                    <li><a href="">Âm nhạc<i class="fas fa-angle-right"></i></a></li>
-                    <li><a href="">Mỹ thuật<i class="fas fa-angle-right"></i></a></li>
-                    <li><a href="">Toán học<i class="fas fa-angle-right"></i></a></li>
+                    @foreach ($subjects as $s)
+                        <li>
+                            <a href="./subject_{{$s->id}}">{{$s->name}}<i class="fas fa-angle-right"></i></a>
+                            <ul class='sub-menu2'>
+                                @foreach ($courses as $c)
+                                    @if ($c->subjectid == $s->id)
+                                        <li><a href="">{{$c->name}}</a></li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
                 </ul>
             </li>
             <li>
                 Trung Tâm
                 <i class="fas fa-angle-down"></i>
                 <ul class="sub-menu">
-                    <li><a href="">Chi nhánh Hồ Chí Minh</a></li>
+                    @foreach ($offices as $o)
+                        <li><a href="">{{$o->name}}</a></li>
+                    @endforeach
                 </ul>
             </li>
             <li><a href="">Về chúng tôi</a></li>

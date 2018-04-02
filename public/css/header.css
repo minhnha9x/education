@@ -66,14 +66,16 @@ a {
             width: max-content;
             border-top: 2px solid #337ab7;
             background: #fff; }
+            .header ul li .sub-menu li .sub-menu2 li a {
+              color: #000; }
+            .header ul li .sub-menu li .sub-menu2 li:hover a {
+              color: #337ab7; }
         .header ul li .sub-menu li:hover a {
           color: #337ab7; }
       .header ul li a {
         color: #000; }
     .header ul li:hover {
       color: #337ab7; }
-      .header ul li:hover a {
-        color: #337ab7; }
     .header ul .login {
       padding: 30px 25px;
       display: inline-block;
