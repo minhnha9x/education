@@ -31,6 +31,13 @@ class AdminController extends Controller
         ->orderby('course.name')
         ->get();
 
+        $schedule = DB::table('room_schedule')
+        ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
+        ->leftjoin('room', 'room_schedule.room', 'room.id')
+        ->leftjoin('office', 'room.office', 'office.id')
+        ->get();
+
+
         $employees = DB::table('employee')
         ->get();
 
@@ -68,6 +75,7 @@ class AdminController extends Controller
             'employees' => $employees,
             'offices' => $offices,
             'rooms' => $rooms,
+            'schedule' => $schedule,
             'teachers' => $teacher);
 
         return view('adminpage')->with($data);
@@ -110,14 +118,6 @@ class AdminController extends Controller
         $course->certificate_required = $request->required;
         $course->save();
         return back()->withInput();
-    }
-    public function getClassFromCourse($id) {
-        $course = DB::table('class')
-        ->select("*")
-        ->where('course', $id)
-        ->get();
-        $data = $course->toJson();
-        return $data;
     }
 
     public function updateCourse(Request $request) {

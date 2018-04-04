@@ -13,9 +13,9 @@
     <tbody>
         @foreach ($teachers as $teacher)
             <tr>
-                <script>
+                {{-- <script>
                     console.log(<?= json_encode($teacher); ?>);
-                </script>
+                </script> --}}
                 <td>{{$teacher->id}}</td>
                 <td>{{$teacher->name}}</td>
                 <td>{{$teacher->degree}}</td>

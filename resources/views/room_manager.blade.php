@@ -12,9 +12,6 @@
     <tbody>
         @foreach ($rooms as $room)
             <tr>
-                <script>
-                    console.log(<?= json_encode($room); ?>);
-                </script>
                 <td>{{$room->id}}</td>
                 <td>{{$room->office}}</td>
                 <td>{{$room->max_student}}</td>

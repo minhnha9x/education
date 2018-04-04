@@ -86,7 +86,7 @@
             dataType:"text",
             success : function (result){
                 obj = JSON.parse(result);
-                console.log(obj);
+                //console.log(obj);
                 $('#courseModal input[name="id"]').val(obj[0]['id']);
                 $('#courseModal input[name="name"]').val(obj[0]['name']);
                 $('#courseModal input[name="price"]').val(obj[0]['price']);

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 31, 2018 lúc 04:43 AM
--- Phiên bản máy phục vụ: 10.1.30-MariaDB
--- Phiên bản PHP: 7.2.2
+-- Thời gian đã tạo: Th4 04, 2018 lúc 11:15 AM
+-- Phiên bản máy phục vụ: 10.1.31-MariaDB
+-- Phiên bản PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -357,10 +357,18 @@ CREATE TABLE `room_schedule` (
   `id` bigint(20) NOT NULL,
   `class` bigint(20) NOT NULL,
   `schedule` bigint(20) NOT NULL,
-  `current_date` bigint(20) NOT NULL,
+  `current_date` enum('Monday','Tuesday','Wednesday','Thursday','Friday','Sartuday','Sunday') NOT NULL,
   `teacher` bigint(20) NOT NULL,
   `room` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `room_schedule`
+--
+
+INSERT INTO `room_schedule` (`id`, `class`, `schedule`, `current_date`, `teacher`, `room`) VALUES
+(1, 1, 1, 'Monday', 1, 2),
+(2, 1, 2, 'Wednesday', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -383,9 +391,21 @@ CREATE TABLE `room_ta` (
 CREATE TABLE `schedule` (
   `id` bigint(20) NOT NULL,
   `slot_in_day` bigint(20) NOT NULL,
-  `start_time` bigint(20) NOT NULL,
-  `end_time` bigint(20) NOT NULL
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `schedule`
+--
+
+INSERT INTO `schedule` (`id`, `slot_in_day`, `start_time`, `end_time`) VALUES
+(1, 1, '07:00:00', '09:00:00'),
+(2, 2, '09:00:00', '11:00:00'),
+(3, 3, '13:00:00', '15:00:00'),
+(4, 4, '15:00:00', '17:00:00'),
+(5, 5, '17:00:00', '19:00:00'),
+(6, 6, '19:00:00', '21:00:00');
 
 -- --------------------------------------------------------
 
@@ -651,7 +671,7 @@ ALTER TABLE `exam`
 -- AUTO_INCREMENT cho bảng `main_teacher`
 --
 ALTER TABLE `main_teacher`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `office`
@@ -705,7 +725,7 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT cho bảng `room_schedule`
 --
 ALTER TABLE `room_schedule`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `room_ta`
@@ -717,7 +737,7 @@ ALTER TABLE `room_ta`
 -- AUTO_INCREMENT cho bảng `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `subject`
