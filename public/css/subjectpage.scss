@@ -110,6 +110,22 @@ $blue: #337ab7;
 								color: $blue;
 							}
 						}
+						.info {
+							.course, .schedule {
+								color: #040404;
+							    font-size: 18px;
+							    margin-bottom: 10px;
+							    letter-spacing: 2px;
+							    margin-top: 0;
+							    text-transform: capitalize;
+							    span {
+							    	color: $blue;
+							    }
+							}
+							.schedule {
+								font-size: 16px;
+							}
+						}
 						.form-sub-w3{
 							position: relative;
 						    margin-bottom: 15px;
@@ -121,7 +137,7 @@ $blue: #337ab7;
 							    letter-spacing: 2px;
 							    width: 100%;
 							    border: none;
-							    border: 1px solid #DCCBCF;
+							    border: 1px solid #040404;
 							    margin-bottom: 5px;
 							    background: transparent;
 								font-family: 'Roboto', sans-serif;

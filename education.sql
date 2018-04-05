@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 04, 2018 lúc 11:15 AM
+-- Thời gian đã tạo: Th4 05, 2018 lúc 05:22 AM
 -- Phiên bản máy phục vụ: 10.1.31-MariaDB
 -- Phiên bản PHP: 7.2.3
 
@@ -300,11 +300,17 @@ CREATE TABLE `position` (
 --
 
 CREATE TABLE `promotion` (
-  `id` bigint(20) NOT NULL,
-  `name` char(1) NOT NULL,
-  `benefit` char(1) NOT NULL,
-  `required` char(1) NOT NULL
+  `code` varchar(20) NOT NULL,
+  `benefit` tinyint(3) UNSIGNED NOT NULL,
+  `course` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `promotion`
+--
+
+INSERT INTO `promotion` (`code`, `benefit`, `course`) VALUES
+('eng50', 50, 1);
 
 -- --------------------------------------------------------
 
@@ -315,11 +321,19 @@ CREATE TABLE `promotion` (
 CREATE TABLE `register` (
   `id` bigint(20) NOT NULL,
   `class` bigint(20) NOT NULL,
-  `promotion` bigint(20) NOT NULL,
+  `promotion` varchar(20) DEFAULT NULL,
   `user` bigint(20) NOT NULL,
   `score` bigint(20) NOT NULL,
   `pass` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `register`
+--
+
+INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `score`, `pass`) VALUES
+(9, 1, NULL, 1, 0, 0),
+(16, 1, 'eng50', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -470,7 +484,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/avatar.jpg', 'YiXyuCmNJVNFlTx8p3Qap9EwNZyj7BY8cUXM3n0C1LAjWdtZP72hiQfrzDDO', '2018-03-16 02:49:36', '2018-03-16 02:49:36');
+(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/avatar.jpg', 'RpKGiXvxe9rzE3caQkA4yHQAAzNKUI4gkO128Lwt5xsvY5Y670ajP09EuLaZ', '2018-03-16 02:49:36', '2018-03-16 02:49:36');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -573,7 +587,8 @@ ALTER TABLE `position`
 -- Chỉ mục cho bảng `promotion`
 --
 ALTER TABLE `promotion`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`code`),
+  ADD KEY `course` (`course`);
 
 --
 -- Chỉ mục cho bảng `register`
@@ -581,8 +596,8 @@ ALTER TABLE `promotion`
 ALTER TABLE `register`
   ADD PRIMARY KEY (`id`),
   ADD KEY `Register_fk0` (`class`),
-  ADD KEY `Register_fk1` (`promotion`),
-  ADD KEY `Register_fk2` (`user`);
+  ADD KEY `Register_fk2` (`user`),
+  ADD KEY `promotion` (`promotion`);
 
 --
 -- Chỉ mục cho bảng `room`
@@ -704,16 +719,10 @@ ALTER TABLE `position`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `promotion`
---
-ALTER TABLE `promotion`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT cho bảng `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `room`
@@ -831,12 +840,18 @@ ALTER TABLE `office_worker`
   ADD CONSTRAINT `Office Worker_fk2` FOREIGN KEY (`office`) REFERENCES `office` (`id`);
 
 --
+-- Các ràng buộc cho bảng `promotion`
+--
+ALTER TABLE `promotion`
+  ADD CONSTRAINT `promotion_ibfk_1` FOREIGN KEY (`course`) REFERENCES `course` (`id`);
+
+--
 -- Các ràng buộc cho bảng `register`
 --
 ALTER TABLE `register`
   ADD CONSTRAINT `Register_fk0` FOREIGN KEY (`class`) REFERENCES `class` (`id`),
-  ADD CONSTRAINT `Register_fk1` FOREIGN KEY (`promotion`) REFERENCES `promotion` (`id`),
-  ADD CONSTRAINT `Register_fk2` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `Register_fk2` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `register_ibfk_1` FOREIGN KEY (`promotion`) REFERENCES `promotion` (`code`);
 
 --
 -- Các ràng buộc cho bảng `room`

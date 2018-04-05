@@ -11,14 +11,11 @@ use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
-    public function getLogin() {
-    	return view('login');
-    }
     public function logout()
     {
         Auth::logout();
         Session::flush();
-        return redirect('/');
+        return redirect()->back()->withInput();
     }
     public function postLogin(Request $request) {
     	$rules = [
@@ -40,7 +37,7 @@ class LoginController extends Controller
     		$password = $request->input('password');
 
     		if( Auth::attempt(['email' => $email, 'password' =>$password])) {
-    			return redirect()->intended('/');
+    			return redirect()->back()->withInput();
     		} else {
     			$errors = new MessageBag(['errorlogin' => 'Email hoặc mật khẩu không đúng']);
     			return redirect()->back()->withInput()->withErrors($errors);

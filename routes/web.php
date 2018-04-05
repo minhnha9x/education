@@ -25,3 +25,4 @@ Route::post('/addcourse', 'AdminController@addCourse');
 Route::post('/updatecourse', 'AdminController@updateCourse');
 
 Route::get('/getclassfromcourse{id}', 'SubjectController@getClassFromCourse');
+Route::post('/classregister', 'SubjectController@classRegister');

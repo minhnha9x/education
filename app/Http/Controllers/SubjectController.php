@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
+use App\Register;
 
 class SubjectController extends Controller
 {
@@ -51,5 +53,37 @@ class SubjectController extends Controller
 
         $data = array('courses' => $course, 'schedule' => $schedule);
         return $data;
+    }
+    public function classRegister(Request $request) {
+    	if ($request->has('promotion')) {
+    		$promotion = DB::table('promotion')
+	    	->leftjoin('class', 'promotion.course', 'class.course')
+	    	->where('promotion.code', $request->promotion)
+	    	->where('class.course', $request->course)
+	    	->where('class.id', $request->class)
+		    ->get();
+
+		    if ($promotion->isEmpty()) {
+		    	session()->flash('error', 'Mã giảm giá không tồn tại.');
+		    	return redirect()->back();
+		    }
+		    else {
+		    	$register = new Register;
+		        $register->class = $request->class;
+		        $register->promotion = $request->promotion;
+		        $register->user = Auth::user()->id;
+		        $register->save();
+		        session()->flash('msg', 'Bạn đã đăng kí khóa học thành công! Hãy vào trang cá nhân để xem các khóa học đã đăng kí.');
+		    	return redirect()->back();
+		    }
+    	}
+    	else {
+    		$register = new Register;
+	        $register->class = $request->class;
+	        $register->user = Auth::user()->id;
+	        $register->save();
+	        session()->flash('msg', 'Bạn đã đăng kí khóa học thành công! Hãy vào trang cá nhân để xem các khóa học đã đăng kí');
+	    	return redirect()->back();
+    	}
     }
 }
