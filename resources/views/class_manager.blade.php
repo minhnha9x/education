@@ -50,7 +50,7 @@
                     <form method="POST" role="form">
                         <h2 id="form-title">Add class</h2>
                         <div class="form-sub-w3 col-md-4">
-                            <select name="subject">
+                            <select name="subject" class="checkchange">
                                 <option disabled selected hidden>Môn học</option>
                                 @foreach ($subjects as $s)
                                     <option value="{{$s->id}}">{{$s->name}}</option>
@@ -58,51 +58,51 @@
                             </select>
                         </div>
                         <div class="form-sub-w3 col-md-4">
-                            <select name="course">
+                            <select name="course" class="checkchange">
                                 <option disabled selected hidden>Khóa học</option>
                             </select>
                         </div>
                         <div class="form-sub-w3 col-md-4">
-                            <select name="office">
+                            <select name="office" class="checkchange">
                                 <option disabled selected hidden>Trung tâm</option>
                                 @foreach ($offices as $o)
                                     <option value="{{$o->id}}">{{$o->name}}</option>
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-sub-w3 flexcenter col-md-6">
+                            <span>Ngày khai giảng:</span>
+                            <input type="date" placeholder="Ngày khai giảng" name="start_date" class="checkchange">
+                        </div>
+                        <div class="form-sub-w3 flexcenter col-md-6">
+                            <span>Ngày kết thúc:</span>
+                            <input type="date" placeholder="Ngày kết thúc" name="end_date" class="checkchange">
+                        </div>
                         <div class="form-sub-w3 col-md-12">
                             <p>Chọn ngày học:</p>
                             <div class="checkbox-wrapper">
                                 <div class="checkbox">
-                                    <label><input type="checkbox" value="">Monday</label>
+                                    <label><input type="checkbox" value="Monday" disabled>Monday</label>
                                 </div>
                                 <div class="checkbox">
-                                    <label><input type="checkbox" value="">Tuesday</label>
+                                    <label><input type="checkbox" value="Tuesday" disabled>Tuesday</label>
                                 </div>
                                 <div class="checkbox">
-                                    <label><input type="checkbox" value="">Wednesday</label>
+                                    <label><input type="checkbox" value="Wednesday" disabled>Wednesday</label>
                                 </div>
                                 <div class="checkbox">
-                                    <label><input type="checkbox" value="">Thursday</label>
+                                    <label><input type="checkbox" value="Thursday" disabled>Thursday</label>
                                 </div>
                                 <div class="checkbox">
-                                    <label><input type="checkbox" value="">Friday</label>
+                                    <label><input type="checkbox" value="Friday" disabled>Friday</label>
                                 </div>
                                 <div class="checkbox">
-                                    <label><input type="checkbox" value="">Saturday</label>
+                                    <label><input type="checkbox" value="Saturday" disabled>Saturday</label>
                                 </div>
                                 <div class="checkbox">
-                                    <label><input type="checkbox" value="">Sunday</label>
+                                    <label><input type="checkbox" value="Sunday" disabled>Sunday</label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-sub-w3 flexcenter col-md-6">
-                            <span>Ngày khai giảng:</span>
-                            <input type="date" placeholder="Ngày khai giảng" name="start_date">
-                        </div>
-                        <div class="form-sub-w3 flexcenter col-md-6">
-                            <span>Ngày kết thúc:</span>
-                            <input type="date" placeholder="Ngày kết thúc" name="end_date">
                         </div>
                         <div class="form-sub-w3 col-md-6">
                             <select name="supervisor">
@@ -114,7 +114,7 @@
                         </div>
                         {!! csrf_field() !!}
                         <div class="submit-w3l col-md-12">
-                            <input type="button" name="change" style="float: right;" value="Create Class">
+                            <input type="button" disabled name="change" style="float: right;" value="Create Class">
                         </div>
                     </form>
                 </div>      
@@ -133,12 +133,80 @@
                             <tr>
                                 <th>Rooms</th>
                                 <th>Monday</th>
-                                <th>Tuesday</th>
                                 <th>Wednesday</th>
-                                <th>Thursday</th>
                                 <th>Friday</th>
-                                <th>Saturday</th>
-                                <th>Sunday</th>
+                            </tr>
+                            <tr>
+                                <td>Phòng 1</td>
+                                <td>
+                                    <select>
+                                        <option selected hidden disabled>Các tiết trống</option>
+                                        <option>7:00 - 9:00</option>
+                                        <option>13:00 - 15:00</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option selected hidden disabled>Các tiết trống</option>
+                                        <option>7:00 - 9:00</option>
+                                        <option>13:00 - 15:00</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option selected hidden disabled>Các tiết trống</option>
+                                        <option>7:00 - 9:00</option>
+                                        <option>13:00 - 15:00</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Phòng 2</td>
+                                <td>
+                                    <select>
+                                        <option selected hidden disabled>Các tiết trống</option>
+                                        <option>7:00 - 9:00</option>
+                                        <option>13:00 - 15:00</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option selected hidden disabled>Các tiết trống</option>
+                                        <option>7:00 - 9:00</option>
+                                        <option>13:00 - 15:00</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option selected hidden disabled>Các tiết trống</option>
+                                        <option>7:00 - 9:00</option>
+                                        <option>13:00 - 15:00</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Teacher</th>
+                                <td>
+                                    <select>
+                                        <option selected hidden disabled>Các giáo viên rảnh</option>
+                                        <option>Giáo viên A</option>
+                                        <option>Giáo viên B</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option selected hidden disabled>Các giáo viên rảnh</option>
+                                        <option>Giáo viên A</option>
+                                        <option>Giáo viên B</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option selected hidden disabled>Các giáo viên rảnh</option>
+                                        <option>Giáo viên A</option>
+                                        <option>Giáo viên B</option>
+                                    </select>
+                                </td>
                             </tr>
                         </table>
                         {!! csrf_field() !!}
@@ -168,6 +236,31 @@
                 }
             }
         });
+    });
+    $(document).on('change', '#addClassModal .checkchange', function(e) {
+        if ($('#addClassModal select[name="subject"]').val() != null 
+            && $('#addClassModal select[name="course"]').val() != null 
+            && $('#addClassModal select[name="office"]').val() != null 
+            && $('#addClassModal input[name="start_date"]').val() != "" 
+            && $('#addClassModal input[name="end_date"]').val() != "") {
+            $.ajax({
+                url : "postroomlist",
+                type : "get",
+                data : {
+                    "subject": $('#addClassModal select[name="subject"]').val(),
+                    "course": $('#addClassModal select[name="course"]').val(),
+                    "office": $('#addClassModal select[name="office"]').val(),
+                    "start_date": $('#addClassModal input[name="start_date"]').val(),
+                    "end_date": $('#addClassModal input[name="end_date"]').val(),
+                },
+                dataType:"text",
+                success : function (result){
+                    obj = JSON.parse(result);
+                    console.log(result);
+                    }
+            });
+            $('#addClassModal input[name="change"]').prop("disabled", false);
+        }
     });
     $('#addClassModal input[name="change"]').click(function(){
         $('#addClassModal').modal('hide');

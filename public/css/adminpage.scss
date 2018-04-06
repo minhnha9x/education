@@ -142,7 +142,7 @@ $blue: #337ab7;
 				}
 				.modal-dialog {
 					background: transparent;
-					width: 650px;
+					width: fit-content;
 					margin: 50px auto;
 					.modal-content {
 						background: transparent;
@@ -281,6 +281,11 @@ $blue: #337ab7;
 									    -o-transition: 0.3s all;
 									    -ms-transition: 0.3s all;
 									}
+									input:disabled {
+										background-color: #EBEBE4;
+										border: none;
+										cursor: no-drop;
+									}
 								}
 							}
 						}
@@ -291,7 +296,7 @@ $blue: #337ab7;
 						margin-bottom: 20px !important;
 					}
 					table {
-						margin-bottom: 15px;
+						margin-bottom: 30px;
 					}
 					.submit-w3l {
 						padding: 0;

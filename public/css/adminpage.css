@@ -121,7 +121,7 @@
       color: #040404 !important; }
     .adminpage .tab-content .tab-pane #courseModal .modal-dialog, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog {
       background: transparent;
-      width: 650px;
+      width: fit-content;
       margin: 50px auto; }
       .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content {
         background: transparent;
@@ -242,10 +242,14 @@
                 -moz-transition: 0.3s all;
                 -o-transition: 0.3s all;
                 -ms-transition: 0.3s all; }
+              .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input:disabled, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input:disabled, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input:disabled {
+                background-color: #EBEBE4;
+                border: none;
+                cursor: no-drop; }
     .adminpage .tab-content .tab-pane #courseModal .schedule-modal h2, .adminpage .tab-content .tab-pane #addClassModal .schedule-modal h2, .adminpage .tab-content .tab-pane #scheduleClassModal .schedule-modal h2 {
       margin-bottom: 20px !important; }
     .adminpage .tab-content .tab-pane #courseModal .schedule-modal table, .adminpage .tab-content .tab-pane #addClassModal .schedule-modal table, .adminpage .tab-content .tab-pane #scheduleClassModal .schedule-modal table {
-      margin-bottom: 15px; }
+      margin-bottom: 30px; }
     .adminpage .tab-content .tab-pane #courseModal .schedule-modal .submit-w3l, .adminpage .tab-content .tab-pane #addClassModal .schedule-modal .submit-w3l, .adminpage .tab-content .tab-pane #scheduleClassModal .schedule-modal .submit-w3l {
       padding: 0; }
 

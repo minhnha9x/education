@@ -29,3 +29,8 @@ Route::post('/classregister', 'SubjectController@classRegister');
 
 Route::get('/schedule', 'ScheduleController@get');
 Route::get('/getschedule', 'ScheduleController@getschedule');
+
+Route::get('/postroomlist', 'AdminController@postroomlist');
+
+Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
+
