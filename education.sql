@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 05, 2018 lúc 05:22 AM
--- Phiên bản máy phục vụ: 10.1.31-MariaDB
--- Phiên bản PHP: 7.2.3
+-- Thời gian đã tạo: Th4 06, 2018 lúc 05:38 AM
+-- Phiên bản máy phục vụ: 10.1.30-MariaDB
+-- Phiên bản PHP: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -280,6 +280,13 @@ CREATE TABLE `office_worker` (
   `experience` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Đang đổ dữ liệu cho bảng `office_worker`
+--
+
+INSERT INTO `office_worker` (`id`, `position`, `office`, `experience`) VALUES
+(3, 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -288,10 +295,17 @@ CREATE TABLE `office_worker` (
 
 CREATE TABLE `position` (
   `id` bigint(20) NOT NULL,
-  `name` char(1) NOT NULL,
+  `name` char(100) NOT NULL,
   `salary` bigint(20) NOT NULL,
   `rate_salary` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `position`
+--
+
+INSERT INTO `position` (`id`, `name`, `salary`, `rate_salary`) VALUES
+(1, 'Class Supervisor', 5000000, 1);
 
 -- --------------------------------------------------------
 
@@ -710,13 +724,13 @@ ALTER TABLE `office_ta`
 -- AUTO_INCREMENT cho bảng `office_worker`
 --
 ALTER TABLE `office_worker`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `position`
 --
 ALTER TABLE `position`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `register`
