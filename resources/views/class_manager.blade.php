@@ -4,6 +4,7 @@
         <tr>
             <th>Mã lớp</th>
             <th>Lịch học</th>
+            <th>Trung tâm</th>
             <th>Khóa học</th>
             <th>Sĩ số</th>
             <th>Ngày khai giảng</th>
@@ -18,7 +19,15 @@
                 <td>
                     @foreach ($schedule as $s)
                         @if ($s->class == $class->id)
-                            {{$s->current_date}}: {{date('H:i', strtotime($s->start_time))}} - {{date('H:i', strtotime($s->end_time))}} (Phòng {{$s->room}} - {{$s->name}})<br>
+                            {{$s->current_date}}: {{date('H:i', strtotime($s->start_time))}} - {{date('H:i', strtotime($s->end_time))}} (Phòng {{$s->room}})<br>
+                        @endif
+                    @endforeach
+                </td>
+                <td>
+                    @foreach ($schedule as $s)
+                        @if ($s->class == $class->id)
+                            {{$s->name}}
+                            @break
                         @endif
                     @endforeach
                 </td>
@@ -34,13 +43,13 @@
     </tbody>
 </table>
 <div id="addClassModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 800px">
         <div class="modal-content">
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
                     <form method="POST" role="form">
                         <h2 id="form-title">Add class</h2>
-                        <div class="form-sub-w3 col-md-6">
+                        <div class="form-sub-w3 col-md-4">
                             <select name="subject">
                                 <option disabled selected hidden>Môn học</option>
                                 @foreach ($subjects as $s)
@@ -48,12 +57,12 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-sub-w3 col-md-6">
+                        <div class="form-sub-w3 col-md-4">
                             <select name="course">
                                 <option disabled selected hidden>Khóa học</option>
                             </select>
                         </div>
-                        <div class="form-sub-w3 col-md-6">
+                        <div class="form-sub-w3 col-md-4">
                             <select name="office">
                                 <option disabled selected hidden>Trung tâm</option>
                                 @foreach ($offices as $o)
@@ -61,21 +70,38 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-sub-w3 col-md-6">
-                            <select name="days" multiple="multiple">
-                                <option value="1">Monday</option>
-                                <option value="2">Tuesday</option>
-                                <option value="3">Wednesday</option>
-                                <option value="4">Thursday</option>
-                                <option value="5">Friday</option>
-                                <option value="6">Saturday</option>
-                                <option value="7">Sunday</option>
-                            </select>
+                        <div class="form-sub-w3 col-md-12">
+                            <p>Chọn ngày học:</p>
+                            <div class="checkbox-wrapper">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="">Monday</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="">Tuesday</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="">Wednesday</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="">Thursday</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="">Friday</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="">Saturday</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="">Sunday</label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-sub-w3 col-md-6">
+                        <div class="form-sub-w3 flexcenter col-md-6">
+                            <span>Ngày khai giảng:</span>
                             <input type="date" placeholder="Ngày khai giảng" name="start_date">
                         </div>
-                        <div class="form-sub-w3 col-md-6">
+                        <div class="form-sub-w3 flexcenter col-md-6">
+                            <span>Ngày kết thúc:</span>
                             <input type="date" placeholder="Ngày kết thúc" name="end_date">
                         </div>
                         <div class="form-sub-w3 col-md-6">
@@ -88,7 +114,37 @@
                         </div>
                         {!! csrf_field() !!}
                         <div class="submit-w3l col-md-12">
-                            <input type="submit" value="Add Class">
+                            <input type="button" name="change" style="float: right;" value="Create Class">
+                        </div>
+                    </form>
+                </div>      
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div id="scheduleClassModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog schedule-modal" role="document">
+        <div class="modal-content">
+            <div class="main-agileits">
+                <div class="form-w3-agile clearfix">
+                    <form method="POST" role="form">
+                        <h2 id="form-title">Create class schedule</h2>
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <th>Rooms</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                                <th>Saturday</th>
+                                <th>Sunday</th>
+                            </tr>
+                        </table>
+                        {!! csrf_field() !!}
+                        <div class="submit-w3l col-md-12">
+                            <input type="button" name="back" value='back'>
+                            <input type="submit" value="Save schedule">
                         </div>
                     </form>
                 </div>      
@@ -113,10 +169,15 @@
             }
         });
     });
+    $('#addClassModal input[name="change"]').click(function(){
+        $('#addClassModal').modal('hide');
+        $('#scheduleClassModal').modal('show', 300);
+    });
+    $('#scheduleClassModal input[name="back"]').click(function() {
+        $('#scheduleClassModal').modal('hide');
+        $('#addClassModal').modal('show', 300);
+    });
     $('#addclass').click(function(){
         $('#addClassModal').modal('show', 300);
     })
-    $('#addClassModal select[name="days"]').multiselect({
-        nonSelectedText: 'Ngày học'
-    });
 </script>

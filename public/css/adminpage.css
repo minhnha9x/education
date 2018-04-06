@@ -138,11 +138,11 @@
           z-index: 1;
           background-position: center bottom; }
           .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile {
-            background: #ff;
+            background: #fff;
             -webkit-box-shadow: 0px 35px 44px -22px rgba(0, 0, 0, 0.72);
             -moz-box-shadow: 0px 35px 44px -22px rgba(0, 0, 0, 0.72);
             box-shadow: 0px 35px 44px -22px #1f181b;
-            padding: 40px 30px; }
+            padding: 30px; }
             .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form {
               margin: 0 auto;
               width: 100%; }
@@ -174,38 +174,45 @@
                   .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input option, .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 select option, .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 textarea option, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input option, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 select option, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 textarea option, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input option, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 select option, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 textarea option {
                     color: initial; }
                 .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input[type='date'], .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input[type='date'], .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input[type='date'] {
-                  text-transform: none; }
-                .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group {
-                  width: 100%; }
-                  .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group button, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group button, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group button {
-                    width: 100%;
-                    height: 45px;
-                    padding: 10px;
-                    border-radius: 0;
-                    text-align: left; }
-                    .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group button span, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group button span, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group button span {
+                  text-transform: none;
+                  width: 180px;
+                  margin-bottom: 0; }
+                .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 span, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 span, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 span {
+                  font-family: 'Roboto', sans-serif;
+                  font-size: 15px;
+                  letter-spacing: 1px;
+                  color: #000; }
+                .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .checkbox-wrapper, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .checkbox-wrapper, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .checkbox-wrapper {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between; }
+                  .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .checkbox-wrapper .checkbox, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .checkbox-wrapper .checkbox, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .checkbox-wrapper .checkbox {
+                    display: inline-block;
+                    margin-right: 10px;
+                    margin-top: 10px; }
+                    .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .checkbox-wrapper .checkbox input, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .checkbox-wrapper .checkbox input, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .checkbox-wrapper .checkbox input {
+                      width: 20px; }
+                    .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .checkbox-wrapper .checkbox label, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .checkbox-wrapper .checkbox label, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .checkbox-wrapper .checkbox label {
                       font-family: 'Roboto', sans-serif;
                       font-size: 15px;
-                      letter-spacing: 2px;
-                      text-transform: capitalize;
-                      color: #000;
-                      max-width: calc(100% - 10px);
-                      display: block;
-                      overflow: hidden; }
-                    .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group button b, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group button b, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group button b {
-                      position: absolute;
-                      right: 5px;
-                      top: 20px; }
-                  .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group ul, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group ul, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group ul {
-                    width: 100%; }
-                  .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group .multiselect-container input, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group .multiselect-container input, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .btn-group .multiselect-container input {
-                    width: initial; }
+                      letter-spacing: 1px;
+                      color: #000; }
+                .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 p, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 p, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 p {
+                  margin: 0;
+                  font-family: 'Roboto', sans-serif;
+                  font-size: 15px;
+                  letter-spacing: 2px;
+                  color: #000; }
                 .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .error, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .error, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .error {
                   color: red; }
                 .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .success, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .success, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .success {
                   color: #8BC34A;
                   text-align: center; }
-              .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"], .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"], .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"] {
+              .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .flexcenter, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .flexcenter, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .flexcenter {
+                display: flex;
+                align-items: center;
+                justify-content: space-between; }
+              .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"], .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="button"], .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"], .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="button"], .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"], .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="button"] {
                 background: #337ab7;
                 color: #fff;
                 outline: none;
@@ -222,6 +229,11 @@
                 -moz-transition: 0.3s all;
                 -o-transition: 0.3s all;
                 -ms-transition: 0.3s all; }
+              .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="button"], .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="button"], .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="button"] {
+                float: none;
+                background-color: #fff;
+                color: #000;
+                border: 1px solid #000; }
               .adminpage .tab-content .tab-pane #courseModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"]:hover, .adminpage .tab-content .tab-pane #addClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"]:hover, .adminpage .tab-content .tab-pane #scheduleClassModal .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"]:hover {
                 background: #4CAF50;
                 color: #ffffff;
@@ -230,5 +242,11 @@
                 -moz-transition: 0.3s all;
                 -o-transition: 0.3s all;
                 -ms-transition: 0.3s all; }
+    .adminpage .tab-content .tab-pane #courseModal .schedule-modal h2, .adminpage .tab-content .tab-pane #addClassModal .schedule-modal h2, .adminpage .tab-content .tab-pane #scheduleClassModal .schedule-modal h2 {
+      margin-bottom: 20px !important; }
+    .adminpage .tab-content .tab-pane #courseModal .schedule-modal table, .adminpage .tab-content .tab-pane #addClassModal .schedule-modal table, .adminpage .tab-content .tab-pane #scheduleClassModal .schedule-modal table {
+      margin-bottom: 15px; }
+    .adminpage .tab-content .tab-pane #courseModal .schedule-modal .submit-w3l, .adminpage .tab-content .tab-pane #addClassModal .schedule-modal .submit-w3l, .adminpage .tab-content .tab-pane #scheduleClassModal .schedule-modal .submit-w3l {
+      padding: 0; }
 
 /*# sourceMappingURL=adminpage.css.map */
