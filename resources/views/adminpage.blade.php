@@ -16,10 +16,10 @@
     </ul>
 
     <div class="tab-content">
-        <div id="menu1" class="tab-pane">
+        <div id="menu1" class="tab-pane in active">
             @include('course_manager')
         </div>
-        <div id="menu2" class="tab-pane in active">
+        <div id="menu2" class="tab-pane">
             @include('class_manager')
         </div>
         <div id="menu3" class="tab-pane">
