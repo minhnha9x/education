@@ -111,6 +111,7 @@
             dataType:"text",
             success : function (result){
             	obj = JSON.parse(result);
+            	console.log(obj);
   				var i;
 				for (i = 0; i < obj['courses'].length; i++) {
 					var j;

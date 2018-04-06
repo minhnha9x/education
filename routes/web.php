@@ -26,3 +26,6 @@ Route::post('/updatecourse', 'AdminController@updateCourse');
 
 Route::get('/getclassfromcourse{id}', 'SubjectController@getClassFromCourse');
 Route::post('/classregister', 'SubjectController@classRegister');
+
+Route::get('/schedule', 'ScheduleController@get');
+Route::get('/getschedule', 'ScheduleController@getschedule');
