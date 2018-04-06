@@ -116,7 +116,7 @@
         
         $('#courseModal').modal('show', 300);
     })
-    $('select[name="subject"]').on('change', function() {
+    $('#courseModal select[name="subject"]').on('change', function() {
         $('#courseModal').find('select[name="required"] option:not(:first-child)').remove();
         $.ajax({
             url : "getcoursefromsub" + $(this).val(),

@@ -3,7 +3,7 @@
 <div class="adminpage">
     @include('header', [$title='Administrator Page', $position='normal'])
 
-    <ul class="tab-menu">
+    <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#menu1"><div class="arrow-left"></div><img src="./img/course.png">Quản lí khóa học</a></li>
         <li><a data-toggle="tab" href="#menu2"><div class="arrow-left"></div><img src="./img/class.png">Quản lí lớp học</a></li>
         <li><a data-toggle="tab" href="#menu3"><div class="arrow-left"></div><img src="./img/subject.png">Quản lí môn học</a></li>
@@ -16,32 +16,32 @@
     </ul>
 
     <div class="tab-content">
-        <div id="menu1" class="tab-pane fade in active">
+        <div id="menu1" class="tab-pane in active">
             @include('course_manager')
         </div>
-        <div id="menu2" class="tab-pane fade">
+        <div id="menu2" class="tab-pane">
             @include('class_manager')
         </div>
-        <div id="menu3" class="tab-pane fade">
+        <div id="menu3" class="tab-pane">
             @include('subject_manager')
         </div>
-        <div id="menu4" class="tab-pane fade">
+        <div id="menu4" class="tab-pane">
             @include('office_manager')
         </div>
-        <div id="menu5" class="tab-pane fade">
+        <div id="menu5" class="tab-pane">
             @include('room_manager')
         </div>
-        <div id="menu6" class="tab-pane fade">
+        <div id="menu6" class="tab-pane">
             @include('teacher_manager')
         </div>
-        <div id="menu7" class="tab-pane fade">
+        <div id="menu7" class="tab-pane">
             @include('employee_manager')
         </div>
-        <div id="menu8" class="tab-pane fade">
+        <div id="menu8" class="tab-pane">
             <h3>Menu 3</h3>
             <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
         </div>
-        <div id="menu9" class="tab-pane fade">
+        <div id="menu9" class="tab-pane">
             <h3>Menu 3</h3>
             <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
         </div>
