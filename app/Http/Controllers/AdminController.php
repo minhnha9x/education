@@ -184,10 +184,15 @@ class AdminController extends Controller
 
     public function postroomlist(Request $r) {
         $class = DB::table('room')
+        ->select('room.id')
         ->leftjoin('course_room', 'room.id', 'course_room.room')
         ->where('course_room.course', $r->course)
         ->where('room.office', $r->office)
         ->get();
+        Debugbar::info($class);
+        if (count($class) < 1) {
+            return array();
+        }
         $string = $r->start_date . '/' . $r->end_date;
         $data = $this->getRoomScheduleList($string, $class);
         return $data;

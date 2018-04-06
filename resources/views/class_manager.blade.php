@@ -1,4 +1,7 @@
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="js/addClassController.js"></script>
 <div id="addclass" class="addbutton hvr-sweep-to-right">Thêm lớp học</div>
+<div class="container" ng-app="educationApp" ng-controller="addClassController">
 <table id="example" class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -72,35 +75,17 @@
                         </div>
                         <div class="form-sub-w3 flexcenter col-md-6">
                             <span>Ngày khai giảng:</span>
-                            <input type="date" placeholder="Ngày khai giảng" name="start_date" class="checkchange">
+                            <input type="date" value="2018-01-01" placeholder="Ngày khai giảng" name="start_date" class="checkchange">
                         </div>
                         <div class="form-sub-w3 flexcenter col-md-6">
                             <span>Ngày kết thúc:</span>
-                            <input type="date" placeholder="Ngày kết thúc" name="end_date" class="checkchange">
+                            <input type="date" value="2018-01-01" placeholder="Ngày kết thúc" name="end_date" class="checkchange">
                         </div>
                         <div class="form-sub-w3 col-md-12">
                             <p>Chọn ngày học:</p>
                             <div class="checkbox-wrapper">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="Monday" disabled>Monday</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="Tuesday" disabled>Tuesday</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="Wednesday" disabled>Wednesday</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="Thursday" disabled>Thursday</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="Friday" disabled>Friday</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="Saturday" disabled>Saturday</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="Sunday" disabled>Sunday</label>
+                                <div class="checkbox" ng-repeat="(key, value) in list_day_in_week">
+                                    <label><input type="checkbox" value="<% key %>" ng-model="list_day_in_week[key]" ng-click="log()"><% key %></label>
                                 </div>
                             </div>
                         </div>
@@ -111,10 +96,13 @@
                                     <option value="{{$t->id}}">{{$t->name}}</option>
                                 @endforeach
                             </select>
+                            <div>
+                                <span>Số phòng tìm thấy:</span><span id='room_available'><% text %></span>
+                            </div>
                         </div>
                         {!! csrf_field() !!}
                         <div class="submit-w3l col-md-12">
-                            <input type="button" disabled name="change" style="float: right;" value="Create Class">
+                            <input type="button" disabled name="change" ng-click="getCheckedList(); getRoomAvailableList()" style="float: right;" value="Create Class">
                         </div>
                     </form>
                 </div>      
@@ -132,79 +120,34 @@
                         <table class="table table-bordered table-hover">
                             <tr>
                                 <th>Rooms</th>
-                                <th>Monday</th>
-                                <th>Wednesday</th>
-                                <th>Friday</th>
+                                <th ng-repeat="title in checkedList" style="width: 150px;"><% title %></th>
                             </tr>
-                            <tr>
-                                <td>Phòng 1</td>
-                                <td>
+                            <tr ng-repeat="(room, days_in_week) in room_available_render">
+                                <td>Phòng <% room %></td>
+                                <td ng-repeat="(day, slot_in_day) in days_in_week">
                                     <select>
                                         <option selected hidden disabled>Các tiết trống</option>
-                                        <option>7:00 - 9:00</option>
-                                        <option>13:00 - 15:00</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select>
-                                        <option selected hidden disabled>Các tiết trống</option>
-                                        <option>7:00 - 9:00</option>
-                                        <option>13:00 - 15:00</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select>
-                                        <option selected hidden disabled>Các tiết trống</option>
-                                        <option>7:00 - 9:00</option>
-                                        <option>13:00 - 15:00</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Phòng 2</td>
-                                <td>
-                                    <select>
-                                        <option selected hidden disabled>Các tiết trống</option>
-                                        <option>7:00 - 9:00</option>
-                                        <option>13:00 - 15:00</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select>
-                                        <option selected hidden disabled>Các tiết trống</option>
-                                        <option>7:00 - 9:00</option>
-                                        <option>13:00 - 15:00</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select>
-                                        <option selected hidden disabled>Các tiết trống</option>
-                                        <option>7:00 - 9:00</option>
-                                        <option>13:00 - 15:00</option>
+                                        <option ng-repeat="(key, value) in slot_in_day"><% value %></option>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Teacher</th>
-                                <td>
+                                <td ng-repeat="test in checkedList">
                                     <select>
                                         <option selected hidden disabled>Các giáo viên rảnh</option>
                                         <option>Giáo viên A</option>
                                         <option>Giáo viên B</option>
                                     </select>
                                 </td>
-                                <td>
+                            </tr>
+                            <tr>
+                                <th>Teaching Assistant</th>
+                                <td ng-repeat="test in checkedList">
                                     <select>
                                         <option selected hidden disabled>Các giáo viên rảnh</option>
-                                        <option>Giáo viên A</option>
-                                        <option>Giáo viên B</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select>
-                                        <option selected hidden disabled>Các giáo viên rảnh</option>
-                                        <option>Giáo viên A</option>
-                                        <option>Giáo viên B</option>
+                                        <option>Trợ Giảng 1</option>
+                                        <option>Trợ Giảng 2</option>
                                     </select>
                                 </td>
                             </tr>
@@ -220,6 +163,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+</div>
 <script type="text/javascript">
     $('#addClassModal select[name="subject"]').on('change', function() {
         $('#addClassModal').find('select[name="course"] option:not(:first-child)').remove();
@@ -236,31 +180,6 @@
                 }
             }
         });
-    });
-    $(document).on('change', '#addClassModal .checkchange', function(e) {
-        if ($('#addClassModal select[name="subject"]').val() != null 
-            && $('#addClassModal select[name="course"]').val() != null 
-            && $('#addClassModal select[name="office"]').val() != null 
-            && $('#addClassModal input[name="start_date"]').val() != "" 
-            && $('#addClassModal input[name="end_date"]').val() != "") {
-            $.ajax({
-                url : "postroomlist",
-                type : "get",
-                data : {
-                    "subject": $('#addClassModal select[name="subject"]').val(),
-                    "course": $('#addClassModal select[name="course"]').val(),
-                    "office": $('#addClassModal select[name="office"]').val(),
-                    "start_date": $('#addClassModal input[name="start_date"]').val(),
-                    "end_date": $('#addClassModal input[name="end_date"]').val(),
-                },
-                dataType:"text",
-                success : function (result){
-                    obj = JSON.parse(result);
-                    console.log(result);
-                    }
-            });
-            $('#addClassModal input[name="change"]').prop("disabled", false);
-        }
     });
     $('#addClassModal input[name="change"]').click(function(){
         $('#addClassModal').modal('hide');

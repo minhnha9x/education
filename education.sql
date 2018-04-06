@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 06, 2018 lúc 05:38 AM
+-- Thời gian đã tạo: Th4 06, 2018 lúc 07:52 PM
 -- Phiên bản máy phục vụ: 10.1.30-MariaDB
 -- Phiên bản PHP: 7.2.2
 
@@ -395,8 +395,8 @@ CREATE TABLE `room_schedule` (
 --
 
 INSERT INTO `room_schedule` (`id`, `class`, `schedule`, `current_date`, `teacher`, `room`) VALUES
-(1, 1, 1, 'Monday', 1, 2),
-(2, 1, 2, 'Wednesday', 1, 2);
+(1, 1, 1, 'Monday', 1, 3),
+(2, 1, 2, 'Wednesday', 1, 4);
 
 -- --------------------------------------------------------
 
