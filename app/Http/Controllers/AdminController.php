@@ -7,6 +7,7 @@ use DB;
 use App\Http\Requests;
 use App\Course;
 use DateTime;
+use Barryvdh\Debugbar\Facade as Debugbar;
 
 class AdminController extends Controller
 {
@@ -130,5 +131,54 @@ class AdminController extends Controller
         $course->certificate_required = $request->required;
         $course->update();
         return back()->withInput();
+    }
+
+    public function getRoomScheduleList($range_date, $room_ids) {
+        $input = $range_date;
+        $range_date_list = array();
+        $range_date_split = (explode("-",$range_date));
+        foreach ($range_date_split as $value) {
+            $value = date('Y-m-d', strtotime($value));
+            array_push($range_date_list, $value);
+        }
+
+        $room_schedule = $this->getRoomScheduleData($room_ids);
+        $result = array();
+        foreach ($room_schedule as $room_record) {
+            if (!array_key_exists($room_record->id, $result)){
+                $result[$room_record->id] = array();
+            }
+            if (strtotime($room_record->end_date) and strtotime($room_record->start_date)){
+                $start_date = date('Y-m-d', strtotime($room_record->start_date));
+                $end_date = date('Y-m-d', strtotime($room_record->end_date));
+                if (!($range_date_list[0] > $end_date || $range_date_list[1] < $start_date)) {
+                    if (!array_key_exists($room_record->current_date, $result[$room_record->id])){
+                        $result[$room_record->id][$room_record->current_date] = array();
+                    }
+                    array_push($result[$room_record->id][$room_record->current_date], $room_record->schedule);
+                }
+            }
+        }
+        Debugbar::info($result);
+        return abort(404);
+    }
+
+    public function getRoomScheduleData($room_ids) {
+        $room_schedule = DB::table('room')
+        ->select('room.id',
+            'room_schedule.current_date',
+            'room_schedule.schedule',
+            'class.start_date',
+            'class.end_date')
+        ->leftjoin('room_schedule', 'room_schedule.room', '=', 'room.id')
+        ->leftjoin('class', 'class.id', '=', 'room_schedule.class');
+
+        if (json_decode($room_ids, TRUE)){
+            $room_schedule = $room_schedule
+            ->whereIn('room.id', json_decode($room_ids, TRUE));
+        }
+        $room_schedule = $room_schedule
+        ->get();
+        return $room_schedule;
     }
 }
