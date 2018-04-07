@@ -39,6 +39,7 @@ myApp.controller('addClassController', function($scope, $http) {
     };
 
     $scope.getRoomAvailableList = function() {
+        $scope.room_available_render = {};
         for (var room_id in $scope.room_available) {
             $scope.room_available_render[room_id] = {};
             for (var index in $scope.checkedList) {
@@ -76,9 +77,14 @@ myApp.controller('addClassController', function($scope, $http) {
                     $scope.room_available = JSON.parse(result);
                     $("#room_available").text(Object.keys($scope.room_available).length);
                     console.log("haha", $scope.room_available);
+                    if (Object.keys($scope.room_available).length == 0){
+                        $('#addClassModal input[name="change"]').prop("disabled", true);
+                    }
+                    else {
+                        $('#addClassModal input[name="change"]').prop("disabled", false);
+                    }
                 }
             });
-            $('#addClassModal input[name="change"]').prop("disabled", false);
         }
     });
 
