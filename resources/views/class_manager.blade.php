@@ -75,11 +75,11 @@
                         </div>
                         <div class="form-sub-w3 flexcenter col-md-6">
                             <span>Ngày khai giảng:</span>
-                            <input type="date" value="2018-01-01" placeholder="Ngày khai giảng" name="start_date" class="checkchange">
+                            <input type="date" value="{{date("Y-m-d")}}" placeholder="Ngày khai giảng" name="start_date" class="checkchange">
                         </div>
                         <div class="form-sub-w3 flexcenter col-md-6">
                             <span>Ngày kết thúc:</span>
-                            <input type="date" value="2018-01-01" placeholder="Ngày kết thúc" name="end_date" class="checkchange">
+                            <input type="date" value="{{date("Y-m-d")}}" placeholder="Ngày kết thúc" name="end_date" class="checkchange">
                         </div>
                         <div class="form-sub-w3 col-md-12">
                             <p>Chọn ngày học:</p>

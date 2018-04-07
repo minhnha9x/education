@@ -82,12 +82,6 @@
             letter-spacing: 2px;
             margin-top: 0;
             text-transform: capitalize; }
-          .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile table td, .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile table th, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile table td, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile table th {
-            text-align: center;
-            vertical-align: middle; }
-          .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile table .action, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile table .action {
-            cursor: pointer;
-            color: #337ab7; }
           .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .info .course, .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .info .schedule, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .info .course, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .info .schedule {
             color: #040404;
             font-size: 18px;
@@ -102,7 +96,7 @@
           .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 {
             position: relative;
             margin-bottom: 15px; }
-            .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 input, .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 select, .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 textarea, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 input, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 select, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 textarea {
+            .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 input, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 input {
               outline: none;
               font-size: 15px;
               color: #000;
@@ -115,16 +109,9 @@
               background: transparent;
               font-family: 'Roboto', sans-serif;
               text-transform: capitalize; }
-              .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 input option, .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 select option, .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 textarea option, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 input option, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 select option, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 textarea option {
-                color: initial; }
-            .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 .error, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 .error {
-              color: red; }
-            .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 .success, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 .success {
-              color: #8BC34A;
-              text-align: center; }
           .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile .submit-w3l, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile .submit-w3l {
             margin-top: 10px; }
-          .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="submit"], .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="button"], .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="submit"], .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="button"] {
+          .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="submit"], .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="submit"] {
             background: #337ab7;
             color: #fff;
             outline: none;
@@ -141,11 +128,6 @@
             -moz-transition: 0.3s all;
             -o-transition: 0.3s all;
             -ms-transition: 0.3s all; }
-          .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="button"], .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="button"] {
-            float: none;
-            background-color: #fff;
-            color: #000;
-            border: 1px solid #000; }
           .subjectpage #classModal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="submit"]:hover, .subjectpage #classregisterModal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="submit"]:hover {
             background: #4CAF50;
             color: #ffffff;

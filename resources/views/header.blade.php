@@ -66,7 +66,7 @@
                     @endforeach
                 </ul>
             </li>
-            <li><a href="">Về chúng tôi</a></li>
+            <li><a href="./schedule">Lịch học</a></li>
             <li><a href="">Liên hệ</a></li>
                 @if( Auth::check() ) 
                 	<div class="acc-wrapper">

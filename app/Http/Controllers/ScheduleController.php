@@ -36,22 +36,44 @@ class ScheduleController extends Controller
 	public function getschedule(Request $r) {
 
 		$class = DB::table('class')
-        ->select("*")
-        ->where('course', $r->course)
-        ->get();
+		->select("*", 'class.id as class')
+		->leftjoin('course', 'class.course', 'course.id')
+		->leftjoin('room_schedule', 'class.id', 'room_schedule.class')
+		->leftjoin('room', 'room_schedule.room', 'room.id')
+		->leftjoin('office', 'room.office', 'office.id')
+		->leftjoin('subject', 'course.subject', 'subject.id')
+		->groupBy('class.id')
+		->select('*', 'course.name as course');
+        if ($r->course != null) {
+        	$class = $class->where('course', $r->course);
+        }
+        if ($r->subject != null) {
+        	$class = $class->where('subject', $r->subject);
+        }
+        if ($r->office != null) {
+        	$class = $class->where('office', $r->office);
+        }
+        $class = $class->get();
 
         $schedule = DB::table('room_schedule')
         ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
         ->leftjoin('room', 'room_schedule.room', 'room.id')
-        ->leftjoin('office', 'room.office', 'office.id')
         ->leftjoin('class', 'room_schedule.class', 'class.id')
-        ->leftjoin('course', 'class.course', 'course.id')
-        ->where('course.subject', $r->subject)
-        ->where('course.id', $r->course)
-        ->where('office.id', $r->office)
-        ->get();
+        ->leftjoin('office', 'room.office', 'office.id')
+        ->leftjoin('course', 'course.id', 'class.course')
+        ->select("*");
+        if ($r->subject != null){
+        	$schedule = $schedule->where('subject', $r->subject);
+        }
+        if ($r->course != null) {
+        	$schedule = $schedule->where('course', $r->course);
+        }
+        if ($r->office != null) {
+        	$schedule = $schedule->where('office', $r->office);
+        }
+        $schedule = $schedule->get();
 
-        $data = array('class' => $class, 'schedule' => $schedule,);
+        $data = array('class' => $class, 'schedule' => $schedule);
         return $data;
 	}
 }
