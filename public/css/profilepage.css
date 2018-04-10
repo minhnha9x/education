@@ -1,0 +1,67 @@
+.profilepage {
+  padding-top: 140px;
+  padding-bottom: 40px; }
+  .profilepage .title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 50px; }
+  .profilepage .profile-wrapper {
+    -webkit-box-shadow: 3px 3px 5px -1px #706c70;
+    -moz-box-shadow: 3px 3px 5px -1px #706c70;
+    box-shadow: 3px 3px 5px -1px #706c70;
+    padding: 30px 15px;
+    border: 1px solid #ccc;
+    text-align: center; }
+    .profilepage .profile-wrapper .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      margin: 0 auto; }
+    .profilepage .profile-wrapper .name {
+      color: #337ab7;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 16px;
+      text-transform: capitalize; }
+    .profilepage .profile-wrapper .text {
+      text-align: right;
+      padding: 20px 20px 0; }
+      .profilepage .profile-wrapper .text strong {
+        float: left; }
+    .profilepage .profile-wrapper .button {
+      border: 1px solid #337ab7;
+      border-radius: 10px;
+      margin-top: 30px;
+      padding: 5px 20px;
+      display: inline-block;
+      font-weight: bold;
+      color: #337ab7;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer; }
+  .profilepage .tab-wrapper {
+    padding-left: 30px; }
+    .profilepage .tab-wrapper .nav-tabs {
+      position: absolute;
+      background: #fff;
+      display: flex; }
+      .profilepage .tab-wrapper .nav-tabs li {
+        display: inline-block;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border: 1px solid #fff;
+        border-bottom: 1px solid #ccc; }
+      .profilepage .tab-wrapper .nav-tabs .active {
+        border: 1px solid #ccc;
+        border-bottom: 1px solid #fff; }
+    .profilepage .tab-wrapper .tab-content {
+      -webkit-box-shadow: 3px 3px 5px -1px #706c70;
+      -moz-box-shadow: 3px 3px 5px -1px #706c70;
+      box-shadow: 3px 3px 5px -1px #706c70;
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin-top: 41px; }
+
+/*# sourceMappingURL=profilepage.css.map */

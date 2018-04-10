@@ -16,6 +16,7 @@ Route::get('/', function () {
     return view('homepage');
 });
 Route::get('/admin', 'AdminController@getData');
+Route::get('/profile', 'ProfileController@get');
 Route::get('/subject_{id}', 'SubjectController@get');
 Route::get('/getcoursefromsub{id}', 'AdminController@getCourseFromSub');
 Route::get('/getcourse{id}', 'AdminController@getCourse');

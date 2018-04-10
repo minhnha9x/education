@@ -113,7 +113,7 @@
 							$schedule += obj['schedule'][j]['current_date'] + ': ' + obj['schedule'][j]['start_time'].substr(0, obj['schedule'][0]['start_time'].length-3) + ' - ' + obj['schedule'][j]['end_time'].substr(0, obj['schedule'][0]['end_time'].length-3) + ' (Phòng ' + obj['schedule'][j]['room'] + ')' + '<br>';
 						$listschedule[i][j] = $schedule;
 					}
-					$string = '<tr><td>' + obj['class'][i]['class'] + '</td><td>' + obj['class'][i]['name'] + '</td><td>' + obj['class'][i]['course'] + '</td><td>' + $schedule + '</td><td></td><td>' + obj['class'][i]['start_date'] + '</td><td class="action" data-course="' + i + '" data-id="' + obj['courses'][i]['id'] + '">Đăng kí</td></tr>';
+					$string = '<tr><td>' + obj['class'][i]['class'] + '</td><td>' + obj['class'][i]['name'] + '</td><td>' + obj['class'][i]['course'] + '</td><td>' + $schedule + '</td><td></td><td>' + obj['class'][i]['start_date'] + '</td><td class="action" data-course="' + i + '" data-id="' + obj['schedule'][i]['course'] + '">Đăng kí</td></tr>';
 					$table += $string;
 				}
 				$table += '</tbody> </table>';

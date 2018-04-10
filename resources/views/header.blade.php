@@ -76,7 +76,7 @@
 	                    </div>
 	                    <i class="fas fa-angle-down"></i>
 	                    <ul>
-	                    	<li><a href="">Profile</a></li>
+	                    	<li><a href="{{url('profile')}}">Profile</a></li>
 	                    	@if ( Auth::user()->role == "admin")
 	                    		<li><a href="{{url('admin')}}">Admin Page</a></li>
 	                    	@endif
