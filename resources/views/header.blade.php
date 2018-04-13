@@ -72,7 +72,11 @@
                 	<div class="acc-wrapper">
                 		<div class="avatar" style="background-image: url('{{ Auth::user()->avatar }}')"></div>
 	                    <div class="loged">
-	                      {{ Auth::user()->name }}
+	                      @if (Auth::user()->fullname != null)
+                            {{Auth::user()->fullname}}
+                        @else
+                            {{Auth::user()->name}}
+                        @endif
 	                    </div>
 	                    <i class="fas fa-angle-down"></i>
 	                    <ul>
@@ -80,7 +84,7 @@
 	                    	@if ( Auth::user()->role == "admin")
 	                    		<li><a href="{{url('admin')}}">Admin Page</a></li>
 	                    	@endif
-	                    	<li onclick="location.href = './logout'">Log Out</li>
+	                    	<li onclick="location.href = './logout'" class="padli">Log Out</li>
 	                    </ul>
                 	</div>
                 @else
@@ -104,7 +108,7 @@
                                 </div>
                             @endif
                             <div class="form-sub-w3">
-                                <input type="text" id="email" placeholder="Email" name="email" value="{{old('email')}}">
+                                <input type="text" id="email" placeholder="Email" name="email" value="{{old('email')}}" required>
                                 <div class="icon-w3">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </div>
@@ -113,7 +117,7 @@
                                  @endif
                             </div>
                             <div class="form-sub-w3">
-                                <input type="password" id="password" placeholder="Password" name="password">
+                                <input type="password" id="password" placeholder="Password" name="password" required>
                                 <div class="icon-w3">
                                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                                 </div>
@@ -141,6 +145,7 @@
                                 </div>
                                 
                             </div>
+                            {!! csrf_field() !!}
                             <div class="clearfix">
                                 <p class="p-bottom-w3ls">Have Account?<button id="lost_login_btn" type="button">Log In here</button></p>
                                 <p class="p-bottom-w3ls1">New User?<button id="lost_register_btn" type="button">Register here</button></p>
@@ -154,10 +159,10 @@
                         <!-- End | Lost Password Form -->
                         
                         <!-- Begin | Register Form -->
-                        <form id="register-form" method="post" style="display:none;">
+                        <form id="register-form" method="post" action="{{url('adduser')}}" style="display:none;">
                             <h2>Please Sign Up</h2>
                             <div class="form-sub-w3">
-                                <input type="text" name="username" placeholder="Username " required=>
+                                <input type="text" name="username" placeholder="Username" required>
                                 <div class="icon-w3">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </div>
@@ -175,6 +180,7 @@
                                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                                 </div>
                             </div>
+                            {!! csrf_field() !!}
                             <div class="clearfix">
                                 <p class="p-bottom-w3ls">Have Account?<button id="register_login_btn" type="button">Log In here</button></p>
                                 <p class="p-bottom-w3ls1">Forgot Password?<button id="register_lost_btn" type="button">Click here</button></p>
@@ -188,44 +194,66 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <script type="text/javascript">
-        $('.menu > li').hover(function(){
-            $(this).find('.sub-menu').slideToggle(200);
-        })
-        $('.sub-menu > li').hover(function(){
-            $(this).find('.sub-menu2').fadeToggle(200);
-        })
-        $('.acc-wrapper').hover(function(){
-            $(this).find('ul').fadeToggle(200);
-        })
-        @if ($position == 'top')
-            $(window).scroll(function (event) {
-                var scroll = $(window).scrollTop();
-                if (scroll > 40) {
-                    $('.header').css('width', '100%');
-                    $('.header').css('position', 'fixed');
-                    $('.header').css('top', '0');
-                    $('.header').css('left', '0');
-                }
-                else {
-                    $('.header').css('width', 'calc(100% - 80px)');
-                    $('.header').css('position', 'absolute');
-                    $('.header').css('top', '40px');
-                    $('.header').css('left', '40px');
-                }
+<script type="text/javascript">
+    $('.menu > li').hover(function(){
+        $(this).find('.sub-menu').slideToggle(200);
+    })
+    $('.sub-menu > li').hover(function(){
+        $(this).find('.sub-menu2').fadeToggle(200);
+    })
+    $('.acc-wrapper').hover(function(){
+        $(this).find('ul').fadeToggle(200);
+    })
+    @if ($position == 'top')
+        $(window).scroll(function (event) {
+            var scroll = $(window).scrollTop();
+            if (scroll > 40) {
+                $('.header').css('width', '100%');
+                $('.header').css('position', 'fixed');
+                $('.header').css('top', '0');
+                $('.header').css('left', '0');
+            }
+            else {
+                $('.header').css('width', 'calc(100% - 80px)');
+                $('.header').css('position', 'absolute');
+                $('.header').css('top', '40px');
+                $('.header').css('left', '40px');
+            }
+        });
+    @else
+        $('.header').css('width', '100%');
+        $('.header').css('position', 'fixed');
+        $('.header').css('top', '0');
+        $('.header').css('left', '0');
+    @endif
+    $('#login-btn').click(function(){
+        $('#myLoginModal').modal('show', 300);
+    })
+    @if($errors->has('email') || $errors->has('password') || $errors->has('errorlogin'))
+    {
+        $('#myLoginModal').modal('show', 300);
+    }
+    @endif
+
+    var $divForms = $('#myLoginModal .form-w3-agile');
+    var $modalAnimateTime = 300;
+    var $msgAnimateTime = 150;
+    var $msgShowTime = 2000;
+
+    function modalAnimate ($oldForm, $newForm) {
+        var $oldH = $oldForm.height();
+        var $newH = $newForm.height() + 120;
+        $oldForm.fadeToggle($modalAnimateTime, function(){
+            $divForms.animate({height: $newH}, $modalAnimateTime, function(){
+                $newForm.fadeToggle($modalAnimateTime);
             });
-        @else
-            $('.header').css('width', '100%');
-            $('.header').css('position', 'fixed');
-            $('.header').css('top', '0');
-            $('.header').css('left', '0');
-        @endif
-        $('#login-btn').click(function(){
-            $('#myLoginModal').modal('show', 300);
-        })
-        @if($errors->has('email') || $errors->has('password') || $errors->has('errorlogin'))
-        {
-            $('#myLoginModal').modal('show', 300);
-        }
-        @endif
-    </script>
+        });
+    }
+    
+    $('#login_register_btn').click( function () { modalAnimate($('#login-form'), $('#register-form')) });
+    $('#register_login_btn').click( function () { modalAnimate($('#register-form'), $('#login-form')); });
+    $('#login_lost_btn').click( function () { modalAnimate($('#login-form'), $('#lost-form')); });
+    $('#lost_login_btn').click( function () { modalAnimate($('#lost-form'), $('#login-form')); });
+    $('#lost_register_btn').click( function () { modalAnimate($('#lost-form'), $('#register-form')); });
+    $('#register_lost_btn').click( function () { modalAnimate($('#register-form'), $('#lost-form')); });
+</script>

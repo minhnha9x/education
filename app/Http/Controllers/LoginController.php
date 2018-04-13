@@ -8,6 +8,8 @@ use Validator;
 use Auth;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -23,9 +25,7 @@ class LoginController extends Controller
     		'password' => 'required|min:8'
     	];
     	$messages = [
-    		'email.required' => 'Email là trường bắt buộc',
     		'email.email' => 'Email không đúng định dạng',
-    		'password.required' => 'Mật khẩu là trường bắt buộc',
     		'password.min' => 'Mật khẩu phải chứa ít nhất 8 ký tự',
     	];
     	$validator = Validator::make($request->all(), $rules, $messages);
@@ -43,5 +43,19 @@ class LoginController extends Controller
     			return redirect()->back()->withInput()->withErrors($errors);
     		}
     	}
+    }
+    public function addUser(Request $r) {
+        $user = new User;
+        $user->name = $r->username;
+        $user->email = $r->email;
+        $user->password = Hash::make($r->password);
+        $user->save();
+        if( Auth::attempt(['email' => $r->email, 'password' => $r->password])) {
+                return redirect()->back()->withInput();
+            } else {
+                $errors = new MessageBag(['errorlogin' => 'Email hoặc mật khẩu không đúng']);
+                return redirect()->back()->withInput()->withErrors($errors);
+            }
+        return view('homepage');
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 13, 2018 lúc 10:37 AM
+-- Thời gian đã tạo: Th4 13, 2018 lúc 02:26 PM
 -- Phiên bản máy phục vụ: 10.1.31-MariaDB
 -- Phiên bản PHP: 7.2.3
 
@@ -489,22 +489,22 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `fullname` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
   `birthday` date DEFAULT NULL,
   `role` enum('admin','member','','') NOT NULL DEFAULT 'member',
   `avatar` varchar(100) DEFAULT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `remember_token` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `address`, `birthday`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', '0986781993', 'So 15 Nguyen Thi Minh Khai, Phuong Tan Hiep, Quan Tan Binh, TP Ho Chi Minh', '1993-01-13', 'admin', './img/avatar.jpg', 'RpKGiXvxe9rzE3caQkA4yHQAAzNKUI4gkO128Lwt5xsvY5Y670ajP09EuLaZ', '2018-03-16 02:49:36', '2018-03-16 02:49:36');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `fullname`, `phone`, `address`, `birthday`, `role`, `avatar`, `remember_token`) VALUES
+(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'Dương Vũ Thông', '0986781993', 'So 15 Nguyen Thi Minh Khai, Phuong Tan Hiep, Quan Tan Binh, TP Ho Chi Minh', '1993-01-13', 'admin', './img/avatar.jpg', 'jBuq7ESORTbCvJkl9pdqV6v0QhKqnSNpVjKAI82G3EIUVd6J8QXZn4BYnWb8'),
+(4, 'VTocean', 'aaa@gmail.com', '$2y$10$DgDJgJuZY3tXrHYFxFIuf.0ENsBMT8uEPB4IlFNWpKF7cTC5D4ME6', NULL, NULL, NULL, NULL, 'member', NULL, 'WZW5TlmpHZGS7IRefJLAbK34ginZREPB6bn5JQX2iBw3qdENRmF3Y2oxR1Mb');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -784,7 +784,7 @@ ALTER TABLE `teaching_assistant`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

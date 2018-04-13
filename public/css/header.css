@@ -73,7 +73,10 @@ a {
         .header ul li .sub-menu li:hover a {
           color: #337ab7; }
       .header ul li a {
-        color: #000; }
+        color: #000;
+        display: block;
+        width: 100%;
+        height: 100%; }
     .header ul li:hover {
       color: #337ab7; }
     .header ul .login {
@@ -128,8 +131,12 @@ a {
         .header ul .acc-wrapper ul li {
           display: block;
           text-transform: capitalize;
-          padding: 10px 20px;
-          border-bottom: 1px solid #ccc; }
+          border-bottom: 1px solid #ccc;
+          padding: 0; }
+          .header ul .acc-wrapper ul li a {
+            padding: 10px 20px; }
+        .header ul .acc-wrapper ul .padli {
+          padding: 10px 20px; }
 
 #myLoginModal a {
   text-decoration: none !important; }
