@@ -5,7 +5,9 @@ var myApp = angular.module('educationApp', [], function($interpolateProvider) {
 
 myApp.controller('addClassController', function($scope, $http) {
     $scope.room_available = {};
-    $scope.room_available_render = {}; 
+    $scope.room_available_render = {};
+    $scope.courseList = {};
+    $scope.officeList = [];
     $scope.list_day_in_week = {
         "Monday":true,
         "Tuesday":false,
@@ -25,8 +27,56 @@ myApp.controller('addClassController', function($scope, $http) {
         6:"19:00 - 21:00",
     }
 
-    $scope.log = function() {
-        console.log("hihi", $scope.list_day_in_week);
+    $scope.showModal = function() {
+        $('#scheduleClassModal').modal('hide');
+        $('#scheduleDetail').modal('show');
+    };
+
+    $scope.courseUpdated = function() {
+        console.log("hoho", $scope.courseSelected);
+        $http.get("get_available_office", {params: { course_id: $scope.courseSelected}})
+            .then(function(response) {
+                console.log(response.data);
+                $scope.officeList = response.data;
+                $scope.officeSelected = $scope.officeList[0]['id'].toString();
+                $scope.officeUpdated();
+            }, function(x) {
+                // Request error
+            });
+    };
+
+    $scope.officeUpdated = function() {
+        console.log("hihi", $scope.officeSelected);
+
+        if ($('#addClassModal select[name="subject"]').val() != null 
+        && $('#addClassModal select[name="course"]').val() != null 
+        && $('#addClassModal select[name="office"]').val() != null 
+        && $('#addClassModal input[name="start_date"]').val() != "" 
+        && $('#addClassModal input[name="end_date"]').val() != "") {
+            $.ajax({
+                url : "postroomlist",
+                type : "get",
+                data : {
+                    "subject": $('#addClassModal select[name="subject"]').val(),
+                    "course": $scope.courseSelected,
+                    "office": $scope.officeSelected,
+                    "start_date": $('#addClassModal input[name="start_date"]').val(),
+                    "end_date": $('#addClassModal input[name="end_date"]').val(),
+                },
+                dataType:"text",
+                success : function (result){
+                    $scope.room_available = JSON.parse(result);
+                    $("#room_available").text(Object.keys($scope.room_available).length);
+                    console.log("haha", $scope.room_available);
+                    if (Object.keys($scope.room_available).length == 0){
+                        $('#addClassModal input[name="change"]').prop("disabled", true);
+                    }
+                    else {
+                        $('#addClassModal input[name="change"]').prop("disabled", false);
+                    }
+                }
+            });
+        }
     };
 
     $scope.getCheckedList = function() {
@@ -56,36 +106,24 @@ myApp.controller('addClassController', function($scope, $http) {
         console.log("asda", $scope.room_available_render);
     };
 
-    $(document).on('change', '#addClassModal .checkchange', function(e) {
-        if ($('#addClassModal select[name="subject"]').val() != null 
-            && $('#addClassModal select[name="course"]').val() != null 
-            && $('#addClassModal select[name="office"]').val() != null 
-            && $('#addClassModal input[name="start_date"]').val() != "" 
-            && $('#addClassModal input[name="end_date"]').val() != "") {
-            $.ajax({
-                url : "postroomlist",
-                type : "get",
-                data : {
-                    "subject": $('#addClassModal select[name="subject"]').val(),
-                    "course": $('#addClassModal select[name="course"]').val(),
-                    "office": $('#addClassModal select[name="office"]').val(),
-                    "start_date": $('#addClassModal input[name="start_date"]').val(),
-                    "end_date": $('#addClassModal input[name="end_date"]').val(),
-                },
-                dataType:"text",
-                success : function (result){
-                    $scope.room_available = JSON.parse(result);
-                    $("#room_available").text(Object.keys($scope.room_available).length);
-                    console.log("haha", $scope.room_available);
-                    if (Object.keys($scope.room_available).length == 0){
-                        $('#addClassModal input[name="change"]').prop("disabled", true);
-                    }
-                    else {
-                        $('#addClassModal input[name="change"]').prop("disabled", false);
-                    }
+    $('#addClassModal select[name="subject"]').on('change', function() {
+        $scope.courseList = {};
+        $('#addClassModal').find('select[name="course"] option:not(:first-child)').remove();
+        $.ajax({
+            url : "getcoursefromsub" + $(this).val(),
+            type : "get",
+            dataType:"text",
+            success : function (result){
+                obj = JSON.parse(result);
+                console.log("hihi", obj);
+                for(var index in obj) { 
+                    $scope.courseList[obj[index]['id']] = obj[index]['name'];
                 }
-            });
-        }
+                $scope.courseSelected = Object.keys($scope.courseList)[0];
+                $scope.$apply();
+                $scope.courseUpdated();
+            }
+        });
     });
 
 });

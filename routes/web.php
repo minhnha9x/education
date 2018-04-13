@@ -33,6 +33,7 @@ Route::get('/schedule', 'ScheduleController@get');
 Route::get('/getschedule', 'ScheduleController@getschedule');
 
 Route::get('/postroomlist', 'AdminController@postroomlist');
+Route::get('/get_available_office', 'AdminController@getAvailableOffice');
 
 Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
 

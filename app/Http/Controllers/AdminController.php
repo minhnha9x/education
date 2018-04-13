@@ -197,4 +197,15 @@ class AdminController extends Controller
         $data = $this->getRoomScheduleList($string, $class);
         return $data;
     }
+
+    public function getAvailableOffice(Request $r) {
+        $data = DB::table('course_room')
+        ->select('office.id', 'office.name')
+        ->leftjoin('room', 'room.id', 'course_room.room')
+        ->leftjoin('office', 'office.id', 'room.office')
+        ->where('course_room.course', $r->course_id)
+        ->groupBy('office.id')
+        ->get();
+        return $data;
+    }
 }
