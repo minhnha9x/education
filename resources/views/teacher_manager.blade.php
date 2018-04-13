@@ -7,6 +7,7 @@
             <th>Bằng cấp</th>
             <th>Dạy các khóa</th>
             <th>Làm việc tại các trung tâm</th>
+            <th>Lịch dạy</th>
             <th>Hành động</th>
         </tr>
     </thead>
@@ -21,6 +22,7 @@
                 <td>{{$teacher->degree}}</td>
                 <td>{{$teacher->course}}</td>
                 <td>{{$teacher->office}}</td>
+                <td><button>Xem</button></td>
                 <td class="action">
                     <a id='edit' data-name="Sửa khóa học" data-id='{{$teacher->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
                 </td>

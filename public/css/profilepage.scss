@@ -31,10 +31,19 @@ $blue: #337ab7;
 			text-transform: capitalize;
 		}
 		.text {
-			text-align: right;
 			padding: 20px 20px 0;
-			strong {
-				float: left;
+			p {
+				text-align: right;
+				span {
+					font-weight: bold;
+					float: left;
+				}
+			}
+			.address {
+				text-align: justify;
+				span {
+					margin-right: 20px;
+				}
 			}
 		}
 		.button {
@@ -61,6 +70,9 @@ $blue: #337ab7;
 				border-top-right-radius: 5px;
 				border: 1px solid #fff;
 				border-bottom: 1px solid #ccc;
+				a {
+					color: #000;
+				}
 			}
 			.active {
 				border: 1px solid #ccc;
@@ -74,6 +86,22 @@ $blue: #337ab7;
 			border: 1px solid #ccc;
 			padding: 20px;
 			margin-top: 41px;
+			table {
+				tr {
+					td, th {
+						vertical-align: middle;
+						text-align: center;
+					}
+					.text {
+						font-family: 'Roboto', sans-serif;
+						font-size: 15px;
+						.course {
+							color: $blue;
+							font-weight: bold;
+						}
+					}
+				}
+			}
 		}
 	}
 }

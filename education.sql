@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 06, 2018 lúc 07:52 PM
--- Phiên bản máy phục vụ: 10.1.30-MariaDB
--- Phiên bản PHP: 7.2.2
+-- Thời gian đã tạo: Th4 13, 2018 lúc 10:37 AM
+-- Phiên bản máy phục vụ: 10.1.31-MariaDB
+-- Phiên bản PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -346,8 +346,7 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `score`, `pass`) VALUES
-(9, 1, NULL, 1, 0, 0),
-(16, 1, 'eng50', 1, 0, 0);
+(9, 1, NULL, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -396,7 +395,11 @@ CREATE TABLE `room_schedule` (
 
 INSERT INTO `room_schedule` (`id`, `class`, `schedule`, `current_date`, `teacher`, `room`) VALUES
 (1, 1, 1, 'Monday', 1, 3),
-(2, 1, 2, 'Wednesday', 1, 4);
+(2, 1, 2, 'Wednesday', 1, 4),
+(4, 4, 3, 'Monday', 5, 5),
+(5, 5, 2, 'Friday', 2, 6),
+(6, 6, 5, 'Tuesday', 4, 7),
+(7, 7, 2, 'Sartuday', 5, 3);
 
 -- --------------------------------------------------------
 
@@ -486,6 +489,9 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
   `role` enum('admin','member','','') NOT NULL DEFAULT 'member',
   `avatar` varchar(100) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
@@ -497,8 +503,8 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/avatar.jpg', 'RpKGiXvxe9rzE3caQkA4yHQAAzNKUI4gkO128Lwt5xsvY5Y670ajP09EuLaZ', '2018-03-16 02:49:36', '2018-03-16 02:49:36');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `address`, `birthday`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', '0986781993', 'So 15 Nguyen Thi Minh Khai, Phuong Tan Hiep, Quan Tan Binh, TP Ho Chi Minh', '1993-01-13', 'admin', './img/avatar.jpg', 'RpKGiXvxe9rzE3caQkA4yHQAAzNKUI4gkO128Lwt5xsvY5Y670ajP09EuLaZ', '2018-03-16 02:49:36', '2018-03-16 02:49:36');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -736,7 +742,7 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT cho bảng `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `room`
@@ -748,7 +754,7 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT cho bảng `room_schedule`
 --
 ALTER TABLE `room_schedule`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `room_ta`
