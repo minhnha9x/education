@@ -8,7 +8,7 @@
                         <div class="form-sub-w3 col-md-6">
                             <select name="subject" class="checkchange">
                                 <option disabled selected hidden>Phòng học</option>
-                                <option value="1">Phong 102</option>
+                                <option value="1">Phong 102 &#xf243;</option>
                                 <option value="1">Phong 202</option>
                                 <option value="1">Phong 305</option>
                             </select>

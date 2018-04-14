@@ -68,7 +68,7 @@
         $('#addClassModal').modal('show', 300);
     });
     $('#addclass').click(function(){
-        $('#addClassModal').modal('show', 300);
+        $('#scheduleDetail').modal('show', 300);
     })
     $('#scheduleClassModal table td').click(function() {
         $('#scheduleClassModal').modal('hide');
