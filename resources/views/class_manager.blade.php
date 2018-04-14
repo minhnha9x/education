@@ -70,4 +70,12 @@
     $('#addclass').click(function(){
         $('#addClassModal').modal('show', 300);
     })
+    $('#scheduleClassModal table td').click(function() {
+        $('#scheduleClassModal').modal('hide');
+        $('#scheduleDetail').modal('show', 300);
+    })
+    $('#scheduleDetail input[name="ok"]').click(function() {
+        $('#scheduleClassModal').modal('show', 300);
+        $('#scheduleDetail').modal('hide');
+    })
 </script>
