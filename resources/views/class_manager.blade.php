@@ -75,7 +75,9 @@
         $('#scheduleDetail').modal('show', 300);
     })
     $('#scheduleDetail input[name="ok"]').click(function() {
-        $('#scheduleClassModal').modal('show', 300);
         $('#scheduleDetail').modal('hide');
     })
+    $('#scheduleDetail').on('hide.bs.modal', function() {
+        $('#scheduleClassModal').modal('show', 300);
+    });
 </script>
