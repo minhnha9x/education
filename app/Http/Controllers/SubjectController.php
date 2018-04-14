@@ -55,7 +55,7 @@ class SubjectController extends Controller
         return $data;
     }
     public function classRegister(Request $request) {
-    	if ($request->has('promotion')) {
+    	if ($request->promotion != '') {
     		$promotion = DB::table('promotion')
 	    	->leftjoin('class', 'promotion.course', 'class.course')
 	    	->where('promotion.code', $request->promotion)
