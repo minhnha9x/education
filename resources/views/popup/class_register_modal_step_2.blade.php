@@ -8,12 +8,12 @@
                         <table class="table table-bordered table-hover">
                             <tr>
                                 <th>Rooms</th>
-                                <th ng-repeat="(key, value) in list_day_in_week" style="width: 150px;"><% key %></th>
+                                <th ng-repeat="(key, value) in list_day_in_week " style="width: 150px;"><% key %></th>
                             </tr>
                             <tr ng-repeat="(key, value) in slot_in_day">
                                 <th><% value %></th>
-                                <td ng-repeat="(key, value) in list_day_in_week">
-                                    <a href="" ng-click="showModal()">&#10060;</a>
+                                <td ng-repeat="(key2, value) in list_day_in_week">
+                                    <a id="<% key %>_<% key2 %>" href="" ng-click="showModal(key, key2)">&#10060;</a>
                                 </td> 
                             </tr>
                         </table>

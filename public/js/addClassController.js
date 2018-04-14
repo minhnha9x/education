@@ -27,10 +27,43 @@ myApp.controller('addClassController', function($scope, $http) {
         6:"19:00 - 21:00",
     }
 
-    $scope.showModal = function() {
+    $scope.showModal = function(param1, param2) {
+        $scope.room_in_cell = null;
+        $scope.teacher_in_cell = null;
+        $scope.ta_in_cell = null;
+        $scope.cellIdSelected = param1 + '_' + param2;
         $('#scheduleClassModal').modal('hide');
         $('#scheduleDetail').modal('show');
     };
+
+    $scope.setSelected = function() {
+        if ($scope.room_in_cell && $scope.teacher_in_cell && $scope.ta_in_cell){
+            $scope.setCheckTag($scope.cellIdSelected);
+            $scope.setUnCheckTagAll($scope.cellIdSelected);
+            return;
+        }
+        $scope.setUnCheckTag($scope.cellIdSelected);
+
+    };
+
+    $scope.setCheckTag = function(id) {
+        $("#" + id).html("&#9989;");
+    };
+
+    $scope.setUnCheckTag = function(id) {
+        $("#" + id).html("&#10060;");
+    };
+
+    $scope.setUnCheckTagAll = function(id) {
+        var res = id.split("_");
+        for (i = 1; i < 7; i++) {
+            var cellId = String(i) + '_' + res[1];
+            if (cellId != id){
+                $scope.setUnCheckTag(cellId);
+            }
+        }
+    };
+
 
     $scope.courseUpdated = function() {
         console.log("hoho", $scope.courseSelected);
