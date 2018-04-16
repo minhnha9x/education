@@ -8,6 +8,7 @@ myApp.controller('addClassController', function($scope, $http) {
     $scope.room_available_render = {};
     $scope.courseList = {};
     $scope.officeList = [];
+    $scope.scheduleList = {};
     $scope.list_day_in_week = {
         "Monday":true,
         "Tuesday":false,
@@ -28,10 +29,15 @@ myApp.controller('addClassController', function($scope, $http) {
     }
 
     $scope.showModal = function(param1, param2) {
+        $scope.cellIdSelected = param1 + '_' + param2;
         $scope.room_in_cell = null;
         $scope.teacher_in_cell = null;
         $scope.ta_in_cell = null;
-        $scope.cellIdSelected = param1 + '_' + param2;
+        if ($scope.cellIdSelected in $scope.scheduleList){
+            $scope.room_in_cell = $scope.scheduleList[$scope.cellIdSelected][0];
+            $scope.teacher_in_cell = $scope.scheduleList[$scope.cellIdSelected][1];
+            $scope.ta_in_cell = $scope.scheduleList[$scope.cellIdSelected][2];
+        }
         $('#scheduleClassModal').modal('hide');
         $('#scheduleDetail').modal('show');
     };
@@ -46,12 +52,20 @@ myApp.controller('addClassController', function($scope, $http) {
 
     };
 
+    $scope.unSelected = function() {
+        $scope.room_in_cell = null;
+        $scope.teacher_in_cell = null;
+        $scope.ta_in_cell = null;
+    };
+
     $scope.setCheckTag = function(id) {
         $("#" + id).html("&#9989;");
+        $scope.scheduleList[id] = [$scope.room_in_cell, $scope.teacher_in_cell, $scope.ta_in_cell];
     };
 
     $scope.setUnCheckTag = function(id) {
         $("#" + id).html("&#10060;");
+        delete $scope.scheduleList[id];
     };
 
     $scope.setUnCheckTagAll = function(id) {
@@ -66,10 +80,8 @@ myApp.controller('addClassController', function($scope, $http) {
 
 
     $scope.courseUpdated = function() {
-        console.log("hoho", $scope.courseSelected);
         $http.get("get_available_office", {params: { course_id: $scope.courseSelected}})
             .then(function(response) {
-                console.log(response.data);
                 $scope.officeList = response.data;
                 $scope.officeSelected = $scope.officeList[0]['id'].toString();
                 $scope.officeUpdated();
@@ -79,8 +91,6 @@ myApp.controller('addClassController', function($scope, $http) {
     };
 
     $scope.officeUpdated = function() {
-        console.log("hihi", $scope.officeSelected);
-
         if ($('#addClassModal select[name="subject"]').val() != null 
         && $('#addClassModal select[name="course"]').val() != null 
         && $('#addClassModal select[name="office"]').val() != null 
@@ -100,7 +110,6 @@ myApp.controller('addClassController', function($scope, $http) {
                 success : function (result){
                     $scope.room_available = JSON.parse(result);
                     $("#room_available").text(Object.keys($scope.room_available).length);
-                    console.log("haha", $scope.room_available);
                     if (Object.keys($scope.room_available).length == 0){
                         $('#addClassModal input[name="change"]').prop("disabled", true);
                     }
@@ -114,9 +123,15 @@ myApp.controller('addClassController', function($scope, $http) {
 
     $scope.getCheckedList = function() {
         $scope.checkedList = [];
+        $scope.scheduleList = {};
         for (var key in $scope.list_day_in_week) {
             if ($scope.list_day_in_week[key] == true) {
                 $scope.checkedList.push(key);
+            }
+        }
+        for (var index in $scope.checkedList) {
+            for (var key in $scope.slot_in_day) {
+                $scope.setUnCheckTag(key + '_' + $scope.checkedList[index]);
             }
         }
     };
@@ -136,7 +151,6 @@ myApp.controller('addClassController', function($scope, $http) {
                 }
             }
         }
-        console.log("asda", $scope.room_available_render);
     };
 
     $('#addClassModal select[name="subject"]').on('change', function() {
@@ -148,7 +162,6 @@ myApp.controller('addClassController', function($scope, $http) {
             dataType:"text",
             success : function (result){
                 obj = JSON.parse(result);
-                console.log("hihi", obj);
                 for(var index in obj) { 
                     $scope.courseList[obj[index]['id']] = obj[index]['name'];
                 }
