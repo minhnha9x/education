@@ -30,6 +30,7 @@
                             </select>
                         </div>            
                         <div class="submit-w3l col-md-12">
+                            <input type="button" ng-click="unSelected()" style="float: left;" value="Reset">
                             <input type="button" name="ok" ng-click="setSelected()" style="float: right;" value="OK">
                         </div>
                     </form>

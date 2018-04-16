@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 13, 2018 lúc 02:26 PM
--- Phiên bản máy phục vụ: 10.1.31-MariaDB
--- Phiên bản PHP: 7.2.3
+-- Thời gian đã tạo: Th4 16, 2018 lúc 07:25 PM
+-- Phiên bản máy phục vụ: 10.1.30-MariaDB
+-- Phiên bản PHP: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -346,7 +346,7 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `score`, `pass`) VALUES
-(9, 1, NULL, 1, 0, 0);
+(21, 1, NULL, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -395,11 +395,7 @@ CREATE TABLE `room_schedule` (
 
 INSERT INTO `room_schedule` (`id`, `class`, `schedule`, `current_date`, `teacher`, `room`) VALUES
 (1, 1, 1, 'Monday', 1, 3),
-(2, 1, 2, 'Wednesday', 1, 4),
-(4, 4, 3, 'Monday', 5, 5),
-(5, 5, 2, 'Friday', 2, 6),
-(6, 6, 5, 'Tuesday', 4, 7),
-(7, 7, 2, 'Sartuday', 5, 3);
+(2, 1, 2, 'Wednesday', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -463,6 +459,19 @@ INSERT INTO `subject` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `teacher_backup`
+--
+
+CREATE TABLE `teacher_backup` (
+  `id` bigint(20) NOT NULL,
+  `backup_teacher` bigint(20) NOT NULL,
+  `date` datetime NOT NULL,
+  `room_schedule` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `teaching_assistant`
 --
 
@@ -489,22 +498,20 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `fullname` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `address` varchar(100) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `role` enum('admin','member','','') NOT NULL DEFAULT 'member',
+  `role` enum('admin','member','teacher','') NOT NULL DEFAULT 'member',
   `avatar` varchar(100) DEFAULT NULL,
-  `remember_token` varchar(100) DEFAULT NULL
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `fullname`, `phone`, `address`, `birthday`, `role`, `avatar`, `remember_token`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'Dương Vũ Thông', '0986781993', 'So 15 Nguyen Thi Minh Khai, Phuong Tan Hiep, Quan Tan Binh, TP Ho Chi Minh', '1993-01-13', 'admin', './img/avatar.jpg', 'jBuq7ESORTbCvJkl9pdqV6v0QhKqnSNpVjKAI82G3EIUVd6J8QXZn4BYnWb8'),
-(4, 'VTocean', 'aaa@gmail.com', '$2y$10$DgDJgJuZY3tXrHYFxFIuf.0ENsBMT8uEPB4IlFNWpKF7cTC5D4ME6', NULL, NULL, NULL, NULL, 'member', NULL, 'WZW5TlmpHZGS7IRefJLAbK34ginZREPB6bn5JQX2iBw3qdENRmF3Y2oxR1Mb');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/avatar.jpg', 'NWlwR6avL4MjJ2ZDH5DgC16t0zILOOYTGVD7qYiS1bFouzI0WjHB2cmbTA3P', '2018-03-16 02:49:36', '2018-03-16 02:49:36'),
+(2, 'nhamh@gmail.com', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', NULL, 'cd9Q7Y5jElM3LNXf9SPcLvOhDB7IFhwG8o5shscy9XZPx868xFxBMPbhYC2J', NULL, NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -657,6 +664,13 @@ ALTER TABLE `subject`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `teacher_backup`
+--
+ALTER TABLE `teacher_backup`
+  ADD KEY `teacher_backup_fk0` (`room_schedule`),
+  ADD KEY `teacher_backup_fk1` (`backup_teacher`);
+
+--
 -- Chỉ mục cho bảng `teaching_assistant`
 --
 ALTER TABLE `teaching_assistant`
@@ -742,7 +756,7 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT cho bảng `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `room`
@@ -754,7 +768,7 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT cho bảng `room_schedule`
 --
 ALTER TABLE `room_schedule`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `room_ta`
@@ -784,7 +798,7 @@ ALTER TABLE `teaching_assistant`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -894,6 +908,13 @@ ALTER TABLE `room_schedule`
 ALTER TABLE `room_ta`
   ADD CONSTRAINT `room_TA_fk0` FOREIGN KEY (`TA`) REFERENCES `teaching_assistant` (`id`),
   ADD CONSTRAINT `room_TA_fk1` FOREIGN KEY (`room_schedule`) REFERENCES `room_schedule` (`id`);
+
+--
+-- Các ràng buộc cho bảng `teacher_backup`
+--
+ALTER TABLE `teacher_backup`
+  ADD CONSTRAINT `teacher_backup_fk0` FOREIGN KEY (`room_schedule`) REFERENCES `room_schedule` (`id`),
+  ADD CONSTRAINT `teacher_backup_fk1` FOREIGN KEY (`backup_teacher`) REFERENCES `employee` (`id`);
 
 --
 -- Các ràng buộc cho bảng `teaching_assistant`
