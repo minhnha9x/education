@@ -107,6 +107,10 @@
           cursor: pointer; }
           .adminpage .tab-content .tab-pane table .action a i {
             margin-right: 5px; }
+    .adminpage .tab-content .tab-pane .chart-wrapper .chart {
+      height: 400px;
+      display: inline-block;
+      margin-bottom: 50px; }
     .adminpage .tab-content .tab-pane #courseModal a, .adminpage .tab-content .tab-pane #addClassModal a, .adminpage .tab-content .tab-pane #scheduleClassModal a, .adminpage .tab-content .tab-pane #scheduleDetail a {
       text-decoration: none !important; }
     .adminpage .tab-content .tab-pane #courseModal input::-webkit-input-placeholder, .adminpage .tab-content .tab-pane #courseModal textarea::-webkit-input-placeholder, .adminpage .tab-content .tab-pane #addClassModal input::-webkit-input-placeholder, .adminpage .tab-content .tab-pane #addClassModal textarea::-webkit-input-placeholder, .adminpage .tab-content .tab-pane #scheduleClassModal input::-webkit-input-placeholder, .adminpage .tab-content .tab-pane #scheduleClassModal textarea::-webkit-input-placeholder, .adminpage .tab-content .tab-pane #scheduleDetail input::-webkit-input-placeholder, .adminpage .tab-content .tab-pane #scheduleDetail textarea::-webkit-input-placeholder {

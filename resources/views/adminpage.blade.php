@@ -38,12 +38,10 @@
             @include('employee_manager')
         </div>
         <div id="menu8" class="tab-pane">
-            <h3>Menu 3</h3>
-            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            @include('promotion_manager')
         </div>
         <div id="menu9" class="tab-pane">
-            <h3>Menu 3</h3>
-            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            @include('statistics_manager')
         </div>
     </div>
 </div>

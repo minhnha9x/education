@@ -116,14 +116,13 @@
   				var i;
 				for (i = 0; i < obj['courses'].length; i++) {
 					var j;
-					$listschedule[i] = [];
 					$schedule = '';
 					for (j = 0; j < obj['schedule'].length; j++) {
 						if (obj['schedule'][j]['class'] == obj['courses'][i]['id'])
 							$schedule += obj['schedule'][j]['current_date'] + ': ' + obj['schedule'][j]['start_time'].substr(0, obj['schedule'][0]['start_time'].length-3) + ' - ' + obj['schedule'][j]['end_time'].substr(0, obj['schedule'][0]['end_time'].length-3) + ' (Phòng ' + obj['schedule'][j]['room'] + ')' + '<br>';
-						$listschedule[i][j] = $schedule;
 					}
-					$string = '<tr><td>' + obj['courses'][i]['id'] + '</td><td>' + $schedule + '</td><td>' + obj['schedule'][0]['name'] + '</td><td></td><td>' + obj['courses'][i]['start_date'] + '</td><td class="action" data-course="' + i + '" data-id="' + obj['courses'][i]['id'] + '">Đăng kí</td></tr>';
+					$listschedule[i] = $schedule;
+					$string = '<tr><td>' + obj['courses'][i]['id'] + '</td><td>' + $schedule + '</td><td>' + obj['schedule'][0]['name'] + '</td><td></td><td>' + obj['courses'][i]['start_date'] + '</td><td class="action" data-course="' + i + '">Đăng kí</td></tr>';
 					$('#classModal tbody').append($string);
 				}
             }
@@ -133,7 +132,7 @@
 	$('#classModal table').on('click', '.action', function(){
 		@if ( Auth::check() )
 			$('#classregisterModal .info').empty();
-			$('#classregisterModal .info').append('<div class="course">Khóa học: <span>' + $course + '</span></div><div class="course">' + obj['schedule'][$courseid - 1]['name'] + '</div><div class="schedule">Giờ học: <br>' + $listschedule[$(this).data('course')][$(this).data('id')] + '</div>');
+			$('#classregisterModal .info').append('<div class="course">Khóa học: <span>' + $course + '</span></div><div class="course">' + obj['schedule'][$courseid - 1]['name'] + '</div><div class="schedule">Giờ học: <br>' + $listschedule[$(this).data('course')] + '</div>');
 			$('#classregisterModal input[name="class"]').attr('value', $(this).data('id'));
 			$('#classregisterModal input[name="course"]').attr('value', $courseid);
 			$('#classModal').modal('hide');

@@ -45,6 +45,10 @@ class AdminController extends Controller
         $offices = DB::table('office')
         ->get();
 
+        $promotions = DB::table('promotion')
+        ->leftjoin('course', 'promotion.course', 'course.id')
+        ->get();
+
         $rooms = DB::table('room')
         ->select('room.*', 'office.name as office', DB::raw("GROUP_CONCAT(course.name SEPARATOR ', ') as course"))
         ->leftjoin('office', 'office.id', 'room.office')
@@ -77,6 +81,7 @@ class AdminController extends Controller
             'offices' => $offices,
             'rooms' => $rooms,
             'schedule' => $schedule,
+            'promotion' => $promotions,
             'teachers' => $teacher);
 
         return view('adminpage')->with($data);

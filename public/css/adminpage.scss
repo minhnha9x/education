@@ -124,6 +124,13 @@ $blue: #337ab7;
 					}
 				}
 			}
+			.chart-wrapper {
+				.chart {
+					height: 400px;
+					display: inline-block;
+					margin-bottom: 50px;
+				}
+			}
 			#courseModal, #addClassModal, #scheduleClassModal, #scheduleDetail {
 				a {
 					text-decoration:none !important;
