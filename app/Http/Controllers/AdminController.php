@@ -213,4 +213,31 @@ class AdminController extends Controller
         ->get();
         return $data;
     }
+
+    public function countRegisterBySubject() {
+        $data = DB::table('register')
+        ->select('subject.name', DB::raw('count(class.id) as count'))
+        ->leftjoin('class','class.id', 'register.class')
+        ->leftjoin('course','course.id', 'class.course')
+        ->rightjoin('subject','subject.id', 'course.subject')
+        ->groupBy('subject.id')
+        ->get();
+        return $data;
+    }
+
+    public function countRegisterByOffice(Request $r) {
+        $data = DB::table('register')
+        ->select('register.id as register', 'office.name as office')
+        ->leftjoin('class','class.id', 'register.class')
+        ->leftjoin('room_schedule','room_schedule.class', 'class.id')
+        ->leftjoin('room','room.id', 'room_schedule.room')
+        ->rightjoin('office', 'office.id', 'room.office')
+        ->groupBy('office.id', 'register.id');
+
+        $new_data = DB::table(DB::raw("({$data->toSql()}) as register_office"))
+        ->select('register_office.office', DB::raw('count(register_office.register) as count'))
+        ->groupBy('register_office.office')
+        ->get();
+        return $new_data;
+    }
 }
