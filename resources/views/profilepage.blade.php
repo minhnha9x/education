@@ -27,7 +27,7 @@
 			Edit Profile
 		</div>
 	</div>
-	@if (Auth::user()->role == 'member')
+	@if (Auth::user()->role != 'teacher')
 		<div class="tab-wrapper col-md-9">
 			<ul class="nav nav-tabs">
 	        	<li class="active"><a data-toggle="tab" href="#menu1">Khóa học đã đăng kí</a></li>

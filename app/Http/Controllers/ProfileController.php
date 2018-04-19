@@ -15,6 +15,11 @@ class ProfileController extends Controller
 			->get();
 
 			$week = array(1 => "Monday", 2 => "Tuesday", 3 => "Wednesday", 4 => "Thrursday", 5 => "Friday", 6 => "Saturday", 7 => "Sunday");
+
+			$courses = DB::table('course')
+	        ->leftjoin('course_teacher', 'course_teacher.course', 'course.id')
+	        ->where('course_teacher.teacher', Auth::user()->id)
+	        ->get();
 			
 			if (Auth::user()->role == 'member')
 			{
@@ -36,14 +41,9 @@ class ProfileController extends Controller
 				->where('register.user', Auth::user()->id)
 				->get();
 
-				$data = array('user' => $user, 'schedule' => $schedule, 'slot' => $slot, 'week' => $week);
+				$data = array('user' => $user, 'schedule' => $schedule, 'slot' => $slot, 'week' => $week, 'courses' => $courses);
 			}
 			else {
-				$courses = DB::table('course')
-		        ->leftjoin('course_teacher', 'course_teacher.course', 'course.id')
-		        ->where('course_teacher.teacher', Auth::user()->id)
-		        ->get();
-
 		        $schedule = DB::table('room_schedule')
 		        ->leftjoin('class', 'room_schedule.class', 'class.id')
 		        ->leftjoin('course', 'class.course', 'course.id')
