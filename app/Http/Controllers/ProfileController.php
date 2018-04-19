@@ -49,7 +49,7 @@ class ProfileController extends Controller
 		        ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
 		        ->leftjoin('room', 'room_schedule.room', 'room.id')
 		        ->leftjoin('office', 'room.office', 'office.id')
-		        ->select('*', 'course.name as course2')
+		        ->select('*', 'course.name as course2', 'room_schedule.id as room_schedule')
 		        ->get();
 
 				$data = array('slot' => $slot, 
@@ -62,5 +62,13 @@ class ProfileController extends Controller
 		else {
 			abort(404);
 		}
+	}
+	public function addTeacherBackup(Request $r) {
+		$data = new Teacher_Backup;
+        $data->backup_teacher = $request->teacher;
+        $data->date = $request->date;
+        $data->room_schedule = $request->room_schedule;
+        $data->save();
+        return back()->withInput();
 	}
 }

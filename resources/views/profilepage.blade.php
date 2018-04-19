@@ -129,8 +129,9 @@
         <div class="modal-content">
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
-                    <form method="POST" role="form">
+                    <form method="POST" role="form" action="{{url('addteacherbackup')}}">
                         <h2 id="form-title">Teaching Backup Register</h2>
+                        <input type="text" name="room_schedule" hidden>
                         <div class="form-sub-w3 col-md-6">
                             <select name="course" class="checkchange">
                                 <option disabled selected hidden>Khóa học</option>
@@ -219,6 +220,8 @@
 	        		$end = $schedule[i]['end_time'];
 	        		$room = $schedule[i]['room'];
 	        		$class = $schedule[i]['class'];
+	        		console.log($schedule[i]['room_schedule']);
+	        		$('#teaching_backup input[name="room_schedule"]').attr('value', $schedule[i]['room_schedule']);
 	        		break;
 	        	}
 	        }
@@ -245,7 +248,7 @@
 	                	$('#review').empty();
 	                	var i;
 		                for (i = 0; i < obj.length; i++) {
-		                    $string = '<option value="' + obj[i]['name'] + '">' + obj[i]['name'] + '</option>';
+		                    $string = '<option value="' + obj[i]['id'] + '">' + obj[i]['name'] + '</option>';
 		                    $('#teaching_backup select[name="teacher"]').append($string);
 		                }
 	                }
@@ -255,7 +258,7 @@
     });
     $('#teaching_backup select[name="teacher"]').on('change', function() {
     	$('#review').empty();
-    	$string = 'Review thông tin dạy thay: <br>Ngày: ' + $d + "/" + $m + "/" + $y + '<br>Khóa học: ' + $course2 + ' - Lớp ' + $class + '<br>' + $office2 + '<br>Thời gian: ' + $start + ' - ' + $end + '<br>Phòng ' + $room + '<br>Giáo viên dạy thay: ' + $(this).val();
+    	$string = 'Review thông tin dạy thay: <br>Ngày: ' + $d + "/" + $m + "/" + $y + '<br>Khóa học: ' + $course2 + ' - Lớp ' + $class + '<br>' + $office2 + '<br>Thời gian: ' + $start + ' - ' + $end + '<br>Phòng ' + $room + '<br>Giáo viên dạy thay: ' + $(this).find('option:selected').text();
 		$('#review').append($string);
     });
 </script>

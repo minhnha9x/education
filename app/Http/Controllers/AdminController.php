@@ -272,6 +272,7 @@ class AdminController extends Controller
 
         $data = DB::table('main_teacher')
         ->select('employee.name',
+            'employee.id',
             'main_teacher.degree',
             'course_teacher.course',
             'office_main_teacher.office',
