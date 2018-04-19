@@ -11,17 +11,17 @@
 		<div class="avatar" style="background-image: url('{{Auth::user()->avatar}}')">
 		</div>
 		<div class="name">
-			@if (Auth::user()->fullname != null)
-				{{Auth::user()->fullname}}
+			@if ($userInfo->fullname != null)
+				{{$userInfo->fullname}}
 			@else
-				{{Auth::user()->name}}
+				{{$userInfo->name}}
 			@endif
 		</div>
 		<div class="text">
-			<p><span>Email: </span>{{Auth::user()->email}}</p>
-			<p class="clearfix"><span>Phone: </span>{{Auth::user()->phone}}</p>
-			<p class="address clearfix"><span>Địa chỉ: </span>{{Auth::user()->address}}</p>
-			<p class="clearfix"><span>Ngày sinh: </span>{{Auth::user()->birthday}}</p>
+			<p><span>Email: </span>{{$userInfo->email}}</p>
+			<p class="clearfix"><span>Phone: </span>{{$userInfo->phone}}</p>
+			<p class="address clearfix"><span>Địa chỉ: </span>{{$userInfo->address}}</p>
+			<p class="clearfix"><span>Ngày sinh: </span>{{$userInfo->birthday}}</p>
 		</div>
 		<div class="button">
 			Edit Profile

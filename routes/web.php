@@ -41,5 +41,5 @@ Route::post('/addteacherbackup', 'ProfileController@addTeacherBackup');
 
 Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
 
-Route::get('/test', 'AdminController@getAvailableTeacher');
+Route::get('/test', 'ProfileController@getTeacherSchedule');
 
