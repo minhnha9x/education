@@ -132,7 +132,7 @@
                     <form method="POST" role="form">
                         <h2 id="form-title">Teaching Backup Register</h2>
                         <div class="form-sub-w3 col-md-6">
-                            <select name="course">
+                            <select name="course" class="checkchange">
                                 <option disabled selected hidden>Khóa học</option>
                                 @foreach ($courses as $c)
                                 	<option value="{{$c->id}}">{{$c->name}}</option>
@@ -140,23 +140,20 @@
                             </select>
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <select name="class">
+                            <select name="class" class="checkchange">
                                 <option disabled selected hidden>Lớp</option>
                             </select>
                         </div>
                         <div class="form-sub-w3 col-md-6">
                         	<span>Ngày cần dạy thay:</span>
-                            <input type="date" name="date" value="{{date("Y-m-d")}}" placeholder="Ngày nghỉ">
+                            <input type="date" name="date" min="{{date("Y-m-d")}}" placeholder="Ngày nghỉ"  class="checkchange">
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <select name="teacher">
+                            <select name="teacher" required>
                                 <option disabled selected hidden>Giáo viên dạy thay</option>
-                                <option value="1">Trợ giảng 1 (6/6)</option>
-                                <option value="1">Trợ giảng 2 (5/6)</option>
-                                <option value="1">Trợ giảng 3 (1/6)</option>
                             </select>
                         </div>
-                        <div class="form-sub-w3 col-md-12">
+                        <div class="review-wrapper col-md-12">
                         	<p id="review"></p>
                         </div>
                         <div class="submit-w3l col-md-12">
@@ -194,24 +191,71 @@
             }
         });
     });
-    $('#teaching_backup select[name="class"]').on('change', function() {
-        for (var i = 0; i < $schedule.length; i++) {
-        	$date = new Date($('#teaching_backup input[name="date"]').val()).getDay();
-        	if ($schedule[i]['class'] == $(this).val() && $temp[$date] == $schedule[i]['current_date'])
-        	{
-        		$string = 'Review thông tin dạy thay: <br>Ngày ' + $('#teaching_backup input[name="date"]').val() + '<br>' + $schedule[i]['name'] + '<br>Thời gian: ' + $schedule[i]['start_time'] + ' - ' + $schedule[i]['end_time'] + '<br>Phòng ' + $schedule[i]['room'];
-				$('#review').append($string);
-        	}
-        }
+    $('#teaching_backup .checkchange').on('change', function() {
+    	$('#teaching_backup').find('select[name="teacher"] option:not(:first-child)').remove();
+    	$check = true;
+    	$office = $course = $slot = '';
+    	$formattedDate = new Date($('#teaching_backup input[name="date"]').val());
+		$d = $formattedDate.getDate();
+		$m = $formattedDate.getMonth() + 1;
+		$y = $formattedDate.getFullYear();
+
+		$formatdate = $m + "/" + $d + "/" + $y;
+    	$('#teaching_backup .checkchange').each(function() {
+    		if ($(this).val() == null || $(this).val() == "")
+    			$check = false;
+    	});
+    	if ($check) {
+    		for (var i = 0; i < $schedule.length; i++) {
+	        	$date = new Date($('#teaching_backup input[name="date"]').val()).getDay();
+	        	if ($schedule[i]['class'] == $('#teaching_backup select[name="class"]').val() && $temp[$date] == $schedule[i]['current_date'])
+	        	{
+	        		$office = $schedule[i]['office'];
+	        		$office2 = $schedule[i]['name'];
+	        		$slot = $schedule[i]['slot_in_day'];
+	        		$course = $schedule[i]['course'];
+	        		$course2 = $schedule[i]['course2'];
+	        		$start = $schedule[i]['start_time'];
+	        		$end = $schedule[i]['end_time'];
+	        		$room = $schedule[i]['room'];
+	        		$class = $schedule[i]['class'];
+	        		break;
+	        	}
+	        }
+    		$.ajax({
+	            url : "getlistfreeteacher",
+	            type : "get",
+	            dataType:"text",
+	            data : {
+	            	date: $formatdate,
+	            	office: $office,
+	            	slot: $slot,
+	            	course: $course,
+	            },
+	            success : function (result){
+	                obj = JSON.parse(result);
+	                console.log(obj);
+	                if (obj.length == 0)
+	                {
+	                	$('#review').empty();
+				    	$string = '<div class="alert alert-danger fade in alert-dismissible" style="margin-top:18px;"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error! </strong>Không có giáo viên dạy thay phù hợp</div>';
+						$('#review').append($string);
+	                }
+	                else {
+	                	$('#review').empty();
+	                	var i;
+		                for (i = 0; i < obj.length; i++) {
+		                    $string = '<option value="' + obj[i]['name'] + '">' + obj[i]['name'] + '</option>';
+		                    $('#teaching_backup select[name="teacher"]').append($string);
+		                }
+	                }
+	            }
+	        });
+	    }
     });
-    $('#teaching_backup input[name="date"]').on('change', function() {
-        for (var i = 0; i < $schedule.length; i++) {
-        	$date = new Date($(this).val()).getDay();
-        	if ($schedule[i]['class'] == $('#teaching_backup select[name="class"]').val() && $temp[$date] == $schedule[i]['current_date'])
-        	{
-        		$string = 'Review thông tin dạy thay: <br>Ngày ' + $(this).val() + '<br>Thời gian' + $schedule[i]['start_time'] + ' - ' + $schedule[i]['end_time'] + '<br>Phòng ' + $schedule[i]['room'];
-				$('#review').append($string);
-        	}
-        }
+    $('#teaching_backup select[name="teacher"]').on('change', function() {
+    	$('#review').empty();
+    	$string = 'Review thông tin dạy thay: <br>Ngày: ' + $d + "/" + $m + "/" + $y + '<br>Khóa học: ' + $course2 + ' - Lớp ' + $class + '<br>' + $office2 + '<br>Thời gian: ' + $start + ' - ' + $end + '<br>Phòng ' + $room + '<br>Giáo viên dạy thay: ' + $(this).val();
+		$('#review').append($string);
     });
 </script>

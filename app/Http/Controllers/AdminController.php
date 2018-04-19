@@ -257,10 +257,10 @@ class AdminController extends Controller
 
     public function getAvailableTeacher(Request $r) {
         // Replace this with param in get request
-        $office = 4;
-        $course = 4;
-        $slot_in_day = 3;
-        $date = '3/7/2018';
+        $office = $r->office;
+        $course = $r->course;
+        $slot_in_day = $r->slot;
+        $date = $r->date;;
         //#
 
         $date_formated = Carbon::parse($date)->startOfDay();

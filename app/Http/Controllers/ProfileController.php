@@ -44,9 +44,12 @@ class ProfileController extends Controller
 		        ->get();
 
 		        $schedule = DB::table('room_schedule')
+		        ->leftjoin('class', 'room_schedule.class', 'class.id')
+		        ->leftjoin('course', 'class.course', 'course.id')
 		        ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
 		        ->leftjoin('room', 'room_schedule.room', 'room.id')
 		        ->leftjoin('office', 'room.office', 'office.id')
+		        ->select('*', 'course.name as course2')
 		        ->get();
 
 				$data = array('slot' => $slot, 

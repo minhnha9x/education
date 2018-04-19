@@ -206,6 +206,11 @@
               font-size: 15px;
               letter-spacing: 1px;
               color: #000; }
+          #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .review-wrapper p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 15px;
+            letter-spacing: 1px;
+            color: #000; }
           #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"], #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="button"] {
             background: #337ab7;
             color: #fff;

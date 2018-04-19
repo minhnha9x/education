@@ -21,6 +21,7 @@ Route::get('/profile', 'ProfileController@get');
 Route::get('/subject_{id}', 'SubjectController@get');
 Route::get('/getcoursefromsub{id}', 'AdminController@getCourseFromSub');
 Route::get('/getclassfromcourse_{id}', 'AdminController@getClassFromCourse');
+Route::get('/getlistfreeteacher', 'AdminController@getAvailableTeacher');
 Route::get('/getcourse{id}', 'AdminController@getCourse');
 Route::get('/deletecourse{id}', 'AdminController@deleteCourse');
 

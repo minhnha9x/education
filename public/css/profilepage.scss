@@ -242,6 +242,14 @@ $blue: #337ab7;
 								color: #000;
 							}
 						}
+						.review-wrapper {
+							p {
+								font-family: 'Roboto', sans-serif;
+								font-size: 15px;
+								letter-spacing: 1px;
+								color: #000;
+							}
+						}
 						input[type="submit"], input[type="button"] {
 						    background: $blue;
 						    color: #fff;
