@@ -38,3 +38,5 @@ Route::get('/get_available_office', 'AdminController@getAvailableOffice');
 
 Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
 
+Route::get('/test', 'AdminController@getAvailableTeacher');
+

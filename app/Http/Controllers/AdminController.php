@@ -7,6 +7,7 @@ use DB;
 use App\Http\Requests;
 use App\Course;
 use DateTime;
+use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
 class AdminController extends Controller
@@ -252,5 +253,43 @@ class AdminController extends Controller
         ->groupBy('register_office.office')
         ->get();
         return $new_data;
+    }
+
+    public function getAvailableTeacher(Request $r) {
+        // Replace this with param in get request
+        $office = 4;
+        $course = 4;
+        $slot_in_day = 3;
+        $date = '3/7/2018';
+        //#
+
+        $date_formated = Carbon::parse($date)->startOfDay();
+
+        $validate = strtotime($date);
+        $day_in_week = date('l', $validate);
+
+        Debugbar::info($day_in_week);
+
+        $data = DB::table('main_teacher')
+        ->select('employee.name',
+            'main_teacher.degree',
+            'course_teacher.course',
+            'office_main_teacher.office',
+            'room_schedule.schedule',
+            'room_schedule.current_date',
+            'class.start_date',
+            'class.end_date')
+        ->leftjoin('employee', 'employee.id', 'main_teacher.id')
+        ->leftjoin('course_teacher','course_teacher.teacher', 'main_teacher.id')
+        ->leftjoin('office_main_teacher', 'office_main_teacher.teacher', 'main_teacher.id')
+        ->leftjoin('room_schedule', 'room_schedule.teacher', 'main_teacher.id')
+        ->leftjoin('class', 'room_schedule.class', 'class.id')
+        ->where('course_teacher.course', $course)
+        ->where('office_main_teacher.office', $office)
+        ->whereRaw('((class.start_date > ? or class.end_date < ?) or room_schedule.current_date != ? or room_schedule.schedule != ?)', [$date_formated, $date_formated, $day_in_week, $slot_in_day])
+        ->groupBy('main_teacher.id')
+        ->get();
+
+        return $data;
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 16, 2018 lúc 07:25 PM
+-- Thời gian đã tạo: Th4 18, 2018 lúc 08:18 PM
 -- Phiên bản máy phục vụ: 10.1.30-MariaDB
 -- Phiên bản PHP: 7.2.2
 
@@ -338,15 +338,16 @@ CREATE TABLE `register` (
   `promotion` varchar(20) DEFAULT NULL,
   `user` bigint(20) NOT NULL,
   `score` bigint(20) NOT NULL,
-  `pass` tinyint(1) NOT NULL
+  `pass` tinyint(1) NOT NULL,
+  `register_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `register`
 --
 
-INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `score`, `pass`) VALUES
-(21, 1, NULL, 1, 0, 0);
+INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `score`, `pass`, `register_date`) VALUES
+(21, 1, NULL, 1, 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -510,7 +511,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/avatar.jpg', 'NWlwR6avL4MjJ2ZDH5DgC16t0zILOOYTGVD7qYiS1bFouzI0WjHB2cmbTA3P', '2018-03-16 02:49:36', '2018-03-16 02:49:36'),
+(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/avatar.jpg', '6AYz5v5o9VWivEOOuV9hfV2ohhPbZMrrkXwh4532JKI2gr9OB5G7n2zpXvsX', '2018-03-16 02:49:36', '2018-03-16 02:49:36'),
 (2, 'nhamh@gmail.com', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', NULL, 'cd9Q7Y5jElM3LNXf9SPcLvOhDB7IFhwG8o5shscy9XZPx868xFxBMPbhYC2J', NULL, NULL);
 
 --
