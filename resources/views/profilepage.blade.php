@@ -157,6 +157,7 @@
                         <div class="review-wrapper col-md-12">
                         	<p id="review"></p>
                         </div>
+                        {!! csrf_field() !!}
                         <div class="submit-w3l col-md-12">
                             <input type="submit" name="ok" ng-click="setSelected()" value="OK">
                         </div>

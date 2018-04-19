@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use App\Teacher_Backup;
 
 class ProfileController extends Controller
 {
@@ -65,9 +66,9 @@ class ProfileController extends Controller
 	}
 	public function addTeacherBackup(Request $r) {
 		$data = new Teacher_Backup;
-        $data->backup_teacher = $request->teacher;
-        $data->date = $request->date;
-        $data->room_schedule = $request->room_schedule;
+        $data->backup_teacher = $r->teacher;
+        $data->date = $r->date;
+        $data->room_schedule = $r->room_schedule;
         $data->save();
         return back()->withInput();
 	}
