@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 18, 2018 lúc 08:18 PM
--- Phiên bản máy phục vụ: 10.1.30-MariaDB
--- Phiên bản PHP: 7.2.2
+-- Thời gian đã tạo: Th4 19, 2018 lúc 12:46 PM
+-- Phiên bản máy phục vụ: 10.1.31-MariaDB
+-- Phiên bản PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -139,7 +139,9 @@ CREATE TABLE `course_teacher` (
 --
 
 INSERT INTO `course_teacher` (`course`, `teacher`) VALUES
+(1, 1),
 (1, 2),
+(1, 4),
 (2, 2),
 (3, 2),
 (4, 1),
@@ -253,7 +255,8 @@ INSERT INTO `office_main_teacher` (`id`, `teacher`, `office`) VALUES
 (1, 5, 2),
 (2, 4, 3),
 (3, 1, 4),
-(4, 2, 1);
+(4, 2, 1),
+(5, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -338,16 +341,16 @@ CREATE TABLE `register` (
   `promotion` varchar(20) DEFAULT NULL,
   `user` bigint(20) NOT NULL,
   `score` bigint(20) NOT NULL,
-  `pass` tinyint(1) NOT NULL,
-  `register_date` date DEFAULT NULL
+  `pass` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `register`
 --
 
-INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `score`, `pass`, `register_date`) VALUES
-(21, 1, NULL, 1, 0, 0, NULL);
+INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `score`, `pass`) VALUES
+(21, 1, NULL, 1, 0, 0),
+(22, 4, 'eng50', 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -396,7 +399,8 @@ CREATE TABLE `room_schedule` (
 
 INSERT INTO `room_schedule` (`id`, `class`, `schedule`, `current_date`, `teacher`, `room`) VALUES
 (1, 1, 1, 'Monday', 1, 3),
-(2, 1, 2, 'Wednesday', 1, 4);
+(2, 1, 2, 'Wednesday', 1, 4),
+(3, 4, 3, 'Wednesday', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -511,8 +515,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/avatar.jpg', '6AYz5v5o9VWivEOOuV9hfV2ohhPbZMrrkXwh4532JKI2gr9OB5G7n2zpXvsX', '2018-03-16 02:49:36', '2018-03-16 02:49:36'),
-(2, 'nhamh@gmail.com', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', NULL, 'cd9Q7Y5jElM3LNXf9SPcLvOhDB7IFhwG8o5shscy9XZPx868xFxBMPbhYC2J', NULL, NULL);
+(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/avatar.jpg', 'NWlwR6avL4MjJ2ZDH5DgC16t0zILOOYTGVD7qYiS1bFouzI0WjHB2cmbTA3P', '2018-03-16 02:49:36', '2018-03-16 02:49:36'),
+(2, 'nhamh@gmail.com', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', NULL, 'cd9Q7Y5jElM3LNXf9SPcLvOhDB7IFhwG8o5shscy9XZPx868xFxBMPbhYC2J', NULL, NULL),
+(4, 'VTocean', 'duongvuthong13@gmail.com', '$2y$10$vRmM1zYB4aZqixBm9tPtK.Z3dXoMmfR0OSzJ2.j3YY2nKC0L9S8Su', 'teacher', NULL, NULL, NULL, NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -733,7 +738,7 @@ ALTER TABLE `office`
 -- AUTO_INCREMENT cho bảng `office_main_teacher`
 --
 ALTER TABLE `office_main_teacher`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `office_ta`
@@ -757,7 +762,7 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT cho bảng `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT cho bảng `room`
@@ -769,7 +774,7 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT cho bảng `room_schedule`
 --
 ALTER TABLE `room_schedule`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `room_ta`
@@ -799,7 +804,7 @@ ALTER TABLE `teaching_assistant`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
