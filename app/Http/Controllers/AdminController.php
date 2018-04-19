@@ -74,6 +74,9 @@ class AdminController extends Controller
         ->groupBy('main_teacher.id')
         ->get();
 
+        $cRbyS = $this->countRegisterBySubject();
+        $cRbyO = $this->countRegisterByOffice();
+
         $data = array('courses' => $courses,
             'subjects' => $subjects,
             'all_class' => $class,
@@ -82,17 +85,27 @@ class AdminController extends Controller
             'rooms' => $rooms,
             'schedule' => $schedule,
             'promotion' => $promotions,
+            'cRbyS' => $cRbyS,
+            'cRbyO' => $cRbyO,
             'teachers' => $teacher);
 
         return view('adminpage')->with($data);
     }
     public function getCourse($id) {
         $course = DB::table('course')
+        ->join('subject', 'course.subject', '=', 'subject.id')
         ->select('course.*', 'subject.name as subject', 'subject.id as subjectid')
         ->where('course.id', $id)
-        ->join('subject', 'course.subject', '=', 'subject.id')
         ->get();
         $data = $course->toJson();
+        return $data;
+    }
+    public function getClassFromCourse($id) {
+        $class = DB::table('class')
+        ->select("*")
+        ->where('course', $id)
+        ->get();
+        $data = $class->toJson();
         return $data;
     }
     public function getCourseFromSub($id) {
@@ -225,7 +238,7 @@ class AdminController extends Controller
         return $data;
     }
 
-    public function countRegisterByOffice(Request $r) {
+    public function countRegisterByOffice() {
         $data = DB::table('register')
         ->select('register.id as register', 'office.name as office')
         ->leftjoin('class','class.id', 'register.class')

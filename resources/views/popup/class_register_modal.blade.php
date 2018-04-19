@@ -31,7 +31,7 @@
                             <span>Ngày kết thúc:</span>
                             <input type="date" value="{{date("Y-m-d")}}" placeholder="Ngày kết thúc" name="end_date" class="checkchange">
                         </div>
-                        <div class="form-sub-w3 col-md-12">
+                        <div class="form-sub-w3 col-md-12" style="display: inline-block;">
                             <p>Chọn ngày học:</p>
                             <div class="checkbox-wrapper">
                                 <div class="checkbox" ng-repeat="(key, value) in list_day_in_week">
@@ -46,9 +46,9 @@
                                     <option value="{{$t->id}}">{{$t->name}}</option>
                                 @endforeach
                             </select>
-                            <div>
-                                <span>Số phòng tìm thấy: </span><span id='room_available'><% text %></span>
-                            </div>
+                        </div>
+                        <div class="form-sub-w3 col-md-12" style="display: inline-block;">
+                            <span>Số phòng tìm thấy: </span><span id='room_available'><% text %></span>
                         </div>
                         {!! csrf_field() !!}
                         <div class="submit-w3l col-md-12">

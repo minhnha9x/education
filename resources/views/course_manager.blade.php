@@ -34,7 +34,7 @@
         <div class="modal-content">
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
-                    <form method="POST" role="form">
+                    <form method="POST" role="form" class="clearfix">
                         <h2 id="form-title"></h2>
                         <div class="form-sub-w3 col-md-6">
                             <input type="text" placeholder="Tên khóa học" name="name">
