@@ -260,7 +260,7 @@ class AdminController extends Controller
         $validate = strtotime($date);
         $day_in_week = date('l', $validate);
 
-        Debugbar::info($day_in_week);
+        Debugbar::info($date_formated, $day_in_week, $slot_in_day);
 
         $data = DB::table('main_teacher')
         ->select('employee.name',
@@ -271,17 +271,22 @@ class AdminController extends Controller
             'room_schedule.schedule',
             'room_schedule.current_date',
             'class.start_date',
-            'class.end_date')
+            'class.end_date',
+            DB::raw('COUNT( CASE WHEN (class.start_date <= ? and class.end_date >= ? and room_schedule.current_date = ? and room_schedule.schedule = ?) THEN employee.id ELSE NULL END) as count')
+        )
         ->leftjoin('employee', 'employee.id', 'main_teacher.id')
         ->leftjoin('course_teacher','course_teacher.teacher', 'main_teacher.id')
         ->leftjoin('office_main_teacher', 'office_main_teacher.teacher', 'main_teacher.id')
         ->leftjoin('room_schedule', 'room_schedule.teacher', 'main_teacher.id')
         ->leftjoin('class', 'room_schedule.class', 'class.id')
-        ->where('course_teacher.course', $course)
-        ->where('office_main_teacher.office', $office)
-        ->whereRaw('((class.start_date > ? or class.end_date < ?) or room_schedule.current_date != ? or room_schedule.schedule != ?)', [$date_formated, $date_formated, $day_in_week, $slot_in_day])
+        ->where('course_teacher.course', '=', '?')
+        ->where('office_main_teacher.office','=', '?')
+        ->having('count', '=', 0)
         ->groupBy('main_teacher.id')
+        ->setBindings([$date_formated, $date_formated, $day_in_week, $slot_in_day, $course, $office])
         ->get();
+
+        Debugbar::info($data);
 
         return $data;
     }

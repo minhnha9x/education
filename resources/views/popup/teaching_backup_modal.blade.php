@@ -81,8 +81,9 @@
             $('#review').empty();
             $string = 'Thông tin buổi học:<br>Khóa học: ' + $course + ' - Lớp ' + $class + '<br>Tuần: ' + $currentweek + ' (' + $sd + '/' + $sm + '/' + $sy + ' - ' + eval($sd + 7) + '/' + $sm + '/' + $sy + ')' + '<br>Thời gian: ' + $date + ' (' + $slottemp[$slot]['start_time'] + ' - ' + $slottemp[$slot]['end_time'] + ')<br>' + 'Địa điểm: Phòng ' + $room + ' (' + $office + ')';
             $('#review').append($string);
-
-            for (var i = $currentweek; i <= $totalweek; i ++) {
+            $('#teaching_backup select[name="week"]').empty();
+            $('#teaching_backup select[name="teacher"]').empty();
+            for (var i = 1; i <= $totalweek; i ++) {
                 if (i == 1) {
                     $newdate = new Date($formattedDate);
                     $newdate2 = new Date($formattedDate);
@@ -137,6 +138,7 @@
                 }
                 else {
                     var i;
+                    $('#teaching_backup select[name="teacher"]').empty();
                     for (i = 0; i < obj.length; i++) {
                         $string = '<option value="' + obj[i]['id'] + '">' + obj[i]['name'] + '</option>';
                         $('#teaching_backup select[name="teacher"]').append($string);
