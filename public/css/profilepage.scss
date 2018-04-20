@@ -61,6 +61,7 @@ $blue: #337ab7;
 			background-size: cover;
 			background-position: center;
 			margin: 0 auto;
+			border: 1px solid #ccc;
 		}
 		.name {
 			color: $blue;
@@ -143,6 +144,9 @@ $blue: #337ab7;
 						vertical-align: middle;
 						text-align: center;
 					}
+					td {
+						cursor: pointer;
+					}
 					.text {
 						font-family: 'Roboto', sans-serif;
 						font-size: 15px;
@@ -215,7 +219,7 @@ $blue: #337ab7;
 							justify-content: space-between;
 						    margin-bottom: 20px;
 						    height: 55px;
-						    input, select, textarea {
+						    select {
 							    outline: none;
 							    font-size: 15px;
 							    color: #000;
@@ -230,27 +234,21 @@ $blue: #337ab7;
 									color: initial;
 								}
 							}
-							input[type='date'] {
-								text-transform: none;
-								width: 180px;
-								margin-bottom: 0;
-							}
-							span {
-								font-family: 'Roboto', sans-serif;
-								font-size: 15px;
-								letter-spacing: 1px;
-								color: #000;
-							}
+						}
+						.submit-w3l {
+							display: flex;
+							align-items: center;
+							height: 55px;
+							justify-content: center;
 						}
 						.review-wrapper {
-							p {
-								font-family: 'Roboto', sans-serif;
-								font-size: 15px;
-								letter-spacing: 1px;
-								color: #000;
-							}
+							font-family: 'Roboto', sans-serif;
+							font-size: 15px;
+							letter-spacing: 1px;
+							color: #000;
+							margin-bottom: 20px;
 						}
-						input[type="submit"], input[type="button"] {
+						input[type="submit"] {
 						    background: $blue;
 						    color: #fff;
 						    outline: none;
@@ -268,12 +266,6 @@ $blue: #337ab7;
 						    -o-transition: 0.3s all;
 						    -ms-transition: 0.3s all;
 						}
-						input[type="button"] {
-								float: none;
-								background-color: #fff;
-								color: #000;
-								border: 1px solid #000;
-							}
 						input[type="submit"]:hover{
 						    background: #4CAF50;
 							color:#ffffff;
@@ -284,7 +276,7 @@ $blue: #337ab7;
 						    -ms-transition: 0.3s all;
 						}
 						input:disabled {
-							background-color: #EBEBE4;
+							background-color: #EBEBE4 !important;
 							border: none;
 							cursor: no-drop;
 						}

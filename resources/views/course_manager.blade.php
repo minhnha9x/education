@@ -41,7 +41,7 @@
                             <input type="hidden" type="text" name="id">
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <select name="subject">
+                            <select name="subject" required>
                                 <option disabled selected hidden>Môn học</option>
                                 @foreach ($subjects as $s)
                                     <option value="{{$s->id}}">{{$s->name}}</option>

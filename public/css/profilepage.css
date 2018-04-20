@@ -58,7 +58,8 @@
       border-radius: 50%;
       background-size: cover;
       background-position: center;
-      margin: 0 auto; }
+      margin: 0 auto;
+      border: 1px solid #ccc; }
     .profilepage .profile-wrapper .name {
       color: #337ab7;
       margin-top: 20px;
@@ -124,6 +125,8 @@
       .profilepage .tab-wrapper .tab-content table tr td, .profilepage .tab-wrapper .tab-content table tr th {
         vertical-align: middle;
         text-align: center; }
+      .profilepage .tab-wrapper .tab-content table tr td {
+        cursor: pointer; }
       .profilepage .tab-wrapper .tab-content table tr .text {
         font-family: 'Roboto', sans-serif;
         font-size: 15px; }
@@ -184,7 +187,7 @@
             justify-content: space-between;
             margin-bottom: 20px;
             height: 55px; }
-            #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input, #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 select, #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 textarea {
+            #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 select {
               outline: none;
               font-size: 15px;
               color: #000;
@@ -195,23 +198,20 @@
               background: transparent;
               font-family: 'FontAwesome', 'Roboto', sans-serif;
               text-transform: capitalize; }
-              #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input option, #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 select option, #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 textarea option {
+              #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 select option {
                 color: initial; }
-            #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input[type='date'] {
-              text-transform: none;
-              width: 180px;
-              margin-bottom: 0; }
-            #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 span {
-              font-family: 'Roboto', sans-serif;
-              font-size: 15px;
-              letter-spacing: 1px;
-              color: #000; }
-          #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .review-wrapper p {
+          #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .submit-w3l {
+            display: flex;
+            align-items: center;
+            height: 55px;
+            justify-content: center; }
+          #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form .review-wrapper {
             font-family: 'Roboto', sans-serif;
             font-size: 15px;
             letter-spacing: 1px;
-            color: #000; }
-          #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"], #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="button"] {
+            color: #000;
+            margin-bottom: 20px; }
+          #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"] {
             background: #337ab7;
             color: #fff;
             outline: none;
@@ -228,11 +228,6 @@
             -moz-transition: 0.3s all;
             -o-transition: 0.3s all;
             -ms-transition: 0.3s all; }
-          #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="button"] {
-            float: none;
-            background-color: #fff;
-            color: #000;
-            border: 1px solid #000; }
           #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form input[type="submit"]:hover {
             background: #4CAF50;
             color: #ffffff;
@@ -242,7 +237,7 @@
             -o-transition: 0.3s all;
             -ms-transition: 0.3s all; }
           #teaching_backup .modal-dialog .modal-content .main-agileits .form-w3-agile form input:disabled {
-            background-color: #EBEBE4;
+            background-color: #EBEBE4 !important;
             border: none;
             cursor: no-drop; }
 

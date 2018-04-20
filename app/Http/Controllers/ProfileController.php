@@ -23,7 +23,7 @@ class ProfileController extends Controller
             ->where('course_teacher.teacher', Auth::user()->id)
             ->get();
             
-            if (Auth::user()->role == 'member')
+            if (Auth::user()->role != 'teacher')
             {
                 $user = DB::table('register')
                 ->leftjoin('users', 'register.user', 'users.id')
@@ -60,9 +60,12 @@ class ProfileController extends Controller
                 ->select('*', 'course.name as course2', 'room_schedule.id as room_schedule')
                 ->get();
 
+                $teacher_schedule = $this->getTeacherSchedule(Auth::user()->id);
+
                 $data = array('slot' => $slot, 
                     'courses' => $courses,
                     'schedule' => $schedule,
+                    'tschedule' => $teacher_schedule,
                     'week' => $week,
                     'userInfo' => (object) $user_info[0]
                 );
@@ -76,20 +79,23 @@ class ProfileController extends Controller
     public function addTeacherBackup(Request $r) {
         $data = new Teacher_Backup;
         $data->backup_teacher = $r->teacher;
-        $data->date = $r->date;
+        $data->date = date("Y-m-d", strtotime($r->week));
         $data->room_schedule = $r->room_schedule;
         $data->save();
         return back()->withInput();
     }
 
-    public function getTeacherSchedule(Request $r) {
+    public function getTeacherSchedule(Int $r) {
         $teacher_id = 1;
         $current_date = '05/15/2018';
         $date_formated = Carbon::parse($current_date)->startOfDay();
 
         $data = DB::table('room_schedule')
-        ->select('*')
         ->leftjoin('class', 'class.id', 'room_schedule.class')
+        ->leftjoin('course', 'class.course', 'course.id')
+        ->leftjoin('room', 'room_schedule.room', 'room.id')
+        ->leftjoin('office', 'office.id', 'room.office')
+        ->select('*', 'course.name as course', 'course.id as courseid', 'room_schedule.id as room_schedule')
         ->where('room_schedule.teacher', $teacher_id)
         ->whereRaw('(class.start_date <= ? and class.end_date >= ?)', [$date_formated, $date_formated])
         ->get();

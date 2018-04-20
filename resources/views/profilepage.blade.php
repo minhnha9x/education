@@ -7,7 +7,7 @@
 		Trang cá nhân
 	</div>
 
-	<div class="profile-wrapper col-md-3">
+	<div class="profile-wrapper col-md-3" id='11'>
 		<div class="avatar" style="background-image: url('{{Auth::user()->avatar}}')">
 		</div>
 		<div class="name">
@@ -68,7 +68,7 @@
 		        			<tr>
 		        				<td>{{substr($s->start_time, 0, strlen($s->start_time) - 3)}} - {{substr($s->end_time, 0, strlen($s->end_time) - 3)}}</td>
 		        				@foreach ($week as $w)
-		        				@php $check = true; @endphp
+		        					@php $check = true; @endphp
 		        					@foreach ($schedule as $sc)
 			        					@if ($sc->schedule == $s->slot_in_day && $sc->current_date == $w)
 			        						<td class="text">
@@ -96,9 +96,8 @@
 	        	<li class="active"><a data-toggle="tab" href="#menu2">Lịch dạy trong tuần</a></li>
 	        </ul>
 	        <div class="tab-content">
-	        	<div id="backup_button" class="addbutton hvr-sweep-to-right">Đăng kí dạy thay</div>
 		        <div id="menu2" class="tab-pane in active">
-		        	<table class="table table-bordered table-hover">
+		        	<table class="table table-bordered table-hover" id="tschedule">
 		        		<tr>
 		        			<th>Tiết học</th>
 		        			<th>Monday</th>
@@ -109,13 +108,31 @@
 		        			<th>Saturday</th>
 		        			<th>Sunday</th>
 		        		</tr>
+		        		<?php $c = 1; ?>
 		        		@foreach ($slot as $s)
 		        			<tr>
 		        				<td>{{substr($s->start_time, 0, strlen($s->start_time) - 3)}} - {{substr($s->end_time, 0, strlen($s->end_time) - 3)}}</td>
+		        				<?php $d = 1; ?>
 		        				@foreach ($week as $w)
-			        				<td></td>
+		        					@php $check = true; @endphp
+		        					@foreach ($tschedule as $t)
+			        					@if ($t->schedule == $s->slot_in_day && $t->current_date == $w)
+			        						<td class="text" id="{{$c}}{{$d}}" data-slot="{{$c}}" data-date="{{$d}}">
+			        							<div class="course">{{$t->course}}</div>
+			        							<strong>{{$t->name}}</strong>
+			        							<div class="course">Phòng {{$t->room}}</div>
+			        						</td>
+			        						@php $check = false; @endphp
+			        						@break;
+			        					@endif
+			        				@endforeach
+			        				@if ($check)
+			        					<td id="{{$c}}{{$d}}" data-slot="{{$c}}" data-date="{{$d}}"></td>
+			        				@endif
+			        				<?php $d += 1; ?>
 		        				@endforeach
 		        			</tr>
+		        			<?php $c += 1; ?>
 		        		@endforeach
 		        	</table>
 		        </div>
@@ -124,142 +141,6 @@
 	@endif
 </div>
 
-<div id="teaching_backup" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" style="width: 800px">
-        <div class="modal-content">
-            <div class="main-agileits">
-                <div class="form-w3-agile clearfix">
-                    <form method="POST" role="form" action="{{url('addteacherbackup')}}">
-                        <h2 id="form-title">Teaching Backup Register</h2>
-                        <input type="text" name="room_schedule" hidden>
-                        <div class="form-sub-w3 col-md-6">
-                            <select name="course" class="checkchange">
-                                <option disabled selected hidden>Khóa học</option>
-                                @foreach ($courses as $c)
-                                	<option value="{{$c->id}}">{{$c->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-sub-w3 col-md-6">
-                            <select name="class" class="checkchange">
-                                <option disabled selected hidden>Lớp</option>
-                            </select>
-                        </div>
-                        <div class="form-sub-w3 col-md-6">
-                        	<span>Ngày cần dạy thay:</span>
-                            <input type="date" name="date" min="{{date("Y-m-d")}}" placeholder="Ngày nghỉ"  class="checkchange">
-                        </div>
-                        <div class="form-sub-w3 col-md-6">
-                            <select name="teacher" required>
-                                <option disabled selected hidden>Giáo viên dạy thay</option>
-                            </select>
-                        </div>
-                        <div class="review-wrapper col-md-12">
-                        	<p id="review"></p>
-                        </div>
-                        {!! csrf_field() !!}
-                        <div class="submit-w3l col-md-12">
-                            <input type="submit" name="ok" ng-click="setSelected()" value="OK">
-                        </div>
-                    </form>
-                </div>      
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+@include('popup.teaching_backup_modal')
 
 @include('footer')
-
-<script type="text/javascript">
-	$schedule = <?= json_encode($schedule); ?>;
-	$temp = ["Sunday",  "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  "Saturday"];
-	$('#backup_button').click(function() {
-		$('#teaching_backup').modal('show', 300);
-	});
-	$('#teaching_backup select[name="course"]').on('change', function() {
-        $('#teaching_backup').find('select[name="class"] option:not(:first-child)').remove();
-        $.ajax({
-            url : "getclassfromcourse_" + $(this).val(),
-            type : "get",
-            dataType:"text",
-            success : function (result){
-                obj = JSON.parse(result);
-                console.log(obj);
-                var i;
-                for (i = 0; i < obj.length; i++) {
-                    $string = '<option value="' + obj[i]['id'] + '">' + obj[i]['id'] + '</option>';
-                    $('#teaching_backup select[name="class"]').append($string);
-                }
-            }
-        });
-    });
-    $('#teaching_backup .checkchange').on('change', function() {
-    	$('#teaching_backup').find('select[name="teacher"] option:not(:first-child)').remove();
-    	$check = true;
-    	$office = $course = $slot = '';
-    	$formattedDate = new Date($('#teaching_backup input[name="date"]').val());
-		$d = $formattedDate.getDate();
-		$m = $formattedDate.getMonth() + 1;
-		$y = $formattedDate.getFullYear();
-
-		$formatdate = $m + "/" + $d + "/" + $y;
-    	$('#teaching_backup .checkchange').each(function() {
-    		if ($(this).val() == null || $(this).val() == "")
-    			$check = false;
-    	});
-    	if ($check) {
-    		for (var i = 0; i < $schedule.length; i++) {
-	        	$date = new Date($('#teaching_backup input[name="date"]').val()).getDay();
-	        	if ($schedule[i]['class'] == $('#teaching_backup select[name="class"]').val() && $temp[$date] == $schedule[i]['current_date'])
-	        	{
-	        		$office = $schedule[i]['office'];
-	        		$office2 = $schedule[i]['name'];
-	        		$slot = $schedule[i]['slot_in_day'];
-	        		$course = $schedule[i]['course'];
-	        		$course2 = $schedule[i]['course2'];
-	        		$start = $schedule[i]['start_time'];
-	        		$end = $schedule[i]['end_time'];
-	        		$room = $schedule[i]['room'];
-	        		$class = $schedule[i]['class'];
-	        		console.log($schedule[i]['room_schedule']);
-	        		$('#teaching_backup input[name="room_schedule"]').attr('value', $schedule[i]['room_schedule']);
-	        		break;
-	        	}
-	        }
-    		$.ajax({
-	            url : "getlistfreeteacher",
-	            type : "get",
-	            dataType:"text",
-	            data : {
-	            	date: $formatdate,
-	            	office: $office,
-	            	slot: $slot,
-	            	course: $course,
-	            },
-	            success : function (result){
-	                obj = JSON.parse(result);
-	                console.log(obj);
-	                if (obj.length == 0)
-	                {
-	                	$('#review').empty();
-				    	$string = '<div class="alert alert-danger fade in alert-dismissible" style="margin-top:18px;"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error! </strong>Không có giáo viên dạy thay phù hợp</div>';
-						$('#review').append($string);
-	                }
-	                else {
-	                	$('#review').empty();
-	                	var i;
-		                for (i = 0; i < obj.length; i++) {
-		                    $string = '<option value="' + obj[i]['id'] + '">' + obj[i]['name'] + '</option>';
-		                    $('#teaching_backup select[name="teacher"]').append($string);
-		                }
-	                }
-	            }
-	        });
-	    }
-    });
-    $('#teaching_backup select[name="teacher"]').on('change', function() {
-    	$('#review').empty();
-    	$string = 'Review thông tin dạy thay: <br>Ngày: ' + $d + "/" + $m + "/" + $y + '<br>Khóa học: ' + $course2 + ' - Lớp ' + $class + '<br>' + $office2 + '<br>Thời gian: ' + $start + ' - ' + $end + '<br>Phòng ' + $room + '<br>Giáo viên dạy thay: ' + $(this).find('option:selected').text();
-		$('#review').append($string);
-    });
-</script>

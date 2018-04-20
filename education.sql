@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 19, 2018 lúc 07:34 PM
--- Phiên bản máy phục vụ: 10.1.30-MariaDB
--- Phiên bản PHP: 7.2.2
+-- Thời gian đã tạo: Th4 20, 2018 lúc 11:07 AM
+-- Phiên bản máy phục vụ: 10.1.31-MariaDB
+-- Phiên bản PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -161,7 +161,7 @@ CREATE TABLE `employee` (
   `id` bigint(20) NOT NULL,
   `name` char(50) NOT NULL,
   `address` char(100) NOT NULL,
-  `phone` bigint(20) NOT NULL,
+  `phone` varchar(15) NOT NULL,
   `mail` char(100) NOT NULL,
   `birthday` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -171,11 +171,11 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `name`, `address`, `phone`, `mail`, `birthday`) VALUES
-(1, 'Tran Phong Phu', '113 Ky Con, Phuong Nguyen Thai Binh, Quan 1, TP Ho Chi Minh', 905642156, 'phutp@gmail.com', '1945-04-25'),
-(2, 'Nguyen Thi Hanh', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', 1236546794, 'hanhtn@gmail.com', NULL),
-(3, 'Nguyen Xuan Hoa', 'So 15 Nguyen Thi Minh Khai, Phuong Tan Hiep, Quan Tan Binh, TP Ho Chi Minh', 194536771, 'hoaxn@gmail.com', NULL),
-(4, 'Tran Binh Trong', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', 1697446546, 'trongbt@gmail.com', NULL),
-(5, 'Nguyen Thi Ai Nhi', 'So 15 Nguyen Giai, Phuong Binh Tho, Quan Thu Duc, TP Ho Chi Minh', 166231567, 'nhiatn@gmail.com', NULL);
+(1, 'Tran Phong Phu', '113 Ky Con, Phuong Nguyen Thai Binh, Quan 1, TP Ho Chi Minh', '0905642156', 'phutp@gmail.com', '1945-04-25'),
+(2, 'Nguyen Thi Hanh', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', '1236546794', 'hanhtn@gmail.com', NULL),
+(3, 'Nguyen Xuan Hoa', 'So 15 Nguyen Thi Minh Khai, Phuong Tan Hiep, Quan Tan Binh, TP Ho Chi Minh', '194536771', 'hoaxn@gmail.com', NULL),
+(4, 'Tran Binh Trong', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', '1697446546', 'trongbt@gmail.com', NULL),
+(5, 'Nguyen Thi Ai Nhi', 'So 15 Nguyen Giai, Phuong Binh Tho, Quan Thu Duc, TP Ho Chi Minh', '166231567', 'nhiatn@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -257,7 +257,8 @@ INSERT INTO `office_main_teacher` (`id`, `teacher`, `office`) VALUES
 (2, 4, 3),
 (3, 1, 4),
 (4, 2, 1),
-(5, 1, 1);
+(5, 1, 1),
+(6, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -475,6 +476,13 @@ CREATE TABLE `teacher_backup` (
   `room_schedule` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Đang đổ dữ liệu cho bảng `teacher_backup`
+--
+
+INSERT INTO `teacher_backup` (`id`, `backup_teacher`, `date`, `room_schedule`) VALUES
+(0, 1, '2018-04-25 00:00:00', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -517,9 +525,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`, `teacher`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/avatar.jpg', 'ZeBJNZRfz73V0jSiRgTw3ZBDAKmKiP3dAuxaT0uO29wE3CywVSaTv50PUrqz', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
+(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/avatar.jpg', 'tDltrjovIhoduFxVkU7UGIqRqo0iFaCrb5mzg29bxD20yhuzaQ8P4tmQyk3x', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
 (2, 'nhamh@gmail.com', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', NULL, 'Kbgqy5psQllWdwh1fqnMosyIAdjxYAJUIobPMWTLCOoaoMr4h3e4YKcURYtg', NULL, NULL, NULL),
-(4, '', 'minhnha93@gmail.com', '$2y$10$vRmM1zYB4aZqixBm9tPtK.Z3dXoMmfR0OSzJ2.j3YY2nKC0L9S8Su', 'teacher', NULL, 'WDwnqh0IGSviLAIW2bWoXPBSERc2uKgdXR9YlSel4pIkzibV3YcZIhm1TULg', NULL, NULL, 1);
+(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', NULL, NULL, NULL, NULL, 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -675,6 +683,7 @@ ALTER TABLE `subject`
 -- Chỉ mục cho bảng `teacher_backup`
 --
 ALTER TABLE `teacher_backup`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `teacher_backup_fk0` (`room_schedule`),
   ADD KEY `teacher_backup_fk1` (`backup_teacher`);
 
@@ -741,7 +750,7 @@ ALTER TABLE `office`
 -- AUTO_INCREMENT cho bảng `office_main_teacher`
 --
 ALTER TABLE `office_main_teacher`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `office_ta`
@@ -807,7 +816,7 @@ ALTER TABLE `teaching_assistant`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

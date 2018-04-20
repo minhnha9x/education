@@ -101,14 +101,6 @@ class AdminController extends Controller
         $data = $course->toJson();
         return $data;
     }
-    public function getClassFromCourse($id) {
-        $class = DB::table('class')
-        ->select("*")
-        ->where('course', $id)
-        ->get();
-        $data = $class->toJson();
-        return $data;
-    }
     public function getCourseFromSub($id) {
         $course = DB::table('course')
         ->select("*")
