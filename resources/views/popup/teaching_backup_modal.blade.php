@@ -53,7 +53,7 @@
                 $firstweekdays = ($formattedDate.getDay() == 0 ? 1 : 7 - $formattedDate.getDay() + 1);
 
                 $diff = new Date($today - $formattedDate);
-                $currentweek = Math.round($diff/1000/60/60/24/7) + 1;
+                $currentweek = Math.floor($diff/1000/60/60/24/7) + 1;
 
                 $formattedDate2 = new Date($tschedule[i]['end_date']);
 
@@ -79,10 +79,14 @@
         }
         if ($check) {
             $('#review').empty();
-            $string = 'Thông tin buổi học:<br>Khóa học: ' + $course + ' - Lớp ' + $class + '<br>Tuần: ' + $currentweek + ' (' + $sd + '/' + $sm + '/' + $sy + ' - ' + eval($sd + 7) + '/' + $sm + '/' + $sy + ')' + '<br>Thời gian: ' + $date + ' (' + $slottemp[$slot]['start_time'] + ' - ' + $slottemp[$slot]['end_time'] + ')<br>' + 'Địa điểm: Phòng ' + $room + ' (' + $office + ')';
+            $newdate = new Date($today);
+            $newdate.setDate($newdate.getDate()  - ($today.getDay() == 0 ? 6 : $today.getDay() - 1));
+            $newdate2 = new Date($newdate);
+            $newdate2.setDate($newdate2.getDate() + 6);
+            $string = 'Thông tin buổi học:<br>Khóa học: ' + $course + ' - Lớp ' + $class + '<br>Tuần: ' + $currentweek + ' (' + $newdate.toLocaleDateString("en-GB") + ' - ' + $newdate2.toLocaleDateString("en-GB") + ')' + '<br>Thời gian: ' + $date + ' (' + $slottemp[$slot]['start_time'] + ' - ' + $slottemp[$slot]['end_time'] + ')<br>' + 'Địa điểm: Phòng ' + $room + ' (' + $office + ')';
             $('#review').append($string);
-            $('#teaching_backup select[name="week"]').empty();
-            $('#teaching_backup select[name="teacher"]').empty();
+            $('#teaching_backup').find('select[name="week"] option:not(:first-child)').remove();
+            $('#teaching_backup').find('select[name="teacher"] option:not(:first-child)').remove();
             for (var i = 1; i <= $totalweek; i ++) {
                 if (i == 1) {
                     $newdate = new Date($formattedDate);
@@ -138,7 +142,7 @@
                 }
                 else {
                     var i;
-                    $('#teaching_backup select[name="teacher"]').empty();
+                    $('#teaching_backup').find('select[name="teacher"] option:not(:first-child)').remove();
                     for (i = 0; i < obj.length; i++) {
                         $string = '<option value="' + obj[i]['id'] + '">' + obj[i]['name'] + '</option>';
                         $('#teaching_backup select[name="teacher"]').append($string);
