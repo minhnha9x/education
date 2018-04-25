@@ -26,10 +26,13 @@
     <link href="./css/owl.carousel.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="./css/datatables.min.css" rel="stylesheet" type="text/css"/>
+ 
     <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="./js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./js/jquery.canvasjs.min.js"></script>
+    <script type="text/javascript" src="./js/datatables.min.js"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

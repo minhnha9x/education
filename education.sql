@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 20, 2018 lúc 07:44 PM
--- Phiên bản máy phục vụ: 10.1.30-MariaDB
--- Phiên bản PHP: 7.2.2
+-- Thời gian đã tạo: Th4 25, 2018 lúc 02:35 PM
+-- Phiên bản máy phục vụ: 10.1.31-MariaDB
+-- Phiên bản PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -472,22 +472,24 @@ INSERT INTO `subject` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `teacher_backup`
+-- Cấu trúc bảng cho bảng `teacher_dayoff`
 --
 
-CREATE TABLE `teacher_backup` (
+CREATE TABLE `teacher_dayoff` (
   `id` bigint(20) NOT NULL,
-  `backup_teacher` bigint(20) NOT NULL,
-  `date` datetime NOT NULL,
+  `backup_teacher` bigint(20) DEFAULT NULL,
+  `date` date NOT NULL,
   `room_schedule` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Đang đổ dữ liệu cho bảng `teacher_backup`
+-- Đang đổ dữ liệu cho bảng `teacher_dayoff`
 --
 
-INSERT INTO `teacher_backup` (`id`, `backup_teacher`, `date`, `room_schedule`) VALUES
-(0, 1, '2018-04-25 00:00:00', 3);
+INSERT INTO `teacher_dayoff` (`id`, `backup_teacher`, `date`, `room_schedule`) VALUES
+(1, 1, '2018-04-25', 3),
+(2, NULL, '2018-04-18', 3),
+(3, NULL, '2018-05-02', 3);
 
 -- --------------------------------------------------------
 
@@ -506,6 +508,27 @@ CREATE TABLE `teaching_assistant` (
 
 INSERT INTO `teaching_assistant` (`id`, `degree`) VALUES
 (4, 'Master of assistant');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `teaching_offset`
+--
+
+CREATE TABLE `teaching_offset` (
+  `id` bigint(20) NOT NULL,
+  `teacher_dayoff` bigint(20) NOT NULL,
+  `date` date NOT NULL,
+  `schedule` bigint(20) NOT NULL,
+  `room` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `teaching_offset`
+--
+
+INSERT INTO `teaching_offset` (`id`, `teacher_dayoff`, `date`, `schedule`, `room`) VALUES
+(1, 2, '2018-05-10', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -686,9 +709,9 @@ ALTER TABLE `subject`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `teacher_backup`
+-- Chỉ mục cho bảng `teacher_dayoff`
 --
-ALTER TABLE `teacher_backup`
+ALTER TABLE `teacher_dayoff`
   ADD PRIMARY KEY (`id`),
   ADD KEY `teacher_backup_fk0` (`room_schedule`),
   ADD KEY `teacher_backup_fk1` (`backup_teacher`);
@@ -698,6 +721,15 @@ ALTER TABLE `teacher_backup`
 --
 ALTER TABLE `teaching_assistant`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `teaching_offset`
+--
+ALTER TABLE `teaching_offset`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `room` (`room`),
+  ADD KEY `schedule` (`schedule`),
+  ADD KEY `teacher_dayoff` (`teacher_dayoff`);
 
 --
 -- Chỉ mục cho bảng `users`
@@ -813,10 +845,22 @@ ALTER TABLE `subject`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT cho bảng `teacher_dayoff`
+--
+ALTER TABLE `teacher_dayoff`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT cho bảng `teaching_assistant`
 --
 ALTER TABLE `teaching_assistant`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `teaching_offset`
+--
+ALTER TABLE `teaching_offset`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
@@ -934,9 +978,9 @@ ALTER TABLE `room_ta`
   ADD CONSTRAINT `room_TA_fk1` FOREIGN KEY (`room_schedule`) REFERENCES `room_schedule` (`id`);
 
 --
--- Các ràng buộc cho bảng `teacher_backup`
+-- Các ràng buộc cho bảng `teacher_dayoff`
 --
-ALTER TABLE `teacher_backup`
+ALTER TABLE `teacher_dayoff`
   ADD CONSTRAINT `teacher_backup_fk0` FOREIGN KEY (`room_schedule`) REFERENCES `room_schedule` (`id`),
   ADD CONSTRAINT `teacher_backup_fk1` FOREIGN KEY (`backup_teacher`) REFERENCES `employee` (`id`);
 
@@ -945,6 +989,14 @@ ALTER TABLE `teacher_backup`
 --
 ALTER TABLE `teaching_assistant`
   ADD CONSTRAINT `Teaching Assistant_fk0` FOREIGN KEY (`id`) REFERENCES `employee` (`id`);
+
+--
+-- Các ràng buộc cho bảng `teaching_offset`
+--
+ALTER TABLE `teaching_offset`
+  ADD CONSTRAINT `teaching_offset_ibfk_1` FOREIGN KEY (`room`) REFERENCES `room` (`id`),
+  ADD CONSTRAINT `teaching_offset_ibfk_2` FOREIGN KEY (`schedule`) REFERENCES `schedule` (`id`),
+  ADD CONSTRAINT `teaching_offset_ibfk_3` FOREIGN KEY (`teacher_dayoff`) REFERENCES `teacher_dayoff` (`id`);
 
 --
 -- Các ràng buộc cho bảng `users`
