@@ -108,6 +108,9 @@ $blue: #337ab7;
 					text-align: center;
 					text-transform: capitalize;
 					vertical-align: middle;
+					img {
+						max-height: 25px;
+					}
 				}
 				p {
 					margin-bottom: 0;

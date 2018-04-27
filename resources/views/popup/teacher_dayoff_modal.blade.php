@@ -1,4 +1,4 @@
-<div id="teaching_backup" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div id="teaching_backup" class="modal profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width: 800px">
         <div class="modal-content">
             <div class="main-agileits">
@@ -14,7 +14,7 @@
                         </div>
                         <div class="form-sub-w3 col-md-5">
                             <select name="teacher">
-                                <option disabled selected hidden>Giáo viên dạy thay</option>
+                                <option selected value="">Giáo viên dạy thay</option>
                             </select>
                         </div>
                         <input type="number" name="room_schedule" hidden>
@@ -152,8 +152,6 @@
                     }
                 }
             });
-        });
-        $('#teaching_backup select[name="teacher"]').on('change', function(){
             $('#teaching_backup input[type="submit"]').removeAttr('disabled');
         });
     @endif

@@ -36,7 +36,8 @@ Route::get('/getschedule', 'ScheduleController@getschedule');
 Route::get('/postroomlist', 'AdminController@postroomlist');
 Route::get('/get_available_office', 'AdminController@getAvailableOffice');
 
-Route::post('/addteacherbackup', 'ProfileController@addTeacherBackup');
+Route::post('/addteacherdayoff', 'ProfileController@addTeacherDayoff');
+Route::post('/addteachingoffset', 'ProfileController@addTeachingOffset');
 
 Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
 

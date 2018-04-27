@@ -141,6 +141,9 @@ $blue: #337ab7;
 					}
 					td {
 						cursor: pointer;
+						img {
+							max-height: 25px;
+						}
 					}
 					.text {
 						font-family: 'Roboto', sans-serif;
@@ -155,7 +158,7 @@ $blue: #337ab7;
 		}
 	}
 }
-#teaching_backup {
+.profile-modal {
 	a {
 		text-decoration:none !important;
 	}
@@ -214,7 +217,7 @@ $blue: #337ab7;
 							justify-content: space-between;
 						    margin-bottom: 20px;
 						    height: 55px;
-						    select {
+						    select, input {
 							    outline: none;
 							    font-size: 15px;
 							    color: #000;
@@ -228,6 +231,16 @@ $blue: #337ab7;
 								option {
 									color: initial;
 								}
+							}
+							input[type='date'] {
+								text-transform: none;
+								width: 180px;
+							}
+							span {
+								font-family: 'Roboto', sans-serif;
+								font-size: 15px;
+								letter-spacing: 1px;
+								color: #000;
 							}
 						}
 						.submit-w3l {

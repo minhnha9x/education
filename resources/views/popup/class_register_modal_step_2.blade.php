@@ -13,7 +13,7 @@
                             <tr ng-repeat="(key, value) in slot_in_day">
                                 <th><% value %></th>
                                 <td ng-repeat="key2 in checkedList">
-                                    <a id="<% key %>_<% key2 %>" href="" ng-click="showModal(key, key2)">&#10060;</a>
+                                    <a id="<% key %>_<% key2 %>" href="" ng-click="showModal(key, key2)"><img src="./img/cross.png"></a>
                                 </td> 
                             </tr>
                         </table>

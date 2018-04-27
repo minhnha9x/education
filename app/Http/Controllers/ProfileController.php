@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use DateTime;
-use App\Teacher_Backup;
+use App\Teacher_Dayoff;
+use App\Teaching_Offset;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
@@ -34,6 +35,32 @@ class ProfileController extends Controller
                 ->groupby('course.id')
                 ->get();
 
+                $week = array();
+                foreach ($user as $c) {
+                    $firstweekdays = ($this->getWeekday($c->start_date) == 0 ? 1 : 7 - $this->getWeekday($c->start_date) + 1);
+
+                    $today = new DateTime('now');
+                    $formattedDate = new DateTime($c->start_date);
+                    $formattedDate2 = new DateTime($c->end_date);
+                    $diff = date_diff($today, $formattedDate);
+                    $currentweek = floor($diff->format('%a')/7) + 1;
+
+                    $diff2 = date_diff($formattedDate, $formattedDate2);
+                    $diff2 = $diff2->format('%a');
+
+                    $lastweekdays = ($diff2 - $firstweekdays) % 7 ;
+
+                    $totalweek = 1 + floor(($diff2 - $firstweekdays) / 7 ) + ($lastweekdays == 0 ? 0 : 1);
+
+                    $data = array('currentweek' => $currentweek, 
+                        'firstweekdays' => $firstweekdays,
+                        'lastweekdays' => $lastweekdays,
+                        'totalweek' => $totalweek,
+                    );
+
+                    $week += array($c->class => $data);
+                }
+
                 $schedule = DB::table('register')
                 ->leftjoin('class', 'register.class', 'class.id')
                 ->leftjoin('course', 'class.course', 'course.id')
@@ -44,7 +71,13 @@ class ProfileController extends Controller
                 ->where('register.user', Auth::user()->id)
                 ->get();
 
-                $data = array('user' => $user, 'schedule' => $schedule, 'slot' => $slot, 'week' => $week, 'courses' => $courses, 'userInfo' => Auth::user());
+                $data = array('user' => $user, 
+                    'schedule' => $schedule, 
+                    'slot' => $slot, 
+                    'week' => $weekday, 
+                    'test' => $week, 
+                    'courses' => $courses, 
+                    'userInfo' => Auth::user());
             }
             else {
                 $user_info = DB::table('employee')
@@ -132,7 +165,7 @@ class ProfileController extends Controller
                 ->leftjoin('course', 'class.course', 'course.id')
                 ->leftjoin('schedule', 'teaching_offset.schedule', 'schedule.id')
                 ->where('room_schedule.teacher', Auth::user()->teacher)
-                ->select('*', 'course.name as course', 'course.id as courseid', 'office.name as office', 'teacher_dayoff.date as dayoff', 'teaching_offset.date as date')
+                ->select('*', 'course.name as course', 'course.id as courseid', 'office.name as office', 'teacher_dayoff.date as dayoff', 'teaching_offset.date as date', 'teaching_offset.room as room')
                 ->orderby('teaching_offset.date')
                 ->get();
 
@@ -161,11 +194,23 @@ class ProfileController extends Controller
     }
 
 
-    public function addTeacherBackup(Request $r) {
-        $data = new Teacher_Backup;
-        $data->backup_teacher = $r->teacher;
+    public function addTeacherDayoff(Request $r) {
+        $data = new Teacher_Dayoff;
+        if ($r->teacher != "") {
+            $data->backup_teacher = $r->teacher;
+        }
         $data->date = date("Y-m-d", strtotime($r->week));
         $data->room_schedule = $r->room_schedule;
+        $data->save();
+        return back()->withInput();
+    }
+
+    public function addTeachingOffset(Request $r) {
+        $data = new Teaching_Offset;
+        $data->date = date("Y-m-d", strtotime($r->date));
+        $data->room = $r->room;
+        $data->schedule = $r->slot;
+        $data->teacher_dayoff = $r->id;
         $data->save();
         return back()->withInput();
     }

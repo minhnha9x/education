@@ -41,6 +41,9 @@ class AdminController extends Controller
 
 
         $employees = DB::table('employee')
+        ->leftjoin('office_worker', 'office_worker.id', 'employee.id')
+        ->leftjoin('position', 'position.id', 'office_worker.position')
+        ->select('*', 'position.name as position', 'employee.name as name', 'employee.id as id')
         ->get();
 
         $offices = DB::table('office')

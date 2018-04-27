@@ -36,7 +36,7 @@
 		</div>
 	</div>
 	@if (Auth::user()->role != 'teacher')
-		<div class="tab-wrapper col-md-9">
+		<div class="tab-wrapper col-md-12">
 			<ul class="nav nav-tabs">
 	        	<li class="active"><a data-toggle="tab" href="#menu1">Khóa học đã đăng kí</a></li>
 	        	<li><a data-toggle="tab" href="#menu2">Lịch học trong tuần</a></li>
@@ -46,15 +46,23 @@
 		        	<table class="table table-bordered table-hover">
 		        		<tr>
 		        			<th>Khóa học</th>
-		        			<th>Mã Lớp</th>
-		        			<th>Tình trạng</th>
+		        			<th>Lớp</th>
+		        			<th>Tuần học</th>
 		        			<th>Kết quả</th>
 		        		</tr>
 		        		@foreach ($user as $u)
 		        			<tr>
 		        				<td>{{$u->name}}</td>
 		        				<td>{{$u->class}}</td>
-		        				<td></td>
+		        				<td>
+		        					@for ($i = 1; $i <= $test[$u->class]['totalweek']; $i++)
+        								@if ($i == $test[$u->class]['currentweek'])
+        									<span style="color:red">{{$i}}</span>
+        								@else
+        									{{$i}}
+        								@endif
+        							@endfor
+		        				</td>
 		        				<td></td>
 		        			</tr>
 		        		@endforeach
@@ -210,7 +218,7 @@
 	        						<td>{{$t->office}}</td>
 	        						<td>{{$t->current_date}}</td>
 	        						<td>{{$t->start_time}} - {{$t->end_time}}</td>
-	        						<td>{{$t->date}}</td>
+	        						<td class="dayoffid" data-id="{{$t->id}}">{{$t->date}}</td>
         							@if ($t->backup_teacher == null)
         								@php $check = false; @endphp
         								@foreach ($teaching_offset as $t2)
@@ -222,14 +230,12 @@
         								@if ($check)
         									<td></td>
         									<td>
-        										Đã đăng kí dạy bù
+        										<img src="./img/check.png">
         									</td>
         								@else
-        									<td></td>
+        									<td><img src="./img/cross.png"></td>
         									<td>
-        										<button>
-		        									Đăng kí dạy bù
-		        								</button>
+        										<a>Đăng kí dạy bù</a>
         									</td>
         								@endif
         							@else
@@ -298,9 +304,11 @@
 	@endif
 </div>
 
-@include('popup.teaching_backup_modal')
+@include('popup.teacher_dayoff_modal')
 
-@include('footer')
+@include('popup.teaching_offset_modal')
+
+{{-- @include('footer') --}}
 
 <script type="text/javascript">
 	$('#tschedule').DataTable({
@@ -309,5 +317,8 @@
 		ordering: false,
 		searching: false,
 		paging: false,
+	});
+	$('#menu3 table a').click(function(){
+		$('#teaching_offset').modal('show', 300);
 	});
 </script>

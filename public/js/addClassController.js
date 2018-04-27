@@ -59,12 +59,12 @@ myApp.controller('addClassController', function($scope, $http) {
     };
 
     $scope.setCheckTag = function(id) {
-        $("#" + id).html("&#9989;");
+        $("#" + id).html('<img src="./img/check.png">');
         $scope.scheduleList[id] = [$scope.room_in_cell, $scope.teacher_in_cell, $scope.ta_in_cell];
     };
 
     $scope.setUnCheckTag = function(id) {
-        $("#" + id).html("&#10060;");
+        $("#" + id).html('<img src="./img/cross.png">');
         delete $scope.scheduleList[id];
     };
 

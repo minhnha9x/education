@@ -12,6 +12,7 @@
                 <th>Sĩ số</th>
                 <th>Ngày khai giảng</th>
                 <th>Ngày kết thúc</th>
+                <th>Bảng điểm</th>
                 <th>Hành động</th>
             </tr>
         </thead>
@@ -38,8 +39,9 @@
                     <td></td>
                     <td>{{$class->start_date}}</td>
                     <td>{{$class->end_date}}</td>
+                    <td><button>Xem bảng điểm</button></td>
                     <td class="action">
-                        <a id='edit' data-name="Sửa khóa học" data-id='{{$class->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
+                        <a id='edit' data-name="Sửa khóa học" data-id='{{$class->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a><a>Nhập bảng điểm</a>
                     </td>
                 </tr>
             @endforeach

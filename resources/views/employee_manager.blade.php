@@ -7,19 +7,25 @@
             <th>Địa chỉ</th>
             <th>Số điện thoại</th>
             <th>Email</th>
+            <th>Chức vụ</th>
+            <th>Mức lương</th>
+            <th>Lương</th>
             <th>Hành động</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($employees as $employee)
+        @foreach ($employees as $e)
             <tr>
-                <td>{{$employee->id}}</td>
-                <td>{{$employee->name}}</td>
-                <td>{{$employee->address}}</td>
-                <td>{{$employee->phone}}</td>
-                <td>{{$employee->mail}}</td>
+                <td>{{$e->id}}</td>
+                <td>{{$e->name}}</td>
+                <td>{{$e->address}}</td>
+                <td>{{$e->phone}}</td>
+                <td>{{$e->mail}}</td>
+                <td>{{$e->position}}</td>
+                <td>{{$e->rate_salary}}</td>
+                <td>{{number_format($e->salary)}} VNĐ</td>
                 <td class="action">
-                    <a id='edit' data-name="Sửa khóa học" data-id='{{$employee->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
+                    <a id='edit' data-name="Sửa khóa học" data-id='{{$e->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
                 </td>
             </tr>
         @endforeach
