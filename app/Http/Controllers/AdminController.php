@@ -293,4 +293,105 @@ class AdminController extends Controller
 
         return $data;
     }
+
+    public function getSalaryInMonth(Request $r) {
+        //Replace month year with request input
+        $year = 2018;
+        $month = 5;
+        //
+
+        $end_day= date('Y-m-t', strtotime($year.'-'.$month.'-01'));
+        $start_day= date('Y-m-d', strtotime($year.'-'.$month.'-01'));
+
+        $main_teacher_salary = DB::table('employee')
+        ->select('employee.id','employee.name')
+        ->get();
+        foreach ($main_teacher_salary as $teacher) {
+            $teaching_day = $this->getNumberOfTeachingDay($start_day, $end_day, $teacher->id);
+            $day_off = $this->getNumberOfDayOff($start_day, $end_day, $teacher->id);
+            $teaching_backup = $this->getNumberOfTeachingBackup($start_day, $end_day, $teacher->id);
+            $teaching_offset = $this->getNumberOfTeachingOffSet($start_day, $end_day, $teacher->id);
+            $salary_rate = 200000;
+
+            $teacher->salary = $salary_rate*($teaching_day - $day_off + $teaching_backup + $teaching_offset);
+        }
+        Debugbar::info($main_teacher_salary);
+        return abort(404);
+    }
+
+    public function getNumberOfTeachingOffSet($start_date, $end_date, $teacher_id) {
+        $teaching_offset = DB::table('teaching_offset')
+        ->select(DB::raw('count(*) as count'))
+        ->leftjoin('room_schedule', 'teaching_offset.room_schedule', 'room_schedule.id')
+        ->where('room_schedule.teacher', $teacher_id)
+        ->whereRaw('teaching_offset.date between ? and ?', [$start_date, $end_date])
+        ->get();
+        return $teaching_offset[0]->count;
+    }
+
+    public function getNumberOfTeachingBackup($start_date, $end_date, $teacher_id) {
+        $teaching_backup = DB::table('teacher_dayoff')
+        ->select(DB::raw('count(*) as count'))
+        ->where('teacher_dayoff.backup_teacher', $teacher_id)
+        ->whereRaw('teacher_dayoff.date between ? and ?', [$start_date, $end_date])
+        ->get();
+        return $teaching_backup[0]->count;
+    }
+
+    public function getNumberOfDayOff($start_date, $end_date, $teacher_id) {
+        $teacher_dayoff = DB::table('teacher_dayoff')
+        ->select(DB::raw('count(*) as count'))
+        ->leftjoin('room_schedule', 'teacher_dayoff.room_schedule', 'room_schedule.id')
+        ->where('room_schedule.teacher', $teacher_id)
+        ->whereRaw('teacher_dayoff.date between ? and ?', [$start_date, $end_date])
+        ->get();
+        return $teacher_dayoff[0]->count;
+    }
+
+    public function getNumberOfTeachingDay($start_date, $end_date, $teacher_id) {
+        $teacher_schedule = DB::table('room_schedule')
+        ->select('room_schedule.current_date', 'class.start_date', 'class.end_date')
+        ->leftjoin('class', 'class.id', 'room_schedule.class')
+        ->where('room_schedule.teacher', $teacher_id)
+        ->whereRaw('not (class.start_date >= ? or class.end_date <= ?)', [$end_date, $start_date])
+        ->get();
+
+        $day_count = 0;
+        $day_in_week = array(        
+            "Monday"=>1,
+            "Tuesday"=>2,
+            "Wednesday"=>3,
+            "Thursday"=>4,
+            "Friday"=>5,
+            "Saturday"=>6,
+            "Sunday"=>7,
+        );
+        foreach ($teacher_schedule as $schedule) {
+            $from = $start_date;
+            $to = $end_date;
+
+            if ($schedule->start_date > $start_date) {
+                $from = $schedule->start_date;
+            }
+
+            if ($schedule->end_date < $end_date) {
+                $to = $schedule->end_date;
+            }
+            $day_count += $this->dayCount($from, $to, $day_in_week[$schedule->current_date]);
+        };
+        return $day_count;
+    }
+
+    function dayCount($from, $to, $day = 5) {
+        $from = new DateTime($from);
+        $to   = new DateTime($to);
+
+        $wF = $from->format('w');
+        $wT = $to->format('w');
+        if ($wF < $wT)       $isExtraDay = $day >= $wF && $day <= $wT;
+        else if ($wF == $wT) $isExtraDay = $wF == $day;
+        else                 $isExtraDay = $day >= $wF || $day <= $wT;
+
+        return floor($from->diff($to)->days / 7) + $isExtraDay;
+    }
 }
