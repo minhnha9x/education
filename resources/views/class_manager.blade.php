@@ -1,5 +1,4 @@
-<script src="js/addClassController.js"></script>
-<div class="container" ng-app="educationApp" ng-controller="addClassController">
+<div class="container" ng-controller="addClassController">
     <div id="addclass" class="addbutton hvr-sweep-to-right">Thêm lớp học</div>
     <table id="example" class="table table-bordered table-hover">
         <thead>

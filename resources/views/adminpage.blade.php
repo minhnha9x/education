@@ -16,7 +16,7 @@
         <li><a data-toggle="tab" href="#menu10"><div class="arrow-left"></div><img src="./img/statistic.png">Thống kê</a></li>
     </ul>
 
-    <div class="tab-content">
+    <div class="tab-content" ng-app="educationApp">
         <div id="menu1" class="tab-pane in active">
             @include('course_manager')
         </div>
@@ -49,7 +49,9 @@
         </div>
     </div>
 </div>
-
+<script src="js/myApp.js"></script>
+<script src="js/salaryController.js"></script>
+<script src="js/addClassController.js"></script>
 <script type="text/javascript">
     $('.tab-content').width($(window).width() - $('.tab-menu').width());
 </script>

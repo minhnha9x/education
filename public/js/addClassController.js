@@ -1,9 +1,4 @@
-var myApp = angular.module('educationApp', [], function($interpolateProvider) {
-    $interpolateProvider.startSymbol('<%');
-    $interpolateProvider.endSymbol('%>');
-});
-
-myApp.controller('addClassController', function($scope, $http) {
+angular.module('educationApp').controller('addClassController', function($scope, $http) {
     $scope.room_available = {};
     $scope.room_available_render = {};
     $scope.courseList = {};
