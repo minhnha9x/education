@@ -81,6 +81,8 @@ class AdminController extends Controller
         $cRbyS = $this->countRegisterBySubject();
         $cRbyO = $this->countRegisterByOffice();
 
+        $salary = $this->getSalaryInMonth();
+
         $data = array('courses' => $courses,
             'subjects' => $subjects,
             'all_class' => $class,
@@ -91,6 +93,7 @@ class AdminController extends Controller
             'promotion' => $promotions,
             'cRbyS' => $cRbyS,
             'cRbyO' => $cRbyO,
+            'salary'=> $salary,
             'teachers' => $teacher);
 
         return view('adminpage')->with($data);
@@ -294,7 +297,7 @@ class AdminController extends Controller
         return $data;
     }
 
-    public function getSalaryInMonth(Request $r) {
+    public function getSalaryInMonth() {
         //Replace month year with request input
         $year = 2018;
         $month = 5;
@@ -316,7 +319,7 @@ class AdminController extends Controller
             $teacher->salary = $salary_rate*($teaching_day - $day_off + $teaching_backup + $teaching_offset);
         }
         Debugbar::info($main_teacher_salary);
-        return abort(404);
+        return $main_teacher_salary;
     }
 
     public function getNumberOfTeachingOffSet($start_date, $end_date, $teacher_id) {

@@ -11,8 +11,9 @@
         <li><a data-toggle="tab" href="#menu5"><div class="arrow-left"></div><img src="./img/room.png">Quản lí phòng học</a></li>
         <li><a data-toggle="tab" href="#menu6"><div class="arrow-left"></div><img src="./img/teacher.png">Quản lí giáo viên</a></li>
         <li><a data-toggle="tab" href="#menu7"><div class="arrow-left"></div><img src="./img/employee.png">Quản lí nhân viên</a></li>
-        <li><a data-toggle="tab" href="#menu8"><div class="arrow-left"></div><img src="./img/promotion.png">Quản lí ưu đãi</a></li>
-        <li><a data-toggle="tab" href="#menu9"><div class="arrow-left"></div><img src="./img/statistic.png">Thống kê</a></li>
+        <li><a data-toggle="tab" href="#menu8"><div class="arrow-left"></div><img src="./img/salary.png">Quản lí lương</a></li>
+        <li><a data-toggle="tab" href="#menu9"><div class="arrow-left"></div><img src="./img/promotion.png">Quản lí ưu đãi</a></li>
+        <li><a data-toggle="tab" href="#menu10"><div class="arrow-left"></div><img src="./img/statistic.png">Thống kê</a></li>
     </ul>
 
     <div class="tab-content">
@@ -38,9 +39,12 @@
             @include('employee_manager')
         </div>
         <div id="menu8" class="tab-pane">
-            @include('promotion_manager')
+            @include('salary_manager')
         </div>
         <div id="menu9" class="tab-pane">
+            @include('promotion_manager')
+        </div>
+        <div id="menu10" class="tab-pane">
             @include('statistics_manager')
         </div>
     </div>

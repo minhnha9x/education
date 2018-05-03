@@ -41,5 +41,4 @@ Route::post('/addteachingoffset', 'ProfileController@addTeachingOffset');
 
 Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
 
-Route::get('/test', 'AdminController@getSalaryInMonth');
-
+Route::get('/getSalary', 'AdminController@getSalaryInMonth');

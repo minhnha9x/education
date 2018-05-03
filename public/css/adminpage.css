@@ -99,6 +99,8 @@
         vertical-align: middle; }
         .adminpage .tab-content .tab-pane table td img, .adminpage .tab-content .tab-pane table th img {
           max-height: 25px; }
+      .adminpage .tab-content .tab-pane table td.email {
+        text-transform: none; }
       .adminpage .tab-content .tab-pane table p {
         margin-bottom: 0; }
       .adminpage .tab-content .tab-pane table .action {
