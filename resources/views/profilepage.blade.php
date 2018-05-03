@@ -218,7 +218,7 @@
 	        						<td>{{$t->office}}</td>
 	        						<td>{{$t->current_date}}</td>
 	        						<td>{{$t->start_time}} - {{$t->end_time}}</td>
-	        						<td class="dayoffid" data-id="{{$t->id}}">{{$t->date}}</td>
+	        						<td class="dayoffid" data-id="{{$t->id}}" data-schedule="{{$t->room_schedule}}">{{$t->date}}</td>
         							@if ($t->backup_teacher == null)
         								@php $check = false; @endphp
         								@foreach ($teaching_offset as $t2)
@@ -234,7 +234,7 @@
         									</td>
         								@else
         									<td><img src="./img/cross.png"></td>
-        									<td>
+        									<td data-id="{{$t->class}}">
         										<a>Đăng kí dạy bù</a>
         									</td>
         								@endif
@@ -318,7 +318,28 @@
 		searching: false,
 		paging: false,
 	});
+	$test = <?= json_encode($test); ?>;
+	$tschedule = <?= json_encode($tschedule); ?>;
+
 	$('#menu3 table a').click(function(){
+		$c = $(this).parent().data('id');
+		$string = '<option value="' + eval($test[$c]['totalweek'] - 1) + '">Tuần ' + eval($test[$c]['totalweek'] - 1) + '</option><option value="' + $test[$c]['totalweek'] + '">Tuần ' + $test[$c]['totalweek'] + '</option>';
+		$('#teaching_offset select[name="week"]').append($string);
+
+		$string ="";
+		for (var i = 0; i < $tschedule.length; i++)
+		{
+			if ($tschedule[i]['class'] == $c)
+			{
+				$start_time = new Date($tschedule[i]['start_date']);
+				$string += '<option value="' + $tschedule[i]['current_date'] + '">' + $tschedule[i]['current_date'] + '</option>';
+			}
+		}
+		$('#teaching_offset select[name="day"]').append($string);
+
+		$('#teaching_offset input[name="id"]').attr('value', $(this).parent().parent().find('.dayoffid').data('id'));
+		$('#teaching_offset input[name="room_schedule"]').attr('value', $(this).parent().parent().find('.dayoffid').data('schedule'));
+		
 		$('#teaching_offset').modal('show', 300);
 	});
 </script>
