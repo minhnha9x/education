@@ -23,6 +23,25 @@ angular.module('educationApp').controller('addClassController', function($scope,
         6:"19:00 - 21:00",
     }
 
+    $scope.showScore = function(param) {
+        $http({
+            url: './getScore',
+            method: 'GET',
+            data: {
+                id: param,
+            },
+            headers: {'Content-Type' : 'application/x-www-form-urlencoded'}
+        })
+        .then(function(response) {
+            console.log(response.data);
+            $scope.scoreInfo = response.data;
+        }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+        $('#scoreTable').modal('show', 300);
+    }
+
     $scope.showModal = function(param1, param2) {
         $scope.cellIdSelected = param1 + '_' + param2;
         $scope.room_in_cell = null;

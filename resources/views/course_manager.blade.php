@@ -29,7 +29,7 @@
         @endforeach
     </tbody>
 </table>
-<div id="courseModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div id="courseModal" class="modal admin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width: 650px">
         <div class="modal-content">
             <div class="main-agileits">

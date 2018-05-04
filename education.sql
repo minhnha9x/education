@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 02, 2018 lúc 08:19 PM
--- Phiên bản máy phục vụ: 10.1.30-MariaDB
--- Phiên bản PHP: 7.2.2
+-- Thời gian đã tạo: Th5 04, 2018 lúc 02:02 PM
+-- Phiên bản máy phục vụ: 10.1.31-MariaDB
+-- Phiên bản PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -189,9 +189,16 @@ INSERT INTO `employee` (`id`, `name`, `address`, `phone`, `mail`, `birthday`) VA
 CREATE TABLE `exam` (
   `id` bigint(20) NOT NULL,
   `register` bigint(20) NOT NULL,
-  `type_of_exam` char(1) NOT NULL,
   `score` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `exam`
+--
+
+INSERT INTO `exam` (`id`, `register`, `score`) VALUES
+(1, 21, 10),
+(2, 22, 8);
 
 -- --------------------------------------------------------
 
@@ -768,7 +775,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT cho bảng `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `main_teacher`

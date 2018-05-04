@@ -1,6 +1,6 @@
 <div class="container" ng-controller="addClassController">
     <div id="addclass" class="addbutton hvr-sweep-to-right">Thêm lớp học</div>
-    <table id="example" class="table table-bordered table-hover">
+    <table id="class_table" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Mã lớp</th>
@@ -37,7 +37,7 @@
                     <td></td>
                     <td>{{$class->start_date}}</td>
                     <td>{{$class->end_date}}</td>
-                    <td><button>Xem bảng điểm</button></td>
+                    <td><button ng-click="showScore({{$class->id}})">Xem bảng điểm</button></td>
                     <td class="action">
                         <a id='edit' data-name="Sửa khóa học" data-id='{{$class->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a><a>Nhập bảng điểm</a>
                     </td>
@@ -56,6 +56,10 @@
 
     <div modal="scheduleDetail">
         @include('popup.schedule_detail_modal')
+    </div>
+
+    <div>
+        @include('popup.score_modal')
     </div>
 </div>
 <script type="text/javascript">

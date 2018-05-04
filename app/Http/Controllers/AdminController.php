@@ -297,10 +297,22 @@ class AdminController extends Controller
         return $data;
     }
 
-    public function getSalaryInMonth(Request $r) {
+    public function getScore(Request $r) {
+        $id = $r->id;
+        $data = DB::table('exam')
+        ->leftjoin('register','exam.register', 'register.id')
+        ->leftjoin('class','register.class', 'class.id')
+        ->leftjoin('users','register.user', 'users.id')
+        ->select('*', 'users.id as user')
+        ->where('register.class', $id)
+        ->get();
+        return $data;
+    }
+
+    public function getSalaryInMonth() {
         //Replace month year with request input
-        $year = $r->year;
-        $month = $r->month;
+        $year = 2018;
+        $month = 5;
         //
 
         $end_day= date('Y-m-t', strtotime($year.'-'.$month.'-01'));

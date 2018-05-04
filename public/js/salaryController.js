@@ -2,8 +2,8 @@ angular.module('educationApp').controller('salaryController', function($scope, $
     $scope.init = function() {
         $('select[name="month"]').attr('ng-init', 'monthSelected="' + new Date().getMonth() + '"');
         $('select[name="year"]').attr('ng-init', 'yearSelected="' + eval(new Date().getYear() + 1900) + '"');
-        $data = [ {month: $scope.monthSelected, 
-                year: $scope.yearSelected} ]
+        $data = {month: $scope.monthSelected, 
+                year: $scope.yearSelected};
         $http({
             url: './getSalary',
             method: 'GET',
@@ -11,7 +11,6 @@ angular.module('educationApp').controller('salaryController', function($scope, $
             headers: {'Content-Type' : 'application/x-www-form-urlencoded'}
         })
         .then(function(response) {
-            console.log(response.data);
             $scope.salaryInfo = response.data;
         }, function(response) {
             // called asynchronously if an error occurs
@@ -21,8 +20,8 @@ angular.module('educationApp').controller('salaryController', function($scope, $
     $scope.init();
 
     $scope.update = function() {
-        $data = [ {month: $scope.monthSelected, 
-                year: $scope.yearSelected} ]
+        $data = {month: $scope.monthSelected, 
+                year: $scope.yearSelected};
         $http({
             url: './getSalary',
             method: 'GET',
@@ -30,7 +29,6 @@ angular.module('educationApp').controller('salaryController', function($scope, $
             headers: {'Content-Type' : 'application/x-www-form-urlencoded'}
         })
         .then(function(response) {
-            console.log(response.data);
             $scope.salaryInfo = response.data;
         }, function(response) {
             // called asynchronously if an error occurs

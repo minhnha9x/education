@@ -1,4 +1,4 @@
-<div id="scheduleClassModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div id="scheduleClassModal" class="modal admin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog schedule-modal" role="document">
         <div class="modal-content">
             <div class="main-agileits">
