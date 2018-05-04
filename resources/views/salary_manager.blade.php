@@ -1,6 +1,6 @@
 <div class="container" ng-controller="salaryController">
     <div>
-        <select name="month">
+        <select name="month" ng-model="monthSelected">
             <option value="0">January</option>
             <option value="1">February</option>
             <option value="2">March</option>
@@ -14,6 +14,11 @@
             <option value="10">November</option>
             <option value="11">December</option>
         </select>
+        <select name="year" ng-model="yearSelected">
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+        </select>
+        <div class="addbutton" style="float: none; display: inline-block;" ng-click='update()'>Xem bảng lương</div>
     </div>
     <div>
         <table id="example" class="table table-bordered table-hover">
@@ -39,5 +44,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    $('select[name="month"] option[value="' + new Date().getMonth() + '"]').attr('selected', 'selected');
+    $('select[name="month"]').attr('ng-init', 'monthSelected="' + new Date().getMonth() + '"');
+    $('select[name="year"]').attr('ng-init', 'yearSelected="' + eval(new Date().getYear() + 1900) + '"');
 </script>

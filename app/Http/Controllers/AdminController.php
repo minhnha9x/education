@@ -297,10 +297,10 @@ class AdminController extends Controller
         return $data;
     }
 
-    public function getSalaryInMonth() {
+    public function getSalaryInMonth(Request $r) {
         //Replace month year with request input
-        $year = 2018;
-        $month = 5;
+        $year = $r->year;
+        $month = $r->month;
         //
 
         $end_day= date('Y-m-t', strtotime($year.'-'.$month.'-01'));
