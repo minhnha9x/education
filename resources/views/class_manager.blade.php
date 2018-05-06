@@ -37,7 +37,7 @@
                     <td></td>
                     <td>{{$class->start_date}}</td>
                     <td>{{$class->end_date}}</td>
-                    <td><button ng-click="showScore({{$class->id}})">Xem bảng điểm</button></td>
+                    <td><a ng-click="showScore({{$class->id}})">Xem bảng điểm</a></td>
                     <td class="action">
                         <a id='edit' data-name="Sửa khóa học" data-id='{{$class->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a><a>Nhập bảng điểm</a>
                     </td>
