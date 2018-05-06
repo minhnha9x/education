@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 04, 2018 lúc 02:02 PM
--- Phiên bản máy phục vụ: 10.1.31-MariaDB
--- Phiên bản PHP: 7.2.3
+-- Thời gian đã tạo: Th5 06, 2018 lúc 06:26 AM
+-- Phiên bản máy phục vụ: 10.1.30-MariaDB
+-- Phiên bản PHP: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -189,6 +189,7 @@ INSERT INTO `employee` (`id`, `name`, `address`, `phone`, `mail`, `birthday`) VA
 CREATE TABLE `exam` (
   `id` bigint(20) NOT NULL,
   `register` bigint(20) NOT NULL,
+  `type_of_exam` char(100) NOT NULL,
   `score` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -196,9 +197,8 @@ CREATE TABLE `exam` (
 -- Đang đổ dữ liệu cho bảng `exam`
 --
 
-INSERT INTO `exam` (`id`, `register`, `score`) VALUES
-(1, 21, 10),
-(2, 22, 8);
+INSERT INTO `exam` (`id`, `register`, `type_of_exam`, `score`) VALUES
+(1, 22, 'final-exam', 90);
 
 -- --------------------------------------------------------
 
@@ -363,7 +363,6 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `score`, `pass`) VALUES
-(21, 1, NULL, 1, 0, 0),
 (22, 4, 'eng50', 2, 0, 0);
 
 -- --------------------------------------------------------
@@ -560,9 +559,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`, `teacher`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/avatar.jpg', 'Lj7R6gGuhYWWOjWAGiEuIPetLb4BP6quLYRvqxgCAE1A6NrkVSsWNUI6Db6P', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
-(2, 'nhamh@gmail.com', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', NULL, 'Kbgqy5psQllWdwh1fqnMosyIAdjxYAJUIobPMWTLCOoaoMr4h3e4YKcURYtg', NULL, NULL, NULL),
-(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/teacher.jpg', 'Vu80XyxnHxq2ZgTm3RGqGFc3nV9PN7IAXzBghW0HtFXnxm8CHjTkAyg3U8tU', NULL, NULL, 1);
+(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/avatar.jpg', 'Lj2psHqh4BQXcErH5p9flxuiIQdnepzfEFV5qvbUR9lnh2D067RtULKqSuaN', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
+(2, 'Ho Minh Nha', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', NULL, 'MlvUOx5IqufqAGO9Wo4dxAhO8y6iYFkWtkQBurAxj9MTDVxmGYp24JL8Dhgo', NULL, NULL, NULL),
+(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/teacher.jpg', 'mRI30sH4TugSeYcNEqUBFY0ZcpYZ4ZAGBRTuTDknwxZpmn7BnuS4LLJQXU9H', NULL, NULL, 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -775,7 +774,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT cho bảng `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `main_teacher`
