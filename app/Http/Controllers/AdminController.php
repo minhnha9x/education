@@ -299,7 +299,7 @@ class AdminController extends Controller
         ->leftjoin('register','exam.register', 'register.id')
         ->leftjoin('class','register.class', 'class.id')
         ->leftjoin('users','register.user', 'users.id')
-        ->select('*', 'users.id as user')
+        ->select('*', 'users.id as user', 'exam.score as score')
         ->where('register.class', $id)
         ->get();
         return $data;

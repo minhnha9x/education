@@ -1,4 +1,4 @@
-<div class="container" ng-controller="addClassController">
+<div class="container" ng-controller="showScoreController">
     <div id="addclass" class="addbutton hvr-sweep-to-right">Thêm lớp học</div>
     <table id="class_table" class="table table-bordered table-hover">
         <thead>
