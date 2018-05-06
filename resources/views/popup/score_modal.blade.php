@@ -8,11 +8,13 @@
                         <tr>
                             <th>Mã học viên</th>
                             <th>Họ và tên</th>
+                            <th>Bài Thi</th>
                             <th>Điểm</th>
                         </tr>
                         <tr ng-repeat="x in scoreInfo">
                             <td><% x.user %></td>
                             <td><% x.name %></td>
+                            <td><% x.type_of_exam %></td>
                             <td><% x.score %></td>
                         </tr>
                     </table>   
