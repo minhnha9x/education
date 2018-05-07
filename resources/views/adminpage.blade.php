@@ -52,7 +52,6 @@
 <script src="js/myApp.js"></script>
 <script src="js/salaryController.js"></script>
 <script src="js/addClassController.js"></script>
-<script src="js/showScoreController.js"></script>
 <script type="text/javascript">
     $('.tab-content').width($(window).width() - $('.tab-menu').width());
 </script>
