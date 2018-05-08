@@ -1,7 +1,7 @@
 <div class="container" ng-controller="salaryController">
     <div>
         <select class="page-select" name="month" ng-model="monthSelected">
-            <option style="display: none;" value="" disabled hidden selected>--Month--</option>
+            <option value="" disabled hidden selected>--Month--</option>
             <option value="1">January</option>
             <option value="2">February</option>
             <option value="3">March</option>
@@ -16,7 +16,7 @@
             <option value="12">December</option>
         </select>
         <select class="page-select" name="year" ng-model="yearSelected">
-            <option style="display: none;" value="" disabled hidden selected>--Year--</option>
+            <option value="" disabled hidden selected>--Year--</option>
             <option value="2018">2018</option>
             <option value="2017">2017</option>
         </select>

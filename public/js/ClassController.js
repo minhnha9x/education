@@ -1,4 +1,4 @@
-angular.module('educationApp').controller('addClassController', function($scope, $http) {
+angular.module('educationApp').controller('ClassController', function($scope, $http) {
     $scope.room_available = {};
     $scope.room_available_render = {};
     $scope.courseList = {};
@@ -156,13 +156,34 @@ angular.module('educationApp').controller('addClassController', function($scope,
             headers: {'Content-Type' : 'application/x-www-form-urlencoded'}
         })
         .then(function(response) {
-            console.log(response.data);
             $scope.scoreInfo = response.data;
         }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
         $('#scoreTable').modal('show', 300);
+    }
+
+    $scope.updateScore = function() {
+        for (var x in $scope.scoreInfo) {
+            console.log($scope.scoreInfo[x]);
+            $http({
+                url: './updateScore',
+                method: 'POST',
+                params: {
+                    id: $scope.scoreInfo[x].id,
+                    id: $scope.scoreInfo[x].register,
+                    score: $scope.scoreInfo[x].score,
+                },
+                headers: {'Content-Type' : 'application/x-www-form-urlencoded'}
+            })
+            .then(function(response) {
+            }, function(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        }
+        console.log($scope.scoreInfo);
     }
 
     $('#addClassModal select[name="subject"]').on('change', function() {

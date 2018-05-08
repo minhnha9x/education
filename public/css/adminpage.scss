@@ -127,6 +127,18 @@ $blue: #337ab7;
 					img {
 						max-height: 25px;
 					}
+					a {
+						cursor: pointer;
+					}
+					input {
+						width: 50px;
+						text-align: center;
+					}
+					input[type=number]::-webkit-inner-spin-button, 
+					input[type=number]::-webkit-outer-spin-button { 
+						-webkit-appearance: none; 
+						margin: 0;
+					}
 				}
 				td.email {
 					text-transform: none;

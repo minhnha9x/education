@@ -43,3 +43,4 @@ Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
 
 Route::get('/getSalary', 'AdminController@getSalaryInMonth');
 Route::get('/getScore', 'AdminController@getScore');
+Route::post('/updateScore', 'AdminController@updateScore');

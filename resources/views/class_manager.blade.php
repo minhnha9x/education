@@ -1,4 +1,4 @@
-<div class="container" ng-controller="addClassController">
+<div class="container" ng-controller="ClassController">
     <div id="addclass" class="addbutton hvr-sweep-to-right">Thêm lớp học</div>
     <table id="class_table" class="table table-bordered table-hover">
         <thead>
@@ -39,7 +39,7 @@
                     <td>{{$class->end_date}}</td>
                     <td><a ng-click="showScore({{$class->id}})">Xem bảng điểm</a></td>
                     <td class="action">
-                        <a id='edit' data-name="Sửa khóa học" data-id='{{$class->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a><a>Nhập bảng điểm</a>
+                        <a id='edit' data-name="Sửa khóa học" data-id='{{$class->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
                     </td>
                 </tr>
             @endforeach

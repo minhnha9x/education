@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
 use App\Course;
+use App\Exam;
 use DateTime;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
@@ -295,14 +296,22 @@ class AdminController extends Controller
 
     public function getScore(Request $r) {
         $id = $r->id;
-        $data = DB::table('exam')
-        ->leftjoin('register','exam.register', 'register.id')
+        $data = DB::table('register')
+        ->leftjoin('exam','exam.register', 'register.id')
         ->leftjoin('class','register.class', 'class.id')
         ->leftjoin('users','register.user', 'users.id')
         ->select('*', 'users.id as user', 'exam.score as score')
         ->where('register.class', $id)
         ->get();
         return $data;
+    }
+
+    public function updateScore(Request $r) {
+        $data = Exam::findOrFail($r->id);
+        $data->register = $r->register;
+        $data->score = $r->score;
+        $data->save();
+        return back()->withInput();
     }
 
     public function getSalaryInMonth(Request $r) {
