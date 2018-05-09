@@ -1,14 +1,18 @@
 angular.module('educationApp').controller('SubjectController', function($scope, $http) {
-    $http({
-        url: './getAllSubject',
-        method: 'GET',
-    })
-    .then(function(response) {
-        $scope.subjectInfo = response.data;
-    }, function(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    });
+    $scope.init = function () {
+        $http({
+            url: './getAllSubject',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.subjectInfo = response.data;
+            $('#subjectModal').modal('hide');
+        }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+    }
+    $scope.init();
     $scope.showModal = function(param1, param2) {
         switch (param1) {
             case 1:
@@ -49,7 +53,7 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
                     },
                 })
                 .then(function(response) {
-                    location.reload();
+                    $scope.init();
                 }, function(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -66,7 +70,7 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
                     },
                 })
                 .then(function(response) {
-                    location.reload();
+                    $scope.init();
                 }, function(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -84,7 +88,7 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
                 },
             })
             .then(function(response) {
-                location.reload();
+                $scope.init();
             }, function(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
