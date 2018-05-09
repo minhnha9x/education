@@ -19,13 +19,7 @@ Route::get('/', function () {
 Route::get('/admin', 'AdminController@getData');
 Route::get('/profile', 'ProfileController@get');
 Route::get('/subject_{id}', 'SubjectController@get');
-Route::get('/getcoursefromsub{id}', 'AdminController@getCourseFromSub');
 Route::get('/getlistfreeteacher', 'AdminController@getAvailableTeacher');
-Route::get('/getcourse{id}', 'AdminController@getCourse');
-Route::get('/deletecourse{id}', 'AdminController@deleteCourse');
-
-Route::post('/addcourse', 'AdminController@addCourse');
-Route::post('/updatecourse', 'AdminController@updateCourse');
 
 Route::get('/getclassfromcourse{id}', 'SubjectController@getClassFromCourse');
 Route::post('/classregister', 'SubjectController@classRegister');
@@ -44,3 +38,14 @@ Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
 Route::get('/getSalary', 'AdminController@getSalaryInMonth');
 Route::get('/getScore', 'AdminController@getScore');
 Route::post('/updateScore', 'AdminController@updateScore');
+
+Route::get('/getAllSubject', 'AdminController@getAllSubject');
+Route::get('/getSubject', 'AdminController@getSubject');
+Route::post('/addSubject', 'AdminController@addSubject');
+Route::get('/deleteSubject', 'AdminController@deleteSubject');
+
+Route::get('/getAllCourse', 'AdminController@getAllCourse');
+Route::get('/getCourseFromSub', 'AdminController@getCourseFromSub');
+Route::get('/getCourse', 'AdminController@getCourse');
+Route::post('/addCourse', 'AdminController@addCourse');
+Route::get('/deleteCourse', 'AdminController@deleteCourse');

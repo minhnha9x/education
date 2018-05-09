@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
-                    <h2>Bảng điểm</h2>
+                    <h2>Bảng điểm lớp <% className %></h2>
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>Mã học viên</th>

@@ -115,6 +115,8 @@
           max-height: 25px; }
         .adminpage .tab-content .tab-pane table td a, .adminpage .tab-content .tab-pane table th a {
           cursor: pointer; }
+          .adminpage .tab-content .tab-pane table td a i, .adminpage .tab-content .tab-pane table th a i {
+            margin-right: 5px; }
         .adminpage .tab-content .tab-pane table td input, .adminpage .tab-content .tab-pane table th input {
           width: 50px;
           text-align: center; }
@@ -133,8 +135,6 @@
         .adminpage .tab-content .tab-pane table .action a {
           margin: 0 10px;
           cursor: pointer; }
-          .adminpage .tab-content .tab-pane table .action a i {
-            margin-right: 5px; }
     .adminpage .tab-content .tab-pane .chart-wrapper .chart {
       height: 400px;
       display: inline-block;

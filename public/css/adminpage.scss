@@ -129,6 +129,9 @@ $blue: #337ab7;
 					}
 					a {
 						cursor: pointer;
+						i {
+							margin-right: 5px;
+						}
 					}
 					input {
 						width: 50px;
@@ -152,9 +155,6 @@ $blue: #337ab7;
 					a {
 						margin: 0 10px;
 						cursor: pointer;
-						i {
-							margin-right: 5px;
-						}
 					}
 				}
 			}

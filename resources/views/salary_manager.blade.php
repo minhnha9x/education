@@ -1,4 +1,4 @@
-<div class="container" ng-controller="salaryController">
+<div class="container" ng-controller="SalaryController">
     <div>
         <select class="page-select" name="month" ng-model="monthSelected">
             <option value="" disabled hidden selected>--Month--</option>

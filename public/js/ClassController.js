@@ -149,6 +149,7 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
     };
     
     $scope.showScore = function(param) {
+        $scope.className = param;
         $http({
             url: './getScore',
             method: 'GET',
@@ -156,6 +157,7 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
             headers: {'Content-Type' : 'application/x-www-form-urlencoded'}
         })
         .then(function(response) {
+            console.log(response.data);
             $scope.scoreInfo = response.data;
         }, function(response) {
             // called asynchronously if an error occurs
@@ -166,24 +168,23 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
 
     $scope.updateScore = function() {
         for (var x in $scope.scoreInfo) {
-            console.log($scope.scoreInfo[x]);
             $http({
                 url: './updateScore',
                 method: 'POST',
                 params: {
                     id: $scope.scoreInfo[x].id,
-                    id: $scope.scoreInfo[x].register,
+                    register: $scope.scoreInfo[x].register,
                     score: $scope.scoreInfo[x].score,
                 },
                 headers: {'Content-Type' : 'application/x-www-form-urlencoded'}
             })
             .then(function(response) {
+                location.reload();
             }, function(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
         }
-        console.log($scope.scoreInfo);
     }
 
     $('#addClassModal select[name="subject"]').on('change', function() {

@@ -1,25 +1,27 @@
-<div id="addcourse" class="addbutton hvr-sweep-to-right" data-name="Thêm khóa học">Thêm môn học</div>
-<table id="example" class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên môn học</th>
-            <th>Mô tả</th>
-            <th>Số khóa đã mở</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($subjects as $subject)
+<div ng-controller="SubjectController">
+    <div class="addbutton hvr-sweep-to-right" ng-click="showModal(1, -1)">Thêm môn học</div>
+    <table class="table table-bordered table-hover">
+        <thead>
             <tr>
-                <td>{{$subject->id}}</td>
-                <td>{{$subject->name}}</td>
-                <td>{{$subject->description}}</td>
-                <td>{{$subject->count}}</td>
+                <th>ID</th>
+                <th>Tên môn học</th>
+                <th>Mô tả</th>
+                <th>Số khóa đã mở</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in subjectInfo">
+                <td><% x.id %></td>
+                <td><% x.name %></td>
+                <td><% x.description %></td>
+                <td><% x.count %></td>
                 <td class="action">
-                    <a id='edit' data-name="Sửa khóa học" data-id='{{$subject->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
+                    <a id='edit' ng-click="showModal(2, x.id)"><i class="fas fa-edit"></i>Sửa</a><a ng-click="delete(x.id)"><i class="fas fa-trash-alt" ></i>Xóa</a>
                 </td>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </tbody>
+    </table>
+
+    @include('popup.add_subject_modal')
+</div>

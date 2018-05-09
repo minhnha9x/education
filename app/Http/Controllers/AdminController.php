@@ -7,6 +7,7 @@ use DB;
 use App\Http\Requests;
 use App\Course;
 use App\Exam;
+use App\Subject;
 use DateTime;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
@@ -82,8 +83,8 @@ class AdminController extends Controller
         $cRbyS = $this->countRegisterBySubject();
         $cRbyO = $this->countRegisterByOffice();
         $data = array('courses' => $courses,
-            'subjects' => $subjects,
             'all_class' => $class,
+            'subjects' => $subjects,
             'employees' => $employees,
             'offices' => $offices,
             'rooms' => $rooms,
@@ -95,27 +96,46 @@ class AdminController extends Controller
 
         return view('adminpage')->with($data);
     }
-    public function getCourse($id) {
-        $course = DB::table('course')
-        ->join('subject', 'course.subject', '=', 'subject.id')
-        ->select('course.*', 'subject.name as subject', 'subject.id as subjectid')
-        ->where('course.id', $id)
+
+    public function getAllCourse() {
+        $data = DB::table('course')
+        ->select('course.*', 'subject.name as subject', 'subject.id as subjectid', 'course2.name as certificate_required', DB::raw('count(class.id) as count'))
+        ->leftjoin('subject', 'course.subject', '=', 'subject.id')
+        ->leftjoin('course as course2', 'course.certificate_required', '=', 'course2.id')
+        ->leftjoin('class', 'class.course', '=', 'course.id')
+        ->groupBy('course.id')
         ->get();
-        $data = $course->toJson();
         return $data;
     }
-    public function getCourseFromSub($id) {
-        $course = DB::table('course')
-        ->select("*")
-        ->where('subject', $id)
+
+    public function getAllSubject() {
+        $data = DB::table('subject')
+        ->select('subject.*', DB::raw('count(course.id) as count'))
+        ->leftjoin('course', 'course.subject', 'subject.id')
+        ->groupBy('subject.id')
         ->get();
-        $data = $course->toJson();
         return $data;
     }
-    public function deleteCourse($id) {
+
+    public function getSubject(Request $r) {
+        return Subject::findOrFail($r->id);
+    }
+
+    public function addSubject(Request $r) {
+        if ($r->id != null)
+            $data = Subject::findOrFail($r->id);
+        else 
+            $data = new Subject;
+        $data->name = $r->name;
+        $data->description = $r->desc;
+        $data->save();
+        return back()->withInput();
+    }
+
+    public function deleteSubject(Request $r) {
         try {
-            $course = DB::table('course')
-            ->where('id', $id)
+            $subject = DB::table('subject')
+            ->where('id', $r->id)
             ->delete();
         }
         catch (\Exception $e) {
@@ -123,27 +143,47 @@ class AdminController extends Controller
         }
         return back()->withInput();
     }
-    public function addCourse(Request $request) {
-        $course = new Course;
-        $course->name = $request->name;
-        $course->subject = $request->subject;
-        $course->price = $request->price;
-        $course->total_of_period = $request->total_of_period;
-        $course->description = $request->description;
-        $course->certificate_required = $request->required;
-        $course->save();
-        return back()->withInput();
+
+    public function getCourse(Request $r) {
+        $data = DB::table('course')
+        ->join('subject', 'course.subject', '=', 'subject.id')
+        ->select('course.*', 'subject.name as subject', 'subject.id as subjectid')
+        ->where('course.id', $r->id)
+        ->get();
+        return $data;
     }
 
-    public function updateCourse(Request $request) {
-        $course = Course::find($request->id);
-        $course->name = $request->name;
-        $course->subject = $request->subject;
-        $course->price = $request->price;
-        $course->total_of_period = $request->total_of_period;
-        $course->description = $request->description;
-        $course->certificate_required = $request->required;
-        $course->update();
+    public function getCourseFromSub(Request $r) {
+        $data = DB::table('course')
+        ->select("*")
+        ->where('subject', $r->id)
+        ->get();
+        return $data;
+    }
+
+    public function deleteCourse(Request $r) {
+        try {
+            $course = DB::table('course')
+            ->where('id', $r->id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return back()->withInput();
+    }
+    public function addCourse(Request $r) {
+        if ($r->id != null)
+            $data = Course::findOrFail($r->id);
+        else 
+            $data = new Course;
+        $data->name = $r->name;
+        $data->subject = $r->subject;
+        $data->price = $r->price;
+        $data->total_of_period = $r->total_of_period;
+        $data->description = $r->description;
+        $data->certificate_required = $r->required;
+        $data->save();
         return back()->withInput();
     }
 
@@ -300,14 +340,17 @@ class AdminController extends Controller
         ->leftjoin('exam','exam.register', 'register.id')
         ->leftjoin('class','register.class', 'class.id')
         ->leftjoin('users','register.user', 'users.id')
-        ->select('*', 'users.id as user', 'exam.score as score')
+        ->select('*', 'users.id as user', 'exam.score as score', 'register.id as register', 'exam.id as id')
         ->where('register.class', $id)
         ->get();
         return $data;
     }
 
     public function updateScore(Request $r) {
-        $data = Exam::findOrFail($r->id);
+       if ($r->id != null)
+            $data = Exam::findOrFail($r->id);
+        else 
+            $data = new Exam;
         $data->register = $r->register;
         $data->score = $r->score;
         $data->save();

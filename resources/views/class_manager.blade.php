@@ -1,4 +1,4 @@
-<div class="container" ng-controller="ClassController">
+<div class="" ng-controller="ClassController">
     <div id="addclass" class="addbutton hvr-sweep-to-right">Thêm lớp học</div>
     <table id="class_table" class="table table-bordered table-hover">
         <thead>
@@ -37,7 +37,7 @@
                     <td></td>
                     <td>{{$class->start_date}}</td>
                     <td>{{$class->end_date}}</td>
-                    <td><a ng-click="showScore({{$class->id}})">Xem bảng điểm</a></td>
+                    <td><a ng-click="showScore({{$class->id}})"><i class="fas fa-eye"></i></a></td>
                     <td class="action">
                         <a id='edit' data-name="Sửa khóa học" data-id='{{$class->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
                     </td>
@@ -46,22 +46,17 @@
         </tbody>
     </table>
 
-    <div >
-        @include('popup.class_register_modal')
-    </div>
+    @include('popup.class_register_modal')
 
-    <div >
-        @include('popup.class_register_modal_step_2')
-    </div>
+    @include('popup.class_register_modal_step_2')
 
     <div modal="scheduleDetail">
         @include('popup.schedule_detail_modal')
     </div>
 
-    <div>
-        @include('popup.score_modal')
-    </div>
+    @include('popup.score_modal')
 </div>
+
 <script type="text/javascript">
     $('#addClassModal input[name="change"]').click(function(){
         $('#addClassModal').modal('hide');

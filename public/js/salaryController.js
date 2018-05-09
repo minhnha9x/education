@@ -1,4 +1,4 @@
-angular.module('educationApp').controller('salaryController', function($scope, $http) {
+angular.module('educationApp').controller('SalaryController', function($scope, $http) {
     $scope.update = function() {
         if (!($scope.monthSelected && $scope.yearSelected)) {
             return;
