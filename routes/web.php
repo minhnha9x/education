@@ -49,3 +49,5 @@ Route::get('/getCourseFromSub', 'AdminController@getCourseFromSub');
 Route::get('/getCourse', 'AdminController@getCourse');
 Route::post('/addCourse', 'AdminController@addCourse');
 Route::get('/deleteCourse', 'AdminController@deleteCourse');
+
+Route::get('/test', 'AdminController@getRegisterInMonth');

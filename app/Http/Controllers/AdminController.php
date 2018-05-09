@@ -457,4 +457,23 @@ class AdminController extends Controller
 
         return floor($from->diff($to)->days / 7) + $isExtraDay;
     }
+
+    function getRegisterInMonth(Request $r) {
+        $year = 2018;
+        $month = 5;
+
+        $end_day = date('Y-m-t', strtotime($year.'-'.$month.'-01'));
+        $start_day = date('Y-m-d', strtotime($year.'-'.$month.'-01'));
+
+        $end_day = Carbon::parse($end_day)->startOfDay();
+        $start_day = Carbon::parse($start_day)->startOfDay();
+
+        $register = DB::table('register')
+        ->select(DB::raw('count(register.id) as count'))
+        ->whereBetween('register.created_date', [$start_day->startOfDay(), $end_day->endOfDay()])
+        ->get();
+
+        Debugbar::info($register);
+        return abort(404);
+    }
 }
