@@ -1,12 +1,13 @@
-angular.module('educationApp').controller('SubjectController', function($scope, $http) {
+angular.module('educationApp').controller('OfficeController', function($scope, $http) {
     $scope.init = function () {
         $http({
-            url: './getAllSubject',
+            url: './getAllOffice',
             method: 'GET',
         })
         .then(function(response) {
-            $scope.subjectInfo = response.data;
-            $('#subjectModal').modal('hide');
+            console.log(response.data);
+            $scope.officeInfo = response.data;
+            $('#officeModal').modal('hide');
         }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -16,24 +17,31 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
     $scope.showModal = function(param1, param2) {
         switch (param1) {
             case 1:
-                $scope.button = "Thêm môn học";
+                $scope.button = "Thêm trung tâm";
                 $scope.edit = -1;
-                $scope.subjectName = '';
-                $scope.subjectDesc = '';
+                $scope.officeName = '';
+                $scope.officeAddr = '';
+                $scope.officePhone = '';
+                $scope.officeMail = '';
+                $scope.Googlemap = '';
                 break;
             case 2:
-                $scope.button = "Sửa môn học";
+                $scope.button = "Sửa trung tâm";
                 $scope.edit = param2;
                 $http({
-                    url: './getSubject',
+                    url: './getOffice',
                     method: 'GET',
                     params: {
                         'id': param2,
                     },
                 })
                 .then(function(response) {
-                    $scope.subjectName = response.data.name;
-                    $scope.subjectDesc = response.data.description;
+                    console.log(response.data[0]);
+                    $scope.officeName = response.data[0].name;
+                    $scope.officeAddr = response.data[0].address;
+                    $scope.officePhone = response.data[0].phone;
+                    $scope.officeMail = response.data[0].mail;
+                    $scope.Googlemap = response.data[0].location;
                 }, function(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -41,17 +49,21 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
                 break;
             default:
         }
-        $('#subjectModal').modal('show', 300);
+        $('#officeModal').modal('show', 300);
     }
-    $scope.addSubject = function(param) {
+
+    $scope.addOffice = function(param) {
         switch (param) {
             case -1:
                 $http({
-                    url: './addSubject',
+                    url: './addOffice',
                     method: 'POST',
                     params: {
-                        'name': $scope.subjectName,
-                        'desc': $scope.subjectDesc,
+                        'name': $scope.officeName,
+                        'address': $scope.officeAddr,
+                        'phone': $scope.officePhone,
+                        'mail': $scope.officeMail,
+                        'location': $scope.Googlemap,
                     },
                 })
                 .then(function(response) {
@@ -63,12 +75,15 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
                 break;
             default:
                 $http({
-                    url: './addSubject',
+                    url: './addOffice',
                     method: 'POST',
                     params: {
                         'id': param,
-                        'name': $scope.subjectName,
-                        'desc': $scope.subjectDesc,
+                        'name': $scope.officeName,
+                        'address': $scope.officeAddr,
+                        'phone': $scope.officePhone,
+                        'mail': $scope.officeMail,
+                        'location': $scope.Googlemap,
                     },
                 })
                 .then(function(response) {
@@ -81,9 +96,9 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
         }
     }
     $scope.delete = function(param) {
-        if (confirm("Are you sure you want to delete this subject?")) {
+        if (confirm("Are you sure you want to delete this office?")) {
             $http({
-                url: './deleteSubject',
+                url: './deleteOffice',
                 method: 'GET',
                 params: {
                     'id': param,

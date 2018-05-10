@@ -6,8 +6,7 @@
                     <form role="form" class="clearfix" ng-submit="addCourse(edit)">
                         <h2 id="form-title"><% button %></h2>
                         <div class="form-sub-w3 col-md-6">
-                            <input type="text" placeholder="Tên khóa học" ng-model="courseName">
-                            <input type="hidden" type="text" name="id">
+                            <input type="text" placeholder="Tên khóa học" ng-model="courseName" required>
                         </div>
                         <div class="form-sub-w3 col-md-6">
                             <select name="subject" required ng-model="subjectName" ng-change="updateCourseList(subjectName)">
@@ -16,10 +15,10 @@
                             </select>
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <input type="number" placeholder="Học phí" ng-model="coursePrice">
+                            <input type="number" placeholder="Học phí" ng-model="coursePrice" required>
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <input type="number" placeholder="Tổng số buổi học" ng-model="total_of_period">
+                            <input type="number" placeholder="Tổng số buổi học" ng-model="total_of_period" required>
                         </div>
                         <div class="form-sub-w3 col-md-6">
                             <select name="required" ng-model="certificate_required">
@@ -28,7 +27,7 @@
                             </select>
                         </div>
                         <div class="form-sub-w3 col-md-12">
-                            <textarea rows="4" ng-model="courseDesc" placeholder="Mô tả chi tiết"></textarea>
+                            <textarea rows="4" ng-model="courseDesc" placeholder="Mô tả chi tiết" required></textarea>
                         </div>
                         {!! csrf_field() !!}
                         <div class="submit-w3l col-md-12">

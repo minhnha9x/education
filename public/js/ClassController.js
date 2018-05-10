@@ -179,7 +179,7 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
                 headers: {'Content-Type' : 'application/x-www-form-urlencoded'}
             })
             .then(function(response) {
-                location.reload();
+                
             }, function(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.

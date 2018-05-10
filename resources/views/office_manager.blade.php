@@ -1,31 +1,33 @@
-<div id="addcourse" class="addbutton hvr-sweep-to-right" data-name="Thêm khóa học">Thêm Trung tâm</div>
-<table id="example" class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Mã trung tâm</th>
-            <th>Tên trung tâm</th>
-            <th>Địa chỉ</th>
-            <th>Số điện thoại</th>
-            <th>Email</th>
-            <th>Vị trí</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($offices as $office)
+<div ng-controller="OfficeController">
+    <div class="addbutton hvr-sweep-to-right" ng-click="showModal(1, -1)">Thêm Trung tâm</div>
+    <table class="table table-bordered table-hover">
+        <thead>
             <tr>
-                <td>{{$office->id}}</td>
-                <td>{{$office->name}}</td>
-                <td>{{$office->address}}</td>
-                <td>{{$office->phone}}</td>
-                <td>{{$office->mail}}</td>
+                <th>Mã trung tâm</th>
+                <th>Tên trung tâm</th>
+                <th>Địa chỉ</th>
+                <th>Số điện thoại</th>
+                <th>Email</th>
+                <th>Vị trí</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in officeInfo">
+                <td><% x.id %></td>
+                <td><% x.name %></td>
+                <td><% x.address %></td>
+                <td><% x.phone %></td>
+                <td><% x.mail %></td>
                 <td>
-                    <a target="_blank" href="{{$office->location}}">Google Map</a>
+                    <a target="_blank" href="<% x.location %>">Google Map</a>
                 </td>
                 <td class="action">
-                    <a id='edit' data-name="Sửa khóa học" data-id='{{$office->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
+                    <a id='edit' ng-click="showModal(2, x.id)"><i class="fas fa-edit"></i>Sửa</a><a ng-click="delete(x.id)"><i class="fas fa-trash-alt"></i>Xóa</a>
                 </td>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </tbody>
+    </table>
+
+    @include('popup.add_office_modal')
+</div>

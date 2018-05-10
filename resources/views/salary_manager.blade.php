@@ -37,8 +37,8 @@
                 <tr ng-repeat="obj in salaryInfo">
                     <td><% obj.id %></td>
                     <td><% obj.name %></td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td><% obj.position %></td>
+                    <td><% obj.rate_salary %></td>
                     <td><% obj.salary %></td>
                 </tr>
             </tbody>

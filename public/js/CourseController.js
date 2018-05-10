@@ -19,6 +19,12 @@ angular.module('educationApp').controller('CourseController', function($scope, $
             case 1:
                 $scope.button = "Thêm khóa học";
                 $scope.edit = -1;
+                $scope.courseName = '';
+                $scope.courseDesc = '';
+                $scope.coursePrice = '';
+                $scope.total_of_period = '';
+                $scope.certificate_required = '';
+                $scope.subjectName = '';
                 break;
             case 2:
                 $scope.button = "Sửa khóa học";

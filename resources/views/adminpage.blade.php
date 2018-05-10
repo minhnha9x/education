@@ -54,6 +54,7 @@
 <script src="js/ClassController.js"></script>
 <script src="js/SubjectController.js"></script>
 <script src="js/CourseController.js"></script>
+<script src="js/OfficeController.js"></script>
 <script type="text/javascript">
     $('.tab-content').width($(window).width() - $('.tab-menu').width());
 </script>

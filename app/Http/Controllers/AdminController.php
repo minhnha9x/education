@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Course;
 use App\Exam;
 use App\Subject;
+use App\Office;
 use DateTime;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
@@ -97,17 +98,6 @@ class AdminController extends Controller
         return view('adminpage')->with($data);
     }
 
-    public function getAllCourse() {
-        $data = DB::table('course')
-        ->select('course.*', 'subject.name as subject', 'subject.id as subjectid', 'course2.name as certificate_required', DB::raw('count(class.id) as count'))
-        ->leftjoin('subject', 'course.subject', '=', 'subject.id')
-        ->leftjoin('course as course2', 'course.certificate_required', '=', 'course2.id')
-        ->leftjoin('class', 'class.course', '=', 'course.id')
-        ->groupBy('course.id')
-        ->get();
-        return $data;
-    }
-
     public function getAllSubject() {
         $data = DB::table('subject')
         ->select('subject.*', DB::raw('count(course.id) as count'))
@@ -144,6 +134,17 @@ class AdminController extends Controller
         return back()->withInput();
     }
 
+    public function getAllCourse() {
+        $data = DB::table('course')
+        ->select('course.*', 'subject.name as subject', 'subject.id as subjectid', 'course2.name as certificate_required', DB::raw('count(class.id) as count'))
+        ->leftjoin('subject', 'course.subject', '=', 'subject.id')
+        ->leftjoin('course as course2', 'course.certificate_required', '=', 'course2.id')
+        ->leftjoin('class', 'class.course', '=', 'course.id')
+        ->groupBy('course.id')
+        ->get();
+        return $data;
+    }
+
     public function getCourse(Request $r) {
         $data = DB::table('course')
         ->join('subject', 'course.subject', '=', 'subject.id')
@@ -161,17 +162,6 @@ class AdminController extends Controller
         return $data;
     }
 
-    public function deleteCourse(Request $r) {
-        try {
-            $course = DB::table('course')
-            ->where('id', $r->id)
-            ->delete();
-        }
-        catch (\Exception $e) {
-            return $e->getMessage();
-        }
-        return back()->withInput();
-    }
     public function addCourse(Request $r) {
         if ($r->id != null)
             $data = Course::findOrFail($r->id);
@@ -184,6 +174,57 @@ class AdminController extends Controller
         $data->description = $r->description;
         $data->certificate_required = $r->required;
         $data->save();
+        return back()->withInput();
+    }
+
+    public function deleteCourse(Request $r) {
+        try {
+            $course = DB::table('course')
+            ->where('id', $r->id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return back()->withInput();
+    }
+
+    public function getAllOffice() {
+        $data = DB::table('office')
+        ->get();
+        return $data;
+    }
+
+    public function getOffice(Request $r) {
+        $data = DB::table('office')
+        ->where('id', $r->id)
+        ->get();
+        return $data;
+    }
+
+    public function addOffice(Request $r) {
+        if ($r->id != null)
+            $data = Office::findOrFail($r->id);
+        else 
+            $data = new Office;
+        $data->name = $r->name;
+        $data->address = $r->address;
+        $data->phone = $r->phone;
+        $data->mail = $r->mail;
+        $data->location = $r->location;
+        $data->save();
+        return back()->withInput();
+    }
+
+    public function deleteOffice(Request $r) {
+        try {
+            $course = DB::table('office')
+            ->where('id', $r->id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
         return back()->withInput();
     }
 
@@ -367,7 +408,9 @@ class AdminController extends Controller
         $start_day= date('Y-m-d', strtotime($year.'-'.$month.'-01'));
 
         $main_teacher_salary = DB::table('employee')
-        ->select('employee.id','employee.name')
+        ->leftjoin('office_worker', 'employee.id', 'office_worker.id')
+        ->leftjoin('position', 'position.id', 'office_worker.position')
+        ->select('employee.id','employee.name', 'position.name as position', 'position.rate_salary')
         ->get();
         foreach ($main_teacher_salary as $teacher) {
             $teaching_day = $this->getNumberOfTeachingDay($start_day, $end_day, $teacher->id);

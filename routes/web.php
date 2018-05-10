@@ -50,4 +50,9 @@ Route::get('/getCourse', 'AdminController@getCourse');
 Route::post('/addCourse', 'AdminController@addCourse');
 Route::get('/deleteCourse', 'AdminController@deleteCourse');
 
+Route::get('/getAllOffice', 'AdminController@getAllOffice');
+Route::get('/getOffice', 'AdminController@getOffice');
+Route::post('/addOffice', 'AdminController@addOffice');
+Route::get('/deleteOffice', 'AdminController@deleteOffice');
+
 Route::get('/test', 'AdminController@getRegisterInMonth');
