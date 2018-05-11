@@ -7,51 +7,51 @@ use DB;
 
 class ScheduleController extends Controller
 {
-	public function get() {
-	   	$courses = DB::table('course')
-		->select('course.*', 'subject.name as subject', 'subject.id as subjectid', 'course2.name as certificate_required', DB::raw('count(class.id) as count'))
-		->leftjoin('subject', 'course.subject', '=', 'subject.id')
-		->leftjoin('course as course2', 'course.certificate_required', '=', 'course2.id')
-		->leftjoin('class', 'class.course', '=', 'course.id')
-		->groupBy('course.id')
-		->get();
+    public function get() {
+        $courses = DB::table('course')
+        ->select('course.*', 'subject.name as subject', 'subject.id as subjectid', 'course2.name as certificate_required', DB::raw('count(class.id) as count'))
+        ->leftjoin('subject', 'course.subject', '=', 'subject.id')
+        ->leftjoin('course as course2', 'course.certificate_required', '=', 'course2.id')
+        ->leftjoin('class', 'class.course', '=', 'course.id')
+        ->groupBy('course.id')
+        ->get();
 
-		$subjects = DB::table('subject')
-		->select('subject.*', DB::raw('count(course.id) as count'))
-		->leftjoin('course', 'course.subject', 'subject.id')
-		->groupBy('subject.id')
-		->get();
+        $subjects = DB::table('subject')
+        ->select('subject.*', DB::raw('count(course.id) as count'))
+        ->leftjoin('course', 'course.subject', 'subject.id')
+        ->groupBy('subject.id')
+        ->get();
 
-		$offices = DB::table('office')
-		->get();
+        $offices = DB::table('office')
+        ->get();
 
-		$classes = DB::table('class')
-		->select('class.*', 'course.name as course')
-		->leftjoin('course', 'course.id', 'class.course')
-		->orderby('course.name')
-		->get();
-		$data = array('courses' => $courses, 'subjects' => $subjects, 'offices' => $offices,  'classes' => $classes);
-		return view('schedulepage')->with($data);
-	}
-	public function getschedule(Request $r) {
+        $classes = DB::table('class')
+        ->select('class.*', 'course.name as course')
+        ->leftjoin('course', 'course.id', 'class.course')
+        ->orderby('course.name')
+        ->get();
+        $data = array('courses' => $courses, 'subjects' => $subjects, 'offices' => $offices,  'classes' => $classes);
+        return view('schedulepage')->with($data);
+    }
+    public function getschedule(Request $r) {
 
-		$class = DB::table('class')
-		->select("*", 'class.id as class')
-		->leftjoin('course', 'class.course', 'course.id')
-		->leftjoin('room_schedule', 'class.id', 'room_schedule.class')
-		->leftjoin('room', 'room_schedule.room', 'room.id')
-		->leftjoin('office', 'room.office', 'office.id')
-		->leftjoin('subject', 'course.subject', 'subject.id')
-		->groupBy('class.id')
-		->select('*', 'course.name as course');
+        $class = DB::table('class')
+        ->select("*", 'class.id as class')
+        ->leftjoin('course', 'class.course', 'course.id')
+        ->leftjoin('room_schedule', 'class.id', 'room_schedule.class')
+        ->leftjoin('room', 'room_schedule.room', 'room.id')
+        ->leftjoin('office', 'room.office', 'office.id')
+        ->leftjoin('subject', 'course.subject', 'subject.id')
+        ->groupBy('class.id')
+        ->select('*', 'course.name as course');
         if ($r->course != null) {
-        	$class = $class->where('course', $r->course);
+            $class = $class->where('course', $r->course);
         }
         if ($r->subject != null) {
-        	$class = $class->where('subject', $r->subject);
+            $class = $class->where('subject', $r->subject);
         }
         if ($r->office != null) {
-        	$class = $class->where('office', $r->office);
+            $class = $class->where('office', $r->office);
         }
         $class = $class->get();
 
@@ -63,17 +63,17 @@ class ScheduleController extends Controller
         ->leftjoin('course', 'course.id', 'class.course')
         ->select("*");
         if ($r->subject != null){
-        	$schedule = $schedule->where('subject', $r->subject);
+            $schedule = $schedule->where('subject', $r->subject);
         }
         if ($r->course != null) {
-        	$schedule = $schedule->where('course', $r->course);
+            $schedule = $schedule->where('course', $r->course);
         }
         if ($r->office != null) {
-        	$schedule = $schedule->where('office', $r->office);
+            $schedule = $schedule->where('office', $r->office);
         }
         $schedule = $schedule->get();
 
         $data = array('class' => $class, 'schedule' => $schedule);
         return $data;
-	}
+    }
 }

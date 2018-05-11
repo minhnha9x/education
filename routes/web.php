@@ -55,4 +55,4 @@ Route::get('/getOffice', 'AdminController@getOffice');
 Route::post('/addOffice', 'AdminController@addOffice');
 Route::get('/deleteOffice', 'AdminController@deleteOffice');
 
-Route::get('/test', 'AdminController@getRegisterInMonth');
+Route::get('/getteacherschedule', 'AdminController@getTeacherScheduleInRange');

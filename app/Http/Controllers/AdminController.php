@@ -258,6 +258,35 @@ class AdminController extends Controller
         return $result;
     }
 
+    public function getTeacherScheduleList($teacher_ids, $start_range, $end_range) {
+        $start_range = date('Y-m-d', strtotime($start_range));
+        $end_range = date('Y-m-d', strtotime($end_range));
+
+        Debugbar::info($start_range, $end_range);
+
+        $teacher_schedule = $this->getTeacherScheduleData($teacher_ids);
+        $result = array();
+        foreach ($teacher_schedule as $schedule) {
+            if (!array_key_exists($schedule->id, $result)){
+                $result[$schedule->id] = array();
+                $result[$schedule->id]['schedule'] = array();
+                $result[$schedule->id]['name'] = $schedule->name;
+            }
+            if (strtotime($schedule->end_date) and strtotime($schedule->start_date)){
+                $start_date = date('Y-m-d', strtotime($schedule->start_date));
+                $end_date = date('Y-m-d', strtotime($schedule->end_date));
+                if (!($start_range > $end_date || $end_range < $start_date)) {
+                    if (!array_key_exists($schedule->current_date, $result[$schedule->id]['schedule'])){
+                        $result[$schedule->id]['schedule'][$schedule->current_date] = array();
+                    }
+                    array_push($result[$schedule->id]['schedule'][$schedule->current_date], $schedule->schedule);
+                }
+            }
+        }
+        Debugbar::info($result);
+        return $result;
+    }
+
     public function getRoomScheduleData($room_ids) {
         $room_schedule = DB::table('room')
         ->select('room.id',
@@ -277,6 +306,23 @@ class AdminController extends Controller
         return $room_schedule;
     }
 
+    public function getTeacherScheduleData($teacher_ids) {
+        $teacher_schedule = DB::table('main_teacher')
+        ->select('main_teacher.id',
+            'room_schedule.current_date',
+            'room_schedule.schedule',
+            'class.start_date',
+            'class.end_date',
+            'employee.name')
+        ->leftjoin('employee', 'employee.id', 'main_teacher.id')
+        ->leftjoin('room_schedule', 'room_schedule.teacher', 'main_teacher.id')
+        ->leftjoin('class', 'class.id', 'room_schedule.class')
+        ->whereIn('main_teacher.id', json_decode($teacher_ids, TRUE))
+        ->get();
+
+        return $teacher_schedule;
+    }
+
     public function postroomlist(Request $r) {
         $class = DB::table('room')
         ->select('room.id')
@@ -290,6 +336,23 @@ class AdminController extends Controller
         }
         $string = $r->start_date . '/' . $r->end_date;
         $data = $this->getRoomScheduleList($string, $class);
+        return $data;
+    }
+
+    public function getTeacherScheduleInRange(Request $r) {
+        $teacher_list = DB::table('office_main_teacher')
+        ->select('office_main_teacher.teacher as teacher_id')
+        ->leftjoin('course_teacher', 'course_teacher.teacher', 'office_main_teacher.teacher')
+        ->where('course_teacher.course', $r->course)
+        ->where('office_main_teacher.office', $r->office)
+        ->distinct()
+        ->get();
+
+        Debugbar::info($teacher_list);
+        if (count($teacher_list) < 1) {
+            return array();
+        }
+        $data = $this->getTeacherScheduleList($teacher_list, $r->start_date, $r->end_date);
         return $data;
     }
 
@@ -343,9 +406,6 @@ class AdminController extends Controller
 
         $validate = strtotime($date);
         $day_in_week = date('l', $validate);
-
-        Debugbar::info($date_formated, $day_in_week, $slot_in_day);
-
         $data = DB::table('main_teacher')
         ->select('employee.name',
             'employee.id',
@@ -369,9 +429,6 @@ class AdminController extends Controller
         ->groupBy('main_teacher.id')
         ->setBindings([$date_formated, $date_formated, $day_in_week, $slot_in_day, $course, $office])
         ->get();
-
-        Debugbar::info($data);
-
         return $data;
     }
 
@@ -403,7 +460,6 @@ class AdminController extends Controller
         $year = $r->year;
         $month = $r->month;
         //
-        Debugbar::info($r->year, $r->month);
         $end_day= date('Y-m-t', strtotime($year.'-'.$month.'-01'));
         $start_day= date('Y-m-d', strtotime($year.'-'.$month.'-01'));
 
@@ -421,7 +477,6 @@ class AdminController extends Controller
 
             $teacher->salary = $salary_rate*($teaching_day - $day_off + $teaching_backup + $teaching_offset);
         }
-        Debugbar::info($main_teacher_salary);
         return $main_teacher_salary;
     }
 
@@ -515,8 +570,6 @@ class AdminController extends Controller
         ->select(DB::raw('count(register.id) as count'))
         ->whereBetween('register.created_date', [$start_day->startOfDay(), $end_day->endOfDay()])
         ->get();
-
-        Debugbar::info($register);
         return abort(404);
     }
 }
