@@ -90,6 +90,11 @@
       margin-bottom: 20px;
       text-transform: capitalize;
       float: right; }
+    .adminpage .tab-content .tab-pane span.page-span {
+      font-family: 'Roboto', sans-serif;
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: #000; }
     .adminpage .tab-content .tab-pane select.page-select {
       height: 45px;
       outline: none;
@@ -101,9 +106,11 @@
       background: transparent;
       font-family: 'Roboto', sans-serif;
       text-transform: capitalize;
-      margin: 0 20px 20px 0; }
+      margin: 0 40px 50px 0; }
       .adminpage .tab-content .tab-pane select.page-select option {
         color: initial; }
+    .adminpage .tab-content .tab-pane .chart-wrapper {
+      text-align: center; }
     .adminpage .tab-content .tab-pane table {
       font-family: 'Roboto', sans-serif;
       font-size: 15px; }
@@ -135,10 +142,6 @@
         .adminpage .tab-content .tab-pane table .action a {
           margin: 0 10px;
           cursor: pointer; }
-    .adminpage .tab-content .tab-pane .chart-wrapper .chart {
-      height: 400px;
-      display: inline-block;
-      margin-bottom: 50px; }
     .adminpage .tab-content .tab-pane .admin-modal a {
       text-decoration: none !important; }
     .adminpage .tab-content .tab-pane .admin-modal input::-webkit-input-placeholder, .adminpage .tab-content .tab-pane .admin-modal textarea::-webkit-input-placeholder {

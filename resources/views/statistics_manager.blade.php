@@ -1,7 +1,32 @@
-<div class="chart-wrapper">
-	<div id="linechart" class="chart col-md-6"></div>
-	<div id="piechart" class="chart col-md-6"></div>
-	<div id="piechart2" class="chart col-md-6"></div>
+<div ng-controller="StatisticController">
+	<div class="chart-wrapper">
+		<span class="page-span">
+			Xem thống kê năm:
+		</span>
+		<select class="page-select" ng-model="yearSelected" ng-change="updateChartData()">
+	        <option value="2018">2018</option>
+	        <option value="2017">2017</option>
+	    </select>
+	    <span class="page-span">
+	    	Loại biểu đồ:
+	    </span>
+	    <select class="page-select" ng-model="typeSelected" ng-change="updateChartType()">
+	        <option value="line">Line</option>
+	        <option value="pie">Pie</option>
+	        <option value="column">Column</option>
+	    </select>
+	    <span class="page-span">
+	    	Xem thống kê theo:
+	    </span>
+	    <select class="page-select" ng-model="viewSelected" ng-change="updateChartView()">
+	        <option value="1">Tổng số lượt đăng kí</option>
+	        <option value="2">Từng môn học</option>
+	        <option value="3">Từng trung tâm</option>
+	    </select>
+		<div id="linechart" class="chart col-md-12"></div>
+		<div id="piechart" class="chart col-md-12"></div>
+		<div id="piechart2" class="chart col-md-12"></div>
+	</div>
 </div>
 
 <script type="text/javascript">
@@ -15,34 +40,6 @@
     for (var i = 0; i < $cRbyO.length; i++) {
     	$cO += $cRbyO[i]['count'];
     }
-    
-	var chart = new CanvasJS.Chart("linechart", {
-		theme: "light1",
-		title:{
-			text: "New Register"
-		},
-		axisY:{
-			includeZero: false
-		},
-		data: [{        
-			type: "line",       
-			dataPoints: [
-				{ label: "Tháng 1", y: 450 },
-				{ label: "Tháng 2",y: 414},
-				{ label: "Tháng 3",y: 520},
-				{ label: "Tháng 4",y: 460 },
-				{ label: "Tháng 5",y: 450 },
-				{ label: "Tháng 6",y: 500 },
-				{ label: "Tháng 7",y: 480 },
-				{ label: "Tháng 8",y: 480 },
-				{ label: "Tháng 9",y: 410 },
-				{ label: "Tháng 10",y: 500 },
-				{ label: "Tháng 11",y: 480 },
-				{ label: "Tháng 12",y: 510 }
-			]
-		}]
-	});
-	chart.render();
 
 	var dataPoints2 = [];
 	var chart2 = new CanvasJS.Chart("piechart", {
@@ -63,7 +60,7 @@
 			label: $cRbyS[i]['name']
 		});
     }
-	chart2.render();
+	//chart2.render();
 
 	var dataPoints3 = [];
 	var chart3 = new CanvasJS.Chart("piechart2", {
@@ -84,5 +81,5 @@
 			label: $cRbyO[i]['office']
 		});
     }
-	chart3.render();
+	//chart3.render();
 </script>

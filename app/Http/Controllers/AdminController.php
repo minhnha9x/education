@@ -557,19 +557,24 @@ class AdminController extends Controller
     }
 
     function getRegisterInMonth(Request $r) {
-        $year = 2018;
-        $month = 5;
+        $year = $r->year;
+        $result = array();
 
-        $end_day = date('Y-m-t', strtotime($year.'-'.$month.'-01'));
-        $start_day = date('Y-m-d', strtotime($year.'-'.$month.'-01'));
+        for ($i = 1; $i <= 12; $i++) {
+            $month = $i;
+            $end_day = date('Y-m-t', strtotime($year.'-'.$month.'-01'));
+            $start_day = date('Y-m-d', strtotime($year.'-'.$month.'-01'));
 
-        $end_day = Carbon::parse($end_day)->startOfDay();
-        $start_day = Carbon::parse($start_day)->startOfDay();
+            $end_day = Carbon::parse($end_day)->startOfDay();
+            $start_day = Carbon::parse($start_day)->startOfDay();
+            $register = DB::table('register')
+            ->select(DB::raw('count(register.id) as count'))
+            ->whereBetween('register.created_date', [$start_day->startOfDay(), $end_day->endOfDay()])
+            ->get();
 
-        $register = DB::table('register')
-        ->select(DB::raw('count(register.id) as count'))
-        ->whereBetween('register.created_date', [$start_day->startOfDay(), $end_day->endOfDay()])
-        ->get();
-        return abort(404);
+            $result += array($i => $register[0]->count);
+        }
+
+        return $result;
     }
 }
