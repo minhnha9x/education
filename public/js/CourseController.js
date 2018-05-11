@@ -5,7 +5,6 @@ angular.module('educationApp').controller('CourseController', function($scope, $
             method: 'GET',
         })
         .then(function(response) {
-            console.log(response.data);
             $scope.courseInfo = response.data;
             $('#courseModal').modal('hide');
         }, function(response) {
@@ -37,7 +36,6 @@ angular.module('educationApp').controller('CourseController', function($scope, $
                     },
                 })
                 .then(function(response) {
-                    console.log(response.data[0]);
                     $scope.courseName = response.data[0].name;
                     $scope.courseDesc = response.data[0].description;
                     $scope.coursePrice = response.data[0].price;

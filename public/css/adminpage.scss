@@ -101,6 +101,12 @@ $blue: #337ab7;
 				text-transform: capitalize;
 				float: right;
 			}
+			span.page-span {
+				font-family: 'Roboto', sans-serif;
+				font-size: 15px;
+				letter-spacing: 1px;
+				color: #000;
+			}
 			select.page-select {
 		    	height: 45px;
 			    outline: none;
@@ -112,10 +118,13 @@ $blue: #337ab7;
 			    background: transparent;
 				font-family: 'Roboto', sans-serif;
 				text-transform: capitalize;
-				margin: 0 20px 20px 0;
+				margin: 0 40px 50px 0;
 				option {
 					color: initial;
 				}
+			}
+			.chart-wrapper {
+				text-align: center;
 			}
 			table {
 				font-family: 'Roboto', sans-serif;
@@ -156,13 +165,6 @@ $blue: #337ab7;
 						margin: 0 10px;
 						cursor: pointer;
 					}
-				}
-			}
-			.chart-wrapper {
-				.chart {
-					height: 400px;
-					display: inline-block;
-					margin-bottom: 50px;
 				}
 			}
 			.admin-modal {

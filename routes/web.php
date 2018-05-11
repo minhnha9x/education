@@ -55,4 +55,7 @@ Route::get('/getOffice', 'AdminController@getOffice');
 Route::post('/addOffice', 'AdminController@addOffice');
 Route::get('/deleteOffice', 'AdminController@deleteOffice');
 
+Route::get('/countRegisterBySubject', 'AdminController@countRegisterBySubject');
+Route::get('/countRegisterByOffice', 'AdminController@countRegisterByOffice');
+
 Route::get('/test', 'AdminController@getRegisterInMonth');

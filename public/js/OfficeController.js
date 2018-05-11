@@ -5,7 +5,6 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
             method: 'GET',
         })
         .then(function(response) {
-            console.log(response.data);
             $scope.officeInfo = response.data;
             $('#officeModal').modal('hide');
         }, function(response) {
@@ -36,7 +35,6 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
                     },
                 })
                 .then(function(response) {
-                    console.log(response.data[0]);
                     $scope.officeName = response.data[0].name;
                     $scope.officeAddr = response.data[0].address;
                     $scope.officePhone = response.data[0].phone;
