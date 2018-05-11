@@ -76,8 +76,7 @@ a {
       .header ul li a {
         color: #000;
         display: block;
-        width: 100%;
-        height: 100%; }
+        width: 100%; }
     .header ul li:hover {
       color: #337ab7; }
     .header ul .login {
