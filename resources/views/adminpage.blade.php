@@ -53,6 +53,7 @@
 <script src="js/SalaryController.js"></script>
 <script src="js/ClassController.js"></script>
 <script src="js/SubjectController.js"></script>
+<script src="js/RoomController.js"></script>
 <script src="js/CourseController.js"></script>
 <script src="js/OfficeController.js"></script>
 <script src="js/StatisticController.js"></script>

@@ -79,6 +79,9 @@
   .adminpage .tab-content {
     width: calc(100% - 130px);
     padding: 40px; }
+    .adminpage .tab-content .tab-pane .loading {
+      height: 100%;
+      background: url("../img/loading.gif") no-repeat center center; }
     .adminpage .tab-content .tab-pane .addbutton {
       padding: 10px 20px;
       background: #fff;

@@ -7,19 +7,15 @@
         Trang cá nhân
     </div>
 
-    <div class="profile-wrapper col-md-12" id='11'>
-        <div class="col-md-2">
+    <div class="profile-wrapper col-md-6" id='11'>
+        <div class="avatar-wrapper">
             <div class="avatar" style="background-image: url('{{Auth::user()->avatar}}')">
             </div>
             <div class="name">
-                @if ($userInfo->fullname != null)
-                    {{$userInfo->fullname}}
-                @else
-                    {{$userInfo->name}}
-                @endif
+                {{$userInfo->name}}
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="text-wrapper">
             <div class="text">
                 <p><span>Email: </span>{{$userInfo->email}}</p>
                 @if (Auth::user()->role == 'teacher')
@@ -40,6 +36,8 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#menu1">Khóa học đã đăng kí</a></li>
                 <li><a data-toggle="tab" href="#menu2">Lịch học trong tuần</a></li>
+                <li><a data-toggle="tab" href="#menu3">Ngày nghỉ</a></li>
+                <li><a data-toggle="tab" href="#menu4">Học bù</a></li>
             </ul>
             <div class="tab-content">
                 <div id="menu1" class="tab-pane in active">
@@ -104,6 +102,60 @@
                         @endforeach
                     </table>
                 </div>
+                <div id="menu3" class="tab-pane">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Lớp</th>
+                                <th>Khóa học</th>
+                                <th>Trung tâm</th>
+                                <th>Thứ</th>
+                                <th>Giờ học</th>
+                                <th>Ngày nghỉ dạy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($teacher_dayoff as $t)
+                                <tr>
+                                    <td>{{$t->class}}</td>
+                                    <td>{{$t->course}}</td>
+                                    <td>{{$t->office}}</td>
+                                    <td>{{$t->current_date}}</td>
+                                    <td>{{$t->start_time}} - {{$t->end_time}}</td>
+                                    <td class="dayoffid" data-id="{{$t->id}}" data-schedule="{{$t->room_schedule}}">{{$t->date}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div id="menu4" class="tab-pane">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Lớp</th>
+                                <th>Khóa học</th>
+                                <th>Trung tâm</th>
+                                <th>Ngày nghỉ dạy</th>
+                                <th>Ngày dạy bù</th>
+                                <th>Giờ dạy bù</th>
+                                <th>Phòng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($teaching_offset as $t)
+                                <tr>
+                                    <td>{{$t->class}}</td>
+                                    <td>{{$t->course}}</td>
+                                    <td>{{$t->office}}</td>
+                                    <td>{{$t->dayoff}}</td>
+                                    <td>{{$t->date}}</td>
+                                    <td>{{$t->start_time}} - {{$t->end_time}}</td>
+                                    <td>{{$t->room}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     @else
@@ -113,7 +165,8 @@
                 <li><a data-toggle="tab" href="#menu2">Lịch dạy trong tuần</a></li>
                 <li><a data-toggle="tab" href="#menu3">Nghỉ dạy</a></li>
                 <li><a data-toggle="tab" href="#menu4">Dạy bù</a></li>
-                <li><a data-toggle="tab" href="#menu5">Tình hình giảng dạy</a></li>
+                <li><a data-toggle="tab" href="#menu5">Dạy thay</a></li>
+                <li><a data-toggle="tab" href="#menu6">Tình hình giảng dạy</a></li>
             </ul>
             <div class="tab-content">
                 <div id="menu1" class="tab-pane in active">
@@ -192,10 +245,6 @@
                         </tbody>
                     </table>
                 </div>
-                <script>
-                    console.log(<?= json_encode($teaching_offset); ?>);
-                    console.log(<?= json_encode($teacher_dayoff_count); ?>);
-                </script>
                 <div id="menu3" class="tab-pane">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -275,7 +324,38 @@
                         </tbody>
                     </table>
                 </div>
+                <script type="text/javascript">
+                    console.log(<?= json_encode($teacher_backup); ?>)
+                </script>
                 <div id="menu5" class="tab-pane">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Lớp</th>
+                                <th>Khóa học</th>
+                                <th>Trung tâm</th>
+                                <th>Giáo viên nghỉ dạy</th>
+                                <th>Ngày dạy thay</th>
+                                <th>Giờ dạy thay</th>
+                                <th>Phòng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($teacher_backup as $t)
+                                <tr>
+                                    <td>{{$t->class}}</td>
+                                    <td>{{$t->course}}</td>
+                                    <td>{{$t->office}}</td>
+                                    <td>{{$t->teacher_off}}</td>
+                                    <td>{{$t->date}}</td>
+                                    <td>{{$t->start_time}} - {{$t->end_time}}</td>
+                                    <td>{{$t->room}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div id="menu6" class="tab-pane">
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -308,6 +388,8 @@
 
 @include('popup.teaching_offset_modal')
 
+@include('popup.update_profile_modal')
+
 {{-- @include('footer') --}}
 
 <script type="text/javascript">
@@ -318,8 +400,12 @@
         searching: false,
         paging: false,
     });
+
     $test = <?= json_encode($test); ?>;
-    $tschedule = <?= json_encode($tschedule); ?>;
+
+    $('.text-wrapper .button').click(function(){
+        $('#update_profile').modal('show', 300)
+    });1
 
     $('#menu3 table a').click(function(){
         $c = $(this).parent().data('id');

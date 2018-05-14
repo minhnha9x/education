@@ -7,6 +7,8 @@ angular.module('educationApp').controller('CourseController', function($scope, $
         .then(function(response) {
             $scope.courseInfo = response.data;
             $('#courseModal').modal('hide');
+            $('.loading').hide();
+            $('#courseTable').removeClass('hidden');
         }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -36,12 +38,13 @@ angular.module('educationApp').controller('CourseController', function($scope, $
                     },
                 })
                 .then(function(response) {
+                    console.log(response.data[0].subjectid);
                     $scope.courseName = response.data[0].name;
                     $scope.courseDesc = response.data[0].description;
                     $scope.coursePrice = response.data[0].price;
                     $scope.total_of_period = response.data[0].total_of_period;
                     $scope.certificate_required = response.data[0].certificate_required;
-                    $scope.subjectName = response.data[0].subjectid;
+                    $scope.subjectName = response.data[0].subjectid + "";
                 }, function(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.

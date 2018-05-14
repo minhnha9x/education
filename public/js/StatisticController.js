@@ -31,7 +31,6 @@ angular.module('educationApp').controller('StatisticController', function($scope
                     y: response.data[i],
                 });
             });
-            console.log($scope.dataPoints);
             chart.options.data[0].dataPoints = $scope.dataPoints;
             chart.render();
         }, function(response) {
@@ -41,29 +40,6 @@ angular.module('educationApp').controller('StatisticController', function($scope
     }
     $scope.init();
 
-    $scope.updateChartData = function() {
-        $http({
-            url: './test',
-            method: 'GET',
-            params : {
-                year: $scope.yearSelected,
-            },
-        })
-        .then(function(response) {
-            $scope.dataPoints = [];
-            $.each(response.data, function(i, item) {
-                $scope.dataPoints.push({
-                    label: 'Tháng ' + i,
-                    y: response.data[i],
-                });
-            });
-            chart.options.data[0].dataPoints = $scope.dataPoints;
-            chart.render();
-        }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
-    }
     $scope.updateChartType = function() {
         chart.data[0].set("type", $scope.typeSelected);
         if ($scope.typeSelected == 'pie') {
@@ -84,15 +60,38 @@ angular.module('educationApp').controller('StatisticController', function($scope
             chart.data[0].set('indexLabel', null);
         }
     }
-    $scope.updateChartView = function() {
+    $scope.updateChartData = function() {
         switch ($scope.viewSelected) {
             case '1':
-                
+                $http({
+                    url: './test',
+                    method: 'GET',
+                    params : {
+                        year: $scope.yearSelected,
+                    },
+                })
+                .then(function(response) {
+                    $scope.dataPoints = [];
+                    $.each(response.data, function(i, item) {
+                        $scope.dataPoints.push({
+                            label: 'Tháng ' + i,
+                            y: response.data[i],
+                        });
+                    });
+                    chart.options.data[0].dataPoints = $scope.dataPoints;
+                    chart.render();
+                }, function(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
                 break;
             case '2':
                 $http({
                     url: './countRegisterBySubject',
                     method: 'GET',
+                    params : {
+                        year: $scope.yearSelected,
+                    },
                 })
                 .then(function(response) {
                     $scope.cRbS = response.data;

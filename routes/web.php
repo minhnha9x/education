@@ -13,9 +13,7 @@
 Route::post('/login','LoginController@postLogin');
 Route::get('/logout', 'LoginController@logout');
 Route::post('/adduser', 'LoginController@addUser');
-Route::get('/', function () {
-    return view('homepage');
-});
+Route::get('/', 'HomeController@get');
 Route::get('/admin', 'AdminController@getData');
 Route::get('/profile', 'ProfileController@get');
 Route::get('/subject_{id}', 'SubjectController@get');
@@ -25,13 +23,14 @@ Route::get('/getclassfromcourse{id}', 'SubjectController@getClassFromCourse');
 Route::post('/classregister', 'SubjectController@classRegister');
 
 Route::get('/schedule', 'ScheduleController@get');
-Route::get('/getschedule', 'ScheduleController@getschedule');
+Route::get('/getSchedule', 'ScheduleController@getSchedule');
 
 Route::get('/postroomlist', 'AdminController@postroomlist');
 Route::get('/get_available_office', 'AdminController@getAvailableOffice');
 
 Route::post('/addteacherdayoff', 'ProfileController@addTeacherDayoff');
 Route::post('/addteachingoffset', 'ProfileController@addTeachingOffset');
+Route::post('/updateProfile', 'ProfileController@updateProfile');
 
 Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
 
@@ -54,6 +53,11 @@ Route::get('/getAllOffice', 'AdminController@getAllOffice');
 Route::get('/getOffice', 'AdminController@getOffice');
 Route::post('/addOffice', 'AdminController@addOffice');
 Route::get('/deleteOffice', 'AdminController@deleteOffice');
+
+Route::get('/getAllRoom', 'AdminController@getAllRoom');
+Route::get('/getRoom', 'AdminController@getRoom');
+Route::post('/addRoom', 'AdminController@addRoom');
+Route::get('/deleteRoom', 'AdminController@deleteRoom');
 
 
 Route::get('/getteacherschedule', 'AdminController@getTeacherScheduleInRange');

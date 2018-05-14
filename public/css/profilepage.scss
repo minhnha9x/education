@@ -55,42 +55,51 @@ $blue: #337ab7;
 		border: 1px solid #ccc;
 		text-align: center;
 		margin-bottom: 30px;
-		.avatar {
-			width: 150px;
-			height: 150px;
-			border-radius: 50%;
-			background-size: cover;
-			background-position: center;
-			margin: 0 auto;
-			border: 1px solid #ccc;
-		}
-		.name {
-			color: $blue;
-			margin-top: 20px;
-			font-weight: bold;
-			font-size: 16px;
-			text-transform: capitalize;
-		}
-		.text {
-			padding: 20px 20px 0;
-			p {
-				text-align: right;
-				span {
-					font-weight: bold;
-					float: left;
-				}
+		display: flex;
+		.avatar-wrapper {
+			display: inline-block;
+			padding: 0 15px;
+			.avatar {
+				width: 150px;
+				height: 150px;
+				border-radius: 50%;
+				background-size: cover;
+				background-position: center;
+				border: 1px solid #ccc;
+			}
+			.name {
+				width: 150px;
+				text-align: center;
+				color: $blue;
+				margin-top: 20px;
+				font-weight: bold;
+				font-size: 16px;
+				text-transform: capitalize;
 			}
 		}
-		.button {
-			border: 1px solid $blue;
-			border-radius: 10px;
-			margin-top: 30px;
-			padding: 5px 20px;
+		.text-wrapper {
 			display: inline-block;
-			font-weight: bold;
-			color: $blue;
-			font-family: 'Montserrat', sans-serif;
-			cursor: pointer;
+			width: calc(100% - 150px);
+			.text {
+				padding: 20px 20px 0;
+				p {
+					text-align: right;
+					span {
+						font-weight: bold;
+						float: left;
+					}
+				}
+			}
+			.button {
+				border: 1px solid $blue;
+				border-radius: 10px;
+				margin-top: 30px;
+				padding: 5px 20px;
+				display: inline-block;
+				font-weight: bold;
+				color: $blue;
+				cursor: pointer;
+			}
 		}
 	}
 	.tab-wrapper {

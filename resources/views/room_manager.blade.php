@@ -1,25 +1,27 @@
-<div id="addcourse" class="addbutton hvr-sweep-to-right" data-name="Thêm khóa học">Thêm phòng học</div>
-<table id="example" class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Mã phòng</th>
-            <th>Thuộc trung tâm</th>
-            <th>Sức chứa</th>
-            <th>Dành cho các khóa</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($rooms as $room)
+<div ng-controller="RoomController">
+    <div class="addbutton hvr-sweep-to-right" ng-click="showModal(1, -1)">Thêm phòng học</div>
+    <table class="table table-bordered table-hover">
+        <thead>
             <tr>
-                <td>{{$room->id}}</td>
-                <td>{{$room->office}}</td>
-                <td>{{$room->max_student}}</td>
-                <td>{{$room->course}}</td>
+                <th>Mã phòng</th>
+                <th>Thuộc trung tâm</th>
+                <th>Sức chứa</th>
+                <th>Dành cho các khóa</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in roomInfo">
+                <td><% x.id %></td>
+                <td><% x.office %></td>
+                <td><% x.max_student %></td>
+                <td><% x.course %></td>
                 <td class="action">
-                    <a id='edit' data-name="Sửa khóa học" data-id='{{$room->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
+                    <a id='edit' ng-click="showModal(2, x.id)"><i class="fas fa-edit"></i>Sửa</a><a ng-click="delete(x.id)"><i class="fas fa-trash-alt"></i>Xóa</a>
                 </td>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </tbody>
+    </table>
+
+    @include('popup.add_room_modal')
+</div>

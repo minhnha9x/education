@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class ScheduleController extends Controller
 {
@@ -30,20 +31,40 @@ class ScheduleController extends Controller
         ->leftjoin('course', 'course.id', 'class.course')
         ->orderby('course.name')
         ->get();
-        $data = array('courses' => $courses, 'subjects' => $subjects, 'offices' => $offices,  'classes' => $classes);
+
+        if(Auth::check()) {
+            if (Auth::user()->teacher != null) {
+                $user_info = DB::table('employee')
+                ->select('*', 'mail as email')
+                ->where('employee.id', Auth::user()->teacher)
+                ->get();
+            }
+            else {
+                $user_info = Auth::user();
+            }
+        }
+        else {
+            $user_info = null;
+        }
+
+        $data = array('courses' => $courses,
+            'subjects' => $subjects,
+            'offices' => $offices,
+            'userInfo' => (object) $user_info[0],
+            'classes' => $classes
+        );
         return view('schedulepage')->with($data);
     }
-    public function getschedule(Request $r) {
+    public function getSchedule(Request $r) {
 
         $class = DB::table('class')
-        ->select("*", 'class.id as class')
         ->leftjoin('course', 'class.course', 'course.id')
         ->leftjoin('room_schedule', 'class.id', 'room_schedule.class')
         ->leftjoin('room', 'room_schedule.room', 'room.id')
         ->leftjoin('office', 'room.office', 'office.id')
         ->leftjoin('subject', 'course.subject', 'subject.id')
         ->groupBy('class.id')
-        ->select('*', 'course.name as course');
+        ->select('*', 'course.name as course', 'class.id as id');
         if ($r->course != null) {
             $class = $class->where('course', $r->course);
         }

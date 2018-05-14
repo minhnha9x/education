@@ -8,6 +8,7 @@ use Auth;
 use DateTime;
 use App\Teacher_Dayoff;
 use App\Teaching_Offset;
+use App\Employee;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
@@ -71,8 +72,38 @@ class ProfileController extends Controller
                 ->where('register.user', Auth::user()->id)
                 ->get();
 
+                $teacher_dayoff = DB::table('teacher_dayoff')
+                ->leftjoin('room_schedule', 'teacher_dayoff.room_schedule', 'room_schedule.id')
+                ->leftjoin('register', 'room_schedule.class', 'register.class')
+                ->leftjoin('class', 'room_schedule.class', 'class.id')
+                ->leftjoin('room', 'room_schedule.room', 'room.id')
+                ->leftjoin('office', 'room.office', 'office.id')
+                ->leftjoin('course', 'class.course', 'course.id')
+                ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
+                ->where('register.user', Auth::user()->id)
+                ->where('teacher_dayoff.backup_teacher', null)
+                ->select('*', 'course.name as course', 'course.id as courseid', 'office.name as office', 'teacher_dayoff.id as id')
+                ->orderby('teacher_dayoff.date')
+                ->get();
+
+                $teaching_offset = DB::table('teaching_offset')
+                ->leftjoin('teacher_dayoff', 'teaching_offset.teacher_dayoff', 'teacher_dayoff.id')
+                ->leftjoin('room_schedule', 'teacher_dayoff.room_schedule', 'room_schedule.id')
+                ->leftjoin('register', 'room_schedule.class', 'register.class')
+                ->leftjoin('class', 'room_schedule.class', 'class.id')
+                ->leftjoin('room', 'room_schedule.room', 'room.id')
+                ->leftjoin('office', 'room.office', 'office.id')
+                ->leftjoin('course', 'class.course', 'course.id')
+                ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
+                ->where('register.user', Auth::user()->id)
+                ->select('*', 'course.name as course', 'course.id as courseid', 'office.name as office', 'teacher_dayoff.date as dayoff', 'teaching_offset.date as date', 'room_schedule.room as room')
+                ->orderby('teaching_offset.date')
+                ->get();
+
                 $data = array('user' => $user, 
-                    'schedule' => $schedule, 
+                    'schedule' => $schedule,
+                    'teacher_dayoff' => $teacher_dayoff,
+                    'teaching_offset' => $teaching_offset,
                     'slot' => $slot, 
                     'week' => $weekday, 
                     'test' => $week, 
@@ -81,7 +112,7 @@ class ProfileController extends Controller
             }
             else {
                 $user_info = DB::table('employee')
-                ->select('*', 'name as fullname', 'mail as email')
+                ->select('*', 'mail as email')
                 ->where('employee.id', Auth::user()->teacher)
                 ->get();
 
@@ -156,6 +187,19 @@ class ProfileController extends Controller
                 ->orderby('teacher_dayoff.date')
                 ->get();
 
+                $teacher_backup = DB::table('teacher_dayoff')
+                ->leftjoin('room_schedule', 'teacher_dayoff.room_schedule', 'room_schedule.id')
+                ->leftjoin('class', 'room_schedule.class', 'class.id')
+                ->leftjoin('room', 'room_schedule.room', 'room.id')
+                ->leftjoin('office', 'room.office', 'office.id')
+                ->leftjoin('course', 'class.course', 'course.id')
+                ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
+                ->leftjoin('employee', 'room_schedule.teacher', 'employee.id')
+                ->select('*', 'course.name as course', 'course.id as courseid', 'office.name as office', 'teacher_dayoff.id as id', 'employee.name as teacher_off')
+                ->where('teacher_dayoff.backup_teacher', $user_info[0]->id)
+                ->orderby('teacher_dayoff.date')
+                ->get();
+
                 $teaching_offset = DB::table('teaching_offset')
                 ->leftjoin('teacher_dayoff', 'teaching_offset.teacher_dayoff', 'teacher_dayoff.id')
                 ->leftjoin('room_schedule', 'teacher_dayoff.room_schedule', 'room_schedule.id')
@@ -173,6 +217,7 @@ class ProfileController extends Controller
                     'class' => $class,
                     'courses' => $courses,
                     'teacher_dayoff' => $teacher_dayoff,
+                    'teacher_backup' => $teacher_backup,
                     'teaching_offset' => $teaching_offset,
                     'tschedule' => $teacher_schedule,
                     'week' => $weekday,
@@ -231,5 +276,15 @@ class ProfileController extends Controller
         ->get();
 
         return $data;
+    }
+
+    public function updateProfile(Request $r) {
+        $data = Employee::findOrFail($r->id);
+        $data->name = $r->fullname;
+        $data->phone = $r->phone;
+        $data->address = $r->address;
+        $data->birthday = $r->birthday;
+        $data->save();
+        return back()->withInput();
     }
 }

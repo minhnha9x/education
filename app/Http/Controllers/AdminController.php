@@ -9,6 +9,7 @@ use App\Course;
 use App\Exam;
 use App\Subject;
 use App\Office;
+use App\Room;
 use DateTime;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
@@ -218,7 +219,55 @@ class AdminController extends Controller
 
     public function deleteOffice(Request $r) {
         try {
-            $course = DB::table('office')
+            $office = DB::table('office')
+            ->where('id', $r->id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return back()->withInput();
+    }
+
+    public function getAllRoom() {
+        $data = DB::table('room')
+        ->select('room.*', 'office.name as office', DB::raw("GROUP_CONCAT(course.name SEPARATOR ', ') as course"))
+        ->leftjoin('office', 'office.id', 'room.office')
+        ->join('course_room', 'room.id', 'course_room.room')
+        ->leftjoin('course', 'course.id', 'course_room.course')
+        ->groupBy('room.id')
+        ->get();
+        return $data;
+    }
+
+    public function getRoom(Request $r) {
+        $data = DB::table('room')
+        ->select('room.*', DB::raw("GROUP_CONCAT(course.id SEPARATOR ', ') as course"))
+        ->leftjoin('office', 'office.id', 'room.office')
+        ->join('course_room', 'room.id', 'course_room.room')
+        ->leftjoin('course', 'course.id', 'course_room.course')
+        ->where('room.id', $r->id)
+        ->get();
+        return $data;
+    }
+
+    public function addRoom(Request $r) {
+        if ($r->id != null)
+            $data = Room::findOrFail($r->id);
+        else 
+            $data = new Room;
+        $data->office = $r->office;
+        $data->max_student = $r->max_student;
+        $data->save();
+        return $r->course;
+    }
+
+    public function deleteRoom(Request $r) {
+        try {
+            $room = DB::table('course_room')
+            ->where('room', $r->id)
+            ->delete();
+            $room = DB::table('room')
             ->where('id', $r->id)
             ->delete();
         }

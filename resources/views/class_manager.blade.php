@@ -46,9 +46,9 @@
         </tbody>
     </table>
 
-    @include('popup.class_register_modal')
+    @include('popup.add_class_modal')
 
-    @include('popup.class_register_modal_step_2')
+    @include('popup.add_class_modal_step_2')
 
     <div modal="scheduleDetail">
         @include('popup.schedule_detail_modal')

@@ -63,8 +63,9 @@
                     @endforeach
                 </ul>
             </li>
+            <li><a href="./schedule">Lịch học</a></li>
             <li>
-                Trung Tâm
+                Liên hệ
                 <i class="fas fa-angle-down"></i>
                 <ul class="sub-menu">
                     @foreach ($offices as $o)
@@ -72,16 +73,14 @@
                     @endforeach
                 </ul>
             </li>
-            <li><a href="./schedule">Lịch học</a></li>
-            <li><a href="">Liên hệ</a></li>
                 @if( Auth::check() ) 
                 	<div class="acc-wrapper">
                 		<div class="avatar" style="background-image: url('{{ Auth::user()->avatar }}')"></div>
 	                    <div class="loged">
-	                      @if (Auth::user()->fullname != null)
-                            {{Auth::user()->fullname}}
-                        @else
+	                      @if (Auth::user()->role != 'teacher')
                             {{Auth::user()->name}}
+                        @else
+                            {{$userInfo->name}}
                         @endif
 	                    </div>
 	                    <i class="fas fa-angle-down"></i>
