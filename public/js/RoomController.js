@@ -85,7 +85,7 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
                 $http({
                     url: './addRoom',
                     method: 'POST',
-                    params: {
+                    data: {
                         'office': $scope.officeName,
                         'max_student': $scope.roomLimit,
                         'course': $scope.courseList,
@@ -102,7 +102,7 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
                 $http({
                     url: './addRoom',
                     method: 'POST',
-                    params: {
+                    data: {
                         'id': param,
                         'office': $scope.officeName,
                         'max_student': $scope.roomLimit,
