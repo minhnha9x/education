@@ -32,7 +32,6 @@ angular.module('educationApp').controller('ScheduleController', function($scope,
             }
         })
         .then(function(response) {
-            console.log(response);
             $scope.courseInfo = response.data;
         }, function(response) {
             // called asynchronously if an error occurs
@@ -51,7 +50,6 @@ angular.module('educationApp').controller('ScheduleController', function($scope,
             }
         })
         .then(function(response) {
-            console.log(response.data.class);
             $scope.scheduleClassInfo = response.data.class;
             $scope.scheduleInfo = response.data.schedule;
         }, function(response) {
@@ -59,7 +57,35 @@ angular.module('educationApp').controller('ScheduleController', function($scope,
             // or server returns response with an error status.
         });
     }
+
     $scope.modalLoginShow = function() {
         $('#myLoginModal').modal('show', 300);
+    }
+
+    $scope.modalShow = function(param) {
+        $scope.courseName = $scope.scheduleClassInfo[param]['course'];
+        $scope.courseId = $scope.scheduleClassInfo[param]['courseid'];
+        $scope.classId = param;
+        $('#classRegisterModal').modal('show', 300);
+    }
+
+    $scope.addRegister = function(param) {
+        $http({
+            url: './addClassRegister',
+            method: 'POST',
+            params: {
+                promotion: $scope.Promotion,
+                course: $scope.courseId,
+                class: $scope.classId,
+            }
+        })
+        .then(function(response) {
+            alert(response.data);
+            $('#classRegisterModal').modal('hide');
+            //location.href = './profile';
+        }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
     }
 });

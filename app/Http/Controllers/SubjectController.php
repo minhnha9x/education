@@ -86,8 +86,7 @@ class SubjectController extends Controller
             ->get();
 
             if ($promotion->isEmpty()) {
-                session()->flash('error', 'Mã giảm giá không tồn tại.');
-                return redirect()->back();
+                return 'Mã giảm giá không tồn tại.';
             }
             else {
                 $register = new Register;
@@ -95,8 +94,7 @@ class SubjectController extends Controller
                 $register->promotion = $request->promotion;
                 $register->user = Auth::user()->id;
                 $register->save();
-                session()->flash('msg', 'Bạn đã đăng kí khóa học thành công! Hãy vào trang cá nhân để xem các khóa học đã đăng kí.');
-                return redirect()->back();
+                return 'Bạn đã đăng kí khóa học thành công! Hãy vào trang cá nhân để xem các khóa học đã đăng kí.';
             }
         }
         else {
@@ -104,8 +102,7 @@ class SubjectController extends Controller
             $register->class = $request->class;
             $register->user = Auth::user()->id;
             $register->save();
-            session()->flash('msg', 'Bạn đã đăng kí khóa học thành công! Hãy vào trang cá nhân để xem các khóa học đã đăng kí');
-            return redirect()->back();
+            return 'Bạn đã đăng kí khóa học thành công! Hãy vào trang cá nhân để xem các khóa học đã đăng kí.';
         }
     }
 }

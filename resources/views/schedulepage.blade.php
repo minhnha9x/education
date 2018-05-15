@@ -81,18 +81,3 @@
 </div>
 
 @include('footer')
-
-<script type="text/javascript">
-	$('.schedulepage').on('click', 'table .action', function(){
-		@if ( Auth::check() )
-			$('#classregisterModal .info').empty();
-			$('#classregisterModal .info').append('<div class="course">Khóa học: <span>' + obj['class'][$(this).data('course')]['course'] + '</span></div><div class="schedule">Giờ học: <br>' + $listschedule[$(this).data('course')][$listschedule.length] + '</div>');
-			$('#classregisterModal input[name="class"]').attr('value', $(this).data('id'));
-			$('#classregisterModal').modal('show', 300);
-		@else
-			$('#classModal').modal('hide');
-			$('#myLoginModal').modal('show', 300);
-		@endif
-		
-	});
-</script>

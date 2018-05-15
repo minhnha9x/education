@@ -3,16 +3,23 @@
         <div class="modal-content">
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
-                	<form method="POST" role='form' action="{{url('classregister')}}">
+                	<form role='form' ng-submit="addRegister()">
                 		<input type="number" name="class" hidden>
                 		<input type="number" name="course" hidden>
                 		<h2>Thông tin đăng kí</h2>
 	                    <div class="form-sub-w3 col-md-12">
 	                    	<div class="info">
+                                <div class="course">Khóa học: <span><% courseName %></span></div>
+                                <div class="schedule">
+                                    Giờ học<br>
+                                    <span ng-repeat="y in scheduleInfo" ng-if="y.class == classId">
+                                        <% y.current_date %>: <% y.start_time %> - <% y.end_time %> (Phòng <% y.room %>)<br>
+                                    </span>
+                                </div>
 	                    	</div>
 	                    </div>
 	                    <div class="form-sub-w3 col-md-5">
-                            <input type="text" placeholder="Mã giảm giá" name="promotion">
+                            <input type="text" placeholder="Mã giảm giá" ng-model="Promotion">
                         </div>
 	                    {!! csrf_field() !!}
 	                    <div class="submit-w3l col-md-12">

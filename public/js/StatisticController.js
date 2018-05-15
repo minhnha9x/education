@@ -17,7 +17,7 @@ angular.module('educationApp').controller('StatisticController', function($scope
         $scope.typeSelected = 'line';
         $scope.viewSelected = '1';
         $http({
-            url: './test',
+            url: './getReisterInMonth',
             method: 'GET',
             params : {
                 year: 2018,
@@ -64,7 +64,7 @@ angular.module('educationApp').controller('StatisticController', function($scope
         switch ($scope.viewSelected) {
             case '1':
                 $http({
-                    url: './test',
+                    url: './getReisterInMonth',
                     method: 'GET',
                     params : {
                         year: $scope.yearSelected,

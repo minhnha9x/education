@@ -20,7 +20,7 @@ Route::get('/subject_{id}', 'SubjectController@get');
 Route::get('/getlistfreeteacher', 'AdminController@getAvailableTeacher');
 
 Route::get('/getclassfromcourse{id}', 'SubjectController@getClassFromCourse');
-Route::post('/classregister', 'SubjectController@classRegister');
+Route::post('/addClassRegister', 'SubjectController@classRegister');
 
 Route::get('/schedule', 'ScheduleController@get');
 Route::get('/getSchedule', 'ScheduleController@getSchedule');
@@ -66,4 +66,4 @@ Route::get('/getteacherschedule', 'AdminController@getTeacherScheduleInRange');
 Route::get('/countRegisterBySubject', 'AdminController@countRegisterBySubject');
 Route::get('/countRegisterByOffice', 'AdminController@countRegisterByOffice');
 
-Route::get('/test', 'ProfileController@deleteFile');
+Route::get('/getReisterInMonth', 'AdminController@getRegisterInMonth');
