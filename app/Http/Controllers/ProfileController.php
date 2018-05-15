@@ -287,4 +287,11 @@ class ProfileController extends Controller
         $data->save();
         return back()->withInput();
     }
+
+    public function doUpload(Request $request)
+    {
+        $file = $request->file;
+
+        $file->move('./img/user/',  Auth::user()->id . '.jpg');
+    }
 }

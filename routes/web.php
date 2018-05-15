@@ -31,6 +31,7 @@ Route::get('/get_available_office', 'AdminController@getAvailableOffice');
 Route::post('/addteacherdayoff', 'ProfileController@addTeacherDayoff');
 Route::post('/addteachingoffset', 'ProfileController@addTeachingOffset');
 Route::post('/updateProfile', 'ProfileController@updateProfile');
+Route::post('/updateAvatar','ProfileController@doUpload');
 
 Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
 

@@ -18,6 +18,9 @@
         <div class="text-wrapper">
             <div class="text">
                 <p><span>Email: </span>{{$userInfo->email}}</p>
+                <div ng-controller="MyCtrl" ng-app="fileUpload">
+                    <div class="button" ngf-select="upload($file)">Upload on file select</div>
+                </div>
                 @if (Auth::user()->role == 'teacher')
                     <p class="clearfix"><span>Phone: </span>{{$userInfo->phone}}</p>
                     <p class="clearfix"><span>Địa chỉ: </span>{{$userInfo->address}}</p>
@@ -25,7 +28,7 @@
                 @endif
             </div>
             @if (Auth::user()->role == 'teacher')
-                <div class="button">
+                <div id="edit-button" class="button">
                     Edit Profile
                 </div>
             @endif
@@ -390,6 +393,9 @@
 
 @include('popup.update_profile_modal')
 
+<script src="js/myApp.js"></script>
+<script src="js/ProfileController.js"></script>
+
 {{-- @include('footer') --}}
 
 <script type="text/javascript">
@@ -403,9 +409,9 @@
 
     $test = <?= json_encode($test); ?>;
 
-    $('.text-wrapper .button').click(function(){
+    $('.text-wrapper #edit-button').click(function(){
         $('#update_profile').modal('show', 300)
-    });1
+    });
 
     $('#menu3 table a').click(function(){
         $c = $(this).parent().data('id');

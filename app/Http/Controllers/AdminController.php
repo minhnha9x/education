@@ -259,6 +259,13 @@ class AdminController extends Controller
         $data->office = $r->office;
         $data->max_student = $r->max_student;
         $data->save();
+        $id = DB::getPdo()->lastInsertId();
+        foreach ($r->course as $c) {
+            $data = new Course_Room;
+            $data->room = $id;
+            $data->course = $c;
+            $data->save();
+        }
         return $r->course;
     }
 
