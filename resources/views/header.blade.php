@@ -113,28 +113,6 @@
     $('.acc-wrapper').hover(function(){
         $(this).find('ul').fadeToggle(200);
     })
-    @if ($position == 'top')
-        $(window).scroll(function (event) {
-            var scroll = $(window).scrollTop();
-            if (scroll > 40) {
-                $('.header').css('width', '100%');
-                $('.header').css('position', 'fixed');
-                $('.header').css('top', '0');
-                $('.header').css('left', '0');
-            }
-            else {
-                $('.header').css('width', 'calc(100% - 80px)');
-                $('.header').css('position', 'absolute');
-                $('.header').css('top', '40px');
-                $('.header').css('left', '40px');
-            }
-        });
-    @else
-        $('.header').css('width', '100%');
-        $('.header').css('position', 'fixed');
-        $('.header').css('top', '0');
-        $('.header').css('left', '0');
-    @endif
     $('#login-btn').click(function(){
         $('#myLoginModal').modal('show', 300);
     })

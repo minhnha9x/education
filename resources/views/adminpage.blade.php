@@ -1,7 +1,7 @@
 <link href="./css/adminpage.css" rel="stylesheet" type="text/css">
 
 <div class="adminpage">
-    @include('header', [$title='Administrator Page', $position='normal'])
+    @include('header', [$title='Administrator Page'])
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#menu1"><div class="arrow-left"></div><img src="./img/course.png">Quản lí khóa học</a></li>

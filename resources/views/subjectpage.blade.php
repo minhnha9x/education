@@ -7,7 +7,7 @@
 <link href="./css/subjectpage.css" rel="stylesheet" type="text/css">
 
 <div class="subjectpage container">
-	@include('header', [$title='Subject Page', $position='normal'])
+	@include('header', [$title='Subject Page'])
 
 	@if (Session::has('msg'))
 		<div class="alert alert-success fade in alert-dismissible" style="margin-top:18px;">

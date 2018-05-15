@@ -3,29 +3,27 @@ a {
 	text-decoration: none !important;
 }
 .header {
-	height: 80px;
-	width: calc(100% - 80px);
-	display: inline-block;
-	position: absolute;
-	top: 40px;
-	left: 40px;
+	height: 60px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
 	z-index: 3;
 	background: #fff;
 	border-bottom: 1px solid #ccc;
 	img {
-		max-height: 60px;
-		margin-left: 20px;
-		margin-top: 10px;
+		max-height: 50px;
+		margin-left: 15px;
+		margin-top: 5px;
 	}
 	ul {
 		display: inline-block;
-		vertical-align: bottom;
 		margin: 0;
 		float: right;
 		.fa-angle-down {
 			position: absolute;
-			right: 0;
-			bottom: 30px;
+			right: 10px;
+			bottom: 20px;
 		}
 		.fa-angle-right {
 			position: absolute;
@@ -34,9 +32,11 @@ a {
 		}
 		li {
 			display: inline-block;
+			height: 60px;
+			line-height: 30px;
 			font-size: 14px;
 			font-weight: bold;
-			padding: 30px 15px;
+			padding: 15px 30px;
 			cursor: pointer;
 			text-transform: uppercase;
 			font-family: 'Montserrat', sans-serif;
@@ -48,19 +48,20 @@ a {
 				right: 0;
 				padding-left: 0;
 				padding-top: 0;
-				top: 80px;
+				top: 60px;
 				width: max-content;
 				border-top: 2px solid $blue;
 				background: #fff;
 				li {
 					display: block;
+					height: initial;
 					font-family: 'Montserrat', sans-serif;
 					border-bottom: 1px solid #ccc;
 					padding: 0;
 					color: #000;
 					position: relative;
 					a {
-						padding: 15px 40px 15px 20px;
+						padding: 10px 40px 10px 20px;
 						text-transform: capitalize;
 					}
 					.sub-menu2 {
@@ -101,14 +102,14 @@ a {
 			color: $blue;
 		}
 		.login {
-			padding: 30px 25px;
+			padding: 20px;
 			display: inline-block;
 			font-family: 'Montserrat', sans-serif;
 			font-size: 14px;
 			text-transform: uppercase;
 			font-weight: bold;
 			background: $blue;
-			margin-left: 30px;
+			margin-left: 50px;
 			cursor: pointer;
 			color: #fff;
 			i {

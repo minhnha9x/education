@@ -38,7 +38,7 @@
   transform: scaleX(1); }
 
 .adminpage {
-  padding-top: 80px;
+  padding-top: 60px;
   display: flex; }
   .adminpage .nav-tabs {
     width: 130px;

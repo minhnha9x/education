@@ -1,7 +1,7 @@
 <link href="./css/schedulepage.css" rel="stylesheet" type="text/css">
 
 <div class="schedulepage container" ng-controller="ScheduleController" ng-app="educationApp">
-	@include('header', [$title='Schedule Page', $position='normal'])
+	@include('header', [$title='Schedule Page'])
 
 	<div class="title">
 		Lịch học

@@ -1,7 +1,7 @@
 <link href="./css/homepage.css" rel="stylesheet" type="text/css">
  
 <div class="homepage">
-	@include('header', [$title='Education Page', $position='top'])
+	@include('header', [$title='Education Page'])
     
     <div class="slider">
         <div class="owl-carousel owl-theme">
