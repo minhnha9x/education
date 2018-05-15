@@ -10,6 +10,7 @@
 	                    <div class="form-sub-w3 col-md-12">
 	                    	<div class="info">
                                 <div class="course">Khóa học: <span><% courseName %></span></div>
+                                <div class="course"><span><% officeName %></span></div>
                                 <div class="schedule">
                                     Giờ học<br>
                                     <span ng-repeat="y in scheduleInfo" ng-if="y.class == classId">

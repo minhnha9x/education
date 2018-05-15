@@ -64,6 +64,7 @@ angular.module('educationApp').controller('ScheduleController', function($scope,
 
     $scope.modalShow = function(param) {
         $scope.courseName = $scope.scheduleClassInfo[param]['course'];
+        $scope.officeName = $scope.scheduleClassInfo[param]['office'];
         $scope.courseId = $scope.scheduleClassInfo[param]['courseid'];
         $scope.classId = param;
         $('#classRegisterModal').modal('show', 300);

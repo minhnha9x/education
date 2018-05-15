@@ -64,7 +64,7 @@ class ScheduleController extends Controller
         ->leftjoin('office', 'room.office', 'office.id')
         ->leftjoin('subject', 'course.subject', 'subject.id')
         ->groupBy('class.id')
-        ->select('*', 'course.name as course', 'class.id as id', 'course.id as courseid');
+        ->select('*', 'course.name as course', 'class.id as id', 'course.id as courseid', 'office.name as office');
         if ($r->course != null) {
             $class = $class->where('course', $r->course);
         }

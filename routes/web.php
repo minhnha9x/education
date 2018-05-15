@@ -60,6 +60,11 @@ Route::get('/getRoom', 'AdminController@getRoom');
 Route::post('/addRoom', 'AdminController@addRoom');
 Route::get('/deleteRoom', 'AdminController@deleteRoom');
 
+Route::get('/getAllPromotion', 'AdminController@getAllPromotion');
+Route::get('/getPromotion', 'AdminController@getPromotion');
+Route::post('/addPromotion', 'AdminController@addPromotion');
+Route::get('/deletePromotion', 'AdminController@deletePromotion');
+
 
 Route::get('/getteacherschedule', 'AdminController@getTeacherScheduleInRange');
 

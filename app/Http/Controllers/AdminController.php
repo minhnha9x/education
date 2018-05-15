@@ -11,6 +11,7 @@ use App\Subject;
 use App\Office;
 use App\Room;
 use App\Course_Room;
+use App\Promotion;
 use DateTime;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
@@ -101,8 +102,7 @@ class AdminController extends Controller
     }
 
     public function getAllSubject() {
-        $data = DB::table('subject')
-        ->select('subject.*', DB::raw('count(course.id) as count'))
+        $data = Subject::select('subject.*', DB::raw('count(course.id) as count'))
         ->leftjoin('course', 'course.subject', 'subject.id')
         ->groupBy('subject.id')
         ->get();
@@ -126,8 +126,7 @@ class AdminController extends Controller
 
     public function deleteSubject(Request $r) {
         try {
-            $subject = DB::table('subject')
-            ->where('id', $r->id)
+            $subject = Subject::where('id', $r->id)
             ->delete();
         }
         catch (\Exception $e) {
@@ -137,8 +136,7 @@ class AdminController extends Controller
     }
 
     public function getAllCourse() {
-        $data = DB::table('course')
-        ->select('course.*', 'subject.name as subject', 'subject.id as subjectid', 'course2.name as certificate_required', DB::raw('count(class.id) as count'))
+        $data = Course::select('course.*', 'subject.name as subject', 'subject.id as subjectid', 'course2.name as certificate_required', DB::raw('count(class.id) as count'))
         ->leftjoin('subject', 'course.subject', '=', 'subject.id')
         ->leftjoin('course as course2', 'course.certificate_required', '=', 'course2.id')
         ->leftjoin('class', 'class.course', '=', 'course.id')
@@ -148,8 +146,7 @@ class AdminController extends Controller
     }
 
     public function getCourse(Request $r) {
-        $data = DB::table('course')
-        ->join('subject', 'course.subject', '=', 'subject.id')
+        $data = Course::join('subject', 'course.subject', '=', 'subject.id')
         ->select('course.*', 'subject.name as subject', 'subject.id as subjectid')
         ->where('course.id', $r->id)
         ->get();
@@ -157,8 +154,7 @@ class AdminController extends Controller
     }
 
     public function getCourseFromSub(Request $r) {
-        $data = DB::table('course')
-        ->select("*")
+        $data = Course::select("*")
         ->where('subject', $r->id)
         ->get();
         return $data;
@@ -181,8 +177,7 @@ class AdminController extends Controller
 
     public function deleteCourse(Request $r) {
         try {
-            $course = DB::table('course')
-            ->where('id', $r->id)
+            $course = Course::where('id', $r->id)
             ->delete();
         }
         catch (\Exception $e) {
@@ -192,14 +187,12 @@ class AdminController extends Controller
     }
 
     public function getAllOffice() {
-        $data = DB::table('office')
-        ->get();
+        $data = Office::get();
         return $data;
     }
 
     public function getOffice(Request $r) {
-        $data = DB::table('office')
-        ->where('id', $r->id)
+        $data = Office::where('id', $r->id)
         ->get();
         return $data;
     }
@@ -220,8 +213,7 @@ class AdminController extends Controller
 
     public function deleteOffice(Request $r) {
         try {
-            $office = DB::table('office')
-            ->where('id', $r->id)
+            $office = Office::where('id', $r->id)
             ->delete();
         }
         catch (\Exception $e) {
@@ -231,8 +223,7 @@ class AdminController extends Controller
     }
 
     public function getAllRoom() {
-        $data = DB::table('room')
-        ->select('room.*', 'office.name as office', DB::raw("GROUP_CONCAT(course.name SEPARATOR ', ') as course"))
+        $data = Room::select('room.*', 'office.name as office', DB::raw("GROUP_CONCAT(course.name SEPARATOR ', ') as course"))
         ->leftjoin('office', 'office.id', 'room.office')
         ->join('course_room', 'room.id', 'course_room.room')
         ->leftjoin('course', 'course.id', 'course_room.course')
@@ -242,8 +233,7 @@ class AdminController extends Controller
     }
 
     public function getRoom(Request $r) {
-        $data = DB::table('room')
-        ->select('room.*', DB::raw("GROUP_CONCAT(course.id SEPARATOR ', ') as course"))
+        $data = Room::select('room.*', DB::raw("GROUP_CONCAT(course.id SEPARATOR ', ') as course"))
         ->leftjoin('office', 'office.id', 'room.office')
         ->join('course_room', 'room.id', 'course_room.room')
         ->leftjoin('course', 'course.id', 'course_room.course')
@@ -301,11 +291,49 @@ class AdminController extends Controller
 
     public function deleteRoom(Request $r) {
         try {
-            $room = DB::table('course_room')
-            ->where('room', $r->id)
+            $room = Course_Room::where('room', $r->id)
             ->delete();
-            $room = DB::table('room')
-            ->where('id', $r->id)
+            $room = Room::where('id', $r->id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return back()->withInput();
+    }
+
+    public function getAllPromotion() {
+        $data = Promotion::leftjoin('course', 'course.id', 'promotion.course')
+        ->get();
+        return $data;
+    }
+
+    public function getPromotion(Request $r) {
+        $data = Promotion::where('code', $r->code)
+        ->get();
+        return $data;
+    }
+
+    public function addPromotion(Request $r) {
+        $data = new Promotion;
+        $data->code = $r->code;
+        $data->benefit = $r->benefit;
+        $data->course = $r->course;
+        $data->save();
+        return back()->withInput();
+    }
+
+    public function editPromotion(Request $r) {
+        $data = Promotion::findOrFail($r->code);
+        $data->benefit = $r->benefit;
+        $data->course = $r->course;
+        $data->save();
+        return back()->withInput();
+    }
+
+    public function deletePromotion(Request $r) {
+        try {
+            $office = Promotion::where('code', $r->code)
             ->delete();
         }
         catch (\Exception $e) {

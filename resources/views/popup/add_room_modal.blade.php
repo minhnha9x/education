@@ -21,7 +21,7 @@
                                     <label><input type="checkbox" value="<% x.id %>"><% x.name %></label>
                                 </div>
                             </div>
-                        </div>                            
+                        </div>
                         {!! csrf_field() !!}
                         <div class="submit-w3l col-md-12">
                             <input type="submit" value="<% button %>">
