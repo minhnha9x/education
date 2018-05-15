@@ -43,6 +43,7 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
                 $('#roomModal .checkbox-wrapper input[type="checkbox"]').each(function(){
                     $(this).removeAttr('checked');
                 });
+                $('#roomModal input[type=submit]').attr('disabled', 'disabled');
                 break;
             case 2:
                 $scope.button = "Sửa phòng học";
@@ -71,24 +72,39 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
             default:
         }
         $('#roomModal').modal('show', 300);
+        $('#roomModal input[type=checkbox]').change(function() {
+            console.log("zzz");
+            $check = false;
+            $('#roomModal .checkbox-wrapper input[type="checkbox"]:checked').each(function(){
+                $check = true;
+            });
+            if ($check)
+                $('#roomModal input[type=submit]').removeAttr('disabled');
+            else
+                $('#roomModal input[type=submit]').attr('disabled', 'disabled');
+        });
     }
 
     $scope.addRoom = function(param) {
         $scope.courseList = [];
+        $scope.courseDelList = [];
         $('#roomModal .checkbox-wrapper input[type="checkbox"]:checked').each(function(){
-            $scope.courseList.push(
-                $(this).val()
-            );
+            console.log($(this).val());
+            $scope.courseList.push($(this).val());
+        });
+        $('#roomModal .checkbox-wrapper input[type="checkbox"]:not(:checked)').each(function(){
+            $scope.courseDelList.push($(this).val());
         });
         switch (param) {
             case -1:
                 $http({
                     url: './addRoom',
                     method: 'POST',
-                    params: {
+                    data: {
                         'office': $scope.officeName,
                         'max_student': $scope.roomLimit,
                         'course': $scope.courseList,
+                        'coursedel': $scope.courseDelList,
                     },
                 })
                 .then(function(response) {
@@ -102,11 +118,12 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
                 $http({
                     url: './addRoom',
                     method: 'POST',
-                    params: {
+                    data: {
                         'id': param,
                         'office': $scope.officeName,
                         'max_student': $scope.roomLimit,
                         'course': $scope.courseList,
+                        'coursedel': $scope.courseDelList,
                     },
                 })
                 .then(function(response) {

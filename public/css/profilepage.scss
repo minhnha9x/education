@@ -66,15 +66,10 @@ $blue: #337ab7;
 				background-size: cover;
 				background-position: center;
 				border: 1px solid #ccc;
+				margin-bottom: 15px;
 			}
-			.name {
-				width: 150px;
-				text-align: center;
-				color: $blue;
-				margin-top: 20px;
-				font-weight: bold;
-				font-size: 16px;
-				text-transform: capitalize;
+			.button {
+				cursor: pointer;
 			}
 		}
 		.text-wrapper {

@@ -10,6 +10,7 @@ use App\Exam;
 use App\Subject;
 use App\Office;
 use App\Room;
+use App\Course_Room;
 use DateTime;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
@@ -259,14 +260,43 @@ class AdminController extends Controller
         $data->office = $r->office;
         $data->max_student = $r->max_student;
         $data->save();
-        $id = DB::getPdo()->lastInsertId();
-        foreach ($r->course as $c) {
-            $data = new Course_Room;
-            $data->room = $id;
-            $data->course = $c;
-            $data->save();
+        foreach ($r->course as $courses) {
+            $this->addRoomCourse($data->id, $courses);
+        }
+        foreach ($r->coursedel as $courses) {
+            $this->deleteRoomCourse($data->id, $courses);
         }
         return $r->course;
+    }
+
+    public function addRoomCourse($room_id, $course_id) {
+        try {
+            $course_room = Course_Room::where('room', $room_id)
+            ->where('course', $course_id)
+            ->first();
+
+            if ($course_room == null) {
+                $course_room = new Course_Room;
+            }
+            $course_room->room = $room_id;
+            $course_room->course = $course_id;
+            $course_room->save();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function deleteRoomCourse($room_id, $course_id) {
+        try {
+            $course_room = Course_Room::where('room', $room_id)
+            ->where('course', $course_id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return back()->withInput();
     }
 
     public function deleteRoom(Request $r) {

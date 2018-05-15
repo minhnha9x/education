@@ -11,16 +11,14 @@
         <div class="avatar-wrapper">
             <div class="avatar" style="background-image: url('{{Auth::user()->avatar}}')">
             </div>
-            <div class="name">
-                {{$userInfo->name}}
+            <div ng-controller="MyCtrl" ng-app="fileUpload">
+                <div class="button" ngf-select="upload($file)">Change avatar</div>
             </div>
         </div>
         <div class="text-wrapper">
             <div class="text">
+                <p><span>Name: </span>{{$userInfo->name}}</p>
                 <p><span>Email: </span>{{$userInfo->email}}</p>
-                <div ng-controller="MyCtrl" ng-app="fileUpload">
-                    <div class="button" ngf-select="upload($file)">Upload on file select</div>
-                </div>
                 @if (Auth::user()->role == 'teacher')
                     <p class="clearfix"><span>Phone: </span>{{$userInfo->phone}}</p>
                     <p class="clearfix"><span>Địa chỉ: </span>{{$userInfo->address}}</p>

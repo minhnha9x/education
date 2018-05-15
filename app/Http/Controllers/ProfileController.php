@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use DB;
 use Auth;
 use DateTime;
 use App\Teacher_Dayoff;
 use App\Teaching_Offset;
 use App\Employee;
+use App\User;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
@@ -290,8 +292,11 @@ class ProfileController extends Controller
 
     public function doUpload(Request $request)
     {
+        $data = User::findOrFail(Auth::user()->id);
+        Storage::delete($data->avatar);
         $file = $request->file;
-
-        $file->move('./img/user/',  Auth::user()->id . '.jpg');
+        $file->move('./img/user/',  Auth::user()->id . '.' . $file->getClientOriginalExtension());
+        $data->avatar = './img/user/' . Auth::user()->id . '.' . $file->getClientOriginalExtension();
+        $data->save();
     }
 }

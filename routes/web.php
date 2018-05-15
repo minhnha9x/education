@@ -66,4 +66,4 @@ Route::get('/getteacherschedule', 'AdminController@getTeacherScheduleInRange');
 Route::get('/countRegisterBySubject', 'AdminController@countRegisterBySubject');
 Route::get('/countRegisterByOffice', 'AdminController@countRegisterByOffice');
 
-Route::get('/test', 'AdminController@getRegisterInMonth');
+Route::get('/test', 'ProfileController@deleteFile');
