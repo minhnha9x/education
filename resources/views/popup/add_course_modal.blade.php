@@ -9,7 +9,7 @@
                             <input type="text" placeholder="Tên khóa học" ng-model="courseName" required>
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <select name="subject" required ng-model="subjectName" ng-change="updateCourseList(subjectName)">
+                            <select required ng-model="subjectName" ng-change="updateCourseList(subjectName)">
                                 <option value="" disabled selected hidden>Môn học</option>
                                 <option ng-repeat="x in subjectInfo" value="<% x.id %>"><% x.name %></option>
                             </select>
@@ -21,7 +21,7 @@
                             <input type="number" placeholder="Tổng số buổi học" ng-model="total_of_period" required>
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <select name="required" ng-model="certificate_required">
+                            <select ng-model="certificate_required">
                                 <option value="" selected>Khóa học tiên quyết</option>
                                 <option ng-repeat="x in courseList" value="<% x.id %>"><% x.name %></option>
                             </select>

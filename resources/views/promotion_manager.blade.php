@@ -15,7 +15,7 @@
                 <td><% x.benefit %></td>
                 <td><% x.name %></td>
                 <td class="action">
-                    <a id='edit' ng-click="showModal(2, x.code)"><i class="fas fa-edit"></i>Sửa</a><a ng-click="delete(x.id)"><i class="fas fa-trash-alt"></i>Xóa</a>
+                    <a id='edit' ng-click="showModal(2, x.code)"><i class="fas fa-edit"></i>Sửa</a><a ng-click="delete(x.code)"><i class="fas fa-trash-alt"></i>Xóa</a>
                 </td>
             </tr>
         </tbody>

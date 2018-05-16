@@ -87,7 +87,7 @@ angular.module('educationApp').controller('CourseController', function($scope, $
                 $http({
                     url: './addCourse',
                     method: 'POST',
-                    params: {
+                    data: {
                         'name': $scope.courseName,
                         'description': $scope.courseDesc,
                         'price': $scope.coursePrice,
@@ -107,7 +107,7 @@ angular.module('educationApp').controller('CourseController', function($scope, $
                 $http({
                     url: './addCourse',
                     method: 'POST',
-                    params: {
+                    data: {
                         'id': param,
                         'name': $scope.courseName,
                         'description': $scope.courseDesc,

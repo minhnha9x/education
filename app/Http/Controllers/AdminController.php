@@ -48,8 +48,9 @@ class AdminController extends Controller
 
         $employees = DB::table('employee')
         ->leftjoin('office_worker', 'office_worker.id', 'employee.id')
+        ->leftjoin('office', 'office_worker.office', 'office.id')
         ->leftjoin('position', 'position.id', 'office_worker.position')
-        ->select('*', 'position.name as position', 'employee.name as name', 'employee.id as id')
+        ->select('*', 'position.name as position', 'employee.name as name', 'employee.id as id', 'employee.address as address', 'office.name as office', 'office.id as officeid')
         ->get();
 
         $offices = DB::table('office')
@@ -302,6 +303,27 @@ class AdminController extends Controller
         return back()->withInput();
     }
 
+    public function getAllEmployee() {
+        $data = DB::table('employee')
+        ->leftjoin('office_worker', 'office_worker.id', 'employee.id')
+        ->leftjoin('office', 'office_worker.office', 'office.id')
+        ->leftjoin('position', 'position.id', 'office_worker.position')
+        ->select('*', 'position.name as position', 'employee.name as name', 'employee.id as id', 'employee.address as address', 'office.name as office', 'office_worker.office as officeid')
+        ->get();
+        return $data;
+    }
+
+    public function getEmployee(Request $r) {
+        $data = DB::table('employee')
+        ->leftjoin('office_worker', 'office_worker.id', 'employee.id')
+        ->leftjoin('office', 'office_worker.office', 'office.id')
+        ->leftjoin('position', 'position.id', 'office_worker.position')
+        ->where('employee.id', $r->id)
+        ->select('*', 'position.name as position', 'employee.name as name', 'employee.id as id', 'employee.address as address', 'office.name as office', 'office.id as officeid')
+        ->get();
+        return $data;
+    }
+
     public function getAllPromotion() {
         $data = Promotion::leftjoin('course', 'course.id', 'promotion.course')
         ->get();
@@ -334,14 +356,9 @@ class AdminController extends Controller
     }
 
     public function deletePromotion(Request $r) {
-        try {
-            $office = Promotion::where('code', $r->code)
-            ->delete();
-        }
-        catch (\Exception $e) {
-            return $e->getMessage();
-        }
-        return back()->withInput();
+        $data = Promotion::find($r->code);
+        $data->delete();
+        return $data;
     }
 
     public function getRoomScheduleList($range_date, $room_ids) {

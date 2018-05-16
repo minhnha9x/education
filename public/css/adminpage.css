@@ -216,6 +216,8 @@
                 .adminpage .tab-content .tab-pane .admin-modal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input[type='date'] {
                   text-transform: none;
                   width: 180px; }
+                .adminpage .tab-content .tab-pane .admin-modal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 input[type='email'] {
+                  text-transform: none; }
                 .adminpage .tab-content .tab-pane .admin-modal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 span {
                   font-family: 'Roboto', sans-serif;
                   font-size: 15px;

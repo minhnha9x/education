@@ -56,7 +56,7 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
                 $http({
                     url: './addOffice',
                     method: 'POST',
-                    params: {
+                    data: {
                         'name': $scope.officeName,
                         'address': $scope.officeAddr,
                         'phone': $scope.officePhone,
@@ -75,7 +75,7 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
                 $http({
                     url: './addOffice',
                     method: 'POST',
-                    params: {
+                    data: {
                         'id': param,
                         'name': $scope.officeName,
                         'address': $scope.officeAddr,

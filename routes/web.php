@@ -33,8 +33,6 @@ Route::post('/addteachingoffset', 'ProfileController@addTeachingOffset');
 Route::post('/updateProfile', 'ProfileController@updateProfile');
 Route::post('/updateAvatar','ProfileController@doUpload');
 
-Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
-
 Route::get('/getSalary', 'AdminController@getSalaryInMonth');
 Route::get('/getScore', 'AdminController@getScore');
 Route::post('/updateScore', 'AdminController@updateScore');
@@ -60,6 +58,11 @@ Route::get('/getRoom', 'AdminController@getRoom');
 Route::post('/addRoom', 'AdminController@addRoom');
 Route::get('/deleteRoom', 'AdminController@deleteRoom');
 
+Route::get('/getAllEmployee', 'AdminController@getAllEmployee');
+Route::get('/getEmployee', 'AdminController@getEmployee');
+Route::post('/addEmployee', 'AdminController@addEmployee');
+Route::get('/deleteEmployee', 'AdminController@deleteEmployee');
+
 Route::get('/getAllPromotion', 'AdminController@getAllPromotion');
 Route::get('/getPromotion', 'AdminController@getPromotion');
 Route::post('/addPromotion', 'AdminController@addPromotion');
@@ -69,7 +72,8 @@ Route::post('/editPromotion', 'AdminController@editPromotion');
 
 Route::get('/getteacherschedule', 'AdminController@getTeacherScheduleInRange');
 
-Route::get('/countRegisterBySubject', 'AdminController@countRegisterBySubject');
-Route::get('/countRegisterByOffice', 'AdminController@countRegisterByOffice');
-
+Route::get('/getRegisterBySubject', 'AdminController@countRegisterBySubject');
+Route::get('/getRegisterByOffice', 'AdminController@countRegisterByOffice');
 Route::get('/getReisterInMonth', 'AdminController@getRegisterInMonth');
+
+Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');

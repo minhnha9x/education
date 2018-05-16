@@ -87,7 +87,7 @@ angular.module('educationApp').controller('StatisticController', function($scope
                 break;
             case '2':
                 $http({
-                    url: './countRegisterBySubject',
+                    url: './getRegisterBySubject',
                     method: 'GET',
                     params : {
                         year: $scope.yearSelected,
@@ -118,7 +118,7 @@ angular.module('educationApp').controller('StatisticController', function($scope
                 break;
             case '3':
                 $http({
-                    url: './countRegisterByOffice',
+                    url: './getRegisterByOffice',
                     method: 'GET',
                 })
                 .then(function(response) {
