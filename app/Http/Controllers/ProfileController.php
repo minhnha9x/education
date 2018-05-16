@@ -13,6 +13,7 @@ use App\Employee;
 use App\User;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
+use File;
 
 class ProfileController extends Controller
 {
@@ -293,7 +294,7 @@ class ProfileController extends Controller
     public function doUpload(Request $request)
     {
         $data = User::findOrFail(Auth::user()->id);
-        Storage::delete($data->avatar);
+        File::delete($data->avatar);
         $file = $request->file;
         $file->move('./img/user/',  Auth::user()->id . '.' . $file->getClientOriginalExtension());
         $data->avatar = './img/user/' . Auth::user()->id . '.' . $file->getClientOriginalExtension();

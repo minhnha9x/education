@@ -61,7 +61,7 @@ angular.module('educationApp').controller('PromotionController', function($scope
                 $http({
                     url: './addPromotion',
                     method: 'POST',
-                    params: {
+                    data: {
                         'code': $scope.promotionCode,
                         'benefit': $scope.promotionBenefit,
                         'course': $scope.courseName,
@@ -76,9 +76,9 @@ angular.module('educationApp').controller('PromotionController', function($scope
                 break;
             default:
                 $http({
-                    url: './addPromotion',
+                    url: './editPromotion',
                     method: 'POST',
-                    params: {
+                    data: {
                         'code': $scope.promotionCode,
                         'benefit': $scope.promotionBenefit,
                         'course': $scope.courseName,

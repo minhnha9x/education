@@ -324,10 +324,12 @@ class AdminController extends Controller
     }
 
     public function editPromotion(Request $r) {
-        $data = Promotion::findOrFail($r->code);
-        $data->benefit = $r->benefit;
-        $data->course = $r->course;
-        $data->save();
+        $data = Promotion::find($r->code);
+        if ($data != null) {
+            $data->benefit = $r->benefit;
+            $data->course = $r->course;
+            $data->save();
+        }
         return back()->withInput();
     }
 
@@ -368,15 +370,12 @@ class AdminController extends Controller
                 }
             }
         }
-        Debugbar::info($result);
         return $result;
     }
 
     public function getTeacherScheduleList($teacher_ids, $start_range, $end_range) {
         $start_range = date('Y-m-d', strtotime($start_range));
         $end_range = date('Y-m-d', strtotime($end_range));
-
-        Debugbar::info($start_range, $end_range);
 
         $teacher_schedule = $this->getTeacherScheduleData($teacher_ids);
         $result = array();
@@ -397,7 +396,6 @@ class AdminController extends Controller
                 }
             }
         }
-        Debugbar::info($result);
         return $result;
     }
 
@@ -444,7 +442,6 @@ class AdminController extends Controller
         ->where('course_room.course', $r->course)
         ->where('room.office', $r->office)
         ->get();
-        Debugbar::info($class);
         if (count($class) < 1) {
             return array();
         }
@@ -462,7 +459,6 @@ class AdminController extends Controller
         ->distinct()
         ->get();
 
-        Debugbar::info($teacher_list);
         if (count($teacher_list) < 1) {
             return array();
         }
