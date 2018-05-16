@@ -308,7 +308,7 @@ class AdminController extends Controller
         ->leftjoin('office_worker', 'office_worker.id', 'employee.id')
         ->leftjoin('office', 'office_worker.office', 'office.id')
         ->leftjoin('position', 'position.id', 'office_worker.position')
-        ->select('*', 'position.name as position', 'employee.name as name', 'employee.id as id', 'employee.address as address', 'office.name as office', 'office_worker.office as officeid')
+        ->select('position.name as position', 'employee.name as name', 'employee.id as id', 'employee.address as address', 'office.name as office', 'office_worker.office as officeid', 'employee.phone as phone', 'employee.mail as mail', 'employee.birthday')
         ->get();
         return $data;
     }
