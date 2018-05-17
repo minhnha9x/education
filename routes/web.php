@@ -69,6 +69,7 @@ Route::post('/addPromotion', 'AdminController@addPromotion');
 Route::get('/deletePromotion', 'AdminController@deletePromotion');
 Route::post('/editPromotion', 'AdminController@editPromotion');
 
+Route::get('/getAllPosition', 'AdminController@getAllPosition');
 
 Route::get('/getteacherschedule', 'AdminController@getTeacherScheduleInRange');
 

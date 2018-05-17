@@ -12,6 +12,8 @@ use App\Office;
 use App\Room;
 use App\Course_Room;
 use App\Promotion;
+use App\Employee;
+use App\Office_Worker;
 use DateTime;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
@@ -319,9 +321,49 @@ class AdminController extends Controller
         ->leftjoin('office', 'office_worker.office', 'office.id')
         ->leftjoin('position', 'position.id', 'office_worker.position')
         ->where('employee.id', $r->id)
-        ->select('*', 'position.name as position', 'employee.name as name', 'employee.id as id', 'employee.address as address', 'office.name as office', 'office.id as officeid')
+        ->select('employee.*', 'position.name as position', 'position.id as positionid', 'employee.name as name', 'employee.id as id', 'employee.address as address', 'office.name as office', 'office.id as officeid')
         ->get();
         return $data;
+    }
+
+    public function addEmployee(Request $r) {
+        if ($r->id != null)
+            $data = Employee::findOrFail($r->id);
+        else 
+            $data = new Employee;
+        $data->name = $r->name;
+        $data->birthday = $r->birthday;
+        $data->address = $r->address;
+        $data->phone = $r->phone;
+        $data->mail = $r->mail;
+        $data->save();
+
+        $office = Office_Worker::where('id', $data->id)
+        ->first();
+
+        if ($office == null) {
+            $office = new Office_Worker;
+        }
+        $office->id = $data->id;
+        $office->position = $r->position;
+        $office->office = $r->office;
+        $office->experience = 1;
+        $office->save();
+
+        return back()->withInput();
+    }
+
+    public function deleteEmployee(Request $r) {
+        try {
+            $room = Office_Worker::where('id', $r->id)
+            ->delete();
+            $room = Employee::where('id', $r->id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return back()->withInput();
     }
 
     public function getAllPromotion() {
@@ -358,6 +400,12 @@ class AdminController extends Controller
     public function deletePromotion(Request $r) {
         $data = Promotion::find($r->code);
         $data->delete();
+        return $data;
+    }
+
+    public function getAllPosition() {
+        $data = DB::table('position')
+        ->get();
         return $data;
     }
 

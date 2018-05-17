@@ -8,6 +8,10 @@
                         <div class="form-sub-w3 col-md-6">
                             <input type="text" placeholder="Tên nhân viên" ng-model="employeeName" required>
                         </div>
+                        <div class="form-sub-w3 col-md-6">
+                            <span>Ngày sinh:</span>
+                            <input type="date" ng-model="employeeBirthday" required>
+                        </div>
                         <div class="form-sub-w3 col-md-12">
                             <input type="text" placeholder="Địa chỉ" ng-model="employeeAddr" required>
                         </div>
@@ -18,13 +22,15 @@
                             <input type="email" placeholder="Email" ng-model="employeeMail" required>
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <span>Ngày sinh:</span>
-                            <input type="date" ng-model="employeeBirthday" required>
-                        </div>
-                        <div class="form-sub-w3 col-md-6">
                             <select required ng-model="officeName">
                                 <option value="" disabled selected hidden>Trung tâm</option>
                                 <option ng-repeat="x in officeInfo" value="<% x.id %>"><% x.name %></option>
+                            </select>
+                        </div>
+                        <div class="form-sub-w3 col-md-6">
+                            <select required ng-model="Position">
+                                <option value="" disabled selected hidden>Vị trí</option>
+                                <option ng-repeat="x in positionInfo" value="<% x.id %>"><% x.name %></option>
                             </select>
                         </div>
                         {!! csrf_field() !!}

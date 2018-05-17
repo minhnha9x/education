@@ -5,7 +5,6 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
             method: 'GET',
         })
         .then(function(response) {
-            console.log(response.data);
             $scope.employeeInfo = response.data;
             $('#employeeModal').modal('hide');
         }, function(response) {
@@ -23,7 +22,9 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 $scope.employeeAddr = '';
                 $scope.employeeMail = '';
                 $scope.employeePhone = '';
+                $scope.employeeBirthday = '';
                 $scope.officeName = '';
+                $scope.Position = '';
                 break;
             case 2:
                 $scope.button = "Sửa nhân viên";
@@ -40,8 +41,10 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                     $scope.employeeAddr = response.data[0].address;
                     $scope.employeeMail = response.data[0].mail;
                     $scope.employeePhone = response.data[0].phone;
-                    $scope.employeeBirthday = response.data[0].phone;
+                    if (response.data[0].birthday != null)
+                        $scope.employeeBirthday = new Date(response.data[0].birthday);
                     $scope.officeName = response.data[0].officeid + '';
+                    $scope.Position = response.data[0].positionid + '';
                 }, function(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -59,6 +62,16 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
+        $http({
+            url: './getAllPosition',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.positionInfo = response.data;
+        }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
         $('#employeeModal').modal('show', 300);
     }
 
@@ -69,12 +82,13 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                     url: './addEmployee',
                     method: 'POST',
                     data: {
-                        'name': $scope.courseName,
-                        'description': $scope.courseDesc,
-                        'price': $scope.coursePrice,
-                        'total_of_period': $scope.total_of_period,
-                        'subject': $scope.subjectName,
-                        'certificate_required': $scope.certificate_required,
+                        'name': $scope.employeeName,
+                        'address': $scope.employeeAddr,
+                        'phone': $scope.employeePhone,
+                        'mail': $scope.employeeMail,
+                        'birthday': $scope.employeeBirthday,
+                        'position': $scope.Position,
+                        'office': $scope.officeName,
                     },
                 })
                 .then(function(response) {
@@ -90,12 +104,13 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                     method: 'POST',
                     data: {
                         'id': param,
-                        'name': $scope.courseName,
-                        'description': $scope.courseDesc,
-                        'price': $scope.coursePrice,
-                        'total_of_period': $scope.total_of_period,
-                        'subject': $scope.subjectName,
-                        'certificate_required': $scope.certificate_required,
+                        'name': $scope.employeeName,
+                        'address': $scope.employeeAddr,
+                        'phone': $scope.employeePhone,
+                        'mail': $scope.employeeMail,
+                        'birthday': $scope.employeeBirthday,
+                        'position': $scope.Position,
+                        'office': $scope.officeName,
                     },
                 })
                 .then(function(response) {
@@ -108,7 +123,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         }
     }
     $scope.delete = function(param) {
-        if (confirm("Are you sure you want to delete this course?")) {
+        if (confirm("Are you sure you want to delete this employee?")) {
             $http({
                 url: './deleteEmployee',
                 method: 'GET',
