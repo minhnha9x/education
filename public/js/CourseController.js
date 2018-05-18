@@ -38,12 +38,15 @@ angular.module('educationApp').controller('CourseController', function($scope, $
                     },
                 })
                 .then(function(response) {
-                    console.log(response.data[0].subjectid);
+                    console.log(response.data[0]);
                     $scope.courseName = response.data[0].name;
                     $scope.courseDesc = response.data[0].description;
                     $scope.coursePrice = response.data[0].price;
                     $scope.total_of_period = response.data[0].total_of_period;
-                    $scope.certificate_required = response.data[0].certificate_required;
+                    if (response.data[0].certificate_required != null)
+                        $scope.certificate_required = response.data[0].certificate_required + "";
+                    else
+                        $scope.certificate_required = "";
                     $scope.subjectName = response.data[0].subjectid + "";
                 }, function(response) {
                     // called asynchronously if an error occurs
@@ -58,6 +61,16 @@ angular.module('educationApp').controller('CourseController', function($scope, $
         })
         .then(function(response) {
             $scope.subjectInfo = response.data;
+        }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+        $http({
+            url: './getAllCourse',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.courseList = response.data;
         }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.

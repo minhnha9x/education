@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 use App\Http\Requests;
 use App\Course;
 use App\Exam;
@@ -21,87 +22,52 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 class AdminController extends Controller
 {
     public function getData() {
-        $courses = DB::table('course')
-        ->select('course.*', 'subject.name as subject', 'subject.id as subjectid', 'course2.name as certificate_required', DB::raw('count(class.id) as count'))
-        ->leftjoin('subject', 'course.subject', '=', 'subject.id')
-        ->leftjoin('course as course2', 'course.certificate_required', '=', 'course2.id')
-        ->leftjoin('class', 'class.course', '=', 'course.id')
-        ->groupBy('course.id')
-        ->get();
+        if(Auth::check() && Auth::user()->role == 'admin') {
+            $subjects = DB::table('subject')
+            ->select('subject.*', DB::raw('count(course.id) as count'))
+            ->leftjoin('course', 'course.subject', 'subject.id')
+            ->groupBy('subject.id')
+            ->get();
 
-        $subjects = DB::table('subject')
-        ->select('subject.*', DB::raw('count(course.id) as count'))
-        ->leftjoin('course', 'course.subject', 'subject.id')
-        ->groupBy('subject.id')
-        ->get();
+            $class = DB::table('class')
+            ->select('class.*', 'course.name as course')
+            ->leftjoin('course', 'course.id', 'class.course')
+            ->orderby('course.name')
+            ->get();
 
-        $class = DB::table('class')
-        ->select('class.*', 'course.name as course')
-        ->leftjoin('course', 'course.id', 'class.course')
-        ->orderby('course.name')
-        ->get();
+            $schedule = DB::table('room_schedule')
+            ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
+            ->leftjoin('room', 'room_schedule.room', 'room.id')
+            ->leftjoin('office', 'room.office', 'office.id')
+            ->get();
 
-        $schedule = DB::table('room_schedule')
-        ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
-        ->leftjoin('room', 'room_schedule.room', 'room.id')
-        ->leftjoin('office', 'room.office', 'office.id')
-        ->get();
+            $main_teacher = DB::table('main_teacher')
+            ->select('main_teacher.degree',
+                'main_teacher.id',
+                'employee.name as name',
+                DB::raw("GROUP_CONCAT(office.name SEPARATOR ', ') as office"))
+            ->leftjoin('employee', 'employee.id', 'main_teacher.id')
+            ->join('office_main_teacher', 'office_main_teacher.teacher', 'main_teacher.id')
+            ->leftjoin('office', 'office.id', 'office_main_teacher.office')
+            ->groupBy('main_teacher.id');
 
+            $teacher = DB::table(DB::raw("({$main_teacher->toSql()}) as main_teacher"))
+            ->select('main_teacher.*', DB::raw("GROUP_CONCAT(course.name SEPARATOR ', ') as course"))
+            ->join('course_teacher', 'course_teacher.teacher', 'main_teacher.id')
+            ->leftjoin('course', 'course_teacher.course', 'course.id')
+            ->groupBy('main_teacher.id')
+            ->get();
 
-        $employees = DB::table('employee')
-        ->leftjoin('office_worker', 'office_worker.id', 'employee.id')
-        ->leftjoin('office', 'office_worker.office', 'office.id')
-        ->leftjoin('position', 'position.id', 'office_worker.position')
-        ->select('*', 'position.name as position', 'employee.name as name', 'employee.id as id', 'employee.address as address', 'office.name as office', 'office.id as officeid')
-        ->get();
+            $data = array('all_class' => $class,
+                'subjects' => $subjects,
+                'schedule' => $schedule,
+                'teachers' => $teacher);
 
-        $offices = DB::table('office')
-        ->get();
-
-        $promotions = DB::table('promotion')
-        ->leftjoin('course', 'promotion.course', 'course.id')
-        ->get();
-
-        $rooms = DB::table('room')
-        ->select('room.*', 'office.name as office', DB::raw("GROUP_CONCAT(course.name SEPARATOR ', ') as course"))
-        ->leftjoin('office', 'office.id', 'room.office')
-        ->join('course_room', 'room.id', 'course_room.room')
-        ->leftjoin('course', 'course.id', 'course_room.course')
-        ->groupBy('room.id')
-        ->get();
-
-        $main_teacher = DB::table('main_teacher')
-        ->select('main_teacher.degree',
-            'main_teacher.id',
-            'employee.name as name',
-            DB::raw("GROUP_CONCAT(office.name SEPARATOR ', ') as office"))
-        ->leftjoin('employee', 'employee.id', 'main_teacher.id')
-        ->join('office_main_teacher', 'office_main_teacher.teacher', 'main_teacher.id')
-        ->leftjoin('office', 'office.id', 'office_main_teacher.office')
-        ->groupBy('main_teacher.id');
-
-        $teacher = DB::table(DB::raw("({$main_teacher->toSql()}) as main_teacher"))
-        ->select('main_teacher.*', DB::raw("GROUP_CONCAT(course.name SEPARATOR ', ') as course"))
-        ->join('course_teacher', 'course_teacher.teacher', 'main_teacher.id')
-        ->leftjoin('course', 'course_teacher.course', 'course.id')
-        ->groupBy('main_teacher.id')
-        ->get();
-
-        $cRbyS = $this->countRegisterBySubject();
-        $cRbyO = $this->countRegisterByOffice();
-        $data = array('courses' => $courses,
-            'all_class' => $class,
-            'subjects' => $subjects,
-            'employees' => $employees,
-            'offices' => $offices,
-            'rooms' => $rooms,
-            'schedule' => $schedule,
-            'promotion' => $promotions,
-            'cRbyS' => $cRbyS,
-            'cRbyO' => $cRbyO,
-            'teachers' => $teacher);
-
-        return view('adminpage')->with($data);
+            return view('adminpage')->with($data);
+        }
+        else {
+            abort(404);
+        }
     }
 
     public function getAllSubject() {
@@ -173,7 +139,7 @@ class AdminController extends Controller
         $data->price = $r->price;
         $data->total_of_period = $r->total_of_period;
         $data->description = $r->description;
-        $data->certificate_required = $r->required;
+        $data->certificate_required = $r->certificate_required;
         $data->save();
         return back()->withInput();
     }

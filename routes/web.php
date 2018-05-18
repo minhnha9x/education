@@ -13,17 +13,11 @@
 Route::post('/login','LoginController@postLogin');
 Route::get('/logout', 'LoginController@logout');
 Route::post('/adduser', 'LoginController@addUser');
+
 Route::get('/', 'HomeController@get');
+
 Route::get('/admin', 'AdminController@getData');
-Route::get('/profile', 'ProfileController@get');
-Route::get('/subject_{id}', 'SubjectController@get');
 Route::get('/getlistfreeteacher', 'AdminController@getAvailableTeacher');
-
-Route::get('/getclassfromcourse{id}', 'SubjectController@getClassFromCourse');
-Route::post('/addClassRegister', 'SubjectController@classRegister');
-
-Route::get('/schedule', 'ScheduleController@get');
-Route::get('/getSchedule', 'ScheduleController@getSchedule');
 
 Route::get('/postroomlist', 'AdminController@postroomlist');
 Route::get('/get_available_office', 'AdminController@getAvailableOffice');
@@ -78,3 +72,8 @@ Route::get('/getRegisterByOffice', 'AdminController@countRegisterByOffice');
 Route::get('/getReisterInMonth', 'AdminController@getRegisterInMonth');
 
 Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
+
+Route::get('/profile', 'ProfileController@get');
+
+Route::get('/schedule', 'ScheduleController@get');
+Route::get('/getSchedule', 'ScheduleController@getSchedule');
