@@ -1,4 +1,4 @@
-<div id="classRegisterModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div id="classRegisterModal" class="modal homepage-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width: 750px">
         <div class="modal-content">
             <div class="main-agileits">
@@ -24,6 +24,9 @@
                         </div>
 	                    {!! csrf_field() !!}
 	                    <div class="submit-w3l col-md-12">
+                            @if ($check)
+                                <input type="button" name="back" value='back' ng-click="backModal()">
+                            @endif
                             <input type="submit" value="Đăng kí">
                         </div>
                 	</form>

@@ -1,37 +1,18 @@
-@php
-    $courses = DB::table('course')
-    ->select('course.*', 'subject.name as subject', 'subject.id as subjectid', 'course2.name as certificate_required', DB::raw('count(class.id) as count'))
-    ->leftjoin('subject', 'course.subject', '=', 'subject.id')
-    ->leftjoin('course as course2', 'course.certificate_required', '=', 'course2.id')
-    ->leftjoin('class', 'class.course', '=', 'course.id')
-    ->groupBy('course.id')
-    ->get();
-
-    $subjects = DB::table('subject')
-    ->select('subject.*', DB::raw('count(course.id) as count'))
-    ->leftjoin('course', 'course.subject', 'subject.id')
-    ->groupBy('subject.id')
-    ->get();
-
-    $offices = DB::table('office')
-    ->get();
-@endphp
-
 <head>
     <title>{{ $title }}</title>
     <link href="./css/header.css" rel="stylesheet" type="text/css">
     <link href="./css/font.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="./css/bootstrap.css" rel="stylesheet" crossorigin="anonymous">
-    <link href="./css/owl.carousel.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="./css/jquery.flipster.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" rel="stylesheet" crossorigin="anonymous">
     <link href="./css/datatables.min.css" rel="stylesheet" type="text/css"/>
  
     <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="./js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./js/jquery.canvasjs.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.flipster.min.js"></script>
     <script type="text/javascript" src="./js/datatables.min.js"></script>
     <script type="text/javascript" src="./js/underscore-min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -46,34 +27,8 @@
     <div class="header">
         <a href="./"><img src="./img/logo.png"></a>
         <ul class='menu'>
-            <li>
-                Khóa học
-                <i class="fas fa-angle-down"></i>
-                <ul class="sub-menu">
-                    @foreach ($subjects as $s)
-                        <li>
-                            <a href="./subject_{{$s->id}}">{{$s->name}}<i class="fas fa-angle-right"></i></a>
-                            <ul class='sub-menu2'>
-                                @foreach ($courses as $c)
-                                    @if ($c->subjectid == $s->id)
-                                        <li><a href="">{{$c->name}}</a></li>
-                                    @endif
-                                @endforeach
-                            </ul>
-                        </li>
-                    @endforeach
-                </ul>
-            </li>
             <li><a href="./schedule">Lịch học</a></li>
-            <li>
-                Liên hệ
-                <i class="fas fa-angle-down"></i>
-                <ul class="sub-menu">
-                    @foreach ($offices as $o)
-                        <li><a href="">{{$o->name}}</a></li>
-                    @endforeach
-                </ul>
-            </li>
+            <li><a href="./centers">Trung tâm đào tạo</a></li>
                 @if( Auth::check() ) 
                 	<div class="acc-wrapper">
                 		<div class="avatar" style="background-image: url('{{ Auth::user()->avatar }}')"></div>
@@ -95,7 +50,7 @@
                 	</div>
                 @else
                     <div class="login" id="login-btn">
-                        <i class="fas fa-unlock-alt"></i>Login
+                        <i class="fas fa-unlock-alt"></i>Account
                     </div>
                 @endif
         </ul>

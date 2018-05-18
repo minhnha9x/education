@@ -74,7 +74,7 @@
 		</tbody>
 	</table>
 
-	@include('popup.class_register_modal')
+	@include('popup.class_register_modal', [$check = false])
 
 	<script src="js/myApp.js"></script>
 	<script src="js/ScheduleController.js"></script>

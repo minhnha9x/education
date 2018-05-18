@@ -1,108 +1,159 @@
-.slider {
-  margin-top: 60px; }
-  .slider .owl-item {
-    height: 650px; }
-    .slider .owl-item .item {
-      background-size: cover;
-      background-position: center;
-      height: 100%; }
-  .slider .owl-nav {
-    position: absolute;
-    top: calc((100% - 70px) / 2);
-    width: 100%; }
-    .slider .owl-nav .owl-prev, .slider .owl-nav .owl-next {
-      display: inline-block;
-      color: #fff;
-      font-size: 50px;
-      margin-left: 20px; }
-    .slider .owl-nav .owl-next {
-      float: right;
-      margin-right: 20px; }
-  .slider .owl-dots {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center; }
-    .slider .owl-dots .owl-dot {
-      width: 15px;
-      height: 15px;
-      margin: 0 10px;
-      display: inline-block;
-      background: transparent;
-      border: 2px solid #337ab7;
-      border-radius: 50%; }
-    .slider .owl-dots .owl-dot.active {
-      background: #337ab7; }
-
-.course-wrapper {
-  padding: 50px 0; }
-  .course-wrapper .title {
+.my-flipster {
+  margin-top: 140px; }
+  .my-flipster li .img {
+    width: 600px;
+    height: 400px;
+    background-size: cover;
+    background-position: center; }
+  .my-flipster li .name {
     font-family: 'Montserrat', sans-serif;
     font-size: 35px;
     text-align: center;
-    margin-bottom: 40px; }
-    .course-wrapper .title .border-wrapper .border {
-      display: inline-block;
-      width: 80px;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #337ab7; }
-  .course-wrapper .object-wrapper {
-    height: 420px;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    align-items: center; }
-    .course-wrapper .object-wrapper a {
-      display: block;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center; }
-    .course-wrapper .object-wrapper .object {
-      background-size: cover;
-      width: 100%;
-      height: 100%;
-      transition: all .2s ease-in-out;
-      position: absolute;
-      top: 0; }
-    .course-wrapper .object-wrapper .bg1 {
-      background: rgba(2, 179, 228, 0.49);
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0; }
-    .course-wrapper .object-wrapper .bg2 {
-      background: rgba(1, 183, 186, 0.6); }
-    .course-wrapper .object-wrapper .bg3 {
-      background: rgba(169, 81, 237, 0.7); }
-    .course-wrapper .object-wrapper .bg4 {
-      background: rgba(125, 151, 173, 0.8); }
-    .course-wrapper .object-wrapper .bg5 {
-      background: rgba(255, 84, 131, 0.7); }
-    .course-wrapper .object-wrapper .text-wrapper {
-      width: 100%;
-      z-index: 2;
+    margin-top: 20px; }
+  .my-flipster li .course {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    text-align: center; }
+
+.subject-wrapper .subject .course-wrapper {
+  margin-bottom: 30px;
+  cursor: pointer; }
+  .subject-wrapper .subject .course-wrapper .img {
+    height: 250px;
+    background-size: cover;
+    background-position: center; }
+  .subject-wrapper .subject .course-wrapper .info {
+    padding: 15px; }
+    .subject-wrapper .subject .course-wrapper .info .name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: bold;
       text-align: center;
-      color: #fff;
-      position: absolute; }
-      .course-wrapper .object-wrapper .text-wrapper .title {
-        font-weight: bold;
-        font-size: 25px;
-        margin-bottom: 0; }
-      .course-wrapper .object-wrapper .text-wrapper .text {
-        font-size: 17px;
-        font-weight: bold; }
-  .course-wrapper .object-wrapper:hover .object {
-    transform: scale(1.1); }
-  .course-wrapper .row-wrapper {
-    margin-bottom: 20px; }
-  .course-wrapper .width50 {
-    width: calc(50% - 10px);
-    height: 200px; }
-  .course-wrapper .mr20 {
-    margin-right: 20px; }
-  .course-wrapper .p10 {
-    padding: 0 10px; }
+      margin-bottom: 10px; }
+    .subject-wrapper .subject .course-wrapper .info .price {
+      font-family: 'Roboto', sans-serif;
+      margin-bottom: 10px; }
+      .subject-wrapper .subject .course-wrapper .info .price img {
+        width: 20px;
+        height: 20px;
+        -webkit-filter: invert(100%);
+        margin-right: 5px;
+        vertical-align: bottom; }
+    .subject-wrapper .subject .course-wrapper .info .desc {
+      text-align: justify;
+      font-family: 'Roboto', sans-serif;
+      font-style: italic;
+      height: 120px;
+      overflow: hidden; }
+
+.homepage-modal a {
+  text-decoration: none !important; }
+.homepage-modal input::-webkit-input-placeholder, .homepage-modal textarea::-webkit-input-placeholder {
+  color: #040404 !important; }
+.homepage-modal input:-moz-placeholder, .homepage-modal textarea:-moz-placeholder {
+  /* Firefox 18- */
+  color: #040404 !important; }
+.homepage-modal input::-moz-placeholder, .homepage-modal textarea::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #040404 !important; }
+.homepage-modal input:-ms-input-placeholder, .homepage-modal textarea:-ms-input-placeholder {
+  color: #040404 !important; }
+.homepage-modal .modal-dialog {
+  background: transparent;
+  width: 900px;
+  margin: 50px auto; }
+  .homepage-modal .modal-dialog .modal-content {
+    background: transparent;
+    box-shadow: none;
+    border: 0; }
+    .homepage-modal .modal-dialog .modal-content .main-agileits {
+      font-family: 'Roboto', sans-serif;
+      position: relative;
+      width: 100%;
+      background: #fff;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center center;
+      z-index: 1;
+      background-position: center bottom; }
+      .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile {
+        background: #fff;
+        -webkit-box-shadow: 0px 35px 44px -22px rgba(0, 0, 0, 0.72);
+        -moz-box-shadow: 0px 35px 44px -22px rgba(0, 0, 0, 0.72);
+        box-shadow: 0px 35px 44px -22px #1f181b;
+        padding: 40px 30px; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile h2 {
+          color: #040404;
+          font-size: 25px;
+          text-align: center;
+          margin-bottom: 30px;
+          letter-spacing: 2px;
+          margin-top: 0;
+          text-transform: capitalize; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .info .course, .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .info .schedule {
+          color: #040404;
+          font-size: 18px;
+          margin-bottom: 10px;
+          letter-spacing: 2px;
+          margin-top: 0;
+          text-transform: capitalize; }
+          .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .info .course span, .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .info .schedule span {
+            color: #337ab7; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .info .schedule {
+          font-size: 16px; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 {
+          position: relative;
+          margin-bottom: 15px; }
+          .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 input {
+            outline: none;
+            font-size: 15px;
+            color: #000;
+            padding: 10px;
+            letter-spacing: 2px;
+            width: 100%;
+            border: none;
+            border: 1px solid #040404;
+            margin-bottom: 5px;
+            background: transparent;
+            font-family: 'Roboto', sans-serif;
+            text-transform: capitalize; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .submit-w3l {
+          margin-top: 10px; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="submit"], .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="button"] {
+          background: #337ab7;
+          color: #fff;
+          outline: none;
+          float: right;
+          border: none;
+          cursor: pointer;
+          padding: 7px 35px;
+          font-size: 16px;
+          font-weight: bold;
+          text-transform: uppercase;
+          font-family: 'Roboto', sans-serif;
+          transition: 0.3s all;
+          -webkit-transition: 0.3s all;
+          -moz-transition: 0.3s all;
+          -o-transition: 0.3s all;
+          -ms-transition: 0.3s all; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="button"] {
+          float: none;
+          background-color: #fff;
+          color: #000;
+          border: 1px solid #000; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile input[type="submit"]:hover {
+          background: #4CAF50;
+          color: #ffffff;
+          transition: 0.3s all;
+          -webkit-transition: 0.3s all;
+          -moz-transition: 0.3s all;
+          -o-transition: 0.3s all;
+          -ms-transition: 0.3s all; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile table tr td, .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile table tr th {
+          text-align: center;
+          vertical-align: middle; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile table tr .action {
+          color: #337ab7;
+          cursor: pointer; }
 
 /*# sourceMappingURL=homepage.css.map */

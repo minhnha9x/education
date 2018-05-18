@@ -1,96 +1,68 @@
 <link href="./css/homepage.css" rel="stylesheet" type="text/css">
  
-<div class="homepage">
+<div class="homepage" ng-app="educationApp" ng-controller="HomepageController">
 	@include('header', [$title='Education Page'])
-    
-    <div class="slider">
-        <div class="owl-carousel owl-theme">
-            <div class="item" style="background-image: url('./img/banner1.jpg')"></div>
-            <div class="item" style="background-image: url('./img/banner2.jpg')"></div>
-            <div class="item" style="background-image: url('./img/banner3.jpg')"></div>
-        </div>
+
+    <div class="my-flipster">
+        <ul>
+            @foreach ($subject as $s)
+                <li data-id="{{$s->id}}">
+                    <div class="img" style="background-image: url('{{$s->img}}')"></div>
+                    <div class="name">
+                        {{$s->name}}
+                    </div>
+                    <div class="course">
+                        {{$s->count}} khóa học
+                    </div>
+                </li>
+            @endforeach
+        </ul>
     </div>
-    <div class="course-wrapper">
-        <div class="title col-xs-12">
-            <div class="border-wrapper">
-                <div class="border"></div>
-            </div>
-            Danh sách môn học
-        </div>
-        <div class="container">
-            <div class="col-md-6 p10">
-                <div class="object-wrapper">
-                    <a href="./subject_1">
-                        <div class="object" style="background-image: url('./img/object1.jpg')"></div>
-                        <div class="bg1"></div>
-                        <div class="text-wrapper">
-                            <div class="title">English</div>
-                            <div class="text">3 khóa học</div>
+
+    <div class="subject-wrapper container">
+        @foreach ($subject as $s)
+            <div class="subject hidden" id="{{$s->id}}">
+                @foreach ($course as $c)
+                    @if ($c->subjectid == $s->id)
+                        <div class="course-wrapper col-md-4" ng-click="showModal({{$c->id}})">
+                            <div class="img" style="background-image: url('{{$c->img_url}}')"></div>
+                            <div class="info">
+                                <div class="name">
+                                    {{$c->name}}
+                                </div>
+                                <div class="price">
+                                    <img src="./img/subject.png"><span>Số buổi học: {{$c->total_of_period}}</span>
+                                    <span style="float: right;"><img src="./img/salary.png"><span>Học phí: {{number_format($c->price)}} VNĐ</span></span>
+                                </div>
+                                <div class="desc">
+                                    {{$c->description}}
+                                </div>
+                            </div>
                         </div>
-                    </a>
-                </div>
+                    @endif
+                @endforeach
             </div>
-            <div class="col-md-6 p10">
-                <div class="row-wrapper" style="display: flex">
-                    <div class="object-wrapper width50 mr20">
-                        <a href="./subject_2">
-                            <div class="object" style="background-image: url('./img/object2.jpg')"></div>
-                            <div class="bg1 bg2"></div>
-                            <div class="text-wrapper">
-                                <div class="title">Maths</div>
-                                <div class="text">2 khóa học</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="object-wrapper width50">
-                        <a href="./subject_3">
-                            <div class="object" style="background-image: url('./img/object3.jpg')"></div>
-                            <div class="bg1 bg3"></div>
-                            <div class="text-wrapper">
-                                <div class="title">Fine Art</div>
-                                <div class="text">1 khóa học</div>
-                            </div>
-                        </a>  
-                    </div>
-                </div>
-                <div class="row-wrapper" style="display: flex">
-                    <div class="object-wrapper width50 mr20">
-                        <a href="./subject_4">
-                            <div class="object" style="background-image: url('./img/object4.jpg')"></div>
-                            <div class="bg1 bg4"></div>
-                            <div class="text-wrapper">
-                                <div class="title">Music</div>
-                                <div class="text">3 khóa học</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="object-wrapper width50">
-                        <a>
-                            <div class="object" style="background-image: url('./img/object5.jpg')"></div>
-                            <div class="bg1 bg5"></div>
-                            <div class="text-wrapper">
-                                <div class="title">IT</div>
-                                <div class="text">0 khóa học</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
+
+    @include('popup.class_list_modal')
+    @include('popup.class_register_modal', [$check = true])
+
     @include('footer')
 </div>
 
+<script src="js/myApp.js"></script>
+<script src="js/HomepageController.js"></script>
+
 <script type="text/javascript">
-    $('.owl-carousel').owlCarousel({
-        autoplay: 4000,
-        loop:true,
-        margin:10,
-        nav:true,
-        items:1,
-        animateOut: 'fadeOut',
-        mouseDrag: false,
-        dots:true,
-        navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'],
-    })
+    $('.my-flipster').flipster({
+        scrollwheel: false,
+        keyboard: false,
+        onItemSwitch: function(currentItem) {
+            $current = currentItem.dataset.id;
+            $('.subject-wrapper').find('.subject').addClass('hidden');
+            $('.subject-wrapper').find('#' + $current).removeClass('hidden');
+        },
+    });
+    $('.subject-wrapper').find('#' + $('.my-flipster .flipster__item--current').data('id')).removeClass('hidden');
 </script>

@@ -25,7 +25,23 @@ class HomeController extends Controller
             $user_info = null;
         }
 
-        $data = array('userInfo' => (object) $user_info[0]
+        $subjects = DB::table('subject')
+        ->select('subject.*', DB::raw('count(course.id) as count'))
+        ->leftjoin('course', 'course.subject', 'subject.id')
+        ->groupBy('subject.id')
+        ->get();
+
+        $courses = DB::table('course')
+        ->select('course.*', 'subject.name as subject', 'subject.id as subjectid', 'course2.name as certificate_required', DB::raw('count(class.id) as count'))
+        ->leftjoin('subject', 'course.subject', '=', 'subject.id')
+        ->leftjoin('course as course2', 'course.certificate_required', '=', 'course2.id')
+        ->leftjoin('class', 'class.course', '=', 'course.id')
+        ->groupBy('course.id')
+        ->get();
+
+        $data = array('userInfo' => (object) $user_info[0],
+            'subject' => $subjects,
+            'course' => $courses,
         );
 
         return view('homepage')->with($data);
