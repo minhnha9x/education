@@ -56,6 +56,7 @@
 
 <script type="text/javascript">
     $('.my-flipster').flipster({
+        start: 1,
         scrollwheel: false,
         keyboard: false,
         onItemSwitch: function(currentItem) {

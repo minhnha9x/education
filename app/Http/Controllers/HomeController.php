@@ -29,6 +29,7 @@ class HomeController extends Controller
         ->select('subject.*', DB::raw('count(course.id) as count'))
         ->leftjoin('course', 'course.subject', 'subject.id')
         ->groupBy('subject.id')
+        ->orderBy('count', 'desc')
         ->get();
 
         $courses = DB::table('course')
