@@ -1,7 +1,7 @@
 <link href="./css/homepage.css" rel="stylesheet" type="text/css">
  
 <div class="homepage" ng-app="educationApp" ng-controller="HomepageController">
-	@include('header', [$title='Education Page'])
+	@include('header', [$title='Trang Chủ'])
 
     <div class="my-flipster">
         <ul>

@@ -28,7 +28,7 @@
         <a href="./"><img src="./img/logo.png"></a>
         <ul class='menu'>
             <li><a href="./schedule">Lịch học</a></li>
-            <li><a href="./centers">Trung tâm đào tạo</a></li>
+            <li><a href="./office">Trung tâm đào tạo</a></li>
                 @if( Auth::check() ) 
                 	<div class="acc-wrapper">
                 		<div class="avatar" style="background-image: url('{{ Auth::user()->avatar }}')"></div>

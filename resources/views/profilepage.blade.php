@@ -1,7 +1,7 @@
 <link href="./css/profilepage.css" rel="stylesheet" type="text/css">
 
 <div class="profilepage container">
-    @include('header', [$title='Profile Page'])
+    @include('header', [$title='Trang Cá Nhân'])
 
     <div class="title">
         Trang cá nhân

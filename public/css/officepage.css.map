@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACA,WAAY;EACX,WAAW,EAAE,KAAK;EAClB,cAAc,EAAE,IAAI;EACpB,kBAAO;IACN,WAAW,EAAE,wBAAwB;IACrC,SAAS,EAAE,IAAI;IACf,UAAU,EAAE,MAAM;IAClB,aAAa,EAAE,IAAI",
+"sources": ["officepage.scss"],
+"names": [],
+"file": "officepage.css"
+}

@@ -77,3 +77,5 @@ Route::get('/profile', 'ProfileController@get');
 
 Route::get('/schedule', 'ScheduleController@get');
 Route::get('/getSchedule', 'ScheduleController@getSchedule');
+
+Route::get('/office', 'OfficeController@get');
