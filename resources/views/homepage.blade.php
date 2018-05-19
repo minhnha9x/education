@@ -24,7 +24,7 @@
             <div class="subject hidden" id="{{$s->id}}">
                 @foreach ($course as $c)
                     @if ($c->subjectid == $s->id)
-                        <div class="course-wrapper col-md-4" ng-click="showModal({{$c->id}})">
+                        <div class="course-wrapper col-md-4 hvr-bob" ng-click="showModal({{$c->id}})">
                             <div class="img" style="background-image: url('{{$c->img_url}}')"></div>
                             <div class="info">
                                 <div class="name">
