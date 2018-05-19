@@ -34,6 +34,13 @@
                                     <img src="./img/subject.png"><span>Số buổi học: {{$c->total_of_period}}</span>
                                     <span style="float: right;"><img src="./img/salary.png"><span>Học phí: {{number_format($c->price)}} VNĐ</span></span>
                                 </div>
+                                <div class="price">
+                                    <img src="./img/course.png">Khóa học tiên quyết: @if ($c->certificate_required != null)
+                                        {{$c->certificate_required}}
+                                    @else
+                                        Không có
+                                    @endif
+                                </div>
                                 <div class="desc">
                                     {{$c->description}}
                                 </div>
