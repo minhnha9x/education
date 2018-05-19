@@ -1,19 +1,24 @@
-.my-flipster {
-  margin-top: 140px; }
-  .my-flipster li .img {
-    width: 600px;
-    height: 400px;
-    background-size: cover;
-    background-position: center; }
-  .my-flipster li .name {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 35px;
-    text-align: center;
-    margin-top: 20px; }
-  .my-flipster li .course {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
-    text-align: center; }
+.homepage {
+  padding-top: 140px;
+  background: #dbfdff; }
+
+.my-flipster li .img {
+  width: 600px;
+  height: 400px;
+  background-size: cover;
+  background-position: center; }
+.my-flipster li .name {
+  background: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 35px;
+  text-align: center;
+  padding-top: 20px; }
+.my-flipster li .course {
+  background: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  text-align: center;
+  padding-bottom: 10px; }
 
 .subject-wrapper .subject .course-wrapper {
   margin-bottom: 30px;
@@ -23,7 +28,8 @@
     background-size: cover;
     background-position: center; }
   .subject-wrapper .subject .course-wrapper .info {
-    padding: 15px; }
+    padding: 15px;
+    background: #fff; }
     .subject-wrapper .subject .course-wrapper .info .name {
       font-family: 'Montserrat', sans-serif;
       font-size: 18px;

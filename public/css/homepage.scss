@@ -1,6 +1,9 @@
 $blue: #337ab7;
+.homepage {
+	padding-top: 140px;
+	background: #dbfdff;
+}
 .my-flipster {
-	margin-top: 140px;
 	li {
 		.img {
 			width: 600px;
@@ -9,15 +12,18 @@ $blue: #337ab7;
 			background-position: center;
 		}
 		.name {
+			background: #fff;
 			font-family: 'Montserrat', sans-serif;
 			font-size: 35px;
 			text-align: center;
-			margin-top: 20px;
+			padding-top: 20px;
 		}
 		.course {
+			background: #fff;
 			font-family: 'Montserrat', sans-serif;
 			font-size: 18px;
 			text-align: center;
+			padding-bottom: 10px;
 		}
 	}
 }
@@ -33,6 +39,7 @@ $blue: #337ab7;
 			}
 			.info {
 				padding: 15px;
+				background: #fff;
 				.name {
 					font-family: 'Montserrat', sans-serif;
 					font-size: 18px;
