@@ -17,14 +17,12 @@
                                 <option ng-repeat="teacher_info in tempTeacherList" value="<% teacher_info[0] %>"><% teacher_info[1] %></option>
                             </select>
                         </div>
-<!--                         <div disabled class="form-sub-w3 col-md-6">
-                            <select name="subject" class="checkchange" ng-model="ta_in_cell">
-                                <option value="" disabled hidden>Trợ giảng</option>
-                                <option selected value="1">Trợ giảng 1 (6/6)</option>
-                                <option value="1">Trợ giảng 2 (5/6)</option>
-                                <option value="1">Trợ giảng 3 (1/6)</option>
+                        <div ng-repeat="TA in TAList track by $index" class="form-sub-w3 col-md-6">
+                            <select class="checkchange" ng-model="TAList[$index].TASelected" ng-change="updateTempTAList()">
+                                <option value="" disabled hidden>Trợ giảng <% $index + 1 %></option>
+                                <option ng-repeat="ta_info in tempTAList" value="<% ta_info[0] %>"><% ta_info[1] %></option>
                             </select>
-                        </div>    -->
+                        </div>   
                         <div class="submit-w3l col-md-12">
                             <input type="button" ng-click="unSelected()" style="float: left;" value="Reset">
                             <input type="button" name="ok" ng-click="setSelected()" style="float: right;" value="OK">

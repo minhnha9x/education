@@ -42,22 +42,17 @@
                             </div>
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <select name="supervisor">
-                                <option disabled selected hidden>Quản lí lớp học</option>
-                                @foreach ($teachers as $t)
-                                    <option value="{{$t->id}}">{{$t->name}}</option>
-                                @endforeach
+                            <select name="supervisor" ng-model="supervisorSelected">
+                                <option value="" disabled selected hidden>Quản lí lớp học</option>
+                                <option ng-repeat="spv in supervisorList" value="<% spv.id %>"><% spv.name %></option>
                             </select>
-                        </div>
-                        <div class="form-sub-w3 col-md-12" style="display: inline-block;">
-                            <span>Số phòng tìm thấy: </span><span id='room_available'><% text %></span>
                         </div>
                         {!! csrf_field() !!}
                         <div class="submit-w3l col-md-12">
-                            <input type="button" disabled name="change" ng-click="getCheckedList(); getRoomAvailable(); getTeacherAvailable()" style="float: right;" value="Create Class">
+                            <input type="button" ng-disabled="checkAddingClass()" ng-click="getCheckedList(); getRoomAvailable(); getTeacherAvailable(); getTAAvailable(); addClassDetail()" style="float: right;" value="Create Class">
                         </div>
                     </form>
-                </div>      
+                </div>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

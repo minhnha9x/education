@@ -430,6 +430,32 @@ class AdminController extends Controller
         return $result;
     }
 
+    public function getTAScheduleList($ta_ids, $start_range, $end_range) {
+        $start_range = date('Y-m-d', strtotime($start_range));
+        $end_range = date('Y-m-d', strtotime($end_range));
+
+        $ta_schedule = $this->getTAScheduleData($ta_ids);
+        $result = array();
+        foreach ($ta_schedule as $schedule) {
+            if (!array_key_exists($schedule->id, $result)){
+                $result[$schedule->id] = array();
+                $result[$schedule->id]['schedule'] = array();
+                $result[$schedule->id]['name'] = $schedule->name;
+            }
+            if (strtotime($schedule->end_date) and strtotime($schedule->start_date)){
+                $start_date = date('Y-m-d', strtotime($schedule->start_date));
+                $end_date = date('Y-m-d', strtotime($schedule->end_date));
+                if (!($start_range > $end_date || $end_range < $start_date)) {
+                    if (!array_key_exists($schedule->current_date, $result[$schedule->id]['schedule'])){
+                        $result[$schedule->id]['schedule'][$schedule->current_date] = array();
+                    }
+                    array_push($result[$schedule->id]['schedule'][$schedule->current_date], $schedule->schedule);
+                }
+            }
+        }
+        return $result;
+    }
+
     public function getRoomScheduleData($room_ids) {
         $room_schedule = DB::table('room')
         ->select('room.id',
@@ -466,6 +492,24 @@ class AdminController extends Controller
         return $teacher_schedule;
     }
 
+    public function getTAScheduleData($ta_ids) {
+        $ta_schedule = DB::table('teaching_assistant')
+        ->select('teaching_assistant.id',
+            'room_schedule.current_date',
+            'room_schedule.schedule',
+            'class.start_date',
+            'class.end_date',
+            'employee.name')
+        ->leftjoin('employee', 'employee.id', 'teaching_assistant.id')
+        ->leftjoin('room_ta', 'room_ta.TA', 'teaching_assistant.id')
+        ->leftjoin('room_schedule', 'room_schedule.id', 'room_ta.room_schedule')
+        ->leftjoin('class', 'class.id', 'room_schedule.class')
+        ->whereIn('teaching_assistant.id', json_decode($ta_ids, TRUE))
+        ->get();
+
+        return $ta_schedule;
+    }
+
     public function postroomlist(Request $r) {
         $class = DB::table('room')
         ->select('room.id')
@@ -494,6 +538,22 @@ class AdminController extends Controller
             return array();
         }
         $data = $this->getTeacherScheduleList($teacher_list, $r->start_date, $r->end_date);
+        return $data;
+    }
+
+    public function getTAScheduleInRange(Request $r) {
+        $ta_list = DB::table('office_ta')
+        ->select('office_ta.teaching_assistant as ta_id')
+        ->leftjoin('course_ta', 'course_ta.TA', 'office_ta.teaching_assistant')
+        ->where('course_ta.course', $r->course)
+        ->where('office_ta.office', $r->office)
+        ->distinct()
+        ->get();
+
+        if (count($ta_list) < 1) {
+            return array();
+        }
+        $data = $this->getTAScheduleList($ta_list, $r->start_date, $r->end_date);
         return $data;
     }
 
@@ -717,5 +777,15 @@ class AdminController extends Controller
         }
 
         return $result;
+    }
+    function getSupervisors(Request $r) {
+        $supervisorList = DB::table('office_worker')
+        ->select('employee.id as id', 'employee.name as name')
+        ->leftjoin('employee', 'employee.id', 'office_worker.id')
+        ->where('office_worker.position', 1)
+        ->where('office_worker.office', $r->office_id)
+        ->get();
+
+        return $supervisorList;
     }
 }

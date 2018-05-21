@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 18, 2018 lúc 11:16 AM
--- Phiên bản máy phục vụ: 10.1.31-MariaDB
--- Phiên bản PHP: 7.2.3
+-- Thời gian đã tạo: Th5 19, 2018 lúc 05:15 AM
+-- Phiên bản máy phục vụ: 10.1.30-MariaDB
+-- Phiên bản PHP: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -61,23 +61,24 @@ CREATE TABLE `course` (
   `certificate_required` bigint(20) DEFAULT NULL,
   `total_of_period` bigint(20) NOT NULL,
   `description` varchar(1000) CHARACTER SET utf32 COLLATE utf32_unicode_ci DEFAULT NULL,
-  `img_url` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
+  `img_url` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `teaching_assistant` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `course`
 --
 
-INSERT INTO `course` (`id`, `name`, `subject`, `price`, `certificate_required`, `total_of_period`, `description`, `img_url`) VALUES
-(1, 'English for fresher', 1, 5000000, NULL, 50, 'Cras ultricies ligula sed magna dictum porta. Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Cras ultricies ligula sed magna dictum porta. Nulla porttitor accumsan tincidunt. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/course1.jpg'),
-(2, 'English for fresher 2', 1, 2000000, 1, 60, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum porta. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', './img/course2.jpg'),
-(3, 'English for fresher 3', 1, 3000000, 2, 20, 'Vivamus suscipit tortor eget felis porttitor volutpat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Cras ultricies ligula sed magna dictum porta. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/course3.jpg'),
-(4, 'Basic Maths', 2, 2000000, NULL, 30, 'Vivamus suscipit tortor eget felis porttitor volutpat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Cras ultricies ligula sed magna dictum porta. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/maths1.jpg'),
-(5, 'Advance Maths', 2, 3000000, 4, 50, 'Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit.', './img/maths2.jpg'),
-(6, 'Art for beginer', 3, 6000000, NULL, 30, 'Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit.', './img/art1.jpg'),
-(7, 'Piano', 4, 6000000, 9, 40, 'Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit.', './img/piano1.jpg'),
-(8, 'Guitar', 4, 4000000, 9, 30, 'Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/guita1.jpg'),
-(9, 'Music Theory', 4, 600000, NULL, 40, 'Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/music1.jpg');
+INSERT INTO `course` (`id`, `name`, `subject`, `price`, `certificate_required`, `total_of_period`, `description`, `img_url`, `teaching_assistant`) VALUES
+(1, 'English for fresher', 1, 5000000, NULL, 50, 'Cras ultricies ligula sed magna dictum porta. Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Cras ultricies ligula sed magna dictum porta. Nulla porttitor accumsan tincidunt. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/course1.jpg', 2),
+(2, 'English for fresher 2', 1, 2000000, 1, 60, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum porta. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', './img/course2.jpg', NULL),
+(3, 'English for fresher 3', 1, 3000000, 2, 20, 'Vivamus suscipit tortor eget felis porttitor volutpat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Cras ultricies ligula sed magna dictum porta. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/course3.jpg', NULL),
+(4, 'Basic Maths', 2, 2000000, NULL, 30, 'Vivamus suscipit tortor eget felis porttitor volutpat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Cras ultricies ligula sed magna dictum porta. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/maths1.jpg', NULL),
+(5, 'Advance Maths', 2, 3000000, 4, 50, 'Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit.', './img/maths2.jpg', NULL),
+(6, 'Art for beginer', 3, 6000000, NULL, 30, 'Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit.', './img/art1.jpg', 2),
+(7, 'Piano', 4, 6000000, 9, 40, 'Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit.', './img/piano1.jpg', 1),
+(8, 'Guitar', 4, 4000000, 9, 30, 'Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/guita1.jpg', 1),
+(9, 'Music Theory', 4, 600000, NULL, 40, 'Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/music1.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -122,6 +123,18 @@ CREATE TABLE `course_ta` (
   `course` bigint(20) NOT NULL,
   `TA` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `course_ta`
+--
+
+INSERT INTO `course_ta` (`course`, `TA`) VALUES
+(1, 4),
+(2, 4),
+(3, 4),
+(1, 7),
+(2, 7),
+(3, 7);
 
 -- --------------------------------------------------------
 
@@ -178,7 +191,8 @@ INSERT INTO `employee` (`id`, `name`, `address`, `phone`, `mail`, `birthday`) VA
 (3, 'Dương Vũ Thông', 'test', '0986781993', 'anhnguBen@gmail.com', '1993-01-13'),
 (4, 'Tran Binh Trong', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', '11111111', 'test@gmail.com', '1993-01-13'),
 (5, 'Nguyen Thi Ai Nhi', 'So 15 Nguyen Giai, Phuong Binh Tho, Quan Thu Duc, TP Ho Chi Minh', '166231567', 'nhiatn@gmail.com', NULL),
-(6, 'Ho Minh Nha', '270A-Ly Thuong Kiet, P14, Q10, TPHCM', '01662319176', 'minhnha93@gmai.com', '1993-09-18');
+(6, 'Ho Minh Nha', '270A-Ly Thuong Kiet, P14, Q10, TPHCM', '01662319176', 'minhnha93@gmai.com', '1993-09-18'),
+(7, 'Ho Minh Tin', '270 Lac Long Quan, Q10, TPHCM', '01235487125', 'tinkhung11@gmail.com', '1994-05-01');
 
 -- --------------------------------------------------------
 
@@ -243,7 +257,7 @@ CREATE TABLE `office` (
 
 INSERT INTO `office` (`id`, `address`, `location`, `phone`, `mail`, `name`) VALUES
 (1, 'Trung Tam Anh Ngu B.E.N, Le Dai Hanh, phuong 15, Quan 11, Ho Chi Minh', 'https://www.google.com/maps/place/Trung+T%C3%A2m+Anh+Ng%E1%BB%AF+B.E.N/@10.7693669,106.6504617,17z/data=!3m1!4b1!4m5!3m4!1s0x31752e9552b97111:0x3e81a87c9948d39e!8m2!3d10.7693669!4d106.6526504', 1332546548, 'anhnguBen@gmail.com', 'Trung Tam Anh Ngu B.E.N'),
-(2, 'Trung Tam Ve Sang Tao Wow Art Quan 11 Lac Long Quan phuong 10 Tan Binh Ho Chi Minh', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6041969089615!2d106.6404770148007!3d10.76495649232935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e90cb12a473%3A0x4a615d2ca3247431!2zVHJ1bmcgVMOibSBW4bq9IFPDoW5nIFThuqFvIFdvdyBBcnQgUXXhuq1uIDEx!5e0!3m2!1svi!2s!4v152', 166326414, 'wowart@gmail.com', 'Trung Tam Ve Sang Tao Wow Art'),
+(2, 'Trung Tam Ve Sang Tao Wow Art Quan 11 Lac Long Quan phuong 10 Tan Binh Ho Chi Minh', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6041969089615!2d106.6404770148007!3d10.76495649232935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e90cb12a473%3A0x4a615d2ca3247431!2zVHJ1bmcgVMOibSBW4bq9IFPDoW5nIFThuqFvIFdvdyBBcnQgUXXhuq1uIDEx!5e0!3m2!1svi!2s!4v152', 166326414, 'wowart@gmail.com', 'Trung Tam Ve Sang Tao Wow Art'),
 (3, 'Trung Tam Am Nhac FASOL Luy Ban Bich Tan Thoi Hoa Tan Phu Ho Chi Minh', 'https://www.google.com/maps/place/Trung+T%C3%A2m+%C3%82m+Nh%E1%BA%A1c+FASOL/@10.7668763,106.6297982,17z/data=!3m1!4b1!4m5!3m4!1s0x31752e9e6035f40d:0x42fb1314b4fbf63c!8m2!3d10.7668763!4d106.6319869', 91564856, 'fasolmusic@gmail.com', 'Trung Tam Am Nhac FASOL'),
 (4, 'Trung tam toan TITAN EDUCATION Mac Dinh Chi Da Kao Quan 1 Ho Chi Minh', 'https://www.google.com/maps/place/Trung+t%C3%A2m+to%C3%A1n+TITAN+EDUCATION/@10.7883586,106.6936165,17z/data=!3m1!4b1!4m5!3m4!1s0x31752f499401b65b:0x8978b8f612b5e3b6!8m2!3d10.7883586!4d106.6958052', 904221635, 'titaneducation@gmail.com', 'Trung tam toan TITAN EDUCATION');
 
@@ -284,6 +298,14 @@ CREATE TABLE `office_ta` (
   `office` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Đang đổ dữ liệu cho bảng `office_ta`
+--
+
+INSERT INTO `office_ta` (`id`, `teaching_assistant`, `office`) VALUES
+(1, 4, 1),
+(2, 7, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -302,7 +324,7 @@ CREATE TABLE `office_worker` (
 --
 
 INSERT INTO `office_worker` (`id`, `position`, `office`, `experience`) VALUES
-(3, 1, 1, 1),
+(3, 1, 2, 1),
 (4, 1, 1, 1);
 
 -- --------------------------------------------------------
@@ -430,6 +452,13 @@ CREATE TABLE `room_ta` (
   `room_schedule` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Đang đổ dữ liệu cho bảng `room_ta`
+--
+
+INSERT INTO `room_ta` (`id`, `TA`, `room_schedule`) VALUES
+(1, 4, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -516,7 +545,8 @@ CREATE TABLE `teaching_assistant` (
 --
 
 INSERT INTO `teaching_assistant` (`id`, `degree`) VALUES
-(4, 'Master of assistant');
+(4, 'Master of assistant'),
+(7, 'College');
 
 -- --------------------------------------------------------
 
@@ -562,9 +592,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`, `teacher`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/user/1.jpg', '6Qfe0SDgc5jdAo25dfzX9JK0qTpJC6WRKv6sLF5IXBteKtPRycYI1935wNFj', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
-(2, 'Ho Minh Nha', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', NULL, 'Kbgqy5psQllWdwh1fqnMosyIAdjxYAJUIobPMWTLCOoaoMr4h3e4YKcURYtg', NULL, NULL, NULL),
-(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', 'mOMlDki1uLCEVwxwpStGXe5lr1ppzKOF7BnAyDSYxLYTbRc6VQbvngwMHss5', NULL, NULL, 1);
+(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/user/1.jpg', 'Sfia2E97Rd6I8byYlE3TmQlP8XyK0PA4Q6gwYPTbioblOkxpwTQaBaSAN4AW', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
+(2, 'Ho Minh Nha', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', './img/user/2.JPG', 'rH95GW9aBDxN8j43qWCrcZsoQwoDlz3J6B2CJqS7fgEgpfZhx1Tla5CYQ6E0', NULL, NULL, NULL),
+(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', 'rWfDef41lY2W18T75N0ATgIXi190ERa6afCaBqYMxQbvStjPPl4Vg9TInVCk', NULL, NULL, 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -771,7 +801,7 @@ ALTER TABLE `course_room`
 -- AUTO_INCREMENT cho bảng `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `exam`
@@ -801,7 +831,7 @@ ALTER TABLE `office_main_teacher`
 -- AUTO_INCREMENT cho bảng `office_ta`
 --
 ALTER TABLE `office_ta`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `office_worker`
@@ -837,7 +867,7 @@ ALTER TABLE `room_schedule`
 -- AUTO_INCREMENT cho bảng `room_ta`
 --
 ALTER TABLE `room_ta`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `schedule`
@@ -861,7 +891,7 @@ ALTER TABLE `teacher_dayoff`
 -- AUTO_INCREMENT cho bảng `teaching_assistant`
 --
 ALTER TABLE `teaching_assistant`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `teaching_offset`

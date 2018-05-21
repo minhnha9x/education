@@ -44,7 +44,7 @@ class HomeController extends Controller
             'subject' => $subjects,
             'course' => $courses,
         );
-
+        Debugbar::info($data);
         return view('homepage')->with($data);
     }
 }
