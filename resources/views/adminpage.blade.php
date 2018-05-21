@@ -57,6 +57,7 @@
 <script src="js/CourseController.js"></script>
 <script src="js/OfficeController.js"></script>
 <script src="js/EmployeeController.js"></script>
+<script src="js/TeacherController.js"></script>
 <script src="js/PromotionController.js"></script>
 <script src="js/StatisticController.js"></script>
 <script type="text/javascript">

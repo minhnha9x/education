@@ -88,7 +88,6 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
         $scope.courseList = [];
         $scope.courseDelList = [];
         $('#roomModal .checkbox-wrapper input[type="checkbox"]:checked').each(function(){
-            console.log($(this).val());
             $scope.courseList.push($(this).val());
         });
         $('#roomModal .checkbox-wrapper input[type="checkbox"]:not(:checked)').each(function(){
