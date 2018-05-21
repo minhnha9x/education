@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use App\Register;
 
 class ScheduleController extends Controller
 {
@@ -55,6 +56,7 @@ class ScheduleController extends Controller
         );
         return view('schedulepage')->with($data);
     }
+
     public function getSchedule(Request $r) {
 
         $class = DB::table('class')
@@ -96,5 +98,35 @@ class ScheduleController extends Controller
 
         $data = array('class' => $class, 'schedule' => $schedule);
         return $data;
+    }
+
+    public function classRegister(Request $request) {
+        if ($request->promotion != '') {
+            $promotion = DB::table('promotion')
+            ->leftjoin('class', 'promotion.course', 'class.course')
+            ->where('promotion.code', $request->promotion)
+            ->where('class.course', $request->course)
+            ->where('class.id', $request->class)
+            ->get();
+
+            if ($promotion->isEmpty()) {
+                return array('msg' => 'Mã giảm giá không tồn tại.', 'type' => 'danger');
+            }
+            else {
+                $register = new Register;
+                $register->class = $request->class;
+                $register->promotion = $request->promotion;
+                $register->user = Auth::user()->id;
+                $register->save();
+                return array('msg' => 'Bạn đã đăng kí khóa học thành công với mã giảm giá <strong>' . $request->promotion . '</strong>!<br>Hãy vào trang cá nhân để xem các khóa học đã đăng kí.', 'type' => 'success');
+            }
+        }
+        else {
+            $register = new Register;
+            $register->class = $request->class;
+            $register->user = Auth::user()->id;
+            $register->save();
+            return array('msg' => 'Bạn đã đăng kí khóa học thành công! Hãy vào trang cá nhân để xem các khóa học đã đăng kí.', 'type' => 'success');
+        }
     }
 }

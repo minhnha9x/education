@@ -175,8 +175,8 @@ INSERT INTO `course_teacher` (`course`, `teacher`) VALUES
 CREATE TABLE `employee` (
   `id` bigint(20) NOT NULL,
   `name` char(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `address` char(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(15) NOT NULL,
+  `address` char(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
   `mail` char(100) NOT NULL,
   `birthday` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -187,7 +187,7 @@ CREATE TABLE `employee` (
 
 INSERT INTO `employee` (`id`, `name`, `address`, `phone`, `mail`, `birthday`) VALUES
 (1, 'Tran Phong Phu', '113 Ky Con, Phuong Nguyen Thai Binh, Quan 1, TP Ho Chi Minh', '09056421560', 'phutp@gmail.com', '1945-04-25'),
-(2, 'Nguyen Thi Hanh', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', '1236546794', 'hanhtn@gmail.com', NULL),
+(2, 'Nguyen Thi Hanh', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', '01236546794', 'hanhtn@gmail.com', '2018-05-15'),
 (3, 'Dương Vũ Thông', 'test', '0986781993', 'anhnguBen@gmail.com', '1993-01-13'),
 (4, 'Tran Binh Trong', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', '11111111', 'test@gmail.com', '1993-01-13'),
 (5, 'Nguyen Thi Ai Nhi', 'So 15 Nguyen Giai, Phuong Binh Tho, Quan Thu Duc, TP Ho Chi Minh', '166231567', 'nhiatn@gmail.com', NULL),
@@ -246,7 +246,7 @@ CREATE TABLE `office` (
   `id` bigint(20) NOT NULL,
   `address` char(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `location` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `phone` bigint(20) NOT NULL,
+  `phone` varchar(20) NOT NULL,
   `mail` char(100) NOT NULL,
   `name` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -364,6 +364,7 @@ CREATE TABLE `promotion` (
 --
 
 INSERT INTO `promotion` (`code`, `benefit`, `course`) VALUES
+('eng30', 30, 2),
 ('eng50', 50, 1);
 
 -- --------------------------------------------------------

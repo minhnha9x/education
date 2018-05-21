@@ -8,11 +8,13 @@
             @foreach ($subject as $s)
                 <li data-id="{{$s->id}}">
                     <div class="img" style="background-image: url('{{$s->img}}')"></div>
-                    <div class="name">
-                        {{$s->name}}
-                    </div>
-                    <div class="course">
-                        {{$s->count}} khóa học
+                    <div class="info">
+                        <div class="name">
+                            {{$s->name}}
+                        </div>
+                        <div class="course">
+                            {{$s->count}} khóa học
+                        </div>
                     </div>
                 </li>
             @endforeach
@@ -24,18 +26,27 @@
             <div class="subject hidden" id="{{$s->id}}">
                 @foreach ($course as $c)
                     @if ($c->subjectid == $s->id)
-                        <div class="course-wrapper col-md-4" ng-click="showModal({{$c->id}})">
-                            <div class="img" style="background-image: url('{{$c->img_url}}')"></div>
-                            <div class="info">
-                                <div class="name">
-                                    {{$c->name}}
-                                </div>
-                                <div class="price">
-                                    <img src="./img/subject.png"><span>Số buổi học: {{$c->total_of_period}}</span>
-                                    <span style="float: right;"><img src="./img/salary.png"><span>Học phí: {{number_format($c->price)}} VNĐ</span></span>
-                                </div>
-                                <div class="desc">
-                                    {{$c->description}}
+                        <div class="col-md-4">
+                            <div class="course-wrapper hvr-bob" ng-click="showModal({{$c->id}})">
+                                <div class="img" style="background-image: url('{{$c->img_url}}')"></div>
+                                <div class="info">
+                                    <div class="name">
+                                        {{$c->name}}
+                                    </div>
+                                    <div class="price">
+                                        <img src="./img/subject.png"><span>Số buổi học: {{$c->total_of_period}}</span>
+                                        <span style="float: right;"><img src="./img/salary.png"><span>Học phí: {{number_format($c->price)}} VNĐ</span></span>
+                                    </div>
+                                    <div class="price">
+                                        <img src="./img/course.png">Khóa học tiên quyết: @if ($c->certificate_required != null)
+                                            {{$c->certificate_required}}
+                                        @else
+                                            Không có
+                                        @endif
+                                    </div>
+                                    <div class="desc">
+                                        {{$c->description}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

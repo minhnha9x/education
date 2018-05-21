@@ -1,29 +1,89 @@
-.my-flipster {
-  margin-top: 140px; }
-  .my-flipster li .img {
-    width: 600px;
-    height: 400px;
-    background-size: cover;
-    background-position: center; }
-  .my-flipster li .name {
+@-webkit-keyframes hvr-bob {
+  0% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px); }
+  50% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px); }
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px); } }
+@keyframes hvr-bob {
+  0% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px); }
+  50% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px); }
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px); } }
+@-webkit-keyframes hvr-bob-float {
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px); } }
+@keyframes hvr-bob-float {
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px); } }
+.hvr-bob {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0); }
+
+.hvr-bob:hover, .hvr-bob:focus, .hvr-bob:active {
+  -webkit-animation-name: hvr-bob-float, hvr-bob;
+  animation-name: hvr-bob-float, hvr-bob;
+  -webkit-animation-duration: .3s, 1.5s;
+  animation-duration: .3s, 1.5s;
+  -webkit-animation-delay: 0s, .3s;
+  animation-delay: 0s, .3s;
+  -webkit-animation-timing-function: ease-out, ease-in-out;
+  animation-timing-function: ease-out, ease-in-out;
+  -webkit-animation-iteration-count: 1, infinite;
+  animation-iteration-count: 1, infinite;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-direction: normal, alternate;
+  animation-direction: normal, alternate; }
+
+.homepage {
+  padding-top: 140px; }
+
+.my-flipster li .img {
+  width: 600px;
+  height: 400px;
+  background-size: cover;
+  background-position: center; }
+.my-flipster li .info {
+  padding: 20px 0 10px 0;
+  text-align: center;
+  background: #fff;
+  -webkit-box-shadow: 3px 3px 5px -1px #706c70;
+  -moz-box-shadow: 3px 3px 5px -1px #706c70;
+  box-shadow: 3px 3px 5px -1px #706c70; }
+  .my-flipster li .info .name {
     font-family: 'Montserrat', sans-serif;
-    font-size: 35px;
-    text-align: center;
-    margin-top: 20px; }
-  .my-flipster li .course {
+    font-size: 35px; }
+  .my-flipster li .info .course {
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
-    text-align: center; }
+    font-size: 18px; }
 
 .subject-wrapper .subject .course-wrapper {
   margin-bottom: 30px;
-  cursor: pointer; }
+  cursor: pointer;
+  -webkit-box-shadow: 3px 3px 5px -1px #706c70;
+  -moz-box-shadow: 3px 3px 5px -1px #706c70;
+  box-shadow: 3px 3px 5px -1px #706c70; }
   .subject-wrapper .subject .course-wrapper .img {
     height: 250px;
     background-size: cover;
     background-position: center; }
   .subject-wrapper .subject .course-wrapper .info {
-    padding: 15px; }
+    padding: 15px;
+    background: #fff; }
     .subject-wrapper .subject .course-wrapper .info .name {
       font-family: 'Montserrat', sans-serif;
       font-size: 18px;
