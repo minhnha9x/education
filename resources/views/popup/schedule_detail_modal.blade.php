@@ -12,13 +12,13 @@
                             </select>
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <select name="subject" class="checkchange" ng-model="teacher_in_cell">
+                            <select name="teaching" class="checkchange" ng-model="teacher_in_cell" ng-change="updateTempTeachingList('main', teacher_in_cell)">
                                 <option value="" disabled selected hidden>Giáo viên</option>
                                 <option ng-repeat="teacher_info in tempTeacherList" value="<% teacher_info[0] %>"><% teacher_info[1] %></option>
                             </select>
                         </div>
                         <div ng-repeat="TA in TAList track by $index" class="form-sub-w3 col-md-6">
-                            <select class="checkchange" ng-model="TAList[$index].TASelected" ng-change="updateTempTAList()">
+                            <select name="teaching" class="checkchange" ng-model="TAList[$index].TASelected" ng-change="updateTempTeachingList('ta_'+$index, TAList[$index].TASelected)">
                                 <option value="" disabled hidden>Trợ giảng <% $index + 1 %></option>
                                 <option ng-repeat="ta_info in tempTAList" value="<% ta_info[0] %>"><% ta_info[1] %></option>
                             </select>

@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                {{$o->location}}
+                <a target="_blank" href="{{$o->location}}">Google Map</a>
             </div>
         </div>
     @endforeach

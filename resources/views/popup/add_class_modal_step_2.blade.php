@@ -20,7 +20,7 @@
                         {!! csrf_field() !!}
                         <div class="submit-w3l col-md-12">
                             <input type="button" name="back" ng-click="backAddClass()" value='back'>
-                            <input type="submit" value="Save schedule">
+                            <input type="submit" ng-disabled="checkFillFull()" ng-click="storeClass()" value="Save schedule">
                         </div>
                     </form>
                 </div>      

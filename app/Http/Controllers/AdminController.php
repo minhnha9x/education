@@ -15,6 +15,9 @@ use App\Course_Room;
 use App\Promotion;
 use App\Employee;
 use App\Office_Worker;
+use App\Class_Room;
+use App\Room_Schedule;
+use App\Room_TA;
 use DateTime;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
@@ -831,5 +834,32 @@ class AdminController extends Controller
         ->get();
 
         return $supervisorList;
+    }
+    function addClass(Request $r) {
+        $class_obj = new Class_Room;
+        $class_obj->course = $r->course;
+        $class_obj->supervisor = $r->supervisor;
+        $class_obj->start_date = date('Y-m-d', strtotime($r->start_date));
+        $class_obj->end_date = date('Y-m-d', strtotime($r->end_date));
+        $class_obj->save();
+        foreach ($r->schedule as $schedule => $detail) {
+            $slot_and_day = explode('_', $schedule, 2);
+            $slot = $slot_and_day[0];
+            $day = $slot_and_day[1];
+
+            $room_schedule_obj = new Room_Schedule;
+            $room_schedule_obj->class = $class_obj->id;
+            $room_schedule_obj->schedule = $slot;
+            $room_schedule_obj->current_date = $day;
+            $room_schedule_obj->teacher = $detail[1];
+            $room_schedule_obj->room = $detail[0];
+            $room_schedule_obj->save();
+            foreach ($detail[2] as $ta) {
+                $room_ta = new Room_TA;
+                $room_ta->TA = $ta['TASelected'];
+                $room_ta->room_schedule = $room_schedule_obj->id;
+                $room_ta->save();
+            }
+        }
     }
 }

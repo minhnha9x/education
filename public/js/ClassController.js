@@ -6,6 +6,7 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
     $scope.scheduleList = {};
     $scope.teacherScheduleList = {};
     $scope.tempTeacherList = [];
+    $scope.teachingList = {};
     $scope.list_day_in_week = {
         "Monday":true,
         "Tuesday":false,
@@ -81,6 +82,13 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
         $('#scheduleDetail').modal('show');
     };
 
+    $scope.updateTempTeachingList = function(index, value) {
+        var param = $scope.teachingList[index];
+        $('[name="teaching"] option[value="'+ param +'"]').show();
+        $scope.teachingList[index] = value;
+        $('[name="teaching"] option[value="'+ value +'"]').hide();
+    }
+
     $scope.setSelected = function() {
         if ($scope.room_in_cell && $scope.teacher_in_cell && $scope.checkTAList()){
             $scope.setCheckTag($scope.cellIdSelected);
@@ -117,8 +125,10 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
     $scope.unSelected = function() {
         $scope.room_in_cell = null;
         $scope.teacher_in_cell = null;
+        $scope.updateTempTeachingList('main', null);
         for (var i in $scope.TAList) {
           $scope.TAList[i].TASelected = null;
+          $scope.updateTempTeachingList('ta_'+i, null);
         }
     };
 
@@ -146,7 +156,8 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
     $scope.getSrc = function(slot, day) {
         var tempTeacher = $scope.checkEmptyTeacher(slot, day);
         var tempRoom = $scope.checkEmptyRoom(slot, day);
-        if (tempTeacher.length == 0 || tempRoom.length == 0) {
+        var tempTa = $scope.checkEmptyTA(slot, day);
+        if (tempTeacher.length == 0 || tempRoom.length == 0 || tempTa.length == 0) {
             return "./img/invalid.png";
         }
         return "./img/uncheck.png";
@@ -212,7 +223,6 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
                 $scope.TAList[i] = {TASelected:undefined};
             }
         }
-        console.log($scope.TAList);
     };
 
     $scope.officeUpdated = function() {
@@ -256,7 +266,6 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
         })
         .then(function(response) {
             $scope.taScheduleList = response.data;
-            console.log($scope.taScheduleList);
         }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -369,5 +378,32 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
         }
         return checkedList;
     };
-
+    $scope.checkFillFull = function() {
+        if ($scope.scheduleList) {
+            return Object.keys($scope.scheduleList).length!=$scope.getSelectedDayList().length;
+        }
+        return true;
+    }
+    $scope.storeClass = function() {
+        $http({
+            url: './addclass',
+            method: 'POST',
+            data: {
+                subject: $scope.subjectSelected,
+                course: $scope.courseSelected,
+                office: $scope.officeSelected,
+                start_date: $scope.startDate.toDateString(),
+                end_date: $scope.endDate.toDateString(),
+                days: $scope.getSelectedDayList(),
+                supervisor: $scope.supervisorSelected,
+                schedule: $scope.scheduleList
+            },
+        })
+        .then(function(response) {
+            location.reload();
+        }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+    }
 });
