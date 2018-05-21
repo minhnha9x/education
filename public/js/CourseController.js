@@ -111,6 +111,7 @@ angular.module('educationApp').controller('CourseController', function($scope, $
                 })
                 .then(function(response) {
                     $scope.init();
+                    $.toaster(response.data['msg'], '', response.data['type']);
                 }, function(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -132,6 +133,7 @@ angular.module('educationApp').controller('CourseController', function($scope, $
                 })
                 .then(function(response) {
                     $scope.init();
+                    $.toaster(response.data['msg'], '', response.data['type']);
                 }, function(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -150,6 +152,7 @@ angular.module('educationApp').controller('CourseController', function($scope, $
             })
             .then(function(response) {
                 $scope.init();
+                $.toaster(response.data['msg'], '', response.data['type']);
             }, function(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.

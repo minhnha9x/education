@@ -15,6 +15,7 @@
     <script type="text/javascript" src="./js/jquery.flipster.min.js"></script>
     <script type="text/javascript" src="./js/datatables.min.js"></script>
     <script type="text/javascript" src="./js/underscore-min.js"></script>
+    <script type="text/javascript" src="./js/jquery.toaster.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script type="text/javascript" src="./js/ng-file-upload.min.js"></script>
 

@@ -46,15 +46,15 @@ angular.module('educationApp').controller('HomepageController', function($scope,
         $http({
             url: './addClassRegister',
             method: 'POST',
-            params: {
+            data: {
                 promotion: $scope.Promotion,
                 course: $scope.courseId,
                 class: $scope.classId,
             }
         })
         .then(function(response) {
-            alert(response.data);
             $('#classRegisterModal').modal('hide');
+            $.toaster(response.data['msg'], '', response.data['type']);
             //location.href = './profile';
         }, function(response) {
             // called asynchronously if an error occurs

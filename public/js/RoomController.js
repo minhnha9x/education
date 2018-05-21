@@ -73,7 +73,6 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
         }
         $('#roomModal').modal('show', 300);
         $('#roomModal input[type=checkbox]').change(function() {
-            console.log("zzz");
             $check = false;
             $('#roomModal .checkbox-wrapper input[type="checkbox"]:checked').each(function(){
                 $check = true;
@@ -109,6 +108,7 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
                 })
                 .then(function(response) {
                     $scope.init();
+                    $.toaster(response.data['msg'], '', response.data['type']);
                 }, function(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -128,6 +128,7 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
                 })
                 .then(function(response) {
                     $scope.init();
+                    $.toaster(response.data['msg'], '', response.data['type']);
                 }, function(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -146,6 +147,7 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
             })
             .then(function(response) {
                 $scope.init();
+                $.toaster(response.data['msg'], '', response.data['type']);
             }, function(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.

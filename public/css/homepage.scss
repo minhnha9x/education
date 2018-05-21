@@ -64,7 +64,6 @@ $blue: #337ab7;
 }
 .homepage {
 	padding-top: 140px;
-	background: #dbfdff;
 }
 .my-flipster {
 	li {
@@ -74,19 +73,21 @@ $blue: #337ab7;
 			background-size: cover;
 			background-position: center;
 		}
-		.name {
-			background: #fff;
-			font-family: 'Montserrat', sans-serif;
-			font-size: 35px;
+		.info {
+			padding: 20px 0 10px 0;
 			text-align: center;
-			padding-top: 20px;
-		}
-		.course {
 			background: #fff;
-			font-family: 'Montserrat', sans-serif;
-			font-size: 18px;
-			text-align: center;
-			padding-bottom: 10px;
+			-webkit-box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
+			-moz-box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
+			box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
+			.name {
+				font-family: 'Montserrat', sans-serif;
+				font-size: 35px;
+			}
+			.course {
+				font-family: 'Montserrat', sans-serif;
+				font-size: 18px;
+			}
 		}
 	}
 }
@@ -95,6 +96,9 @@ $blue: #337ab7;
 		.course-wrapper {
 			margin-bottom: 30px;
 			cursor: pointer;
+			-webkit-box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
+			-moz-box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
+			box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
 			.img {
 				height: 250px;
 				background-size: cover;

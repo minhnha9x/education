@@ -50,30 +50,33 @@
   animation-direction: normal, alternate; }
 
 .homepage {
-  padding-top: 140px;
-  background: #dbfdff; }
+  padding-top: 140px; }
 
 .my-flipster li .img {
   width: 600px;
   height: 400px;
   background-size: cover;
   background-position: center; }
-.my-flipster li .name {
-  background: #fff;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 35px;
+.my-flipster li .info {
+  padding: 20px 0 10px 0;
   text-align: center;
-  padding-top: 20px; }
-.my-flipster li .course {
   background: #fff;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 18px;
-  text-align: center;
-  padding-bottom: 10px; }
+  -webkit-box-shadow: 3px 3px 5px -1px #706c70;
+  -moz-box-shadow: 3px 3px 5px -1px #706c70;
+  box-shadow: 3px 3px 5px -1px #706c70; }
+  .my-flipster li .info .name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 35px; }
+  .my-flipster li .info .course {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px; }
 
 .subject-wrapper .subject .course-wrapper {
   margin-bottom: 30px;
-  cursor: pointer; }
+  cursor: pointer;
+  -webkit-box-shadow: 3px 3px 5px -1px #706c70;
+  -moz-box-shadow: 3px 3px 5px -1px #706c70;
+  box-shadow: 3px 3px 5px -1px #706c70; }
   .subject-wrapper .subject .course-wrapper .img {
     height: 250px;
     background-size: cover;

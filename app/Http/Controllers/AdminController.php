@@ -90,7 +90,7 @@ class AdminController extends Controller
         $data->name = $r->name;
         $data->description = $r->desc;
         $data->save();
-        return back()->withInput();
+        return array('msg' => 'Đã cập nhật danh sách môn học.', 'type' => 'success');
     }
 
     public function deleteSubject(Request $r) {
@@ -101,7 +101,7 @@ class AdminController extends Controller
         catch (\Exception $e) {
             return $e->getMessage();
         }
-        return back()->withInput();
+        return array('msg' => 'Xóa môn học thành công.', 'type' => 'success');
     }
 
     public function getAllCourse() {
@@ -141,7 +141,7 @@ class AdminController extends Controller
         $data->description = $r->description;
         $data->certificate_required = $r->certificate_required;
         $data->save();
-        return back()->withInput();
+        return array('msg' => 'Đã cập nhật danh sách khóa học.', 'type' => 'success');
     }
 
     public function deleteCourse(Request $r) {
@@ -152,7 +152,7 @@ class AdminController extends Controller
         catch (\Exception $e) {
             return $e->getMessage();
         }
-        return back()->withInput();
+        return array('msg' => 'Xóa khóa học thành công.', 'type' => 'success');
     }
 
     public function getAllOffice() {
@@ -177,7 +177,7 @@ class AdminController extends Controller
         $data->mail = $r->mail;
         $data->location = $r->location;
         $data->save();
-        return back()->withInput();
+        return array('msg' => 'Đã cập nhật danh sách trung tâm.', 'type' => 'success');
     }
 
     public function deleteOffice(Request $r) {
@@ -188,7 +188,7 @@ class AdminController extends Controller
         catch (\Exception $e) {
             return $e->getMessage();
         }
-        return back()->withInput();
+        return array('msg' => 'Xóa trung tâm thành công.', 'type' => 'success');
     }
 
     public function getAllRoom() {
@@ -225,7 +225,7 @@ class AdminController extends Controller
         foreach ($r->coursedel as $courses) {
             $this->deleteRoomCourse($data->id, $courses);
         }
-        return $r->course;
+        return array('msg' => 'Đã cập nhật danh sách phòng học.', 'type' => 'success');
     }
 
     public function addRoomCourse($room_id, $course_id) {
@@ -268,7 +268,7 @@ class AdminController extends Controller
         catch (\Exception $e) {
             return $e->getMessage();
         }
-        return back()->withInput();
+        return array('msg' => 'Xóa phòng học thành công.', 'type' => 'success');
     }
 
     public function getAllEmployee() {
@@ -316,7 +316,7 @@ class AdminController extends Controller
         $office->experience = 1;
         $office->save();
 
-        return back()->withInput();
+        return array('msg' => 'Đã cập nhật danh sách nhân viên.', 'type' => 'success');
     }
 
     public function deleteEmployee(Request $r) {
@@ -329,7 +329,7 @@ class AdminController extends Controller
         catch (\Exception $e) {
             return $e->getMessage();
         }
-        return back()->withInput();
+        return array('msg' => 'Xóa nhân viên thành công.', 'type' => 'success');
     }
 
     public function getAllPromotion() {
@@ -350,7 +350,7 @@ class AdminController extends Controller
         $data->benefit = $r->benefit;
         $data->course = $r->course;
         $data->save();
-        return back()->withInput();
+        return array('msg' => 'Đã cập nhật danh sách mã giảm giá.', 'type' => 'success');
     }
 
     public function editPromotion(Request $r) {
@@ -360,13 +360,13 @@ class AdminController extends Controller
             $data->course = $r->course;
             $data->save();
         }
-        return back()->withInput();
+        return array('msg' => 'Đã cập nhật danh sách mã giảm giá.', 'type' => 'success');
     }
 
     public function deletePromotion(Request $r) {
         $data = Promotion::find($r->code);
         $data->delete();
-        return $data;
+        return array('msg' => 'Xóa mã giảm giá thành công.', 'type' => 'success');
     }
 
     public function getAllPosition() {
