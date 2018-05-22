@@ -8,7 +8,6 @@
                 <th>Địa chỉ</th>
                 <th>Số điện thoại</th>
                 <th>Email</th>
-                <th>Vị trí</th>
                 <th>Hành động</th>
             </tr>
         </thead>
@@ -19,9 +18,6 @@
                 <td><% x.address %></td>
                 <td><% x.phone %></td>
                 <td><% x.mail %></td>
-                <td>
-                    <a target="_blank" href="<% x.location %>">Google Map</a>
-                </td>
                 <td class="action">
                     <a id='edit' ng-click="showModal(2, x.id)"><i class="fas fa-edit"></i>Sửa</a><a ng-click="delete(x.id)"><i class="fas fa-trash-alt"></i>Xóa</a>
                 </td>

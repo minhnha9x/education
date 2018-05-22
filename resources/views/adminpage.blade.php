@@ -9,8 +9,8 @@
         <li><a data-toggle="tab" href="#menu3"><div class="arrow-left"></div><img src="./img/subject.png">Quản lí môn học</a></li>
         <li><a data-toggle="tab" href="#menu4"><div class="arrow-left"></div><img src="./img/office.png">Quản lí trung tâm</a></li>
         <li><a data-toggle="tab" href="#menu5"><div class="arrow-left"></div><img src="./img/room.png">Quản lí phòng học</a></li>
-        <li><a data-toggle="tab" href="#menu6"><div class="arrow-left"></div><img src="./img/teacher.png">Quản lí giáo viên</a></li>
-        <li><a data-toggle="tab" href="#menu7"><div class="arrow-left"></div><img src="./img/employee.png">Quản lí nhân viên</a></li>
+        <li><a data-toggle="tab" href="#menu6"><div class="arrow-left"></div><img src="./img/employee.png">Quản lí nhân viên</a></li>
+        <li><a data-toggle="tab" href="#menu7"><div class="arrow-left"></div><img src="./img/teacher.png">Quản lí giáo viên</a></li>
         <li><a data-toggle="tab" href="#menu8"><div class="arrow-left"></div><img src="./img/salary.png">Quản lí lương</a></li>
         <li><a data-toggle="tab" href="#menu9"><div class="arrow-left"></div><img src="./img/promotion.png">Quản lí ưu đãi</a></li>
         <li><a data-toggle="tab" href="#menu10"><div class="arrow-left"></div><img src="./img/statistic.png">Thống kê</a></li>
@@ -33,10 +33,10 @@
             @include('room_manager')
         </div>
         <div id="menu6" class="tab-pane">
-            @include('teacher_manager')
+            @include('employee_manager')
         </div>
         <div id="menu7" class="tab-pane">
-            @include('employee_manager')
+            @include('teacher_manager')
         </div>
         <div id="menu8" class="tab-pane">
             @include('salary_manager')

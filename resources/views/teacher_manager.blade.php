@@ -19,7 +19,7 @@
                 <td><% x.course %></td>
                 <td><% x.office %></td>
                 <td class="action">
-                    <a id='edit' ng-click="showModal(2, x.id)"><i class="fas fa-edit"></i>Sửa</a><a ng-click="showModal(2, x.id)"><i class="fas fa-trash-alt"></i>Xóa</a>
+                    <a id='edit' ng-click="showModal(2, x.id)"><i class="fas fa-edit"></i>Sửa</a><a ng-click="delete(x.id)"><i class="fas fa-trash-alt"></i>Xóa</a>
                 </td>
             </tr>
         </tbody>

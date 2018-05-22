@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<div class="col-md-6">
-				{{$o->location}}
+				{!!$o->location!!}
 			</div>
 		</div>
 	@endforeach

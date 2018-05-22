@@ -34,15 +34,22 @@ angular.module('educationApp').controller('TeacherController', function($scope, 
     }
     $scope.init();
     $scope.showModal = function(param1, param2) {
+        $http({
+            url: './getEmployeeTeacher',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.teacherEmployeeInfo = response.data;
+        }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
         switch (param1) {
             case 1:
                 $scope.button = "Thêm giáo viên";
                 $scope.edit = -1;
-                $scope.teacherName = '';
-                $scope.teacherMail = '';
                 $scope.teacherLevel = '';
-                $scope.officeName = '';
-                $scope.showPassword = false;
+                $scope.nameDisabled = false;
                 $('#teacherModal .office-wrapper input[type="checkbox"]').each(function(){
                     $(this).removeAttr('checked');
                 });
@@ -54,6 +61,7 @@ angular.module('educationApp').controller('TeacherController', function($scope, 
             case 2:
                 $scope.button = "Sửa giáo viên";
                 $scope.edit = param2;
+                $scope.nameDisabled = true;
                 $http({
                     url: './getTeacher',
                     method: 'GET',
@@ -62,11 +70,8 @@ angular.module('educationApp').controller('TeacherController', function($scope, 
                     },
                 })
                 .then(function(response) {
-                    $scope.teacherName = response.data[0].name;
-                    $scope.teacherMail = response.data[0].mail;
+                    $scope.teacherName = response.data[0].id + '';
                     $scope.teacherLevel = response.data[0].degree;
-                    $scope.officeName = response.data[0].officeid + '';
-                    $scope.showPassword = true;
                     for (var i=0; i < response.data[0].office.length; i++) {
                         $('#teacherModal .office-wrapper input[type="checkbox"][value="' + response.data[0].office[i] + '"]').attr('checked', 'checked');
                     }
@@ -98,7 +103,7 @@ angular.module('educationApp').controller('TeacherController', function($scope, 
         });
     }
 
-    $scope.addteacher = function(param) {
+    $scope.addTeacher = function(param) {
         $scope.courseList = [];
         $scope.courseDelList = [];
         $scope.officeList = [];
@@ -115,14 +120,14 @@ angular.module('educationApp').controller('TeacherController', function($scope, 
         $('#teacherModal .office-wrapper input[type="checkbox"]:not(:checked)').each(function(){
             $scope.officeDelList.push($(this).val());
         });
+        console.log($scope.teacherName);
         switch (param) {
             case -1:
                 $http({
-                    url: './addteacher',
+                    url: './addTeacher',
                     method: 'POST',
                     data: {
-                        'name': $scope.teacherName,
-                        'mail': $scope.teacherMail,
+                        'employeeid': $scope.teacherName,
                         'degree': $scope.teacherLevel,
                         'course': $scope.courseList,
                         'coursedel': $scope.courseDelList,
@@ -140,17 +145,15 @@ angular.module('educationApp').controller('TeacherController', function($scope, 
                 break;
             default:
                 $http({
-                    url: './addteacher',
+                    url: './addTeacher',
                     method: 'POST',
                     data: {
                         'id': param,
-                        'name': $scope.teacherName,
-                        'address': $scope.teacherAddr,
-                        'phone': $scope.teacherPhone,
-                        'mail': $scope.teacherMail,
-                        'birthday': $scope.teacherBirthday,
-                        'position': $scope.Position,
-                        'office': $scope.officeName,
+                        'degree': $scope.teacherLevel,
+                        'course': $scope.courseList,
+                        'coursedel': $scope.courseDelList,
+                        'office': $scope.officeList,
+                        'officedel': $scope.officeDelList,
                     },
                 })
                 .then(function(response) {
@@ -166,7 +169,7 @@ angular.module('educationApp').controller('TeacherController', function($scope, 
     $scope.delete = function(param) {
         if (confirm("Are you sure you want to delete this teacher?")) {
             $http({
-                url: './deleteteacher',
+                url: './deleteTeacher',
                 method: 'GET',
                 params: {
                     'id': param,

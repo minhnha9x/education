@@ -3,16 +3,13 @@
         <div class="modal-content">
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
-                    <form role="form" class="clearfix" ng-submit="addCourse(edit)">
+                    <form role="form" class="clearfix" ng-submit="addTeacher(edit)">
                         <h2 id="form-title"><% button %></h2>
                         <div class="form-sub-w3 col-md-6">
-                            <input type="text" placeholder="Tên giáo viên" ng-model="teacherName" required>
-                        </div>
-                        <div class="form-sub-w3 col-md-6">
-                            <input type="email" placeholder="Email" ng-model="teacherMail" required>
-                        </div>
-                        <div class="form-sub-w3 col-md-6">
-                            <input type="password" placeholder="Password" ng-disabled="showPassword" ng-model="teacherPassword" required>
+                            <select required ng-model="teacherName" ng-disabled="nameDisabled">
+                                <option value="" disabled selected hidden>Tên giáo viên</option>
+                                <option ng-repeat="x in teacherEmployeeInfo" value="<% x.id %>"><% x.name %></option>
+                            </select>
                         </div>
                         <div class="form-sub-w3 col-md-6">
                             <input type="text" placeholder="Bằng cấp" ng-model="teacherLevel" required>

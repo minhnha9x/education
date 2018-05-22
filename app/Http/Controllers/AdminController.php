@@ -14,7 +14,10 @@ use App\Room;
 use App\Course_Room;
 use App\Promotion;
 use App\Employee;
+use App\Teacher;
 use App\Office_Worker;
+use App\Office_Teacher;
+use App\Course_Teacher;
 use DateTime;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
@@ -372,8 +375,119 @@ class AdminController extends Controller
         return $data;
     }
 
+    public function getEmployeeTeacher() {
+        $data = DB::table('employee')
+        ->leftjoin('office_worker', 'office_worker.id', 'employee.id')
+        ->leftjoin('position', 'office_worker.position', 'position.id')
+        ->where('position.id', 2)
+        ->orWhere('position.id', 3)
+        ->select('*', 'position.name as position', 'position.id as positionid', 'employee.name as name', 'employee.id as id')
+        ->get();
+        return $data;
+    }
+
     public function addTeacher(Request $r) {
-        
+        if ($r->id != null) {
+            $data = Teacher::findOrFail($r->id);
+            $result = array('msg' => 'Đã cập nhật thông tin giáo viên.', 'type' => 'success');
+        }
+        else {
+            $data = new Teacher;
+            $data->id = $r->employeeid;
+            $result = array('msg' => 'Thêm giáo viên thành công.', 'type' => 'success');
+        }
+        $data->degree = $r->degree;
+        $data->save();
+
+        foreach ($r->office as $o) {
+            $this->addOfficeTeacher($data->id, $o);
+        }
+        foreach ($r->officedel as $o) {
+            $this->deleteOfficeTeacher($data->id, $o);
+        }
+
+        foreach ($r->course as $c) {
+            $this->addCourseTeacher($data->id, $c);
+        }
+        foreach ($r->coursedel as $c) {
+            $this->deleteCourseTeacher($data->id, $c);
+        }
+        return $result;
+    }
+
+    public function addOfficeTeacher($teacher_id, $office_id) {
+        try {
+            $data = Office_Teacher::where('teacher', $teacher_id)
+            ->where('office', $office_id)
+            ->first();
+
+            if ($data == null) {
+                $data = new Office_Teacher;
+            }
+            $data->office = $office_id;
+            $data->teacher = $teacher_id;
+            $data->save();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function addCourseTeacher($teacher_id, $course_id) {
+        try {
+            $data = Course_Teacher::where('teacher', $teacher_id)
+            ->where('course', $course_id)
+            ->first();
+
+            if ($data == null) {
+                $data = new Course_Teacher;
+            }
+            $data->course = $course_id;
+            $data->teacher = $teacher_id;
+            $data->save();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function deleteOfficeTeacher($teacher_id, $office_id) {
+        try {
+            $data = Office_Teacher::where('teacher', $teacher_id)
+            ->where('office', $office_id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return back()->withInput();
+    }
+
+    public function deleteCourseTeacher($teacher_id, $course_id) {
+        try {
+            $data = Course_Teacher::where('teacher', $teacher_id)
+            ->where('course', $course_id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return back()->withInput();
+    }
+
+    public function deleteTeacher(Request $r) {
+        try {
+            $data = Office_Teacher::where('teacher', $r->id)
+            ->delete();
+            $data = Course_Teacher::where('teacher', $r->id)
+            ->delete();
+            $data = Teacher::where('id', $r->id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return array('msg' => 'Xóa phòng học thành công.', 'type' => 'success');
     }
 
     public function getAllPromotion() {

@@ -10,24 +10,27 @@ $blue: #337ab7;
 	}
 	.office-wrapper {
 		margin-bottom: 30px;
-		.name {
-			img {
-				margin-right: 10px;
-			}
-			font-family: 'Montserrat', sans-serif;
-			font-size: 16px;
-			font-weight: bold;
-		}
-		.address {
-			font-family: 'Roboto', sans-serif;
-			font-size: 16px;
-			padding-left: 38px;
-			margin-bottom: 10px;
-			div {
-				i {
+		.info {
+			padding-top: 50px;
+			.name {
+				img {
 					margin-right: 10px;
 				}
+				font-family: 'Montserrat', sans-serif;
+				font-size: 16px;
+				font-weight: bold;
+			}
+			.address {
+				font-family: 'Roboto', sans-serif;
+				font-size: 16px;
+				padding-left: 38px;
 				margin-bottom: 10px;
+				div {
+					i {
+						margin-right: 10px;
+					}
+					margin-bottom: 10px;
+				}
 			}
 		}
 	}
