@@ -22,15 +22,15 @@
                             <input type="email" placeholder="Email" ng-model="employeeMail" required>
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <select required ng-model="officeName">
-                                <option value="" disabled selected hidden>Trung tâm</option>
-                                <option ng-repeat="x in officeInfo" value="<% x.id %>"><% x.name %></option>
-                            </select>
-                        </div>
-                        <div class="form-sub-w3 col-md-6">
                             <select required ng-model="Position">
                                 <option value="" disabled selected hidden>Vị trí</option>
                                 <option ng-repeat="x in positionInfo" value="<% x.id %>"><% x.name %></option>
+                            </select>
+                        </div>
+                        <div class="form-sub-w3 col-md-6">
+                            <select ng-model="officeName" ng-show="Position != 2 && Position != 3">
+                                <option value="" disabled selected hidden>Trung tâm</option>
+                                <option ng-repeat="x in officeInfo" value="<% x.id %>"><% x.name %></option>
                             </select>
                         </div>
                         {!! csrf_field() !!}

@@ -310,17 +310,19 @@ class AdminController extends Controller
         $data->mail = $r->mail;
         $data->save();
 
-        $office = Office_Worker::where('id', $data->id)
-        ->first();
+        if ($r->position != 2 && $r->position != 3 && $r->position != '') {
+            $office = Office_Worker::where('id', $data->id)
+            ->first();
 
-        if ($office == null) {
-            $office = new Office_Worker;
+            if ($office == null) {
+                $office = new Office_Worker;
+            }
+            $office->id = $data->id;
+            $office->position = $r->position;
+            $office->office = $r->office;
+            $office->experience = 1;
+            $office->save();
         }
-        $office->id = $data->id;
-        $office->position = $r->position;
-        $office->office = $r->office;
-        $office->experience = 1;
-        $office->save();
 
         return array('msg' => 'Đã cập nhật danh sách nhân viên.', 'type' => 'success');
     }
