@@ -3,16 +3,28 @@
         <div class="modal-content">
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
-                    <form role="form" class="clearfix" ng-submit="addTeacher(edit)">
+                    <form role="form" class="clearfix" ng-submit="addTeacher(editTeacher)">
                         <h2 id="form-title"><% button %></h2>
                         <div class="form-sub-w3 col-md-6">
-                            <select required ng-model="teacherName" ng-disabled="nameDisabled">
-                                <option value="" disabled selected hidden>Tên giáo viên</option>
-                                <option ng-repeat="x in teacherEmployeeInfo" value="<% x.id %>"><% x.name %></option>
-                            </select>
+                            <input type="text" placeholder="Tên giáo viên" ng-model="teacherName" required>
+                        </div>
+                        <div class="form-sub-w3 col-md-6" style="height: 45px;">
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <input type="text" placeholder="Bằng cấp" ng-model="teacherLevel" required>
+                            <input type="email" placeholder="Email" ng-model="teacherMail" required>
+                        </div>
+                        <div class="form-sub-w3 col-md-6">
+                            <input type="text" placeholder="Số điện thoại" ng-model="teacherPhone" required>
+                        </div>
+                        <div class="form-sub-w3 col-md-6">
+                            <input type="text" placeholder="Bằng cấp" ng-model="teacherDegree" required>
+                        </div>
+                        <div class="form-sub-w3 col-md-6">
+                            <span>Ngày sinh:</span>
+                            <input type="date" ng-model="teacherBirthday" required>
+                        </div>
+                        <div class="form-sub-w3 col-md-12">
+                            <input type="text" placeholder="Địa chỉ" ng-model="teacherAddr" required>
                         </div>
                         <div class="form-sub-w3 col-md-12" style="display: block">
                             <p>Dạy những trung tâm:</p>
@@ -39,4 +51,4 @@
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+</div>

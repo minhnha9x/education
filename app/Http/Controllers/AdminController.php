@@ -299,10 +299,14 @@ class AdminController extends Controller
     }
 
     public function addEmployee(Request $r) {
-        if ($r->id != null)
+        if ($r->id != null) {
             $data = Employee::findOrFail($r->id);
-        else 
+            $result = array('msg' => 'Đã cập nhật thông tin nhân viên.', 'type' => 'success');
+        }
+        else {
             $data = new Employee;
+            $result = array('msg' => 'Thêm nhân viên thành công.', 'type' => 'success');
+        }
         $data->name = $r->name;
         $data->birthday = $r->birthday;
         $data->address = $r->address;
@@ -310,7 +314,8 @@ class AdminController extends Controller
         $data->mail = $r->mail;
         $data->save();
 
-        if ($r->position != 2 && $r->position != 3 && $r->position != '') {
+        if ($r->position != '' && $r->office != '')
+        {
             $office = Office_Worker::where('id', $data->id)
             ->first();
 
@@ -323,8 +328,11 @@ class AdminController extends Controller
             $office->experience = 1;
             $office->save();
         }
-
-        return array('msg' => 'Đã cập nhật danh sách nhân viên.', 'type' => 'success');
+        else {
+            $office = Office_Worker::where('id', $data->id)
+            ->delete();
+        }
+        return $result;
     }
 
     public function deleteEmployee(Request $r) {
@@ -345,6 +353,10 @@ class AdminController extends Controller
         ->select('main_teacher.degree',
             'main_teacher.id',
             'employee.name as name',
+            'employee.address as address',
+            'employee.phone as phone',
+            'employee.birthday as birthday',
+            'employee.mail as mail',
             DB::raw("GROUP_CONCAT(office.name SEPARATOR ', ') as office"))
         ->leftjoin('employee', 'employee.id', 'main_teacher.id')
         ->join('office_main_teacher', 'office_main_teacher.teacher', 'main_teacher.id')
@@ -364,6 +376,9 @@ class AdminController extends Controller
         ->select('main_teacher.degree',
             'main_teacher.id',
             'employee.name as name',
+            'employee.address as address',
+            'employee.phone as phone',
+            'employee.birthday as birthday',
             'employee.mail as mail',
             DB::raw("GROUP_CONCAT(office.id SEPARATOR ', ') as office"))
         ->leftjoin('employee', 'employee.id', 'main_teacher.id')
@@ -380,42 +395,40 @@ class AdminController extends Controller
         return $data;
     }
 
-    public function getEmployeeTeacher() {
-        $data = DB::table('employee')
-        ->leftjoin('office_worker', 'office_worker.id', 'employee.id')
-        ->leftjoin('position', 'office_worker.position', 'position.id')
-        ->where('position.id', 2)
-        ->orWhere('position.id', 3)
-        ->select('*', 'position.name as position', 'position.id as positionid', 'employee.name as name', 'employee.id as id')
-        ->get();
-        return $data;
-    }
-
     public function addTeacher(Request $r) {
         if ($r->id != null) {
-            $data = Teacher::findOrFail($r->id);
+            $employee = Employee::findOrFail($r->id);
+            $teacher = Teacher::findOrFail($r->id);
             $result = array('msg' => 'Đã cập nhật thông tin giáo viên.', 'type' => 'success');
         }
         else {
-            $data = new Teacher;
-            $data->id = $r->employeeid;
+            $employee = new Employee;
+            $teacher = new Teacher;
+            $teacher->id = $employee->id;
             $result = array('msg' => 'Thêm giáo viên thành công.', 'type' => 'success');
         }
-        $data->degree = $r->degree;
-        $data->save();
+        $employee->name = $r->name;
+        $employee->birthday = $r->birthday;
+        $employee->address = $r->address;
+        $employee->phone = $r->phone;
+        $employee->mail = $r->mail;
+        $employee->save();
+
+        $teacher->degree = $r->degree;
+        $teacher->save();
 
         foreach ($r->office as $o) {
-            $this->addOfficeTeacher($data->id, $o);
+            $this->addOfficeTeacher($teacher->id, $o);
         }
         foreach ($r->officedel as $o) {
-            $this->deleteOfficeTeacher($data->id, $o);
+            $this->deleteOfficeTeacher($teacher->id, $o);
         }
 
         foreach ($r->course as $c) {
-            $this->addCourseTeacher($data->id, $c);
+            $this->addCourseTeacher($teacher->id, $c);
         }
         foreach ($r->coursedel as $c) {
-            $this->deleteCourseTeacher($data->id, $c);
+            $this->deleteCourseTeacher($teacher->id, $c);
         }
         return $result;
     }
@@ -492,7 +505,7 @@ class AdminController extends Controller
         catch (\Exception $e) {
             return $e->getMessage();
         }
-        return array('msg' => 'Xóa phòng học thành công.', 'type' => 'success');
+        return array('msg' => 'Xóa giáo viên thành công.', 'type' => 'success');
     }
 
     public function getAllPromotion() {

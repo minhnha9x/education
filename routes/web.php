@@ -59,7 +59,6 @@ Route::get('/deleteEmployee', 'AdminController@deleteEmployee');
 
 Route::get('/getAllTeacher', 'AdminController@getAllTeacher');
 Route::get('/getTeacher', 'AdminController@getTeacher');
-Route::get('/getEmployeeTeacher', 'AdminController@getEmployeeTeacher');
 Route::post('/addTeacher', 'AdminController@addTeacher');
 Route::get('/deleteTeacher', 'AdminController@deleteTeacher');
 

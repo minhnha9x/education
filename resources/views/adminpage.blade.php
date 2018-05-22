@@ -36,7 +36,7 @@
             @include('employee_manager')
         </div>
         <div id="menu7" class="tab-pane">
-            @include('teacher_manager')
+            {{-- @include('teacher_manager') --}}
         </div>
         <div id="menu8" class="tab-pane">
             @include('salary_manager')
@@ -57,7 +57,7 @@
 <script src="js/CourseController.js"></script>
 <script src="js/OfficeController.js"></script>
 <script src="js/EmployeeController.js"></script>
-<script src="js/TeacherController.js"></script>
+{{-- <script src="js/TeacherController.js"></script> --}}
 <script src="js/PromotionController.js"></script>
 <script src="js/StatisticController.js"></script>
 <script type="text/javascript">

@@ -15,9 +15,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="x in courseInfo">
-                <td>
-                    <a href="./course_<% x.id %>" target='_blank'><% x.name %></a>
-                </td>
+                <td><% x.name %></td>
                 <td><% x.subject %></td>
                 <td><% x.total_of_period %></td>
                 <td><% x.count %></td>
