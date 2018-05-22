@@ -73,6 +73,8 @@ Route::get('/getAllPosition', 'AdminController@getAllPosition');
 
 Route::get('/getteacherschedule', 'AdminController@getTeacherScheduleInRange');
 
+Route::get('/gettaschedule', 'AdminController@getTAScheduleInRange');
+
 Route::get('/getRegisterBySubject', 'AdminController@countRegisterBySubject');
 Route::get('/getRegisterByOffice', 'AdminController@countRegisterByOffice');
 Route::get('/getReisterInMonth', 'AdminController@getRegisterInMonth');
@@ -86,3 +88,7 @@ Route::get('/getSchedule', 'ScheduleController@getSchedule');
 Route::post('/addClassRegister', 'ScheduleController@classRegister');
 
 Route::get('/office', 'OfficeController@get');
+
+Route::get('/getsupervisors', 'AdminController@getSupervisors');
+
+Route::post('/addclass', 'AdminController@addClass');

@@ -1,11 +1,11 @@
 <link href="./css/officepage.css" rel="stylesheet" type="text/css">
 
 <div class="officepage container">
-	@include('header', [$title='Trung Tâm Đào Tạo'])
+    @include('header', [$title='Trung Tâm Đào Tạo'])
 
-	<div class="title">
-		Trung Tâm Đào Tạo
-	</div>
+    <div class="title">
+        Trung Tâm Đào Tạo
+    </div>
 
 	@foreach ($offices as $o)
 		<div class="office-wrapper clearfix">

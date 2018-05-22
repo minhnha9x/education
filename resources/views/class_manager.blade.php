@@ -1,5 +1,5 @@
 <div class="" ng-controller="ClassController">
-    <div id="addclass" class="addbutton hvr-sweep-to-right">Thêm lớp học</div>
+    <div ng-click="addClass()" class="addbutton hvr-sweep-to-right">Thêm lớp học</div>
     <table id="class_table" class="table table-bordered table-hover">
         <thead>
             <tr>
@@ -50,29 +50,12 @@
 
     @include('popup.add_class_modal_step_2')
 
-    <div modal="scheduleDetail">
-        @include('popup.schedule_detail_modal')
-    </div>
+    @include('popup.schedule_detail_modal')
 
     @include('popup.score_modal')
 </div>
 
 <script type="text/javascript">
-    $('#addClassModal input[name="change"]').click(function(){
-        $('#addClassModal').modal('hide');
-        $('#scheduleClassModal').modal('show', 300);
-    });
-    $('#scheduleClassModal input[name="back"]').click(function() {
-        $('#scheduleClassModal').modal('hide');
-        $('#addClassModal').modal('show', 300);
-    });
-    $('#addclass').click(function(){
-        $('#addClassModal').modal('show', 300);
-    })
-    $('#scheduleClassModal table td').click(function() {
-        $('#scheduleClassModal').modal('hide');
-        $('#scheduleDetail').modal('show', 300);
-    })
     $('#scheduleDetail input[name="ok"]').click(function() {
         $('#scheduleDetail').modal('hide');
     })

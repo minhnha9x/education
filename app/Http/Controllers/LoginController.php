@@ -17,7 +17,7 @@ class LoginController extends Controller
     {
         Auth::logout();
         Session::flush();
-        return redirect()->back()->withInput();
+        return redirect('./');
     }
     public function postLogin(Request $request) {
     	$rules = [

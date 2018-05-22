@@ -31,24 +31,26 @@
             <li><a href="./schedule">Lịch học</a></li>
             <li><a href="./office">Trung tâm đào tạo</a></li>
                 @if( Auth::check() ) 
-                	<div class="acc-wrapper">
-                		<div class="avatar" style="background-image: url('{{ Auth::user()->avatar }}')"></div>
-	                    <div class="loged">
-	                      @if (Auth::user()->role != 'teacher')
+                    <div class="acc-wrapper">
+                        <div class="avatar" style="background-image: url('{{ Auth::user()->avatar }}')"></div>
+                        <div class="loged">
+                          @if (Auth::user()->role != 'teacher')
                             {{Auth::user()->name}}
                         @else
                             {{$userInfo->name}}
                         @endif
-	                    </div>
-	                    <i class="fas fa-angle-down"></i>
-	                    <ul>
-	                    	<li><a href="{{url('profile')}}">Profile</a></li>
-	                    	@if ( Auth::user()->role == "admin")
-	                    		<li><a href="{{url('admin')}}">Admin Page</a></li>
-	                    	@endif
-	                    	<li onclick="location.href = './logout'" class="padli">Log Out</li>
-	                    </ul>
-                	</div>
+                        </div>
+                        <i class="fas fa-angle-down"></i>
+                        <ul>
+                            @if ( Auth::user()->role != "admin")
+                                <li><a href="{{url('profile')}}">Profile</a></li>
+                            @endif
+                            @if ( Auth::user()->role == "admin")
+                                <li><a href="{{url('admin')}}">Admin Page</a></li>
+                            @endif
+                            <li onclick="location.href = './logout'" class="padli">Log Out</li>
+                        </ul>
+                    </div>
                 @else
                     <div class="login" id="login-btn">
                         <i class="fas fa-unlock-alt"></i>Account
