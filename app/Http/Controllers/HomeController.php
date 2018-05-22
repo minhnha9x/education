@@ -9,8 +9,8 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 
 class HomeController extends Controller
 {
-	public function get() {
-		if(Auth::check()) {
+    public function get() {
+        if(Auth::check()) {
             if (Auth::user()->teacher != null) {
                 $user_info = DB::table('employee')
                 ->select('*', 'mail as email')

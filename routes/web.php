@@ -91,3 +91,4 @@ Route::get('/office', 'OfficeController@get');
 Route::get('/getsupervisors', 'AdminController@getSupervisors');
 
 Route::post('/addclass', 'AdminController@addClass');
+
