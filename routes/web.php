@@ -92,3 +92,7 @@ Route::get('/getsupervisors', 'AdminController@getSupervisors');
 
 Route::post('/addclass', 'AdminController@addClass');
 
+Route::get('/test1', 'AdminController@countRegisterBySubjectInYear');
+
+Route::get('/test2', 'AdminController@countRegisterByOfficeInYear');
+
