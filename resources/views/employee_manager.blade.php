@@ -1,6 +1,5 @@
 <div ng-controller="EmployeeController" id="employee_manager_wrapper">
     <select class="page-select" ng-model="employeeType" ng-change="changeTable()">
-        <option value="" disabled hidden selected>--Loại nhân viên--</option>
         <option value="1">Nhân viên văn phòng</option>
         <option value="2">Giáo viên</option>
         <option value="3">Trợ giảng</option>
@@ -9,7 +8,7 @@
     <div class="addbutton hvr-sweep-to-right" ng-click="showTeacherModal(1, -1)">Thêm giáo viên</div>
     <div class="addbutton hvr-sweep-to-right" ng-click="showTAModal(1, -1)">Thêm trợ giảng</div>
 
-    <table id="employeeTable" class="table table-bordered table-hover" hidden>
+    <table id="employeeTable" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Mã nhân viên</th>
@@ -45,9 +44,6 @@
             <tr>
                 <th>Mã giáo viên</th>
                 <th>Tên giáo viên</th>
-                <th>Ngày sinh</th>
-                <th>Địa chỉ</th>
-                <th>Số điện thoại</th>
                 <th>Email</th>
                 <th>Bằng cấp</th>
                 <th>Dạy các khóa</th>
@@ -59,9 +55,6 @@
             <tr ng-repeat="x in teacherInfo">
                 <td><% x.id %></td>
                 <td><% x.name %></td>
-                <td><% x.birthday %></td>
-                <td><% x.address %></td>
-                <td><% x.phone %></td>
                 <td class="email"><% x.mail %></td>
                 <td><% x.degree %></td>
                 <td><% x.course %></td>

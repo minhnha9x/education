@@ -6,25 +6,13 @@
                     <form role="form" class="clearfix" ng-submit="addTeacher(editTeacher)">
                         <h2 id="form-title"><% button %></h2>
                         <div class="form-sub-w3 col-md-6">
-                            <input type="text" placeholder="Tên giáo viên" ng-model="teacherName" required>
-                        </div>
-                        <div class="form-sub-w3 col-md-6" style="height: 45px;">
-                        </div>
-                        <div class="form-sub-w3 col-md-6">
-                            <input type="email" placeholder="Email" ng-model="teacherMail" required>
-                        </div>
-                        <div class="form-sub-w3 col-md-6">
-                            <input type="text" placeholder="Số điện thoại" ng-model="teacherPhone" required>
+                            <select required ng-model="teacherName">
+                                <option value="" selected disabled hidden>Tên giáo viên</option>
+                                <option ng-repeat="x in employeeInfo" value="<% x.id %>"><% x.name %> (<% x.mail %>)</option>
+                            </select>
                         </div>
                         <div class="form-sub-w3 col-md-6">
                             <input type="text" placeholder="Bằng cấp" ng-model="teacherDegree" required>
-                        </div>
-                        <div class="form-sub-w3 col-md-6">
-                            <span>Ngày sinh:</span>
-                            <input type="date" ng-model="teacherBirthday" required>
-                        </div>
-                        <div class="form-sub-w3 col-md-12">
-                            <input type="text" placeholder="Địa chỉ" ng-model="teacherAddr" required>
                         </div>
                         <div class="form-sub-w3 col-md-12" style="display: block">
                             <p>Dạy những trung tâm:</p>

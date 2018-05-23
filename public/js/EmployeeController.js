@@ -1,5 +1,6 @@
 angular.module('educationApp').controller('EmployeeController', function($scope, $http) {
     $scope.init = function () {
+        $scope.employeeType = '1';
         $http({
             url: './getAllEmployee',
             method: 'GET',
@@ -46,14 +47,17 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
     $scope.init();
 
     $scope.changeTable = function() {
-        $('#employee_manager_wrapper table').each(function() {
-            $(this).hide();
-        });
         switch ($scope.employeeType) {
             case '1':
+                $('#employee_manager_wrapper table').each(function() {
+                    $(this).hide();
+                });
                 $('#employeeTable').show();
                 break;
             case '2':
+                $('#employee_manager_wrapper table').each(function() {
+                    $(this).hide();
+                });
                 $('#teacherTable').show();
                 break;
             case '3':
@@ -126,6 +130,17 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
     }
 
     $scope.showTeacherModal = function(param1, param2) {
+        $http({
+            url: './getAllEmployee',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.employeeInfo = response.data;
+            $('#employeeModal').modal('hide');
+        }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
         switch (param1) {
             case 1:
                 $scope.button = "Thêm giáo viên";
@@ -261,11 +276,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                     method: 'POST',
                     data: {
                         'degree': $scope.teacherDegree,
-                        'name': $scope.teacherName,
-                        'address': $scope.teacherAddr,
-                        'phone': $scope.teacherPhone,
-                        'mail': $scope.teacherMail,
-                        'birthday': $scope.teacherBirthday,
+                        'id': $scope.teacherName,
                         'course': $scope.courseList,
                         'coursedel': $scope.courseDelList,
                         'office': $scope.officeList,
@@ -285,13 +296,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                     url: './addTeacher',
                     method: 'POST',
                     data: {
-                        'id': param,
-                        'degree': $scope.teacherDegree,
-                        'name': $scope.teacherName,
-                        'address': $scope.teacherAddr,
-                        'phone': $scope.teacherPhone,
-                        'mail': $scope.teacherMail,
-                        'birthday': $scope.teacherBirthday,
+                        'employeeid': param,
                         'course': $scope.courseList,
                         'coursedel': $scope.courseDelList,
                         'office': $scope.officeList,

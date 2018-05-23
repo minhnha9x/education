@@ -337,9 +337,15 @@ class AdminController extends Controller
 
     public function deleteEmployee(Request $r) {
         try {
-            $room = Office_Worker::where('id', $r->id)
+            $data = Office_Teacher::where('teacher', $r->id)
             ->delete();
-            $room = Employee::where('id', $r->id)
+            $data = Course_Teacher::where('teacher', $r->id)
+            ->delete();
+            $data = Teacher::where('id', $r->id)
+            ->delete();
+            $data = Office_Worker::where('id', $r->id)
+            ->delete();
+            $data = Employee::where('id', $r->id)
             ->delete();
         }
         catch (\Exception $e) {
@@ -396,23 +402,15 @@ class AdminController extends Controller
     }
 
     public function addTeacher(Request $r) {
-        if ($r->id != null) {
-            $employee = Employee::findOrFail($r->id);
-            $teacher = Teacher::findOrFail($r->id);
+        if ($r->employeeid != null) {
+            $teacher = Teacher::findOrFail($r->employeeid);
             $result = array('msg' => 'Đã cập nhật thông tin giáo viên.', 'type' => 'success');
         }
         else {
-            $employee = new Employee;
             $teacher = new Teacher;
-            $teacher->id = $employee->id;
+            $teacher->id = $r->id;
             $result = array('msg' => 'Thêm giáo viên thành công.', 'type' => 'success');
         }
-        $employee->name = $r->name;
-        $employee->birthday = $r->birthday;
-        $employee->address = $r->address;
-        $employee->phone = $r->phone;
-        $employee->mail = $r->mail;
-        $employee->save();
 
         $teacher->degree = $r->degree;
         $teacher->save();
