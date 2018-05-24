@@ -120,6 +120,9 @@ angular.module('educationApp').controller('StatisticController', function($scope
                 $http({
                     url: './getRegisterByOffice',
                     method: 'GET',
+                    params : {
+                        year: $scope.yearSelected,
+                    },
                 })
                 .then(function(response) {
                     $scope.cRbO = response.data;

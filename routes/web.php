@@ -77,8 +77,8 @@ Route::get('/getteacherschedule', 'AdminController@getTeacherScheduleInRange');
 
 Route::get('/gettaschedule', 'AdminController@getTAScheduleInRange');
 
-Route::get('/getRegisterBySubject', 'AdminController@countRegisterBySubject');
-Route::get('/getRegisterByOffice', 'AdminController@countRegisterByOffice');
+Route::get('/getRegisterBySubject', 'AdminController@countRegisterBySubjectInYear');
+Route::get('/getRegisterByOffice', 'AdminController@countRegisterByOfficeInYear');
 Route::get('/getReisterInMonth', 'AdminController@getRegisterInMonth');
 
 Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
@@ -94,4 +94,8 @@ Route::get('/office', 'OfficeController@get');
 Route::get('/getsupervisors', 'AdminController@getSupervisors');
 
 Route::post('/addclass', 'AdminController@addClass');
+
+Route::get('/test1', 'AdminController@countRegisterBySubjectInYear');
+
+Route::get('/test2', 'AdminController@countRegisterByOfficeInYear');
 
