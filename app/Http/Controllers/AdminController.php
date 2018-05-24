@@ -76,6 +76,28 @@ class AdminController extends Controller
         }
     }
 
+    public function getAllRegister() {
+        $data = DB::table('register')
+        ->leftjoin('users', 'register.user', 'users.id')
+        ->leftjoin('class', 'register.class', 'class.id')
+        ->leftjoin('course', 'class.course', 'course.id')
+        ->leftjoin('subject', 'course.subject', 'subject.id')
+        ->select('users.name as name', 'course.name as course', 'register.created_date', 'register.promotion as promotion', 'users.email as mail', 'class.id as class', 'register.id as id')
+        ->get();
+        return $data;
+    }
+
+    public function deleteRegister(Request $r) {
+        try {
+            $subject = DB::table('register')->where('id', $r->id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return array('msg' => 'Xóa đăng ký thành công.', 'type' => 'success');
+    }
+
     public function getAllSubject() {
         $data = Subject::select('subject.*', DB::raw('count(course.id) as count'))
         ->leftjoin('course', 'course.subject', 'subject.id')

@@ -4,7 +4,8 @@
     @include('header', [$title='Trang Quản lí'])
 
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#menu1"><div class="arrow-left"></div><img src="./img/course.png">Quản lí khóa học</a></li>
+        <li class="active"><a data-toggle="tab" href="#menu0"><div class="arrow-left"></div><img src="./img/register.png">Quản lí học viên</a></li>
+        <li><a data-toggle="tab" href="#menu1"><div class="arrow-left"></div><img src="./img/course.png">Quản lí khóa học</a></li>
         <li><a data-toggle="tab" href="#menu2"><div class="arrow-left"></div><img src="./img/class.png">Quản lí lớp học</a></li>
         <li><a data-toggle="tab" href="#menu3"><div class="arrow-left"></div><img src="./img/subject.png">Quản lí môn học</a></li>
         <li><a data-toggle="tab" href="#menu4"><div class="arrow-left"></div><img src="./img/office.png">Quản lí trung tâm</a></li>
@@ -16,7 +17,10 @@
     </ul>
 
     <div class="tab-content" ng-app="educationApp">
-        <div id="menu1" class="tab-pane in active">
+        <div id="menu0" class="tab-pane in active">
+            @include('register_manager')
+        </div>
+        <div id="menu1" class="tab-pane">
             @include('course_manager')
         </div>
         <div id="menu2" class="tab-pane">
@@ -47,6 +51,7 @@
 </div>
 <script src="js/myApp.js"></script>
 <script src="js/SalaryController.js"></script>
+<script src="js/RegisterController.js"></script>
 <script src="js/ClassController.js"></script>
 <script src="js/SubjectController.js"></script>
 <script src="js/RoomController.js"></script>

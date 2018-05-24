@@ -7,8 +7,6 @@ angular.module('educationApp').controller('CourseController', function($scope, $
         .then(function(response) {
             $scope.courseInfo = response.data;
             $('#courseModal').modal('hide');
-            $('.loading').hide();
-            $('#courseTable').removeClass('hidden');
         }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.

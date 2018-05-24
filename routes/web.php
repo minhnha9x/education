@@ -31,6 +31,9 @@ Route::get('/getSalary', 'AdminController@getSalaryInMonth');
 Route::get('/getScore', 'AdminController@getScore');
 Route::post('/updateScore', 'AdminController@updateScore');
 
+Route::get('/getAllRegister', 'AdminController@getAllRegister');
+Route::get('/deleteRegister', 'AdminController@deleteRegister');
+
 Route::get('/getAllSubject', 'AdminController@getAllSubject');
 Route::get('/getSubject', 'AdminController@getSubject');
 Route::post('/addSubject', 'AdminController@addSubject');
