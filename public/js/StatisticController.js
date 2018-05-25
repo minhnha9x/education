@@ -96,6 +96,7 @@ angular.module('educationApp').controller('StatisticController', function($scope
                 .then(function(response) {
                     $scope.cRbS = response.data;
                     $scope.cS = 0;
+                    console.log(response.data);
                     for (var i=0; i < $scope.cRbS.length; i++)
                     {
                         $scope.cS += $scope.cRbS[i]['count'];
