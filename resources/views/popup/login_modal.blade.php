@@ -39,15 +39,13 @@
                         </div>
                     </form>
 
-                    <form id="lost-form" method="post" style="display:none;">
+                    <form id="lost-form" action="{{url('forgotPassword')}}" method="post" style="display:none;">
                         <h2>Forgot Password</h2>
                         <div class="form-sub-w3">
-                            
                             <input type="text" name="email" placeholder="Email" required>
                             <div class="icon-w3">
                                 <i class="fa fa-paper-plane" aria-hidden="true"></i>
                             </div>
-                            
                         </div>
                         {!! csrf_field() !!}
                         <div class="clearfix">

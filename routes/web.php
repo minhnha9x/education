@@ -13,6 +13,7 @@
 Route::post('/login','LoginController@postLogin');
 Route::get('/logout', 'LoginController@logout');
 Route::post('/adduser', 'LoginController@addUser');
+Route::post('/forgotPassword', 'LoginController@forgotPassword');
 
 Route::get('/', 'HomeController@get');
 

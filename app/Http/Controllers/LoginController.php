@@ -10,6 +10,7 @@ use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -57,5 +58,9 @@ class LoginController extends Controller
                 return redirect()->back()->withInput()->withErrors($errors);
             }
         return view('homepage');
+    }
+
+    public function forgotPassword(Request $r) {
+        return $r->email;
     }
 }
