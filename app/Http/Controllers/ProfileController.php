@@ -10,6 +10,7 @@ use DateTime;
 use App\Teacher_Dayoff;
 use App\Teaching_Offset;
 use App\Employee;
+use App\Exam;
 use App\User;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
@@ -103,14 +104,24 @@ class ProfileController extends Controller
                 ->orderby('teaching_offset.date')
                 ->get();
 
+                $result = DB::table('exam')
+                ->select('exam.*', 'register.class')
+                ->leftjoin('register', 'register.id', 'exam.register')
+                ->where('register.user', Auth::user()->id)
+                ->get()
+                ->keyBy('class');
+
+                Debugbar::info($result);
+
                 $data = array('user' => $user, 
                     'schedule' => $schedule,
                     'teacher_dayoff' => $teacher_dayoff,
                     'teaching_offset' => $teaching_offset,
-                    'slot' => $slot, 
-                    'week' => $weekday, 
-                    'test' => $week, 
-                    'courses' => $courses, 
+                    'slot' => $slot,
+                    'result' => $result,
+                    'week' => $weekday,
+                    'test' => $week,
+                    'courses' => $courses,
                     'userInfo' => Auth::user());
             }
             else {
@@ -299,5 +310,36 @@ class ProfileController extends Controller
         $file->move('./img/user/',  Auth::user()->id . '.' . $file->getClientOriginalExtension());
         $data->avatar = './img/user/' . Auth::user()->id . '.' . $file->getClientOriginalExtension();
         $data->save();
+    }
+
+    public function getScoreList(Request $r) {
+        $data = DB::table('register')
+        ->select('users.id', 'users.name', 'exam.score', 'exam.teacher_feedback', 'register.id as register', 'exam.id as exam', 'exam.supervisor_feedback')
+        ->leftjoin('exam', 'exam.register', 'register.id')
+        ->leftjoin('users', 'users.id', 'register.user')
+        ->where('register.class', $r->class_id)
+        ->get();
+        return $data;
+    }
+    public function updateScoreList(Request $r) {
+        Debugbar::info($r->data);
+        foreach ($r->data as $score) {
+            $score = (object) $score;
+            if ($score->exam != null){
+                $data = Exam::find($score->exam);
+                if ($data == null) {
+                    return back();
+                }
+            }
+            else {
+                $data = new Exam;
+            }
+            $data->register = $score->register;
+            $data->score = $score->score;
+            $data->teacher_feedback = $score->teacher_feedback;
+            $data->supervisor_feedback = $score->supervisor_feedback;
+            $data->save();
+        }
+        return back()->withInput();
     }
 }

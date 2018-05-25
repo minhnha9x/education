@@ -84,6 +84,7 @@ Route::get('/getReisterInMonth', 'AdminController@getRegisterInMonth');
 Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
 
 Route::get('/profile', 'ProfileController@get');
+Route::get('/getscorelist', 'ProfileController@getScoreList');
 
 Route::get('/schedule', 'ScheduleController@get');
 Route::get('/getSchedule', 'ScheduleController@getSchedule');
@@ -98,4 +99,8 @@ Route::post('/addclass', 'AdminController@addClass');
 Route::get('/test1', 'AdminController@countRegisterBySubjectInYear');
 
 Route::get('/test2', 'AdminController@countRegisterByOfficeInYear');
+
+Route::post('/deleteclass', 'ClassManageController@deleteClass');
+Route::post('/updatescorelist', 'ProfileController@updateScoreList');
+
 

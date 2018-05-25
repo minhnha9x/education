@@ -39,7 +39,12 @@
                     <td>{{$class->end_date}}</td>
                     <td><a ng-click="showScore({{$class->id}})"><i class="fas fa-eye"></i></a></td>
                     <td class="action">
-                        <a id='edit' data-name="Sửa khóa học" data-id='{{$class->id}}'><i class="fas fa-edit"></i>Sửa</a><a><i class="fas fa-trash-alt"></i>Xóa</a>
+                        <a id='edit' data-name="Sửa khóa học" data-id='{{$class->id}}'>
+                            <i class="fas fa-edit"></i>Sửa
+                        </a>
+                        <a ng-click="deleteClass({{$class->id}})">
+                            <i class="fas fa-trash-alt"></i>Xóa
+                        </a>
                     </td>
                 </tr>
             @endforeach

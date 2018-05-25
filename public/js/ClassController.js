@@ -157,7 +157,7 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
         var tempTeacher = $scope.checkEmptyTeacher(slot, day);
         var tempRoom = $scope.checkEmptyRoom(slot, day);
         var tempTa = $scope.checkEmptyTA(slot, day);
-        if (tempTeacher.length == 0 || tempRoom.length == 0 || tempTa.length == 0) {
+        if (tempTeacher.length == 0 || tempRoom.length == 0 || (tempTa.length == 0 && $scope.TAList.length > 0)) {
             return "./img/invalid.png";
         }
         return "./img/uncheck.png";
@@ -322,12 +322,25 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
         $('#scoreTable').modal('show', 300);
     }
 
+    $scope.deleteClass =function(class_id) {
+        if (confirm("Are you sure you want to delete class " + class_id + " ?")) {
+            $http({
+                url: './deleteclass',
+                method: 'POST',
+                params: {id: class_id},
+            })
+            .then(function(response) {
+                location.reload();
+            });
+        }
+    }
+
     $scope.updateScore = function() {
         for (var x in $scope.scoreInfo) {
             $http({
                 url: './updateScore',
                 method: 'POST',
-                params: {
+                data: {
                     id: $scope.scoreInfo[x].id,
                     register: $scope.scoreInfo[x].register,
                     score: $scope.scoreInfo[x].score,

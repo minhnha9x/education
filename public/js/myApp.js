@@ -1,4 +1,4 @@
-angular.module('educationApp', [], function($interpolateProvider) {
+angular.module('educationApp', ['ngFileUpload'], function($interpolateProvider) {
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
 });

@@ -1,8 +1,7 @@
 <link href="./css/profilepage.css" rel="stylesheet" type="text/css">
-
-<div class="profilepage container">
+<div class="profilepage container" ng-app="educationApp" ng-controller="ProfileController">
     @include('header', [$title='Trang Cá Nhân'])
-
+<div>
     <div class="title">
         Trang cá nhân
     </div>
@@ -11,7 +10,7 @@
         <div class="avatar-wrapper">
             <div class="avatar" style="background-image: url('{{Auth::user()->avatar}}')">
             </div>
-            <div ng-controller="MyCtrl" ng-app="fileUpload">
+            <div>
                 <div class="button" ngf-select="upload($file)">Change avatar</div>
             </div>
         </div>
@@ -62,7 +61,28 @@
                                         @endif
                                     @endfor
                                 </td>
-                                <td></td>
+                                <td ng-click="ishown[{{$u->class}}]=!ishown[{{$u->class}}]" ng-init="ishown[{{$u->class}}]=true">
+                                    <i class="fas fa-minus-square" ng-show="!ishown[{{$u->class}}]"></i>
+                                    <i class="fas fa-plus-square" ng-show="ishown[{{$u->class}}]"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" ng-show="!ishown[{{$u->class}}]">
+                                    <div style="text-align: left;">
+                                        <p>
+                                            <span style="font-weight: bold;">Điểm Thi: </span>{{$result[$u->class]->score}}
+                                        </p>
+                                        <p>
+                                            <span style="font-weight: bold;">Nhận xét giáo viên: </span>{{$result[$u->class]->teacher_feedback}}
+                                        </p>
+                                        <p>
+                                            <span style="font-weight: bold;">Nhận xét giám thị: </span>{{$result[$u->class]->supervisor_feedback}}
+                                        </p>
+                                        <p>
+                                            <span style="font-weight: bold;">Kết quả: </span><b ng-style="{'color': ('{{$result[$u->class]->result}}'=='Pass') ? 'blue' : 'red'}">{{$result[$u->class]->result}}</b>
+                                        </p>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </table>
@@ -365,6 +385,7 @@
                                 <th>Số buổi nghỉ dạy</th>
                                 <th>Nghỉ dạy đã bù</th>
                                 <th>Còn thiếu</th>
+                                <th>Điểm số</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -375,6 +396,36 @@
                                     <td>{{$teacher_dayoff_count[$c->id]}}</td>
                                     <td>{{$teaching_offset_count[$c->id]}}</td>
                                     <td>{{$teacher_dayoff_count[$c->id] - $teaching_offset_count[$c->id]}} buổi</td>
+                                    <td ng-click="ishown[{{$c->class}}]=!ishown[{{$c->class}}]; expandScore({{$c->class}}, ishown[{{$c->class}}])" ng-init="ishown[{{$c->class}}]=false">
+                                        <i class="fas fa-minus-square" ng-show="ishown[{{$c->class}}]"></i>
+                                        <i class="fas fa-plus-square" ng-show="!ishown[{{$c->class}}]"></i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" ng-show="ishown[{{$c->class}}]">
+                                        <div style="text-align: left;">
+                                            <table class="table table-bordered table-hover">
+                                                <tr>
+                                                    <th>Mã số</th>
+                                                    <th>Tên học viên</th>
+                                                    <th>Điểm</th>
+                                                    <th>Nhận xét giáo viên</th>
+                                                    <th>Nhận xét giám thị</th>
+                                                </tr>
+                                                <tr ng-repeat="memberScore in scopeList[{{$c->class}}]">
+                                                    <td><% memberScore.id %></td>
+                                                    <td><% memberScore.name %></td>
+                                                    <td><input type="number" ng-model="memberScore.score"></td>
+                                                    <td><textarea style="resize:none" rows="4" cols="40" name="comment" ng-model="memberScore.teacher_feedback"></textarea></td>
+                                                    <td><textarea disabled style="resize:none" rows="4" cols="40" name="comment" ng-model="memberScore.supervisor_feedback"></textarea></td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div>
+                                            <button class="my-button left" ng-click="updateScore({{$c->class}})" ng-disabled="scopeList[{{$c->class}}].status" >Update</button>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -384,6 +435,7 @@
         </div>
     @endif
 </div>
+</div>
 
 @include('popup.teacher_dayoff_modal')
 
@@ -391,10 +443,9 @@
 
 @include('popup.update_profile_modal')
 
+{{-- @include('footer') --}}
 <script src="js/myApp.js"></script>
 <script src="js/ProfileController.js"></script>
-
-{{-- @include('footer') --}}
 
 <script type="text/javascript">
     $('#tschedule').DataTable({

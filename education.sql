@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 19, 2018 lúc 05:15 AM
+-- Thời gian đã tạo: Th5 25, 2018 lúc 08:35 PM
 -- Phiên bản máy phục vụ: 10.1.30-MariaDB
 -- Phiên bản PHP: 7.2.2
 
@@ -42,10 +42,9 @@ CREATE TABLE `class` (
 
 INSERT INTO `class` (`id`, `start_date`, `end_date`, `course`, `supervisor`) VALUES
 (1, '2018-03-06', '2018-06-01', 1, NULL),
-(4, '2018-04-19', '2018-05-17', 4, NULL),
-(5, '2018-04-19', '2018-05-10', 1, NULL),
-(6, '2018-04-13', '2018-08-14', 1, NULL),
-(7, '2018-03-01', '2018-04-13', 4, NULL);
+(15, '2018-05-08', '2019-05-07', 1, 4),
+(18, '2018-05-08', '2019-05-07', 1, 4),
+(20, '2018-05-09', '2018-11-14', 5, 8);
 
 -- --------------------------------------------------------
 
@@ -134,7 +133,10 @@ INSERT INTO `course_ta` (`course`, `TA`) VALUES
 (3, 4),
 (1, 7),
 (2, 7),
-(3, 7);
+(3, 7),
+(9, 9),
+(8, 9),
+(7, 9);
 
 -- --------------------------------------------------------
 
@@ -175,8 +177,8 @@ INSERT INTO `course_teacher` (`course`, `teacher`) VALUES
 CREATE TABLE `employee` (
   `id` bigint(20) NOT NULL,
   `name` char(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `address` char(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `phone` varchar(15) DEFAULT NULL,
+  `address` char(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(15) NOT NULL,
   `mail` char(100) NOT NULL,
   `birthday` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -187,12 +189,14 @@ CREATE TABLE `employee` (
 
 INSERT INTO `employee` (`id`, `name`, `address`, `phone`, `mail`, `birthday`) VALUES
 (1, 'Tran Phong Phu', '113 Ky Con, Phuong Nguyen Thai Binh, Quan 1, TP Ho Chi Minh', '09056421560', 'phutp@gmail.com', '1945-04-25'),
-(2, 'Nguyen Thi Hanh', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', '01236546794', 'hanhtn@gmail.com', '2018-05-15'),
+(2, 'Nguyen Thi Hanh', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', '1236546794', 'hanhtn@gmail.com', NULL),
 (3, 'Dương Vũ Thông', 'test', '0986781993', 'anhnguBen@gmail.com', '1993-01-13'),
 (4, 'Tran Binh Trong', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', '11111111', 'test@gmail.com', '1993-01-13'),
 (5, 'Nguyen Thi Ai Nhi', 'So 15 Nguyen Giai, Phuong Binh Tho, Quan Thu Duc, TP Ho Chi Minh', '166231567', 'nhiatn@gmail.com', NULL),
 (6, 'Ho Minh Nha', '270A-Ly Thuong Kiet, P14, Q10, TPHCM', '01662319176', 'minhnha93@gmai.com', '1993-09-18'),
-(7, 'Ho Minh Tin', '270 Lac Long Quan, Q10, TPHCM', '01235487125', 'tinkhung11@gmail.com', '1994-05-01');
+(7, 'Ho Minh Tin', '270 Lac Long Quan, Q10, TPHCM', '01235487125', 'tinkhung11@gmail.com', '1994-05-01'),
+(8, 'Nguyen Thi Mai', 'TP Ho Chi Minha', '016654227', 'mainguyen@gmail.com', '1990-08-08'),
+(9, 'Vuong A Tu', '199 Dien Bien Phu, P14, Q15, TPHCM', '01663453', 'minhnha91@gmail.com', '1989-05-22');
 
 -- --------------------------------------------------------
 
@@ -203,16 +207,21 @@ INSERT INTO `employee` (`id`, `name`, `address`, `phone`, `mail`, `birthday`) VA
 CREATE TABLE `exam` (
   `id` bigint(20) NOT NULL,
   `register` bigint(20) NOT NULL,
-  `score` bigint(20) NOT NULL
+  `score` bigint(20) NOT NULL,
+  `teacher_feedback` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `supervisor_feedback` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `result` set('Pass','Fail','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `exam`
 --
 
-INSERT INTO `exam` (`id`, `register`, `score`) VALUES
-(2, 22, 8),
-(3, 23, 1);
+INSERT INTO `exam` (`id`, `register`, `score`, `teacher_feedback`, `supervisor_feedback`, `result`) VALUES
+(12, 30, 5, 'Lười học', 'Đi học đều', 'Pass'),
+(15, 29, 4, 'Học rất ngu', 'Lười đi học', 'Fail'),
+(16, 28, 4, 'Học chưa tốt', NULL, ''),
+(20, 31, 1, 'Yếu kém', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -246,7 +255,7 @@ CREATE TABLE `office` (
   `id` bigint(20) NOT NULL,
   `address` char(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `location` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(20) NOT NULL,
+  `phone` bigint(20) NOT NULL,
   `mail` char(100) NOT NULL,
   `name` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -304,7 +313,8 @@ CREATE TABLE `office_ta` (
 
 INSERT INTO `office_ta` (`id`, `teaching_assistant`, `office`) VALUES
 (1, 4, 1),
-(2, 7, 1);
+(2, 7, 1),
+(3, 9, 3);
 
 -- --------------------------------------------------------
 
@@ -325,7 +335,8 @@ CREATE TABLE `office_worker` (
 
 INSERT INTO `office_worker` (`id`, `position`, `office`, `experience`) VALUES
 (3, 1, 2, 1),
-(4, 1, 1, 1);
+(4, 1, 1, 1),
+(8, 1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -364,7 +375,6 @@ CREATE TABLE `promotion` (
 --
 
 INSERT INTO `promotion` (`code`, `benefit`, `course`) VALUES
-('eng30', 30, 2),
 ('eng50', 50, 1);
 
 -- --------------------------------------------------------
@@ -386,9 +396,10 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `created_date`) VALUES
-(22, 4, 'eng50', 2, '2018-05-10 01:10:29'),
-(23, 4, 'eng50', 1, '2018-05-10 01:10:29'),
-(28, 1, NULL, 1, '2018-05-15 10:21:02');
+(28, 1, NULL, 1, '2018-05-15 10:21:02'),
+(29, 20, NULL, 2, '2018-05-25 16:31:08'),
+(30, 1, NULL, 2, '2018-05-25 16:32:10'),
+(31, 15, NULL, 2, '2018-05-25 21:55:31');
 
 -- --------------------------------------------------------
 
@@ -438,8 +449,10 @@ CREATE TABLE `room_schedule` (
 INSERT INTO `room_schedule` (`id`, `class`, `schedule`, `current_date`, `teacher`, `room`) VALUES
 (1, 1, 1, 'Monday', 1, 3),
 (2, 1, 2, 'Wednesday', 1, 4),
-(3, 4, 3, 'Wednesday', 1, 6),
-(4, 4, 5, 'Friday', 1, 1);
+(14, 15, 1, 'Wednesday', 1, 3),
+(17, 18, 1, 'Thursday', 1, 3),
+(20, 20, 1, 'Wednesday', 6, 1),
+(21, 20, 4, 'Thursday', 6, 6);
 
 -- --------------------------------------------------------
 
@@ -458,7 +471,9 @@ CREATE TABLE `room_ta` (
 --
 
 INSERT INTO `room_ta` (`id`, `TA`, `room_schedule`) VALUES
-(1, 4, 1);
+(1, 4, 1),
+(4, 4, 17),
+(5, 7, 17);
 
 -- --------------------------------------------------------
 
@@ -521,15 +536,6 @@ CREATE TABLE `teacher_dayoff` (
   `room_schedule` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Đang đổ dữ liệu cho bảng `teacher_dayoff`
---
-
-INSERT INTO `teacher_dayoff` (`id`, `backup_teacher`, `date`, `room_schedule`) VALUES
-(1, 1, '2018-05-25', 3),
-(2, NULL, '2018-05-18', 3),
-(3, NULL, '2018-05-02', 3);
-
 -- --------------------------------------------------------
 
 --
@@ -547,7 +553,8 @@ CREATE TABLE `teaching_assistant` (
 
 INSERT INTO `teaching_assistant` (`id`, `degree`) VALUES
 (4, 'Master of assistant'),
-(7, 'College');
+(7, 'College'),
+(9, 'College');
 
 -- --------------------------------------------------------
 
@@ -561,13 +568,6 @@ CREATE TABLE `teaching_offset` (
   `date` date NOT NULL,
   `room_schedule` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `teaching_offset`
---
-
-INSERT INTO `teaching_offset` (`id`, `teacher_dayoff`, `date`, `room_schedule`) VALUES
-(1, 2, '2018-06-10', 3);
 
 -- --------------------------------------------------------
 
@@ -593,9 +593,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`, `teacher`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/user/1.jpg', 'Sfia2E97Rd6I8byYlE3TmQlP8XyK0PA4Q6gwYPTbioblOkxpwTQaBaSAN4AW', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
-(2, 'Ho Minh Nha', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', './img/user/2.JPG', 'rH95GW9aBDxN8j43qWCrcZsoQwoDlz3J6B2CJqS7fgEgpfZhx1Tla5CYQ6E0', NULL, NULL, NULL),
-(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', 'rWfDef41lY2W18T75N0ATgIXi190ERa6afCaBqYMxQbvStjPPl4Vg9TInVCk', NULL, NULL, 1);
+(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/user/1.jpg', 'oG4m9OA1MLDAVtRAQeiU3ECY5mP2XXwpXOoidsA9tzSGFmjhdLSVvQ8hC2AX', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
+(2, 'Ho Minh Nha', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', './img/user/2.jpg', 'ydtgaTYmkBG9xY94iuxqXo9PnNWpcl9AzuiGYtJQ1ee5ZcyUr5Ge4OxZglJq', NULL, NULL, NULL),
+(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', 'e2xPCaTbghIunYTtERryrgoyKfawoQw6T10WAakVyaZ0UuuEgUgJCmNy5uh2', NULL, NULL, 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -650,6 +650,7 @@ ALTER TABLE `employee`
 --
 ALTER TABLE `exam`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `register` (`register`),
   ADD KEY `Exam_fk0` (`register`);
 
 --
@@ -784,7 +785,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `class`
 --
 ALTER TABLE `class`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `course`
@@ -802,13 +803,13 @@ ALTER TABLE `course_room`
 -- AUTO_INCREMENT cho bảng `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `main_teacher`
@@ -832,13 +833,13 @@ ALTER TABLE `office_main_teacher`
 -- AUTO_INCREMENT cho bảng `office_ta`
 --
 ALTER TABLE `office_ta`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `office_worker`
 --
 ALTER TABLE `office_worker`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `position`
@@ -850,7 +851,7 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT cho bảng `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT cho bảng `room`
@@ -862,13 +863,13 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT cho bảng `room_schedule`
 --
 ALTER TABLE `room_schedule`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `room_ta`
 --
 ALTER TABLE `room_ta`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `schedule`
@@ -886,19 +887,19 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT cho bảng `teacher_dayoff`
 --
 ALTER TABLE `teacher_dayoff`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `teaching_assistant`
 --
 ALTER TABLE `teaching_assistant`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `teaching_offset`
 --
 ALTER TABLE `teaching_offset`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
@@ -949,7 +950,7 @@ ALTER TABLE `course_teacher`
 -- Các ràng buộc cho bảng `exam`
 --
 ALTER TABLE `exam`
-  ADD CONSTRAINT `Exam_fk0` FOREIGN KEY (`register`) REFERENCES `register` (`id`);
+  ADD CONSTRAINT `Exam_fk0` FOREIGN KEY (`register`) REFERENCES `register` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `main_teacher`
@@ -989,7 +990,7 @@ ALTER TABLE `promotion`
 -- Các ràng buộc cho bảng `register`
 --
 ALTER TABLE `register`
-  ADD CONSTRAINT `Register_fk0` FOREIGN KEY (`class`) REFERENCES `class` (`id`),
+  ADD CONSTRAINT `Register_fk0` FOREIGN KEY (`class`) REFERENCES `class` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `Register_fk2` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `register_ibfk_1` FOREIGN KEY (`promotion`) REFERENCES `promotion` (`code`);
 
@@ -1003,7 +1004,7 @@ ALTER TABLE `room`
 -- Các ràng buộc cho bảng `room_schedule`
 --
 ALTER TABLE `room_schedule`
-  ADD CONSTRAINT `room_schedule_fk0` FOREIGN KEY (`class`) REFERENCES `class` (`id`),
+  ADD CONSTRAINT `room_schedule_fk0` FOREIGN KEY (`class`) REFERENCES `class` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `room_schedule_fk1` FOREIGN KEY (`schedule`) REFERENCES `schedule` (`id`),
   ADD CONSTRAINT `room_schedule_fk2` FOREIGN KEY (`teacher`) REFERENCES `main_teacher` (`id`),
   ADD CONSTRAINT `room_schedule_fk3` FOREIGN KEY (`room`) REFERENCES `room` (`id`);
@@ -1013,13 +1014,13 @@ ALTER TABLE `room_schedule`
 --
 ALTER TABLE `room_ta`
   ADD CONSTRAINT `room_TA_fk0` FOREIGN KEY (`TA`) REFERENCES `teaching_assistant` (`id`),
-  ADD CONSTRAINT `room_TA_fk1` FOREIGN KEY (`room_schedule`) REFERENCES `room_schedule` (`id`);
+  ADD CONSTRAINT `room_TA_fk1` FOREIGN KEY (`room_schedule`) REFERENCES `room_schedule` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `teacher_dayoff`
 --
 ALTER TABLE `teacher_dayoff`
-  ADD CONSTRAINT `teacher_backup_fk0` FOREIGN KEY (`room_schedule`) REFERENCES `room_schedule` (`id`),
+  ADD CONSTRAINT `teacher_backup_fk0` FOREIGN KEY (`room_schedule`) REFERENCES `room_schedule` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `teacher_backup_fk1` FOREIGN KEY (`backup_teacher`) REFERENCES `employee` (`id`);
 
 --
@@ -1032,8 +1033,8 @@ ALTER TABLE `teaching_assistant`
 -- Các ràng buộc cho bảng `teaching_offset`
 --
 ALTER TABLE `teaching_offset`
-  ADD CONSTRAINT `teaching_offset_ibfk_3` FOREIGN KEY (`teacher_dayoff`) REFERENCES `teacher_dayoff` (`id`),
-  ADD CONSTRAINT `teaching_offset_ibfk_4` FOREIGN KEY (`room_schedule`) REFERENCES `room_schedule` (`id`);
+  ADD CONSTRAINT `teaching_offset_ibfk_3` FOREIGN KEY (`teacher_dayoff`) REFERENCES `teacher_dayoff` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `teaching_offset_ibfk_4` FOREIGN KEY (`room_schedule`) REFERENCES `room_schedule` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `users`

@@ -900,10 +900,15 @@ class AdminController extends Controller
     }
 
     public function updateScore(Request $r) {
-       if ($r->id != null)
-            $data = Exam::findOrFail($r->id);
-        else 
+        if ($r->id != null){
+            $data = Exam::find($r->id);
+            if ($data == null) {
+                return back();
+            }
+        }
+        else {
             $data = new Exam;
+        }
         $data->register = $r->register;
         $data->score = $r->score;
         $data->save();
