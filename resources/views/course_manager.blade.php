@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="x in courseInfo">
+            <tr ng-repeat="x in courseInfo" on-finish-render="test()">
                 <td><% x.name %></td>
                 <td><% x.subject %></td>
                 <td><% x.total_of_period %></td>

@@ -118,6 +118,11 @@
     .adminpage .tab-content .tab-pane table {
       font-family: 'Roboto', sans-serif;
       font-size: 15px; }
+      .adminpage .tab-content .tab-pane table th {
+        background: #337ab7;
+        color: #fff;
+        font-weight: normal;
+        border-bottom: 1px; }
       .adminpage .tab-content .tab-pane table td, .adminpage .tab-content .tab-pane table th {
         text-align: center;
         text-transform: capitalize;

@@ -134,6 +134,12 @@ $blue: #337ab7;
 			table {
 				font-family: 'Roboto', sans-serif;
 				font-size: 15px;
+				th {
+					background: $blue;
+					color: #fff;
+					font-weight: normal;
+					border-bottom: 1px;
+				}
 				td, th {
 					text-align: center;
 					text-transform: capitalize;
