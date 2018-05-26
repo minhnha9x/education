@@ -7,17 +7,20 @@
     <link href="./css/jquery.flipster.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" rel="stylesheet" crossorigin="anonymous">
-    <link href="./css/datatables.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
  
     <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./js/jquery.canvasjs.min.js"></script>
     <script type="text/javascript" src="./js/jquery.flipster.min.js"></script>
-    <script type="text/javascript" src="./js/datatables.min.js"></script>
     <script type="text/javascript" src="./js/underscore-min.js"></script>
     <script type="text/javascript" src="./js/jquery.toaster.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script type="text/javascript" src="./js/ng-file-upload.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.0.0/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-utils/0.1.1/angular-ui-utils.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

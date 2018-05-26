@@ -1,6 +1,6 @@
 <div ng-controller="CourseController">
     <div class="addbutton hvr-sweep-to-right" ng-click="showModal(1, -1)">Thêm khóa học</div>
-    <table id="courseTable" class="table table-bordered table-hover">
+    <table id="courseTable" class="table table-bordered bordered table-striped table-condensed datatable" ui-jq="dataTable">
         <thead>
             <tr>
                 <th>Tên khóa học</th>

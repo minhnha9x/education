@@ -107,6 +107,7 @@
                                     @foreach ($schedule as $sc)
                                         @if ($sc->schedule == $s->slot_in_day && $sc->current_date == $w)
                                             <td class="text">
+                                                <div class="course">Lớp {{$sc->class}}</div>
                                                 <div class="course">{{$sc->course}}</div>
                                                 <strong>{{$sc->name}}</strong>
                                                 <div class="course">Phòng {{$sc->room}}</div>
@@ -247,6 +248,7 @@
                                     @foreach ($tschedule as $t)
                                         @if ($t->schedule == $s->slot_in_day && $t->current_date == $w)
                                             <td class="text" id="{{$c}}{{$d}}" data-slot="{{$c}}" data-date="{{$d}}" data-class="{{$t->class}}">
+                                                <div class="course">Lớp {{$t->class}}</div>
                                                 <div class="course">{{$t->course}}</div>
                                                 <strong>{{$t->name}}</strong>
                                                 <div class="course">Phòng {{$t->room}}</div>
@@ -448,16 +450,6 @@
 <script src="js/ProfileController.js"></script>
 
 <script type="text/javascript">
-    $('#tschedule').DataTable({
-        lengthChange: false,
-        info: false,
-        ordering: false,
-        searching: false,
-        paging: false,
-    });
-
-    $test = <?= json_encode($test); ?>;
-
     $('.text-wrapper #edit-button').click(function(){
         $('#update_profile').modal('show', 300)
     });

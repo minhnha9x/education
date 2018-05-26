@@ -792,7 +792,7 @@ class AdminController extends Controller
         return $data;
     }
 
-    public function countRegisterBySubjectInYear(request $r) {
+    public function countRegisterBySubjectInYear(Request $r) {
         $year = $r->year;
         $result = array();
         for ($month = 1; $month <= 12; $month++) {
@@ -801,7 +801,7 @@ class AdminController extends Controller
         return $result;
     }
 
-    public function countRegisterByOfficeInYear(request $r) {
+    public function countRegisterByOfficeInYear(Request $r) {
         $year = $r->year;
         $result = array();
         for ($month = 1; $month <= 12; $month++) {
