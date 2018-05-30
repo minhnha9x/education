@@ -173,13 +173,8 @@ class AdminController extends Controller
     }
 
     public function deleteCourse(Request $r) {
-        try {
-            $course = Course::where('id', $r->id)
-            ->delete();
-        }
-        catch (\Exception $e) {
-            return $e->getMessage();
-        }
+        $course = Course::findOrFail($r->id)
+        ->delete();
         return array('msg' => 'Xóa khóa học thành công.', 'type' => 'success');
     }
 

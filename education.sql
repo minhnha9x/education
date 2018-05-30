@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 25, 2018 lúc 08:35 PM
+-- Thời gian đã tạo: Th5 29, 2018 lúc 05:15 PM
 -- Phiên bản máy phục vụ: 10.1.30-MariaDB
 -- Phiên bản PHP: 7.2.2
 
@@ -77,7 +77,7 @@ INSERT INTO `course` (`id`, `name`, `subject`, `price`, `certificate_required`, 
 (6, 'Art for beginer', 3, 6000000, NULL, 30, 'Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit.', './img/art1.jpg', 2),
 (7, 'Piano', 4, 6000000, 9, 40, 'Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit.', './img/piano1.jpg', 1),
 (8, 'Guitar', 4, 4000000, 9, 30, 'Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/guita1.jpg', 1),
-(9, 'Music Theory', 4, 600000, NULL, 40, 'Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/music1.jpg', 1);
+(9, 'Music Theory', 4, 600000, NULL, 60, 'Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/music1.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -220,7 +220,7 @@ CREATE TABLE `exam` (
 INSERT INTO `exam` (`id`, `register`, `score`, `teacher_feedback`, `supervisor_feedback`, `result`) VALUES
 (12, 30, 5, 'Lười học', 'Đi học đều', 'Pass'),
 (15, 29, 4, 'Học rất ngu', 'Lười đi học', 'Fail'),
-(16, 28, 4, 'Học chưa tốt', NULL, ''),
+(16, 28, 6, 'Học chưa tốt', NULL, ''),
 (20, 31, 1, 'Yếu kém', NULL, '');
 
 -- --------------------------------------------------------
@@ -593,9 +593,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`, `teacher`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/user/1.jpg', 'oG4m9OA1MLDAVtRAQeiU3ECY5mP2XXwpXOoidsA9tzSGFmjhdLSVvQ8hC2AX', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
-(2, 'Ho Minh Nha', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', './img/user/2.jpg', 'ydtgaTYmkBG9xY94iuxqXo9PnNWpcl9AzuiGYtJQ1ee5ZcyUr5Ge4OxZglJq', NULL, NULL, NULL),
-(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', 'e2xPCaTbghIunYTtERryrgoyKfawoQw6T10WAakVyaZ0UuuEgUgJCmNy5uh2', NULL, NULL, 1);
+(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/user/1.jpg', 'XRSMwu1v4sselvNcTKtNgLbi7qvKU467DcGcMatGo4noQtdunJO1aQ8tKXfM', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
+(2, 'Ho Minh Nha', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', './img/user/2.jpg', 'Q8FtW7Uu5NhZyzvBLqD038AeNTwSmmqcZljUmBXx2HLWLsyUwb1AMxKkRhRf', NULL, NULL, NULL),
+(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', 'SawG4FhJMKDWFzUxbAg1N1jnMTKBta7vQ06zUzbDV3BHEuosMjM8ZlsRJ4Pe', NULL, NULL, 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -869,7 +869,7 @@ ALTER TABLE `room_schedule`
 -- AUTO_INCREMENT cho bảng `room_ta`
 --
 ALTER TABLE `room_ta`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `schedule`
@@ -923,27 +923,27 @@ ALTER TABLE `class`
 --
 ALTER TABLE `course`
   ADD CONSTRAINT `Course_fk0` FOREIGN KEY (`subject`) REFERENCES `subject` (`id`),
-  ADD CONSTRAINT `Course_fk1` FOREIGN KEY (`certificate_required`) REFERENCES `course` (`id`);
+  ADD CONSTRAINT `Course_fk1` FOREIGN KEY (`certificate_required`) REFERENCES `course` (`id`) ON DELETE SET NULL;
 
 --
 -- Các ràng buộc cho bảng `course_room`
 --
 ALTER TABLE `course_room`
-  ADD CONSTRAINT `course_room_fk0` FOREIGN KEY (`course`) REFERENCES `course` (`id`),
+  ADD CONSTRAINT `course_room_fk0` FOREIGN KEY (`course`) REFERENCES `course` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `course_room_fk1` FOREIGN KEY (`room`) REFERENCES `room` (`id`);
 
 --
 -- Các ràng buộc cho bảng `course_ta`
 --
 ALTER TABLE `course_ta`
-  ADD CONSTRAINT `course_TA_fk0` FOREIGN KEY (`course`) REFERENCES `course` (`id`),
+  ADD CONSTRAINT `course_TA_fk0` FOREIGN KEY (`course`) REFERENCES `course` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `course_TA_fk1` FOREIGN KEY (`TA`) REFERENCES `teaching_assistant` (`id`);
 
 --
 -- Các ràng buộc cho bảng `course_teacher`
 --
 ALTER TABLE `course_teacher`
-  ADD CONSTRAINT `course_teacher_fk0` FOREIGN KEY (`course`) REFERENCES `course` (`id`),
+  ADD CONSTRAINT `course_teacher_fk0` FOREIGN KEY (`course`) REFERENCES `course` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `course_teacher_fk1` FOREIGN KEY (`teacher`) REFERENCES `main_teacher` (`id`);
 
 --
