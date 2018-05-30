@@ -71,40 +71,77 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 18px; }
 
-.subject-wrapper .subject .course-wrapper {
-  margin-bottom: 30px;
-  cursor: pointer;
-  -webkit-box-shadow: 3px 3px 5px -1px #706c70;
-  -moz-box-shadow: 3px 3px 5px -1px #706c70;
-  box-shadow: 3px 3px 5px -1px #706c70; }
-  .subject-wrapper .subject .course-wrapper .img {
-    height: 250px;
-    background-size: cover;
-    background-position: center; }
-  .subject-wrapper .subject .course-wrapper .info {
-    padding: 15px;
-    background: #fff; }
-    .subject-wrapper .subject .course-wrapper .info .name {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 18px;
-      font-weight: bold;
+.subject-wrapper {
+  padding: 40px 0; }
+  .subject-wrapper .subject .course-wrapper {
+    margin-bottom: 30px;
+    cursor: pointer;
+    -webkit-box-shadow: 3px 3px 5px -1px #706c70;
+    -moz-box-shadow: 3px 3px 5px -1px #706c70;
+    box-shadow: 3px 3px 5px -1px #706c70; }
+    .subject-wrapper .subject .course-wrapper .img {
+      height: 250px;
+      background-size: cover;
+      background-position: center; }
+    .subject-wrapper .subject .course-wrapper .info {
+      padding: 15px;
+      background: #fff; }
+      .subject-wrapper .subject .course-wrapper .info .name {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px; }
+      .subject-wrapper .subject .course-wrapper .info .price {
+        font-family: 'Roboto', sans-serif;
+        margin-bottom: 10px; }
+        .subject-wrapper .subject .course-wrapper .info .price img {
+          width: 20px;
+          height: 20px;
+          -webkit-filter: invert(100%);
+          margin-right: 5px;
+          vertical-align: bottom; }
+      .subject-wrapper .subject .course-wrapper .info .desc {
+        text-align: justify;
+        font-family: 'Roboto', sans-serif;
+        font-style: italic;
+        height: 120px;
+        overflow: hidden; }
+
+.education-info {
+  background-image: url("../img/student.png");
+  background-position: bottom;
+  background-size: cover;
+  padding: 70px 0; }
+  .education-info .title {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 70px; }
+  .education-info .box-wrapper {
+    text-align: center; }
+  .education-info .box {
+    color: #fff;
+    display: inline-block;
+    width: 85%;
+    padding-top: 85%;
+    position: relative;
+    cursor: pointer; }
+    .education-info .box .text-wrapper {
+      position: absolute;
       text-align: center;
-      margin-bottom: 10px; }
-    .subject-wrapper .subject .course-wrapper .info .price {
-      font-family: 'Roboto', sans-serif;
-      margin-bottom: 10px; }
-      .subject-wrapper .subject .course-wrapper .info .price img {
-        width: 20px;
-        height: 20px;
-        -webkit-filter: invert(100%);
-        margin-right: 5px;
-        vertical-align: bottom; }
-    .subject-wrapper .subject .course-wrapper .info .desc {
-      text-align: justify;
-      font-family: 'Roboto', sans-serif;
-      font-style: italic;
-      height: 120px;
-      overflow: hidden; }
+      top: 0;
+      left: 0;
+      width: 100%; }
+    .education-info .box .big-text {
+      font-size: 45px; }
+    .education-info .box .text {
+      font-size: 13px;
+      text-transform: uppercase;
+      font-weight: bold;
+      opacity: 0.8;
+      height: 35px; }
 
 .homepage-modal a {
   text-decoration: none !important; }

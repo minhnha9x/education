@@ -68,7 +68,7 @@ class UtilController extends Controller
     public function sendMail(Request $request)
     {
         Mail::send('mail_template.mail', array('firstname'=>'nhamh'), function($message){
-            $message->to('minhnha9z@gmail.com', 'Visitor')->subject('Visitor Feedback!');
+            $message->to($request->email, 'Visitor')->subject('Visitor Feedback!');
         });
         Session::flash('flash_message', 'Send message successfully!');
 

@@ -19,9 +19,9 @@
 							<tr ng-repeat="x in scheduleClassInfo">
 								<td><% x.id %></td>
 								<td><% x.office %></td>
-								<td>
+								<td style="white-space: nowrap;">
 									<span ng-repeat="y in scheduleInfo" ng-if="y.class == x.id">
-										<% y.current_date %>: <% y.start_time %> - <% y.end_time %> (Phòng <% y.room %>)<br>
+										<% y.current_date %>: <% y.start_time | limitTo: 5 %> - <% y.end_time | limitTo: 5 %> (Phòng <% y.room %>)<br>
 									</span>
 								</td>
 								<td></td>
