@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 29, 2018 lúc 05:15 PM
+-- Thời gian đã tạo: Th5 30, 2018 lúc 07:11 PM
 -- Phiên bản máy phục vụ: 10.1.30-MariaDB
 -- Phiên bản PHP: 7.2.2
 
@@ -218,9 +218,9 @@ CREATE TABLE `exam` (
 --
 
 INSERT INTO `exam` (`id`, `register`, `score`, `teacher_feedback`, `supervisor_feedback`, `result`) VALUES
-(12, 30, 5, 'Lười học', 'Đi học đều', 'Pass'),
+(12, 30, 8, 'Lười học', 'Đi học đều', 'Pass'),
 (15, 29, 4, 'Học rất ngu', 'Lười đi học', 'Fail'),
-(16, 28, 6, 'Học chưa tốt', NULL, ''),
+(16, 28, 6, 'Học chưa tốt', NULL, 'Pass'),
 (20, 31, 1, 'Yếu kém', NULL, '');
 
 -- --------------------------------------------------------
@@ -503,6 +503,26 @@ INSERT INTO `schedule` (`id`, `slot_in_day`, `start_time`, `end_time`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `student_level`
+--
+
+CREATE TABLE `student_level` (
+  `id` int(11) NOT NULL,
+  `course` bigint(20) NOT NULL,
+  `member` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `student_level`
+--
+
+INSERT INTO `student_level` (`id`, `course`, `member`) VALUES
+(1, 1, 1),
+(2, 1, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `subject`
 --
 
@@ -593,7 +613,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`, `teacher`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/user/1.jpg', 'XRSMwu1v4sselvNcTKtNgLbi7qvKU467DcGcMatGo4noQtdunJO1aQ8tKXfM', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
+(1, 'admin', 'admin@gmail.com', '$2y$10$2lnE8Q3W9U49vhhfNq1EyuwckGTjO2uNMVRaJIrVDHfZ4UZamNPY6', 'admin', './img/user/1.jpg', 'j1WvZThECCHJ8Q7X16illBEbVUDmKERPNZ7ImzBUqeUspiCnRkNw56GPKOzV', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
 (2, 'Ho Minh Nha', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', './img/user/2.jpg', 'Q8FtW7Uu5NhZyzvBLqD038AeNTwSmmqcZljUmBXx2HLWLsyUwb1AMxKkRhRf', NULL, NULL, NULL),
 (5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', 'SawG4FhJMKDWFzUxbAg1N1jnMTKBta7vQ06zUzbDV3BHEuosMjM8ZlsRJ4Pe', NULL, NULL, 1);
 
@@ -743,6 +763,14 @@ ALTER TABLE `schedule`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `student_level`
+--
+ALTER TABLE `student_level`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `studen_level_fk01` (`course`),
+  ADD KEY `studen_level_fk02` (`member`);
+
+--
 -- Chỉ mục cho bảng `subject`
 --
 ALTER TABLE `subject`
@@ -876,6 +904,12 @@ ALTER TABLE `room_ta`
 --
 ALTER TABLE `schedule`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT cho bảng `student_level`
+--
+ALTER TABLE `student_level`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `subject`
@@ -1015,6 +1049,13 @@ ALTER TABLE `room_schedule`
 ALTER TABLE `room_ta`
   ADD CONSTRAINT `room_TA_fk0` FOREIGN KEY (`TA`) REFERENCES `teaching_assistant` (`id`),
   ADD CONSTRAINT `room_TA_fk1` FOREIGN KEY (`room_schedule`) REFERENCES `room_schedule` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `student_level`
+--
+ALTER TABLE `student_level`
+  ADD CONSTRAINT `studen_level_fk01` FOREIGN KEY (`course`) REFERENCES `course` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `studen_level_fk02` FOREIGN KEY (`member`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `teacher_dayoff`

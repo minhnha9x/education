@@ -21,29 +21,29 @@ class LoginController extends Controller
         return redirect('./');
     }
     public function postLogin(Request $request) {
-    	$rules = [
-    		'email' =>'required|email',
-    		'password' => 'required|min:8'
-    	];
-    	$messages = [
-    		'email.email' => 'Email không đúng định dạng',
-    		'password.min' => 'Mật khẩu phải chứa ít nhất 8 ký tự',
-    	];
-    	$validator = Validator::make($request->all(), $rules, $messages);
+        $rules = [
+            'email' =>'required|email',
+            'password' => 'required|min:8'
+        ];
+        $messages = [
+            'email.email' => 'Email không đúng định dạng',
+            'password.min' => 'Mật khẩu phải chứa ít nhất 8 ký tự',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
 
-    	if ($validator->fails()) {
-    		return redirect()->back()->withErrors($validator)->withInput();
-    	} else {
-    		$email = $request->input('email');
-    		$password = $request->input('password');
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $email = $request->input('email');
+            $password = $request->input('password');
 
-    		if( Auth::attempt(['email' => $email, 'password' =>$password])) {
-    			return redirect()->back()->withInput();
-    		} else {
-    			$errors = new MessageBag(['errorlogin' => 'Email hoặc mật khẩu không đúng']);
-    			return redirect()->back()->withInput()->withErrors($errors);
-    		}
-    	}
+            if( Auth::attempt(['email' => $email, 'password' =>$password])) {
+                return redirect()->back()->withInput();
+            } else {
+                $errors = new MessageBag(['errorlogin' => 'Email hoặc mật khẩu không đúng']);
+                return redirect()->back()->withInput()->withErrors($errors);
+            }
+        }
     }
     public function addUser(Request $r) {
         $user = new User;

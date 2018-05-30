@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use App\Student_Level;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use Illuminate\Support\Facades\Session;
 use Mail;
@@ -46,8 +47,25 @@ class UtilController extends Controller
                 }
             }
         }
-        return true;
-        
+        return $this->validateCourseRequired($user_id, $class_id);
+    }
+
+    public function validateCourseRequired($user_id, $class_id) {
+        $class = DB::table('class')
+        ->where('class.id', $class_id)
+        ->leftjoin('course', 'course.id', 'class.course')
+        ->select('course.certificate_required')
+        ->first();
+        if ($class->certificate_required == null)
+            return true;
+        if (!$class)
+            return false;
+        $sl_obj = Student_Level::where('course', $class->certificate_required)
+        ->where('member', $user_id)
+        ->first();
+        if ($sl_obj)
+            return true;
+        return false;
     }
 
     public function getScheduleAsDict($class_id) {
@@ -67,8 +85,9 @@ class UtilController extends Controller
 
     public function sendMail(Request $request)
     {
-        Mail::send('mail_template.mail', array('firstname'=>'nhamh'), function($message){
-            $message->to($request->email, 'Visitor')->subject('Visitor Feedback!');
+        $email = $request->email;
+        Mail::send('mail_template.mail', array('firstname'=>'nhamh'), function($message) use ($email){
+            $message->to($email, 'Visitor')->subject('Visitor Feedback!');
         });
         Session::flash('flash_message', 'Send message successfully!');
 

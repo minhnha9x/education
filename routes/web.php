@@ -106,8 +106,6 @@ Route::post('/updatescorelist', 'ProfileController@updateScoreList');
 
 Route::get('/sendmail', 'UtilController@sendMail');
 
-Route::get('/test', 'UtilController@getEmployeeExcludeOW');
-
 
 
 

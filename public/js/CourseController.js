@@ -6,9 +6,17 @@ angular.module('educationApp').controller('CourseController', function($scope, $
         })
         .then(function(response) {
             $scope.courseInfo = response.data;
+            console.log($scope.courseInfo);
             $('#courseTable').DataTable({
-                lengthChange: false,
-                pageLength: 15,
+                data: $scope.courseInfo,
+                columns: [
+                    { data: 'name' },
+                    { data: 'subject' },
+                    { data: 'total_of_period' },
+                    { data: 'count' },
+                    { data: 'price' },
+                    { data: 'certificate_required' }
+                ]
             });
             $('#courseModal').modal('hide');
         }, function(response) {

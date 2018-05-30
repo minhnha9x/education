@@ -12,6 +12,7 @@ use App\Teaching_Offset;
 use App\Employee;
 use App\Exam;
 use App\User;
+use App\Student_Level;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use File;
@@ -338,6 +339,29 @@ class ProfileController extends Controller
             $data->score = $score->score;
             $data->teacher_feedback = $score->teacher_feedback;
             $data->supervisor_feedback = $score->supervisor_feedback;
+            $course = DB::table('register')
+            ->leftjoin('class', 'class.id', 'register.class')
+            ->leftjoin('course', 'course.id', 'class.course')
+            ->where('register.id', $score->register)
+            ->select('course.id', 'register.user')
+            ->first();
+            $sl_obj = Student_Level::where('course', $course->id)
+                ->where('member', $course->user)
+                ->first();
+            if ($score->score >= 5) {
+                $data->result = 'Pass';
+                if (!$sl_obj) {
+                    $sl_obj = new Student_Level;
+                    $sl_obj->member = $course->user;
+                    $sl_obj->course = $course->id;
+                    $sl_obj->save();
+                }
+            }
+            else {
+                $data->result = 'Fail';
+                if ($sl_obj)
+                    $sl_obj->delete();
+            }
             $data->save();
         }
         return back()->withInput();
