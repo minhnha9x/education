@@ -127,7 +127,6 @@ a {
     box-shadow: none;
     border: 0; }
     #myLoginModal .modal-dialog .modal-content .main-agileits {
-      font-family: 'Sirin Stencil', cursive;
       position: relative;
       width: 100%;
       background: #333;
@@ -152,8 +151,7 @@ a {
             text-align: center;
             margin-bottom: 30px;
             letter-spacing: 2px;
-            margin-top: 0;
-            font-family: 'Sirin Stencil', cursive; }
+            margin-top: 0; }
           #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .icon-w3 {
             display: inline-block;
             position: absolute;
@@ -176,8 +174,7 @@ a {
               border: 1px solid #DCCBCF;
               -webkit-appearance: none;
               margin-bottom: 10px;
-              background: transparent;
-              font-family: 'Sirin Stencil', cursive; }
+              background: transparent; }
             #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .error {
               color: red; }
             #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .success {
@@ -196,7 +193,6 @@ a {
             margin-top: 20px;
             font-weight: bold;
             text-transform: uppercase;
-            font-family: 'Sirin Stencil', cursive;
             transition: 0.3s all;
             -webkit-transition: 0.3s all;
             -moz-transition: 0.3s all;
@@ -216,8 +212,7 @@ a {
             margin-top: 0em;
             text-align: center;
             text-transform: none;
-            float: left;
-            font-family: 'Sirin Stencil', cursive; }
+            float: left; }
             @media screen and (max-width: 768px) {
               #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .p-bottom-w3ls, #myLoginModal .modal-dialog .modal-content .main-agileits .form-w3-agile form .p-bottom-w3ls1 {
                 float: none; } }

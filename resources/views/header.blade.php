@@ -54,7 +54,7 @@
                     </div>
                 @else
                     <div class="login" id="login-btn">
-                        <i class="fas fa-unlock-alt"></i>Account
+                        <i class="fas fa-unlock-alt"></i>Tài khoản
                     </div>
                 @endif
         </ul>

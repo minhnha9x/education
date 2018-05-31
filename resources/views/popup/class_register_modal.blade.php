@@ -6,7 +6,7 @@
                 	<form role='form' ng-submit="addRegister()">
                 		<input type="number" name="class" hidden>
                 		<input type="number" name="course" hidden>
-                		<h2>Thông tin đăng kí</h2>
+                		<h2>Thông tin đăng ký học</h2>
 	                    <div class="form-sub-w3 col-md-12">
 	                    	<div class="info">
                                 <div class="course">Khóa học: <span><% courseName %></span></div>
@@ -27,7 +27,7 @@
                             @if ($check)
                                 <input type="button" name="back" value='back' ng-click="backModal()">
                             @endif
-                            <input type="submit" value="Đăng kí">
+                            <input type="submit" value="Đăng ký">
                         </div>
                 	</form>
                 </div>      

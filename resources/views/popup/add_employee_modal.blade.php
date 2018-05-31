@@ -21,18 +21,6 @@
                         <div class="form-sub-w3 col-md-6">
                             <input type="email" placeholder="Email" ng-model="employeeMail" required>
                         </div>
-                        <div class="form-sub-w3 col-md-6">
-                            <select ng-model="Position">
-                                <option value="" selected>Vị trí</option>
-                                <option ng-repeat="x in positionInfo" value="<% x.id %>" ng-if="x.id != 2 && x.id != 3"><% x.name %></option>
-                            </select>
-                        </div>
-                        <div class="form-sub-w3 col-md-6">
-                            <select ng-model="officeName">
-                                <option value="" selected>Trung tâm</option>
-                                <option ng-repeat="x in officeInfo" value="<% x.id %>"><% x.name %></option>
-                            </select>
-                        </div>
                         {!! csrf_field() !!}
                         <div class="submit-w3l col-md-12">
                             <input type="submit" value="<% button %>">

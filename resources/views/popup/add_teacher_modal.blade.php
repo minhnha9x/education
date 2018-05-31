@@ -6,10 +6,11 @@
                     <form role="form" class="clearfix" ng-submit="addTeacher(editTeacher)">
                         <h2 id="form-title"><% button %></h2>
                         <div class="form-sub-w3 col-md-6">
-                            <select required ng-model="teacherName">
+                            <select ng-model="teacherNameSelected" ng-show="showSelect" ng-required="showSelect">
                                 <option value="" selected disabled hidden>Tên giáo viên</option>
-                                <option ng-repeat="x in employeeInfo" value="<% x.id %>"><% x.name %> (<% x.mail %>)</option>
+                                <option ng-repeat="x in listEmployeeInfo" value="<% x.id %>"><% x.name %> (<% x.mail %>)</option>
                             </select>
+                            <input type="text" ng-model="teacherName" disabled ng-show="!showSelect">
                         </div>
                         <div class="form-sub-w3 col-md-6">
                             <input type="text" placeholder="Bằng cấp" ng-model="teacherDegree" required>

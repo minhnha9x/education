@@ -1,6 +1,5 @@
 angular.module('educationApp').controller('EmployeeController', function($scope, $http) {
     $scope.init = function () {
-        $scope.employeeType = '1';
         $http({
             url: './getAllEmployee',
             method: 'GET',
@@ -19,6 +18,17 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         .then(function(response) {
             $scope.teacherInfo = response.data;
             $('#teacherModal').modal('hide');
+        }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+        $http({
+            url: './getAllWorker',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.workerInfo = response.data;
+            $('#workerModal').modal('hide');
         }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -43,16 +53,32 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
+        $http({
+            url: './getAllPosition',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.positionInfo = response.data;
+        }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
     }
     $scope.init();
 
     $scope.changeTable = function() {
         switch ($scope.employeeType) {
-            case '1':
+            case '0':
                 $('#employee_manager_wrapper table').each(function() {
                     $(this).hide();
                 });
                 $('#employeeTable').show();
+                break;
+            case '1':
+                $('#employee_manager_wrapper table').each(function() {
+                    $(this).hide();
+                });
+                $('#workerTable').show();
                 break;
             case '2':
                 $('#employee_manager_wrapper table').each(function() {
@@ -68,26 +94,6 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
     }
 
     $scope.showEmployeeModal = function(param1, param2) {
-        $http({
-            url: './getAllOffice',
-            method: 'GET',
-        })
-        .then(function(response) {
-            $scope.officeInfo = response.data;
-        }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
-        $http({
-            url: './getAllPosition',
-            method: 'GET',
-        })
-        .then(function(response) {
-            $scope.positionInfo = response.data;
-        }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
         switch (param1) {
             case 1:
                 $scope.button = "Thêm nhân viên";
@@ -97,8 +103,6 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 $scope.employeeMail = '';
                 $scope.employeePhone = '';
                 $scope.employeeBirthday = '';
-                $scope.officeName = '';
-                $scope.Position = '';
                 break;
             case 2:
                 $scope.button = "Sửa nhân viên";
@@ -117,8 +121,6 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                     $scope.employeePhone = response.data[0].phone;
                     if (response.data[0].birthday != null)
                         $scope.employeeBirthday = new Date(response.data[0].birthday);
-                    $scope.officeName = response.data[0].officeid + '';
-                    $scope.Position = response.data[0].positionid + '';
                 }, function(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -129,14 +131,60 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         $('#employeeModal').modal('show', 300);
     }
 
-    $scope.showTeacherModal = function(param1, param2) {
+    $scope.showWorkerModal = function(param1, param2) {
         $http({
-            url: './getAllEmployee',
+            url: './getEmployeeNotWorker',
             method: 'GET',
         })
         .then(function(response) {
-            $scope.employeeInfo = response.data;
-            $('#employeeModal').modal('hide');
+            $scope.listEmployeeInfo = response.data;
+        }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+        switch (param1) {
+            case 1:
+                $scope.button = "Thêm nhân viên văn phòng";
+                $scope.editWorker = -1;
+                $scope.workerNameSelected = '';
+                $scope.workerOffice = '';
+                $scope.workerPosition = '';
+                $scope.workerExperience = '';
+                $scope.showSelect = true;
+                break;
+            case 2:
+                $scope.button = "Sửa nhân viên văn phòng";
+                $scope.editWorker = param2;
+                $scope.showSelect = false;
+                $http({
+                    url: './getWorker',
+                    method: 'GET',
+                    params: {
+                        'id': param2,
+                    },
+                })
+                .then(function(response) {
+                    $scope.workerName = response.data[0].name;
+                    $scope.workerOffice = response.data[0].officeid + '';
+                    $scope.workerPosition = response.data[0].positionid + '';
+                    $scope.workerExperience = response.data[0].experience;
+                }, function(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+                break;
+            default:
+        }
+        $('#workerModal').modal('show', 300);
+    }
+
+    $scope.showTeacherModal = function(param1, param2) {
+        $http({
+            url: './getEmployeeNotTeacher',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.listEmployeeInfo = response.data;
         }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -145,12 +193,9 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
             case 1:
                 $scope.button = "Thêm giáo viên";
                 $scope.editTeacher = -1;
-                $scope.teacherName = '';
-                $scope.teacherAddr = '';
-                $scope.teacherMail = '';
-                $scope.teacherPhone = '';
-                $scope.teacherBirthday = '';
+                $scope.teacherNameSelected = '';
                 $scope.teacherDegree = '';
+                $scope.showSelect = true;
                 $('#teacherModal .office-wrapper input[type="checkbox"]').each(function(){
                     $(this).removeAttr('checked');
                 });
@@ -162,6 +207,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
             case 2:
                 $scope.button = "Sửa giáo viên";
                 $scope.editTeacher = param2;
+                $scope.showSelect = false;
                 $http({
                     url: './getTeacher',
                     method: 'GET',
@@ -172,9 +218,6 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 .then(function(response) {
                     $scope.teacherDegree = response.data[0].degree;
                     $scope.teacherName = response.data[0].name;
-                    $scope.teacherAddr = response.data[0].address;
-                    $scope.teacherMail = response.data[0].mail;
-                    $scope.teacherPhone = response.data[0].phone;
                     if (response.data[0].birthday != null)
                         $scope.teacherBirthday = new Date(response.data[0].birthday);
                     for (var i=0; i < response.data[0].office.length; i++) {
@@ -209,7 +252,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                     url: './addEmployee',
                     method: 'POST',
                     data: {
-                        'name': $scope.employeeName,
+                        'name': $scope.employeeNameSelected,
                         'address': $scope.employeeAddr,
                         'phone': $scope.employeePhone,
                         'mail': $scope.employeeMail,
@@ -252,6 +295,49 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         }
     }
 
+    $scope.addWorker = function(param) {
+        switch (param) {
+            case -1:
+                $http({
+                    url: './addWorker',
+                    method: 'POST',
+                    data: {
+                        'id': $scope.workerNameSelected,
+                        'office': $scope.workerOffice,
+                        'position': $scope.workerPosition,
+                        'experience': $scope.workerExperience,
+                    },
+                })
+                .then(function(response) {
+                    $scope.init();
+                    $.toaster(response.data['msg'], '', response.data['type']);
+                }, function(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+                break;
+            default:
+                $http({
+                    url: './addWorker',
+                    method: 'POST',
+                    data: {
+                        'employeeid': param,
+                        'office': $scope.workerOffice,
+                        'position': $scope.workerPosition,
+                        'experience': $scope.workerExperience,
+                    },
+                })
+                .then(function(response) {
+                    $scope.init();
+                    $.toaster(response.data['msg'], '', response.data['type']);
+                }, function(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+                break;
+        }
+    }
+
     $scope.addTeacher = function(param) {
         $scope.courseList = [];
         $scope.courseDelList = [];
@@ -276,7 +362,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                     method: 'POST',
                     data: {
                         'degree': $scope.teacherDegree,
-                        'id': $scope.teacherName,
+                        'id': $scope.teacherNameSelected,
                         'course': $scope.courseList,
                         'coursedel': $scope.courseDelList,
                         'office': $scope.officeList,
@@ -297,6 +383,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                     method: 'POST',
                     data: {
                         'employeeid': param,
+                        'degree': $scope.teacherDegree,
                         'course': $scope.courseList,
                         'coursedel': $scope.courseDelList,
                         'office': $scope.officeList,
@@ -318,6 +405,25 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         if (confirm("Are you sure you want to delete this employee?")) {
             $http({
                 url: './deleteEmployee',
+                method: 'GET',
+                params: {
+                    'id': param,
+                },
+            })
+            .then(function(response) {
+                $scope.init();
+                $.toaster(response.data['msg'], '', response.data['type']);
+            }, function(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        }
+    }
+
+    $scope.deleteWorker = function(param) {
+        if (confirm("Are you sure you want to delete this worker?")) {
+            $http({
+                url: './deleteWorker',
                 method: 'GET',
                 params: {
                     'id': param,

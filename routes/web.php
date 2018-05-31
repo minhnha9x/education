@@ -61,6 +61,15 @@ Route::get('/getEmployee', 'AdminController@getEmployee');
 Route::post('/addEmployee', 'AdminController@addEmployee');
 Route::get('/deleteEmployee', 'AdminController@deleteEmployee');
 
+Route::get('/getAllWorker', 'AdminController@getAllWorker');
+Route::get('/getWorker', 'AdminController@getWorker');
+Route::post('/addWorker', 'AdminController@addWorker');
+Route::get('/deleteWorker', 'AdminController@deleteWorker');
+
+Route::get('/getEmployeeNotWorker', 'UtilController@getEmployeeExcludeOW');
+Route::get('/getEmployeeNotTeacher', 'UtilController@getEmployeeExcludeTeacher');
+Route::get('/getEmployeeNotTA', 'UtilController@getEmployeeExcludeTA');
+
 Route::get('/getAllTeacher', 'AdminController@getAllTeacher');
 Route::get('/getTeacher', 'AdminController@getTeacher');
 Route::post('/addTeacher', 'AdminController@addTeacher');

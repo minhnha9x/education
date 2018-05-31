@@ -15,6 +15,7 @@ use App\Course_Room;
 use App\Promotion;
 use App\Employee;
 use App\Teacher;
+use App\Worker;
 use App\Office_Worker;
 use App\Office_Teacher;
 use App\Course_Teacher;
@@ -296,10 +297,6 @@ class AdminController extends Controller
 
     public function getAllEmployee() {
         $data = DB::table('employee')
-        ->leftjoin('office_worker', 'office_worker.id', 'employee.id')
-        ->leftjoin('office', 'office_worker.office', 'office.id')
-        ->leftjoin('position', 'position.id', 'office_worker.position')
-        ->select('position.name as position', 'employee.name as name', 'employee.id as id', 'employee.address as address', 'office.name as office', 'office_worker.office as officeid', 'employee.phone as phone', 'employee.mail as mail', 'employee.birthday')
         ->get();
         return $data;
     }
@@ -330,26 +327,56 @@ class AdminController extends Controller
         $data->phone = $r->phone;
         $data->mail = $r->mail;
         $data->save();
+        return $result;
+    }
 
-        if ($r->position != '' && $r->office != '')
-        {
-            $office = Office_Worker::where('id', $data->id)
-            ->first();
+    public function getAllWorker() {
+        $data = DB::table('office_worker')
+        ->leftjoin('employee', 'office_worker.id', 'employee.id')
+        ->leftjoin('office', 'office_worker.office', 'office.id')
+        ->leftjoin('position', 'office_worker.position', 'position.id')
+        ->select('*', 'position.name as position', 'office.name as office', 'employee.name as name', 'employee.id as id')
+        ->get();
+        return $data;
+    }
 
-            if ($office == null) {
-                $office = new Office_Worker;
-            }
-            $office->id = $data->id;
-            $office->position = $r->position;
-            $office->office = $r->office;
-            $office->experience = 1;
-            $office->save();
+    public function getWorker(Request $r) {
+        $data = DB::table('office_worker')
+        ->leftjoin('employee', 'office_worker.id', 'employee.id')
+        ->leftjoin('office', 'office_worker.office', 'office.id')
+        ->leftjoin('position', 'office_worker.position', 'position.id')
+        ->where('employee.id', $r->id)
+        ->select('*', 'position.name as position', 'position.id as positionid', 'office.name as office', 'office.id as officeid', 'employee.name as name', 'employee.id as id')
+        ->get();
+        return $data;
+    }
+
+    public function addWorker(Request $r) {
+        if ($r->employeeid != null) {
+            $data = Worker::findOrFail($r->employeeid);
+            $result = array('msg' => 'Đã cập nhật thông tin nhân viên văn phòng.', 'type' => 'success');
         }
         else {
-            $office = Office_Worker::where('id', $data->id)
+            $data = new Worker;
+            $data->id = $r->id;
+            $result = array('msg' => 'Thêm nhân viên văn phòng thành công.', 'type' => 'success');
+        }
+        $data->position = $r->position;
+        $data->office = $r->office;
+        $data->experience = $r->experience;
+        $data->save();
+        return $result;
+    }
+
+    public function deleteWorker(Request $r) {
+        try {
+            $data = Worker::where('id', $r->id)
             ->delete();
         }
-        return $result;
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return array('msg' => 'Xóa nhân viên văn phòng thành công.', 'type' => 'success');
     }
 
     public function deleteEmployee(Request $r) {

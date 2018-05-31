@@ -64,7 +64,7 @@
             <div class="col-md-3 box-wrapper">
                 <div class="box" style="background-color: #4BBADC">
                     <div class="text-wrapper">
-                        <div class="big-text">50</div>
+                        <div class="big-text">50+</div>
                         <div class="text">Giáo viên trình độ cao</div>
                     </div>
                 </div>
@@ -119,7 +119,6 @@
     $('.subject-wrapper').find('#' + $('.my-flipster .flipster__item--current').data('id')).removeClass('hidden');
 
     $('.education-info .box .text-wrapper').each(function() {
-        console.log($(this).height());
        $(this).css('top', ($(this).parent().parent().height() - $(this).height()) / 2);
     });
 </script>

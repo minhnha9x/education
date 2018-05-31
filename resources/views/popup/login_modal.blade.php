@@ -4,7 +4,7 @@
             <div class="main-agileits">
                 <div class="form-w3-agile">
                     <form id="login-form" action="{{url('login')}}" method="POST" role="form">
-                        <h2>Login Now</h2>
+                        <h2>Đăng nhập</h2>
                         @if($errors->has('errorlogin'))
                             <div class="alert alert-danger">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -21,7 +21,7 @@
                              @endif
                         </div>
                         <div class="form-sub-w3">
-                            <input type="password" id="password" placeholder="Password" name="password" required>
+                            <input type="password" id="password" placeholder="Mật khẩu" name="password" required>
                             <div class="icon-w3">
                                 <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                             </div>
@@ -31,16 +31,16 @@
                         </div>
                         {!! csrf_field() !!}
                         <div class="clearfix">
-                            <p class="p-bottom-w3ls">Forgot Password?<button id="login_lost_btn" type="button">Click here</button></p>
-                            <p class="p-bottom-w3ls1">New User?<button id="login_register_btn" type="button">Register here</button></p>
+                            <p class="p-bottom-w3ls">Quên mật khẩu?<button id="login_lost_btn" type="button">Click tại đây</button></p>
+                            <p class="p-bottom-w3ls1">Chưa có tài khoản?<button id="login_register_btn" type="button">Đăng ký ngay</button></p>
                         </div>
                         <div class="submit-w3l">
-                            <input type="submit" value="Login">
+                            <input type="submit" value="Đăng nhập">
                         </div>
                     </form>
 
                     <form id="lost-form" action="{{url('forgotPassword')}}" method="post" style="display:none;">
-                        <h2>Forgot Password</h2>
+                        <h2>Quên mật khẩu</h2>
                         <div class="form-sub-w3">
                             <input type="text" name="email" placeholder="Email" required>
                             <div class="icon-w3">
@@ -49,12 +49,12 @@
                         </div>
                         {!! csrf_field() !!}
                         <div class="clearfix">
-                            <p class="p-bottom-w3ls">Have Account?<button id="lost_login_btn" type="button">Log In here</button></p>
-                            <p class="p-bottom-w3ls1">New User?<button id="lost_register_btn" type="button">Register here</button></p>
+                            <p class="p-bottom-w3ls">Đã có tài khoản?<button id="lost_login_btn" type="button">Đăng nhập ngay</button></p>
+                            <p class="p-bottom-w3ls1">Chưa có tài khoản?<button id="lost_register_btn" type="button">Đăng ký ngay</button></p>
                         </div>
                         
                         <div class="submit-w3l">
-                            <input type="submit" value="Send" name="lost-submit">
+                            <input type="submit" value="OK" name="lost-submit">
                         </div>
                         
                     </form>
@@ -62,9 +62,9 @@
                     
                     <!-- Begin | Register Form -->
                     <form id="register-form" method="post" action="{{url('adduser')}}" style="display:none;">
-                        <h2>Please Sign Up</h2>
+                        <h2>Đăng ký tài khoản</h2>
                         <div class="form-sub-w3">
-                            <input type="text" name="username" placeholder="Username" required>
+                            <input type="text" name="username" placeholder="Tên tài khoản" required>
                             <div class="icon-w3">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </div>
@@ -77,18 +77,18 @@
                             </div>
                         </div>
                         <div class="form-sub-w3">
-                            <input type="password" minlength="8" name="password" placeholder="Password" required>
+                            <input type="password" minlength="8" name="password" placeholder="Mật khẩu" required>
                             <div class="icon-w3">
                                 <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                             </div>
                         </div>
                         {!! csrf_field() !!}
                         <div class="clearfix">
-                            <p class="p-bottom-w3ls">Have Account?<button id="register_login_btn" type="button">Log In here</button></p>
-                            <p class="p-bottom-w3ls1">Forgot Password?<button id="register_lost_btn" type="button">Click here</button></p>
+                            <p class="p-bottom-w3ls">Đã có tài khoản?<button id="register_login_btn" type="button">Đăng nhập ngay</button></p>
+                            <p class="p-bottom-w3ls">Quên mật khẩu?<button id="register_lost_btn" type="button">Click tại đây</button></p>
                         </div>
                         <div class="submit-w3l">
-                            <input type="submit" value="Register" name="register-submit">
+                            <input type="submit" value="Đăng ký" name="register-submit">
                         </div>
                     </form>
                 </div>      
