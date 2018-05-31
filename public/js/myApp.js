@@ -1,4 +1,4 @@
-angular.module('educationApp', ['ngFileUpload', 'ui.bootstrap', 'ui.utils'], function($interpolateProvider) {
+angular.module('educationApp', ['ngFileUpload', 'smart-table'], function($interpolateProvider) {
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
 });

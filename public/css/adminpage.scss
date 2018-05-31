@@ -38,6 +38,13 @@ $blue: #337ab7;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
+.st-sort-ascent:after{
+  content: '    \25B2';
+}
+
+.st-sort-descent:after{
+  content: '    \25BC';
+}
 .adminpage {
 	padding-top: 60px;
 	display: flex;
@@ -138,12 +145,16 @@ $blue: #337ab7;
 					background: $blue;
 					color: #fff;
 					font-weight: normal;
-					border-bottom: 1px;
+				}
+				th.search {
+					background: transparent;
+					border: none;
 				}
 				td, th {
 					text-align: center;
 					text-transform: capitalize;
 					vertical-align: middle;
+					border: 1px solid #ccc;
 					img {
 						max-height: 25px;
 					}
@@ -153,7 +164,7 @@ $blue: #337ab7;
 							margin-right: 5px;
 						}
 					}
-					input {
+					input[type=number] {
 						width: 50px;
 						text-align: center;
 					}
@@ -161,6 +172,16 @@ $blue: #337ab7;
 					input[type=number]::-webkit-outer-spin-button { 
 						-webkit-appearance: none; 
 						margin: 0;
+					}
+				}
+				tfoot {
+					tr {
+						td {
+							border: 0;
+							.pagination {
+								margin: 0;
+							}
+						}
 					}
 				}
 				td.email {

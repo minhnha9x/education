@@ -37,6 +37,12 @@
   -webkit-transform: scaleX(1);
   transform: scaleX(1); }
 
+.st-sort-ascent:after {
+  content: '    \25B2'; }
+
+.st-sort-descent:after {
+  content: '    \25BC'; }
+
 .adminpage {
   padding-top: 60px;
   display: flex; }
@@ -121,25 +127,32 @@
       .adminpage .tab-content .tab-pane table th {
         background: #337ab7;
         color: #fff;
-        font-weight: normal;
-        border-bottom: 1px; }
+        font-weight: normal; }
+      .adminpage .tab-content .tab-pane table th.search {
+        background: transparent;
+        border: none; }
       .adminpage .tab-content .tab-pane table td, .adminpage .tab-content .tab-pane table th {
         text-align: center;
         text-transform: capitalize;
-        vertical-align: middle; }
+        vertical-align: middle;
+        border: 1px solid #ccc; }
         .adminpage .tab-content .tab-pane table td img, .adminpage .tab-content .tab-pane table th img {
           max-height: 25px; }
         .adminpage .tab-content .tab-pane table td a, .adminpage .tab-content .tab-pane table th a {
           cursor: pointer; }
           .adminpage .tab-content .tab-pane table td a i, .adminpage .tab-content .tab-pane table th a i {
             margin-right: 5px; }
-        .adminpage .tab-content .tab-pane table td input, .adminpage .tab-content .tab-pane table th input {
+        .adminpage .tab-content .tab-pane table td input[type=number], .adminpage .tab-content .tab-pane table th input[type=number] {
           width: 50px;
           text-align: center; }
         .adminpage .tab-content .tab-pane table td input[type=number]::-webkit-inner-spin-button,
         .adminpage .tab-content .tab-pane table td input[type=number]::-webkit-outer-spin-button, .adminpage .tab-content .tab-pane table th input[type=number]::-webkit-inner-spin-button,
         .adminpage .tab-content .tab-pane table th input[type=number]::-webkit-outer-spin-button {
           -webkit-appearance: none;
+          margin: 0; }
+      .adminpage .tab-content .tab-pane table tfoot tr td {
+        border: 0; }
+        .adminpage .tab-content .tab-pane table tfoot tr td .pagination {
           margin: 0; }
       .adminpage .tab-content .tab-pane table td.email {
         text-transform: none; }
