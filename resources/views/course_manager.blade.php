@@ -1,8 +1,6 @@
 <div ng-controller="CourseController">
-    <div class="col-xs-12" style="padding: 0;">
-        <div class="addbutton hvr-sweep-to-right" ng-click="showModal(1, -1)">Thêm khóa học</div>
-    </div>
-    <table id="courseTable" class="table table-bordered bordered table-striped table-condensed datatable">
+    <div class="addbutton hvr-sweep-to-right" ng-click="showModal(1, -1)">Thêm khóa học</div>
+    <table id="courseTable" class="table table-hover" st-table="courseCollection" st-safe-src="courseInfo">
         <thead>
             <tr>
                 <th>Tên khóa học</th>
@@ -13,9 +11,13 @@
                 <th>Môn tiên quyết</th>
                 <th>Hành động</th>
             </tr>
+            <tr>
+                <th class="search"><input st-search="name" placeholder="Tìm theo Tên" class="input-sm form-control" type="search"/></th>
+                <th class="search"><input st-search="subject" placeholder="Tìm theo Môn học" class="input-sm form-control" type="search"/></th>
+            </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="x in courseInfo" on-finish-render="test()">
+            <tr ng-repeat="x in courseCollection">
                 <td><% x.name %></td>
                 <td><% x.subject %></td>
                 <td><% x.total_of_period %></td>
@@ -27,6 +29,13 @@
                 </td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="7" class="text-center">
+                    <div st-pagination="" st-items-by-page="10"></div>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 
     @include('popup.add_course_modal')

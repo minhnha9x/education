@@ -3,7 +3,6 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Tên môn học</th>
                 <th>Mô tả</th>
                 <th>Số khóa đã mở</th>
@@ -12,7 +11,6 @@
         </thead>
         <tbody>
             <tr ng-repeat="x in subjectInfo">
-                <td><% x.id %></td>
                 <td><% x.name %></td>
                 <td><% x.description %></td>
                 <td><% x.count %></td>

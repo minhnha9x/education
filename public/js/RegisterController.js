@@ -7,7 +7,7 @@ angular.module('educationApp').controller('RegisterController', function($scope,
         .then(function(response) {
             $scope.registerInfo = response.data;
             $('.loading').hide();
-            $('#registerTable').removeClass('hidden');
+            $('#registerTable').show();
         }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.

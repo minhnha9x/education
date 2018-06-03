@@ -10,10 +10,9 @@
     <div class="addbutton hvr-sweep-to-right" ng-click="showTeacherModal(1, -1)">Thêm giáo viên</div>
     <div class="addbutton hvr-sweep-to-right" ng-click="showTAModal(1, -1)">Thêm trợ giảng</div>
 
-    <table id="employeeTable" class="table table-bordered table-hover">
+    <table id="employeeTable" class="table table-hover" st-table="employeeCollection" st-safe-src="employeeInfo">
         <thead>
             <tr>
-                <th>Mã nhân viên</th>
                 <th>Tên nhân viên</th>
                 <th>Email</th>
                 <th>Ngày sinh</th>
@@ -21,10 +20,13 @@
                 <th>Số điện thoại</th>
                 <th>Hành động</th>
             </tr>
+            <tr>
+                <th class="search"><input st-search="name" placeholder="Tìm theo Tên" class="input-sm form-control" type="search"/></th>
+                <th class="search"><input st-search="mail" placeholder="Tìm theo Email" class="input-sm form-control" type="search"/></th>
+            </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="x in employeeInfo">
-                <td><% x.id %></td>
+            <tr ng-repeat="x in employeeCollection">
                 <td><% x.name %></td>
                 <td class="email"><% x.mail %></td>
                 <td style="white-space: nowrap;"><% x.birthday | date: "dd/MM/yyyy" %></td>
@@ -35,12 +37,18 @@
                 </td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6" class="text-center">
+                    <div st-pagination="" st-items-by-page="10"></div>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 
-    <table id="workerTable" class="table table-bordered table-hover" hidden>
+    <table id="workerTable" class="table table-hover" st-table="workerCollection" st-safe-src="workerInfo" hidden>
         <thead>
             <tr>
-                <th>Mã nhân viên</th>
                 <th>Tên nhân viên</th>
                 <th>Email</th>
                 <th>Trung tâm</th>
@@ -48,10 +56,14 @@
                 <th>Kinh nghiệm</th>
                 <th>Hành động</th>
             </tr>
+            <tr>
+                <th class="search"><input st-search="name" placeholder="Tìm theo Tên" class="input-sm form-control" type="search"/></th>
+                <th class="search"><input st-search="mail" placeholder="Tìm theo Email" class="input-sm form-control" type="search"/></th>
+                <th class="search"><input st-search="office" placeholder="Tìm theo Trung tâm" class="input-sm form-control" type="search"/></th>
+            </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="x in workerInfo">
-                <td><% x.id %></td>
+            <tr ng-repeat="x in workerCollection">
                 <td><% x.name %></td>
                 <td class="email"><% x.mail %></td>
                 <td><% x.office %></td>
@@ -62,12 +74,18 @@
                 </td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6" class="text-center">
+                    <div st-pagination="" st-items-by-page="10"></div>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 
-    <table id="teacherTable" class="table table-bordered table-hover" hidden>
+    <table id="teacherTable" class="table table-hover" st-table="teacherCollection" st-safe-src="teacherInfo" hidden>
         <thead>
             <tr>
-                <th>Mã giáo viên</th>
                 <th>Tên giáo viên</th>
                 <th>Email</th>
                 <th>Bằng cấp</th>
@@ -75,11 +93,17 @@
                 <th>Làm việc tại các trung tâm</th>
                 <th>Hành động</th>
             </tr>
+            <tr>
+                <th class="search"><input st-search="name" placeholder="Tìm theo Tên" class="input-sm form-control" type="search"/></th>
+                <th class="search"><input st-search="mail" placeholder="Tìm theo Email" class="input-sm form-control" type="search"/></th>
+                <th class="search"></th>
+                <th class="search"><input st-search="course" placeholder="Tìm theo Khóa học" class="input-sm form-control" type="search"/></th>
+                <th class="search"><input st-search="office" placeholder="Tìm theo Trung tâm" class="input-sm form-control" type="search"/></th>
+            </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="x in teacherInfo">
-                <td><% x.id %></td>
-                <td><% x.name %></td>
+            <tr ng-repeat="x in teacherCollection">
+                <td style="white-space: nowrap;"><% x.name %></td>
                 <td class="email"><% x.mail %></td>
                 <td><% x.degree %></td>
                 <td><% x.course %></td>
@@ -89,6 +113,13 @@
                 </td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6" class="text-center">
+                    <div st-pagination="" st-items-by-page="10"></div>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 
     @include('popup.add_teacher_modal')

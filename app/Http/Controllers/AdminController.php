@@ -948,7 +948,7 @@ class AdminController extends Controller
         $main_teacher_salary = DB::table('employee')
         ->leftjoin('office_worker', 'employee.id', 'office_worker.id')
         ->leftjoin('position', 'position.id', 'office_worker.position')
-        ->select('employee.id','employee.name', 'position.name as position', 'position.rate_salary')
+        ->select('employee.id','employee.name', 'employee.mail', 'position.name as position', 'position.rate_salary')
         ->get();
         foreach ($main_teacher_salary as $teacher) {
             $teaching_day = $this->getNumberOfTeachingDay($start_day, $end_day, $teacher->id);

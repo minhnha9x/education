@@ -1,6 +1,6 @@
 <div ng-controller="RoomController">
     <div class="addbutton hvr-sweep-to-right" ng-click="showModal(1, -1)">Thêm phòng học</div>
-    <table class="table table-bordered table-hover">
+    <table class="table table-hover" st-table="roomCollection" st-safe-src="roomInfo">
         <thead>
             <tr>
                 <th>Mã phòng</th>
@@ -9,9 +9,15 @@
                 <th>Dành cho các khóa</th>
                 <th>Hành động</th>
             </tr>
+            <tr>
+                <th class="search"></th>
+                <th class="search"><input st-search="office" placeholder="Tìm theo Trung tâm" class="input-sm form-control" type="search"/></th>
+                <th class="search"></th>
+                <th class="search"><input st-search="course" placeholder="Tìm theo Khóa" class="input-sm form-control" type="search"/></th>
+            </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="x in roomInfo">
+            <tr ng-repeat="x in roomCollection">
                 <td><% x.id %></td>
                 <td><% x.office %></td>
                 <td><% x.max_student %></td>
@@ -21,6 +27,13 @@
                 </td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="7" class="text-center">
+                    <div st-pagination="" st-items-by-page="10"></div>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 
     @include('popup.add_room_modal')

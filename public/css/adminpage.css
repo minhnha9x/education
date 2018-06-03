@@ -130,12 +130,12 @@
         font-weight: normal; }
       .adminpage .tab-content .tab-pane table th.search {
         background: transparent;
-        border: none; }
+        border: none !important; }
       .adminpage .tab-content .tab-pane table td, .adminpage .tab-content .tab-pane table th {
         text-align: center;
         text-transform: capitalize;
         vertical-align: middle;
-        border: 1px solid #ccc; }
+        border: 1px solid #ccc !important; }
         .adminpage .tab-content .tab-pane table td img, .adminpage .tab-content .tab-pane table th img {
           max-height: 25px; }
         .adminpage .tab-content .tab-pane table td a, .adminpage .tab-content .tab-pane table th a {
@@ -151,7 +151,7 @@
           -webkit-appearance: none;
           margin: 0; }
       .adminpage .tab-content .tab-pane table tfoot tr td {
-        border: 0; }
+        border: 0 !important; }
         .adminpage .tab-content .tab-pane table tfoot tr td .pagination {
           margin: 0; }
       .adminpage .tab-content .tab-pane table td.email {

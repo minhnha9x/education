@@ -12,7 +12,7 @@
         <li><a data-toggle="tab" href="#menu5"><div class="arrow-left"></div><img src="./img/room.png">Quản lí phòng học</a></li>
         <li><a data-toggle="tab" href="#menu6"><div class="arrow-left"></div><img src="./img/employee.png">Quản lí nhân viên</a></li>
         <li><a data-toggle="tab" href="#menu7"><div class="arrow-left"></div><img src="./img/salary.png">Quản lí lương</a></li>
-        <li><a data-toggle="tab" href="#menu8"><div class="arrow-left"></div><img src="./img/promotion.png">Quản lí ưu đãi</a></li>
+        <li><a data-toggle="tab" href="#menu8"><div class="arrow-left"></div><img src="./img/promotion.png">Quản lí mã ưu đãi</a></li>
         <li><a data-toggle="tab" href="#menu9"><div class="arrow-left"></div><img src="./img/statistic.png">Thống kê</a></li>
     </ul>
 

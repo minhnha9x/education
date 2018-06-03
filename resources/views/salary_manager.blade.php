@@ -23,25 +23,36 @@
         <div class="addbutton" style="float: none; display: inline-block;" ng-click='update()'>Xem bảng lương</div>
     </div>
     <div>
-        <table id="example" class="table table-bordered table-hover">
+        <table id="salaryTable" class="table table-hover" st-table="salaryCollection" st-safe-src="salaryInfo" hidden>
             <thead>
                 <tr>
-                    <th>Mã nhân viên</th>
                     <th>Tên nhân viên</th>
+                    <th>Email</th>
                     <th>Chức vụ</th>
                     <th>Mức lương</th>
                     <th>Lương</th>
                 </tr>
+                <tr>
+                    <th class="search"><input st-search="name" placeholder="Tìm theo Tên" class="input-sm form-control" type="search"/></th>
+                    <th class="search"><input st-search="mail" placeholder="Tìm theo Email" class="input-sm form-control" type="search"/></th>
+                </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="obj in salaryInfo">
-                    <td><% obj.id %></td>
+                <tr ng-repeat="obj in salaryCollection">
                     <td><% obj.name %></td>
+                    <td class="email"><% obj.mail %></td>
                     <td><% obj.position %></td>
                     <td><% obj.rate_salary %></td>
                     <td><% obj.salary %></td>
                 </tr>
             </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6" class="text-center">
+                    <div st-pagination="" st-items-by-page="10"></div>
+                </td>
+            </tr>
+        </tfoot>
         </table>
     </div>
 </div>

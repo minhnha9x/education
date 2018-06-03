@@ -11,6 +11,7 @@ angular.module('educationApp').controller('SalaryController', function($scope, $
         })
         .then(function(response) {
             $scope.salaryInfo = response.data;
+            $('#salaryTable').show();
         }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.

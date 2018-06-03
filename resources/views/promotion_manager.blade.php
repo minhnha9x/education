@@ -1,6 +1,6 @@
 <div ng-controller="PromotionController">
     <div class="addbutton hvr-sweep-to-right" ng-click="showModal(1, -1)">Thêm mã giảm giá</div>
-    <table class="table table-bordered table-hover">
+    <table class="table table-hover" st-table="promotionCollection" st-safe-src="promotionInfo"">
         <thead>
             <tr>
                 <th>Mã giảm giá</th>
@@ -8,9 +8,14 @@
                 <th>Khóa học áp dụng</th>
                 <th>Hành động</th>
             </tr>
+            <tr>
+                <th class="search"><input st-search="code" placeholder="Tìm theo Mã" class="input-sm form-control" type="search"/></th>
+                <th class="search"></th>
+                <th class="search"><input st-search="name" placeholder="Tìm theo Khóa học" class="input-sm form-control" type="search"/></th>
+            </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="x in promotionInfo">
+            <tr ng-repeat="x in promotionCollection">
                 <td><% x.code %></td>
                 <td><% x.benefit %></td>
                 <td><% x.name %></td>

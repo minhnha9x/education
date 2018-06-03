@@ -3,7 +3,6 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>Mã trung tâm</th>
                 <th>Tên trung tâm</th>
                 <th>Địa chỉ</th>
                 <th>Số điện thoại</th>
@@ -13,7 +12,6 @@
         </thead>
         <tbody>
             <tr ng-repeat="x in officeInfo">
-                <td><% x.id %></td>
                 <td><% x.name %></td>
                 <td><% x.address %></td>
                 <td><% x.phone %></td>
