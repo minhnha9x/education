@@ -6,29 +6,36 @@
         Trang cá nhân
     </div>
 
-    <div class="profile-wrapper col-md-6" id='11'>
-        <div class="avatar-wrapper">
-            <div class="avatar" style="background-image: url('{{Auth::user()->avatar}}')">
+    <div class="profile-wrapper col-md-6">
+        <div class="row">
+            <div class="avatar-wrapper">
+                <div class="avatar" style="background-image: url('{{Auth::user()->avatar}}')">
+                </div>
+                <div>
+                    <div class="button" ngf-select="upload($file)">Đổi ảnh đại diện</div>
+                </div>
             </div>
-            <div>
-                <div class="button" ngf-select="upload($file)">Change avatar</div>
+            <div class="text-wrapper">
+                <div class="text">
+                    <p><span>Name: </span>{{$userInfo->name}}</p>
+                    <p><span>Email: </span>{{$userInfo->email}}</p>
+                    @if (Auth::user()->role == 'teacher')
+                        <p class="clearfix"><span>Phone: </span>{{$userInfo->phone}}</p>
+                        <p class="clearfix"><span>Địa chỉ: </span>{{$userInfo->address}}</p>
+                        <p class="clearfix"><span>Ngày sinh: </span>{{$userInfo->birthday}}</p>
+                    @endif
+                </div>
             </div>
         </div>
-        <div class="text-wrapper">
-            <div class="text">
-                <p><span>Name: </span>{{$userInfo->name}}</p>
-                <p><span>Email: </span>{{$userInfo->email}}</p>
-                @if (Auth::user()->role == 'teacher')
-                    <p class="clearfix"><span>Phone: </span>{{$userInfo->phone}}</p>
-                    <p class="clearfix"><span>Địa chỉ: </span>{{$userInfo->address}}</p>
-                    <p class="clearfix"><span>Ngày sinh: </span>{{$userInfo->birthday}}</p>
-                @endif
-            </div>
+        <div class="button-wrapper">
             @if (Auth::user()->role == 'teacher')
-                <div id="edit-button" class="button">
-                    Edit Profile
+                <div id="edit-info" class="button">
+                    Cập nhật thông tin
                 </div>
             @endif
+            <div id="edit-password" class="button">
+                Đổi mật khẩu
+            </div>
         </div>
     </div>
     @if (Auth::user()->role != 'teacher')
@@ -53,8 +60,8 @@
                                 <td>{{$u->name}}</td>
                                 <td>{{$u->class}}</td>
                                 <td>
-                                    @for ($i = 1; $i <= $test[$u->class]['totalweek']; $i++)
-                                        @if ($i == $test[$u->class]['currentweek'])
+                                    @for ($i = 1; $i <= $week[$u->class]['totalweek']; $i++)
+                                        @if ($i == $week[$u->class]['currentweek'])
                                             <span style="color:red">{{$i}}</span>
                                         @else
                                             {{$i}}
@@ -102,7 +109,7 @@
                         @foreach ($slot as $s)
                             <tr>
                                 <td>{{substr($s->start_time, 0, strlen($s->start_time) - 3)}} - {{substr($s->end_time, 0, strlen($s->end_time) - 3)}}</td>
-                                @foreach ($week as $w)
+                                @foreach ($weekday as $w)
                                     @php $check = true; @endphp
                                     @foreach ($schedule as $sc)
                                         @if ($sc->schedule == $s->slot_in_day && $sc->current_date == $w)
@@ -210,8 +217,8 @@
                                     <td>{{$c->name}}</td>
                                     <td>{{$c->start_date}}</td>
                                     <td>
-                                        @for ($i = 1; $i <= $test[$c->class]['totalweek']; $i++)
-                                            @if ($i == $test[$c->class]['currentweek'])
+                                        @for ($i = 1; $i <= $week[$c->class]['totalweek']; $i++)
+                                            @if ($i == $week[$c->class]['currentweek'])
                                                 <span style="color:red">{{$i}}</span>
                                             @else
                                                 {{$i}}
@@ -243,7 +250,7 @@
                             <tr>
                                 <td>{{substr($s->start_time, 0, strlen($s->start_time) - 3)}} - {{substr($s->end_time, 0, strlen($s->end_time) - 3)}}</td>
                                 <?php $d = 1; ?>
-                                @foreach ($week as $w)
+                                @foreach ($weekday as $w)
                                     @php $check = true; @endphp
                                     @foreach ($tschedule as $t)
                                         @if ($t->schedule == $s->slot_in_day && $t->current_date == $w)
@@ -348,7 +355,7 @@
                     </table>
                 </div>
                 <script type="text/javascript">
-                    console.log(<?= json_encode($teacher_backup); ?>)
+                    console.log(<?= json_encode($week); ?>)
                 </script>
                 <div id="menu5" class="tab-pane">
                     <table class="table table-bordered table-hover">
@@ -445,18 +452,24 @@
 
 @include('popup.update_profile_modal')
 
+@include('popup.update_password_modal')
+
 {{-- @include('footer') --}}
 <script src="js/myApp.js"></script>
 <script src="js/ProfileController.js"></script>
 
 <script type="text/javascript">
-    $('.text-wrapper #edit-button').click(function(){
+    $week = <?= json_encode($week); ?>;
+    $('.button-wrapper #edit-info').click(function(){
         $('#update_profile').modal('show', 300)
+    });
+    $('.button-wrapper #edit-password').click(function(){
+        $('#update_password').modal('show', 300)
     });
 
     $('#menu3 table a').click(function(){
         $c = $(this).parent().data('id');
-        $string = '<option value="' + eval($test[$c]['totalweek'] - 1) + '">Tuần ' + eval($test[$c]['totalweek'] - 1) + '</option><option value="' + $test[$c]['totalweek'] + '">Tuần ' + $test[$c]['totalweek'] + '</option>';
+        $string = '<option value="' + eval($week[$c]['totalweek'] - 1) + '">Tuần ' + eval($week[$c]['totalweek'] - 1) + '</option><option value="' + $week[$c]['totalweek'] + '">Tuần ' + $week[$c]['totalweek'] + '</option>';
         $('#teaching_offset select[name="week"]').append($string);
 
         $string ="";

@@ -10,40 +10,6 @@
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s; }
 
-.my-button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
-
-.my-button {
-    background-color: white;
-    color: black; 
-    border: 2px solid #008CBA;
-}
-
-.my-button:hover {
-    background-color: #008CBA;
-    color: white;
-}
-
-.my-button.left {
-    float: right;
-}
-
-.my-button:disabled {
-    cursor: not-allowed;
-    opacity: 0.4;
-}
 .hvr-sweep-to-right:before {
   content: "";
   position: absolute;
@@ -86,11 +52,10 @@
     padding: 15px;
     border: 1px solid #ccc;
     text-align: center;
-    margin-bottom: 30px;
-    display: flex; }
+    margin-bottom: 30px; }
     .profilepage .profile-wrapper .avatar-wrapper {
       display: inline-block;
-      padding: 0 15px; }
+      padding: 0 10px; }
       .profilepage .profile-wrapper .avatar-wrapper .avatar {
         width: 150px;
         height: 150px;
@@ -98,12 +63,14 @@
         background-size: cover;
         background-position: center;
         border: 1px solid #ccc;
-        margin-bottom: 15px; }
+        margin-bottom: 15px;
+        float: left; }
       .profilepage .profile-wrapper .avatar-wrapper .button {
         cursor: pointer; }
     .profilepage .profile-wrapper .text-wrapper {
       display: inline-block;
-      width: calc(100% - 150px); }
+      width: calc(100% - 170px);
+      float: right; }
       .profilepage .profile-wrapper .text-wrapper .text {
         padding: 20px 20px 0; }
         .profilepage .profile-wrapper .text-wrapper .text p {
@@ -111,10 +78,12 @@
           .profilepage .profile-wrapper .text-wrapper .text p span {
             font-weight: bold;
             float: left; }
-      .profilepage .profile-wrapper .text-wrapper .button {
+    .profilepage .profile-wrapper .button-wrapper {
+      margin-top: 20px; }
+      .profilepage .profile-wrapper .button-wrapper .button {
         border: 1px solid #337ab7;
-        border-radius: 10px;
-        margin-top: 30px;
+        border-radius: 5px;
+        margin: 0 10px;
         padding: 5px 20px;
         display: inline-block;
         font-weight: bold;
@@ -158,6 +127,16 @@
       .profilepage .tab-wrapper .tab-content table tr td, .profilepage .tab-wrapper .tab-content table tr th {
         vertical-align: middle;
         text-align: center; }
+        .profilepage .tab-wrapper .tab-content table tr td input[type=number], .profilepage .tab-wrapper .tab-content table tr th input[type=number] {
+          width: 50px;
+          text-align: center; }
+        .profilepage .tab-wrapper .tab-content table tr td input[type=number]::-webkit-inner-spin-button,
+        .profilepage .tab-wrapper .tab-content table tr td input[type=number]::-webkit-outer-spin-button, .profilepage .tab-wrapper .tab-content table tr th input[type=number]::-webkit-inner-spin-button,
+        .profilepage .tab-wrapper .tab-content table tr th input[type=number]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0; }
+        .profilepage .tab-wrapper .tab-content table tr td textarea, .profilepage .tab-wrapper .tab-content table tr th textarea {
+          padding: 10px; }
       .profilepage .tab-wrapper .tab-content table tr td {
         cursor: pointer; }
         .profilepage .tab-wrapper .tab-content table tr td img {

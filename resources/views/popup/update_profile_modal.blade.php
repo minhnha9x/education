@@ -7,21 +7,21 @@
                         <h2 id="form-title">Update Profile Information</h2>
                         <input type="number" name="id" value="{{$userInfo->id}}" hidden>
                         <div class="form-sub-w3 col-md-6">
-                            <input type="text" name="fullname" value="{{$userInfo->name}}">
+                            <input type="text" name="fullname" value="{{$userInfo->name}}" required>
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <input type="text" name="phone" value="{{$userInfo->phone}}">
+                            <input type="text" name="phone" value="{{$userInfo->phone}}" required>
                         </div>
                         <div class="form-sub-w3 col-md-12">
-                            <input type="text" name="address" value="{{$userInfo->address}}">
+                            <input type="text" name="address" value="{{$userInfo->address}}" required>
                         </div>
                         <div class="form-sub-w3 col-md-6">
                             <span>Ngày sinh: </span>
-                            <input type="date" name="birthday" value="{{$userInfo->birthday}}">
+                            <input type="date" name="birthday" value="{{$userInfo->birthday}}" required>
                         </div>
                         {!! csrf_field() !!}
                         <div class="col-md-12">
-                            <input type="submit" value="Update">
+                            <input type="submit" value="Cập nhật">
                         </div>
                     </form>
                 </div>      

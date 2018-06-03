@@ -38,6 +38,7 @@ $blue: #337ab7;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
+
 .profilepage {
 	padding-top: 100px;
 	padding-bottom: 40px;
@@ -55,10 +56,9 @@ $blue: #337ab7;
 		border: 1px solid #ccc;
 		text-align: center;
 		margin-bottom: 30px;
-		display: flex;
 		.avatar-wrapper {
 			display: inline-block;
-			padding: 0 15px;
+			padding: 0 10px;
 			.avatar {
 				width: 150px;
 				height: 150px;
@@ -67,6 +67,7 @@ $blue: #337ab7;
 				background-position: center;
 				border: 1px solid #ccc;
 				margin-bottom: 15px;
+				float: left;
 			}
 			.button {
 				cursor: pointer;
@@ -74,7 +75,8 @@ $blue: #337ab7;
 		}
 		.text-wrapper {
 			display: inline-block;
-			width: calc(100% - 150px);
+			width: calc(100% - 170px);
+			float: right;
 			.text {
 				padding: 20px 20px 0;
 				p {
@@ -85,10 +87,13 @@ $blue: #337ab7;
 					}
 				}
 			}
+		}
+		.button-wrapper {
+			margin-top: 20px;
 			.button {
 				border: 1px solid $blue;
-				border-radius: 10px;
-				margin-top: 30px;
+				border-radius: 5px;
+				margin: 0 10px;
 				padding: 5px 20px;
 				display: inline-block;
 				font-weight: bold;
@@ -142,6 +147,18 @@ $blue: #337ab7;
 					td, th {
 						vertical-align: middle;
 						text-align: center;
+						input[type=number] {
+							width: 50px;
+							text-align: center;
+						}
+						input[type=number]::-webkit-inner-spin-button, 
+						input[type=number]::-webkit-outer-spin-button { 
+							-webkit-appearance: none; 
+							margin: 0;
+						}
+						textarea {
+							padding: 10px;
+						}
 					}
 					td {
 						cursor: pointer;

@@ -11,18 +11,18 @@
                         <input type="number" name="room_schedule" hidden>
                         <input type="date" name="date" hidden>
                         <div class="form-sub-w3 col-md-6">
-                            <select name="week" class="checkchange">
-                                <option selected disabled hidden>Chọn tuần dạy bù</option>
+                            <select name="week" class="checkchange" required>
+                                <option value="" selected disabled hidden>Chọn tuần dạy bù</option>
                             </select>
                         </div>
                         <div class="form-sub-w3 col-md-6">
-                            <select name="day" class="checkchange">
-                                <option selected disabled hidden>Chọn ngày trong tuần</option>
+                            <select name="day" class="checkchange" required>
+                                <option value="" selected disabled hidden>Chọn ngày trong tuần</option>
                             </select>
                         </div>
                         {!! csrf_field() !!}
                         <div class="col-md-12">
-                            <input type="submit" value="OK" disabled>
+                            <input type="submit" value="OK">
                         </div>
                         <div id="error" class="review-wrapper col-md-12">
                         </div>
@@ -34,7 +34,7 @@
 </div><!-- /.modal -->
 
 <script type="text/javascript">
-    $weekday = <?= json_encode($week); ?>;
+    $weekday = <?= json_encode($weekday); ?>;
     $('#teaching_offset .checkchange').on('change', function(){
         if ($('#teaching_offset select[name="week"]').val() != null && $('#teaching_offset select[name="day"]').val() != null) {
             for (var i = 1; i <= _.size($weekday); i++)
@@ -45,8 +45,8 @@
                     break;
                 }
             }
-            $date = $test[$c]['firstweekdays'];
-            for (var i = 2; i < $test[$c]['totalweek'] - 1; i++)
+            $date = $week[$c]['firstweekdays'];
+            for (var i = 2; i < $week[$c]['totalweek'] - 1; i++)
                 $date += 7;
             $date += $temp -1;
             $start_time.setDate($start_time.getDate() + $date);
@@ -57,7 +57,6 @@
             var today = $start_time.getFullYear()+"-"+(month)+"-"+(day) ;
 
             $('#teaching_offset input[name="date"]').val(today);
-            $('#teaching_offset input[type="submit"]').removeAttr('disabled');
         }
     });
 </script>

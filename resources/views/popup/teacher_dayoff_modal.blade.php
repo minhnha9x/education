@@ -3,24 +3,24 @@
         <div class="modal-content">
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
-                    <form method="POST" role="form" action="{{url('addteacherbackup')}}">
+                    <form method="POST" role="form" action="{{url('addteacherdayoff')}}">
                         <h2 id="form-title">Teaching Backup Register</h2>
                         <div id="review" class="review-wrapper col-md-12">
                         </div>
                         <div class="form-sub-w3 col-md-5">
-                        	<select name="week">
-                                <option disabled selected hidden>Chọn tuần học</option>
+                        	<select name="week" required>
+                                <option value="" disabled selected hidden>Chọn tuần học</option>
                             </select>
                         </div>
                         <div class="form-sub-w3 col-md-5">
                             <select name="teacher">
-                                <option selected value="">Giáo viên dạy thay</option>
+                                <option value="" selected value="">Giáo viên dạy thay</option>
                             </select>
                         </div>
                         <input type="number" name="room_schedule" hidden>
                         {!! csrf_field() !!}
                         <div class="submit-w3l col-md-2">
-                            <input type="submit" value="OK" disabled>
+                            <input type="submit" value="OK">
                         </div>
                         <div id="error" class="review-wrapper col-md-12">
                         </div>
@@ -152,7 +152,6 @@
                     }
                 }
             });
-            $('#teaching_backup input[type="submit"]').removeAttr('disabled');
         });
     @endif
     

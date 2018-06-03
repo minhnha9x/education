@@ -120,8 +120,8 @@ class ProfileController extends Controller
                     'teaching_offset' => $teaching_offset,
                     'slot' => $slot,
                     'result' => $result,
-                    'week' => $weekday,
-                    'test' => $week,
+                    'weekday' => $weekday,
+                    'week' => $week,
                     'courses' => $courses,
                     'userInfo' => Auth::user());
             }
@@ -235,8 +235,8 @@ class ProfileController extends Controller
                     'teacher_backup' => $teacher_backup,
                     'teaching_offset' => $teaching_offset,
                     'tschedule' => $teacher_schedule,
-                    'week' => $weekday,
-                    'test' => $week,
+                    'weekday' => $weekday,
+                    'week' => $week,
                     'teacher_dayoff_count' => $day_off,
                     'teaching_offset_count' => $day_offset,
                     'userInfo' => (object) $user_info[0]
