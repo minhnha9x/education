@@ -43,4 +43,26 @@ angular.module('educationApp').controller('ProfileController', function($scope, 
             $scope.scopeList[class_id].status = false;
         });
     }
+
+    $scope.updatePassword = function(param) {
+        $http({
+            url: './updatePassword',
+            method: 'POST',
+            data: {
+                'id': param,
+                'old': $scope.oldPassword,
+                'new': $scope.newPassword,
+                'confirm': $scope.confirmPassword,
+            },
+        })
+        .then(function(response) {
+            $('.profile-modal .error').text('');
+            if (response.data['type'] == "error")
+                $('#update_password .error').text(response.data['msg']);
+            else {
+                $('#update_password').modal('hide');
+                $.toaster(response.data['msg'], '', response.data['type']);
+            }
+        });
+    }
 });

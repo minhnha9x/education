@@ -3,17 +3,17 @@
         <div class="modal-content">
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
-                    <form method="POST" role="form" action="{{url('updatePassword')}}">
+                    <form role="form" ng-submit="updatePassword({{$userInfo->id}})">
                         <h2 id="form-title">Đổi mật khẩu</h2>
-                        <input type="number" name="id" value="{{$userInfo->id}}" hidden>
+                        <div class="error" ngModel="errorMsg"></div>
                         <div class="form-sub-w3 col-md-12">
-                            <input type="password" name="oldpassword" placeholder="Mật khẩu cũ" required>
+                            <input type="password" ng-model="oldPassword" placeholder="Mật khẩu cũ" required minlength="8">
                         </div>
                         <div class="form-sub-w3 col-md-12">
-                            <input type="password" name="newpassword" placeholder="Mật khẩu mới" required>
+                            <input type="password" ng-model="newPassword" placeholder="Mật khẩu mới" required minlength="8">
                         </div>
                         <div class="form-sub-w3 col-md-12">
-                            <input type="password" name="confirmpassword" placeholder="Nhập lại mật khẩu mới" required>
+                            <input type="password" ng-model="confirmPassword" placeholder="Nhập lại mật khẩu mới" required minlength="8">
                         </div>
                         {!! csrf_field() !!}
                         <div class="col-md-12">

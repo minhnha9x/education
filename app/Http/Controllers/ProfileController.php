@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 use DB;
 use Auth;
 use DateTime;
@@ -311,6 +312,21 @@ class ProfileController extends Controller
         $file->move('./img/user/',  Auth::user()->id . '.' . $file->getClientOriginalExtension());
         $data->avatar = './img/user/' . Auth::user()->id . '.' . $file->getClientOriginalExtension();
         $data->save();
+    }
+
+    public function updatePassword(Request $r) {
+        $data = User::findOrFail($r->id);
+        if (Hash::check($r->old, $data->password) == false)
+            return array('msg' => 'Mật khẩu cũ không chính xác!', 'type' => 'error');
+        else {
+            if ($r->new != $r->confirm)
+                return array('msg' => 'Xác nhận mật khẩu mới không chính xác!', 'type' => 'error');
+            else {
+                $data->password = Hash::make($r->new);
+                $data->save();
+                return array('msg' => 'Đổi mật khẩu thành công!', 'type' => 'success');
+            }
+        }
     }
 
     public function getScoreList(Request $r) {

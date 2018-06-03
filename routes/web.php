@@ -27,6 +27,7 @@ Route::post('/addteacherdayoff', 'ProfileController@addTeacherDayoff');
 Route::post('/addteachingoffset', 'ProfileController@addTeachingOffset');
 Route::post('/updateProfile', 'ProfileController@updateProfile');
 Route::post('/updateAvatar','ProfileController@doUpload');
+Route::post('/updatePassword','ProfileController@updatePassword');
 
 Route::get('/getSalary', 'AdminController@getSalaryInMonth');
 Route::get('/getScore', 'AdminController@getScore');
