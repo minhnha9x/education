@@ -8,6 +8,7 @@ angular.module('educationApp').controller('HomepageController', function($scope,
             }
         })
         .then(function(response) {
+            console.log(response.data.class);
             $scope.scheduleClassInfo = response.data.class;
             $scope.scheduleInfo = response.data.schedule;
             $('#classInfoModal').modal('show', 300);

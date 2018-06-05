@@ -43,11 +43,11 @@
                         </div>
                         <i class="fas fa-angle-down"></i>
                         <ul>
-                            <li><a href="{{url('profile')}}">Profile</a></li>
+                            <li><a href="{{url('profile')}}">Trang cá nhân</a></li>
                             @if ( Auth::user()->role == "admin")
-                                <li><a href="{{url('admin')}}">Admin Page</a></li>
+                                <li><a href="{{url('admin')}}">Trang quản trị</a></li>
                             @endif
-                            <li onclick="location.href = './logout'" class="padli">Log Out</li>
+                            <li onclick="location.href = './logout'" class="padli">Đăng xuất</li>
                         </ul>
                     </div>
                 @else

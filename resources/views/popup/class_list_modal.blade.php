@@ -24,7 +24,7 @@
 										<% y.current_date %>: <% y.start_time | limitTo: 5 %> - <% y.end_time | limitTo: 5 %> (Phòng <% y.room %>)<br>
 									</span>
 								</td>
-								<td></td>
+								<td><% x.count %></td>
 								<td><% x.start_date %></td>
 								@if (Auth::check())
 									<td class="action">

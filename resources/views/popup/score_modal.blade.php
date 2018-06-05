@@ -13,12 +13,9 @@
                         <tr ng-repeat="x in scoreInfo">
                             <td><% x.user %></td>
                             <td><% x.name %></td>
-                            <td><input type="number" ng-model="x.score""></td>
+                            <td><% x.score %></td>
                         </tr>
                     </table>
-                    <div class="addbutton" ng-click="updateScore()">
-                        Update Score
-                    </div>
                 </div>
             </div>
         </div><!-- /.modal-content -->

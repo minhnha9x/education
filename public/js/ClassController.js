@@ -335,26 +335,6 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
         }
     }
 
-    $scope.updateScore = function() {
-        for (var x in $scope.scoreInfo) {
-            $http({
-                url: './updateScore',
-                method: 'POST',
-                data: {
-                    id: $scope.scoreInfo[x].id,
-                    register: $scope.scoreInfo[x].register,
-                    score: $scope.scoreInfo[x].score,
-                },
-            })
-            .then(function(response) {
-                
-            }, function(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-            });
-        }
-    }
-
     $scope.subjectUpdated = function() {
         $scope.courseList = [];
         $http({

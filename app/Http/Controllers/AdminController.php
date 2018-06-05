@@ -921,22 +921,6 @@ class AdminController extends Controller
         return $data;
     }
 
-    public function updateScore(Request $r) {
-        if ($r->id != null){
-            $data = Exam::find($r->id);
-            if ($data == null) {
-                return back();
-            }
-        }
-        else {
-            $data = new Exam;
-        }
-        $data->register = $r->register;
-        $data->score = $r->score;
-        $data->save();
-        return back()->withInput();
-    }
-
     public function getSalaryInMonth(Request $r) {
         //Replace month year with request input
         $year = $r->year;
