@@ -1,6 +1,7 @@
 .officepage {
   padding-top: 100px;
-  padding-bottom: 40px; }
+  padding-bottom: 40px;
+  background-color: #eee; }
   .officepage .title {
     font-family: 'Montserrat', sans-serif;
     font-size: 35px;
@@ -9,7 +10,12 @@
   .officepage .office-wrapper {
     margin-bottom: 30px; }
     .officepage .office-wrapper .info {
-      padding-top: 50px; }
+      margin-top: 50px;
+      padding: 15px;
+      background-color: #fff;
+      -webkit-box-shadow: 3px 3px 5px -1px #706c70;
+      -moz-box-shadow: 3px 3px 5px -1px #706c70;
+      box-shadow: 3px 3px 5px -1px #706c70; }
       .officepage .office-wrapper .info .name {
         font-family: 'Montserrat', sans-serif;
         font-size: 16px;
@@ -25,5 +31,9 @@
           margin-bottom: 10px; }
           .officepage .office-wrapper .info .address div i {
             margin-right: 10px; }
+  .officepage iframe {
+    -webkit-box-shadow: 3px 3px 5px -1px #706c70;
+    -moz-box-shadow: 3px 3px 5px -1px #706c70;
+    box-shadow: 3px 3px 5px -1px #706c70; }
 
 /*# sourceMappingURL=officepage.css.map */

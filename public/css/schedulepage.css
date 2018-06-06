@@ -1,6 +1,9 @@
 .schedulepage {
-  padding-top: 100px;
-  padding-bottom: 40px; }
+  padding-top: 60px;
+  padding-bottom: 40px;
+  background-color: #eee; }
+  .schedulepage .page-content {
+    padding-top: 40px; }
   .schedulepage .title {
     font-family: 'Montserrat', sans-serif;
     font-size: 35px;
@@ -21,7 +24,7 @@
       border: none;
       border: 1px solid #040404;
       margin-bottom: 5px;
-      background: transparent;
+      background: #fff;
       font-family: 'Roboto', sans-serif;
       text-transform: capitalize; }
       .schedulepage .filter-wrapper .form-sub-w3 input option, .schedulepage .filter-wrapper .form-sub-w3 select option, .schedulepage .filter-wrapper .form-sub-w3 textarea option {
@@ -53,10 +56,14 @@
       -o-transition: 0.3s all;
       -ms-transition: 0.3s all; }
   .schedulepage table {
-    margin-top: 30px; }
+    margin-top: 30px;
+    -webkit-box-shadow: 3px 3px 5px -1px #706c70;
+    -moz-box-shadow: 3px 3px 5px -1px #706c70;
+    box-shadow: 3px 3px 5px -1px #706c70; }
     .schedulepage table td, .schedulepage table th {
       text-align: center;
-      vertical-align: middle !important; }
+      vertical-align: middle !important;
+      background-color: #fff; }
     .schedulepage table .action {
       cursor: pointer;
       color: #337ab7; }

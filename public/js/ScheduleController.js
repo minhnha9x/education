@@ -52,6 +52,7 @@ angular.module('educationApp').controller('ScheduleController', function($scope,
         .then(function(response) {
             $scope.scheduleClassInfo = response.data.class;
             $scope.scheduleInfo = response.data.schedule;
+            $('#scheduleTable').show();
         }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.

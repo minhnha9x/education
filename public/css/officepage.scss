@@ -2,6 +2,7 @@ $blue: #337ab7;
 .officepage {
 	padding-top: 100px;
 	padding-bottom: 40px;
+	background-color: #eee;
 	.title {
 		font-family: 'Montserrat', sans-serif;
 		font-size: 35px;
@@ -11,7 +12,12 @@ $blue: #337ab7;
 	.office-wrapper {
 		margin-bottom: 30px;
 		.info {
-			padding-top: 50px;
+			margin-top: 50px;
+			padding: 15px;
+			background-color: #fff;
+			-webkit-box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
+			-moz-box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
+			box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
 			.name {
 				img {
 					margin-right: 10px;
@@ -33,5 +39,10 @@ $blue: #337ab7;
 				}
 			}
 		}
+	}
+	iframe {
+		-webkit-box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
+		-moz-box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
+		box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
 	}
 }

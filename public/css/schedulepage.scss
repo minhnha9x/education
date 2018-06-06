@@ -1,7 +1,11 @@
 $blue: #337ab7;
 .schedulepage {
-	padding-top: 100px;
+	padding-top: 60px;
 	padding-bottom: 40px;
+	background-color: #eee;
+	.page-content {
+		padding-top: 40px;
+	}
 	.title {
 		font-family: 'Montserrat', sans-serif;
 		font-size: 35px;
@@ -25,7 +29,7 @@ $blue: #337ab7;
 			    border: none;
 			    border: 1px solid #040404;
 			    margin-bottom: 5px;
-			    background: transparent;
+			    background: #fff;
 				font-family: 'Roboto', sans-serif;
 				text-transform: capitalize;
 				option {
@@ -64,9 +68,13 @@ $blue: #337ab7;
 	}
 	table {
 		margin-top: 30px;
+		-webkit-box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
+		-moz-box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
+		box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
 		td, th {
 			text-align: center;
 			vertical-align: middle !important;
+			background-color: #fff;
 		}
 		.action {
 			cursor: pointer;

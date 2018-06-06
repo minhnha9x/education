@@ -39,7 +39,8 @@
 
 .profilepage {
   padding-top: 100px;
-  padding-bottom: 40px; }
+  padding-bottom: 40px;
+  background-color: #eee; }
   .profilepage .title {
     font-family: 'Montserrat', sans-serif;
     font-size: 35px;
@@ -52,7 +53,8 @@
     padding: 15px;
     border: 1px solid #ccc;
     text-align: center;
-    margin-bottom: 30px; }
+    margin-bottom: 30px;
+    background-color: #fff; }
     .profilepage .profile-wrapper .avatar-wrapper {
       display: inline-block;
       padding: 0 10px; }
@@ -93,20 +95,21 @@
     padding: 0; }
     .profilepage .tab-wrapper .nav-tabs {
       position: absolute;
-      background: #fff;
       display: flex; }
       .profilepage .tab-wrapper .nav-tabs li {
         display: inline-block;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
-        border: 1px solid #fff;
+        border: 1px solid #eee;
         border-bottom: 1px solid #ccc; }
         .profilepage .tab-wrapper .nav-tabs li a {
           color: #000; }
       .profilepage .tab-wrapper .nav-tabs .active {
+        background: #fff;
         border: 1px solid #ccc;
         border-bottom: 1px solid #fff; }
     .profilepage .tab-wrapper .tab-content {
+      background-color: #fff;
       -webkit-box-shadow: 3px 3px 5px -1px #706c70;
       -moz-box-shadow: 3px 3px 5px -1px #706c70;
       box-shadow: 3px 3px 5px -1px #706c70;
