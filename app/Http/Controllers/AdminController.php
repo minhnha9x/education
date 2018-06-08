@@ -728,7 +728,7 @@ class AdminController extends Controller
         return $ta_schedule;
     }
 
-    public function postroomlist(Request $r) {
+    public function postRoomList(Request $r) {
         $class = DB::table('room')
         ->select('room.id')
         ->leftjoin('course_room', 'room.id', 'course_room.room')

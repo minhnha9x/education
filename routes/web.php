@@ -20,7 +20,7 @@ Route::get('/', 'HomeController@get');
 Route::get('/admin', 'AdminController@getData');
 Route::get('/getlistfreeteacher', 'AdminController@getAvailableTeacher');
 
-Route::get('/postroomlist', 'AdminController@postroomlist');
+Route::get('/postroomlist', 'AdminController@postRoomList');
 Route::get('/get_available_office', 'AdminController@getAvailableOffice');
 
 Route::post('/addteacherdayoff', 'ProfileController@addTeacherDayoff');
