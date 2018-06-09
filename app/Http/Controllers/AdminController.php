@@ -17,10 +17,13 @@ use App\Course_Room;
 use App\Promotion;
 use App\Employee;
 use App\Teacher;
+use App\TA;
 use App\Worker;
 use App\Office_Worker;
 use App\Office_Teacher;
+use App\Office_TA;
 use App\Course_Teacher;
+use App\Course_TA;
 use App\Class_Room;
 use App\Room_Schedule;
 use App\Room_TA;
@@ -450,6 +453,29 @@ class AdminController extends Controller
         return $data;
     }
 
+    public function getAllTA() {
+        $teaching_assistant = DB::table('teaching_assistant')
+        ->select('teaching_assistant.degree',
+            'teaching_assistant.id',
+            'employee.name as name',
+            'employee.address as address',
+            'employee.phone as phone',
+            'employee.birthday as birthday',
+            'employee.mail as mail',
+            DB::raw("GROUP_CONCAT(office.name SEPARATOR ', ') as office"))
+        ->leftjoin('employee', 'employee.id', 'teaching_assistant.id')
+        ->leftjoin('office_ta', 'office_ta.teaching_assistant', 'teaching_assistant.id')
+        ->leftjoin('office', 'office.id', 'office_ta.office')
+        ->groupBy('teaching_assistant.id');
+        $data = DB::table(DB::raw("({$teaching_assistant->toSql()}) as teaching_assistant"))
+        ->select('teaching_assistant.*', DB::raw("GROUP_CONCAT(course.name SEPARATOR ', ') as course"))
+        ->leftjoin('course_ta', 'course_ta.TA', 'teaching_assistant.id')
+        ->leftjoin('course', 'course_ta.course', 'course.id')
+        ->groupBy('teaching_assistant.id')
+        ->get();
+        return $data;
+    }
+
     public function getTeacher(Request $r) {
         $main_teacher = DB::table('main_teacher')
         ->select('main_teacher.degree',
@@ -470,6 +496,30 @@ class AdminController extends Controller
         ->leftjoin('course', 'course_teacher.course', 'course.id')
         ->groupBy('main_teacher.id')
         ->where('main_teacher.id', $r->id)
+        ->get();
+        return $data;
+    }
+
+    public function getTA(Request $r) {
+        $teaching_assistant = DB::table('teaching_assistant')
+        ->select('teaching_assistant.degree',
+            'teaching_assistant.id',
+            'employee.name as name',
+            'employee.address as address',
+            'employee.phone as phone',
+            'employee.birthday as birthday',
+            'employee.mail as mail',
+            DB::raw("GROUP_CONCAT(office.id SEPARATOR ', ') as office"))
+        ->leftjoin('employee', 'employee.id', 'teaching_assistant.id')
+        ->join('office_main_teacher', 'office_main_teacher.teacher', 'teaching_assistant.id')
+        ->leftjoin('office', 'office.id', 'office_main_teacher.office')
+        ->groupBy('teaching_assistant.id');
+        $data = DB::table(DB::raw("({$teaching_assistant->toSql()}) as teaching_assistant"))
+        ->select('teaching_assistant.*', DB::raw("GROUP_CONCAT(course.id SEPARATOR ', ') as course"))
+        ->join('course_teacher', 'course_teacher.teacher', 'teaching_assistant.id')
+        ->leftjoin('course', 'course_teacher.course', 'course.id')
+        ->groupBy('teaching_assistant.id')
+        ->where('teaching_assistant.id', $r->id)
         ->get();
         return $data;
     }
@@ -504,6 +554,36 @@ class AdminController extends Controller
         return $result;
     }
 
+    public function addTA(Request $r) {
+        if ($r->employeeid != null) {
+            $teacher = TA::findOrFail($r->employeeid);
+            $result = array('msg' => 'Đã cập nhật thông tin trợ giảng.', 'type' => 'success');
+        }
+        else {
+            $teacher = new TA;
+            $teacher->id = $r->id;
+            $result = array('msg' => 'Thêm trợ giảng thành công.', 'type' => 'success');
+        }
+
+        $teacher->degree = $r->degree;
+        $teacher->save();
+
+        foreach ($r->office as $o) {
+            $this->addOfficeTA($teacher->id, $o);
+        }
+        foreach ($r->officedel as $o) {
+            $this->deleteOfficeTA($teacher->id, $o);
+        }
+
+        foreach ($r->course as $c) {
+            $this->addCourseTA($teacher->id, $c);
+        }
+        foreach ($r->coursedel as $c) {
+            $this->deleteCourseTA($teacher->id, $c);
+        }
+        return $result;
+    }
+
     public function addOfficeTeacher($teacher_id, $office_id) {
         try {
             $data = Office_Teacher::where('teacher', $teacher_id)
@@ -512,6 +592,24 @@ class AdminController extends Controller
 
             if ($data == null) {
                 $data = new Office_Teacher;
+            }
+            $data->office = $office_id;
+            $data->teacher = $teacher_id;
+            $data->save();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function addOfficeTA($teacher_id, $office_id) {
+        try {
+            $data = Office_TA::where('teaching_assistant', $teacher_id)
+            ->where('office', $office_id)
+            ->first();
+
+            if ($data == null) {
+                $data = new Office_TA;
             }
             $data->office = $office_id;
             $data->teacher = $teacher_id;
@@ -540,6 +638,24 @@ class AdminController extends Controller
         }
     }
 
+    public function addCourseTA($teacher_id, $course_id) {
+        try {
+            $data = Course_TA::where('teaching_assistant', $teacher_id)
+            ->where('course', $course_id)
+            ->first();
+
+            if ($data == null) {
+                $data = new Course_TA;
+            }
+            $data->course = $course_id;
+            $data->teacher = $teacher_id;
+            $data->save();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function deleteOfficeTeacher($teacher_id, $office_id) {
         try {
             $data = Office_Teacher::where('teacher', $teacher_id)
@@ -552,9 +668,33 @@ class AdminController extends Controller
         return back()->withInput();
     }
 
+    public function deleteOfficeTA($teacher_id, $office_id) {
+        try {
+            $data = Office_TA::where('teaching_assistant', $teacher_id)
+            ->where('office', $office_id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return back()->withInput();
+    }
+
     public function deleteCourseTeacher($teacher_id, $course_id) {
         try {
             $data = Course_Teacher::where('teacher', $teacher_id)
+            ->where('course', $course_id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return back()->withInput();
+    }
+
+    public function deleteCourseTA($teacher_id, $course_id) {
+        try {
+            $data = Course_TA::where('teaching_assistant', $teacher_id)
             ->where('course', $course_id)
             ->delete();
         }
@@ -577,6 +717,21 @@ class AdminController extends Controller
             return $e->getMessage();
         }
         return array('msg' => 'Xóa giáo viên thành công.', 'type' => 'success');
+    }
+
+    public function deleteTA(Request $r) {
+        try {
+            $data = Office_TA::where('teaching_assistant', $r->id)
+            ->delete();
+            $data = Course_TA::where('TA', $r->id)
+            ->delete();
+            $data = TA::where('id', $r->id)
+            ->delete();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return array('msg' => 'Xóa trợ giảng thành công.', 'type' => 'success');
     }
 
     public function getAllPromotion() {

@@ -77,6 +77,11 @@ Route::get('/getTeacher', 'AdminController@getTeacher');
 Route::post('/addTeacher', 'AdminController@addTeacher');
 Route::get('/deleteTeacher', 'AdminController@deleteTeacher');
 
+Route::get('/getAllTA', 'AdminController@getAllTA');
+Route::get('/getTA', 'AdminController@getTA');
+Route::post('/addTA', 'AdminController@addTA');
+Route::get('/deleteTA', 'AdminController@deleteTA');
+
 Route::get('/getAllPromotion', 'AdminController@getAllPromotion');
 Route::get('/getPromotion', 'AdminController@getPromotion');
 Route::post('/addPromotion', 'AdminController@addPromotion');

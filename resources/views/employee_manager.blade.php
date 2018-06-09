@@ -122,7 +122,48 @@
         </tfoot>
     </table>
 
+    <table id="taTable" class="table table-hover" st-table="taCollection" st-safe-src="TAInfo" hidden>
+        <thead>
+            <tr>
+                <th>Tên trợ giảng</th>
+                <th>Email</th>
+                <th>Bằng cấp</th>
+                <th>Dạy các khóa</th>
+                <th>Làm việc tại các trung tâm</th>
+                <th>Hành động</th>
+            </tr>
+            <tr>
+                <th class="search"><input st-search="name" placeholder="Tìm theo Tên" class="input-sm form-control" type="search"/></th>
+                <th class="search"><input st-search="mail" placeholder="Tìm theo Email" class="input-sm form-control" type="search"/></th>
+                <th class="search"></th>
+                <th class="search"><input st-search="course" placeholder="Tìm theo Khóa học" class="input-sm form-control" type="search"/></th>
+                <th class="search"><input st-search="office" placeholder="Tìm theo Trung tâm" class="input-sm form-control" type="search"/></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in taCollection">
+                <td style="white-space: nowrap;"><% x.name %></td>
+                <td class="email"><% x.mail %></td>
+                <td><% x.degree %></td>
+                <td><% x.course %></td>
+                <td><% x.office %></td>
+                <td class="action">
+                    <a id='edit' ng-click="showTAModal(2, x.id)"><i class="fas fa-edit"></i>Sửa</a><a ng-click="deleteTA(x.id)"><i class="fas fa-trash-alt"></i>Xóa</a>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6" class="text-center">
+                    <div st-pagination="" st-items-by-page="10"></div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
     @include('popup.add_teacher_modal')
+
+    @include('popup.add_TA_modal')
 
     @include('popup.add_employee_modal')
 

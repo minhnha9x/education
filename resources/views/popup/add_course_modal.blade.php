@@ -33,7 +33,7 @@
                                 <img ngf-src="picFile">
                             </div>
                             <div class="form-sub-w3 col-xs-12">
-                                <label for="uploadCourseImg" class="btn">Chọn hình ảnh cho khóa học</label>
+                                <label class="upload" for="uploadCourseImg" class="btn">Chọn hình ảnh cho khóa học</label>
                                 <input id="uploadCourseImg" type="file" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" style="display: none;">
                             </div>
                         </div>

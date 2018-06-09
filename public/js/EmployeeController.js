@@ -21,6 +21,16 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
         $http({
+            url: './getAllTA',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.TAInfo = response.data;
+            $('#taModal').modal('hide');
+        }, function(response) {
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+        });
+        $http({
             url: './getAllWorker',
             method: 'GET',
         })
@@ -81,6 +91,10 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 $('#teacherTable').show();
                 break;
             case '3':
+                $('#employee_manager_wrapper table').each(function() {
+                    $(this).hide();
+                });
+                $('#taTable').show();
                 break;
             default:
                 break;
@@ -210,8 +224,6 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 .then(function(response) {
                     $scope.teacherDegree = response.data[0].degree;
                     $scope.teacherName = response.data[0].name;
-                    if (response.data[0].birthday != null)
-                        $scope.teacherBirthday = new Date(response.data[0].birthday);
                     for (var i=0; i < response.data[0].office.length; i++) {
                         $('#teacherModal .office-wrapper input[type="checkbox"][value="' + response.data[0].office[i] + '"]').attr('checked', 'checked');
                     }
@@ -234,6 +246,70 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 $('#teacherModal input[type=submit]').removeAttr('disabled');
             else
                 $('#teacherModal input[type=submit]').attr('disabled', 'disabled');
+        });
+    }
+
+    $scope.showTAModal = function(param1, param2) {
+        $http({
+            url: './getEmployeeNotTA',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.listEmployeeInfo = response.data;
+        }, function(response) {
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+        });
+        switch (param1) {
+            case 1:
+                $scope.button = "Thêm trợ giảng";
+                $scope.editTA = -1;
+                $scope.taNameSelected = '';
+                $scope.taDegree = '';
+                $scope.showSelect = true;
+                $('#taModal .office-wrapper input[type="checkbox"]').each(function(){
+                    $(this).removeAttr('checked');
+                });
+                $('#taModal .course-wrapper input[type="checkbox"]').each(function(){
+                    $(this).removeAttr('checked');
+                });
+                $('#taModal input[type=submit]').attr('disabled', 'disabled');
+                break;
+            case 2:
+                $scope.button = "Sửa trợ giảng";
+                $scope.editTA = param2;
+                $scope.showSelect = false;
+                $http({
+                    url: './getTA',
+                    method: 'GET',
+                    params: {
+                        'id': param2,
+                    },
+                })
+                .then(function(response) {
+                    $scope.taDegree = response.data[0].degree;
+                    $scope.taName = response.data[0].name;
+                    for (var i=0; i < response.data[0].office.length; i++) {
+                        $('#taModal .office-wrapper input[type="checkbox"][value="' + response.data[0].office[i] + '"]').attr('checked', 'checked');
+                    }
+                    for (var i=0; i < response.data[0].course.length; i++) {
+                        $('#taModal .course-wrapper input[type="checkbox"][value="' + response.data[0].course[i] + '"]').attr('checked', 'checked');
+                    }
+                    $('#taModal input[type=submit]').removeAttr('disabled');
+                }, function(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+                break;
+            default:
+        }
+        $('#taModal').modal('show', 300);
+        $('#taModal input[type=checkbox]').change(function() {
+            $check1 = $('#taModal .office-wrapper input[type="checkbox"]:checked').length;
+            $check2 = $('#taModal .course-wrapper input[type="checkbox"]:checked').length;
+            if ($check1 > 0 && $check2 > 0)
+                $('#taModal input[type=submit]').removeAttr('disabled');
+            else
+                $('#taModal input[type=submit]').attr('disabled', 'disabled');
         });
     }
 
@@ -393,6 +469,69 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         }
     }
 
+    $scope.addTA = function(param) {
+        $scope.courseList = [];
+        $scope.courseDelList = [];
+        $scope.officeList = [];
+        $scope.officeDelList = [];
+        $('#taModal .course-wrapper input[type="checkbox"]:checked').each(function(){
+            $scope.courseList.push($(this).val());
+        });
+        $('#taModal .course-wrapper input[type="checkbox"]:not(:checked)').each(function(){
+            $scope.courseDelList.push($(this).val());
+        });
+        $('#taModal .office-wrapper input[type="checkbox"]:checked').each(function(){
+            $scope.officeList.push($(this).val());
+        });
+        $('#taModal .office-wrapper input[type="checkbox"]:not(:checked)').each(function(){
+            $scope.officeDelList.push($(this).val());
+        });
+        switch (param) {
+            case -1:
+                $http({
+                    url: './addTA',
+                    method: 'POST',
+                    data: {
+                        'degree': $scope.taDegree,
+                        'id': $scope.taNameSelected,
+                        'course': $scope.courseList,
+                        'coursedel': $scope.courseDelList,
+                        'office': $scope.officeList,
+                        'officedel': $scope.officeDelList,
+                    },
+                })
+                .then(function(response) {
+                    $scope.init();
+                    $.toaster(response.data['msg'], '', response.data['type']);
+                }, function(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+                break;
+            default:
+                $http({
+                    url: './addTA',
+                    method: 'POST',
+                    data: {
+                        'employeeid': param,
+                        'degree': $scope.taDegree,
+                        'course': $scope.courseList,
+                        'coursedel': $scope.courseDelList,
+                        'office': $scope.officeList,
+                        'officedel': $scope.officeDelList,
+                    },
+                })
+                .then(function(response) {
+                    $scope.init();
+                    $.toaster(response.data['msg'], '', response.data['type']);
+                }, function(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+                break;
+        }
+    }
+
     $scope.deleteEmployee = function(param) {
         if (confirm("Are you sure you want to delete this employee?")) {
             $http({
@@ -435,6 +574,25 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         if (confirm("Are you sure you want to delete this teacher?")) {
             $http({
                 url: './deleteTeacher',
+                method: 'GET',
+                params: {
+                    'id': param,
+                },
+            })
+            .then(function(response) {
+                $scope.init();
+                $.toaster(response.data['msg'], '', response.data['type']);
+            }, function(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        }
+    }
+
+    $scope.deleteTA = function(param) {
+        if (confirm("Are you sure you want to delete this TA?")) {
+            $http({
+                url: './deleteTA',
                 method: 'GET',
                 params: {
                     'id': param,
