@@ -1,4 +1,4 @@
-angular.module('educationApp').controller('SubjectController', function($scope, $http) {
+angular.module('educationApp').controller('SubjectController', function($scope, $http, Upload) {
     $scope.init = function () {
         $http({
             url: './getAllSubject',
@@ -8,8 +8,7 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
             $scope.subjectInfo = response.data;
             $('#subjectModal').modal('hide');
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
     $scope.init();
@@ -20,6 +19,7 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
                 $scope.edit = -1;
                 $scope.subjectName = '';
                 $scope.subjectDesc = '';
+                $scope.picFile = '';
                 break;
             case 2:
                 $scope.button = "Sửa môn học";
@@ -34,16 +34,16 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
                 .then(function(response) {
                     $scope.subjectName = response.data.name;
                     $scope.subjectDesc = response.data.description;
+                    $scope.picFile = response.data.img;
                 }, function(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
                 break;
             default:
         }
         $('#subjectModal').modal('show', 300);
     }
-    $scope.addSubject = function(param) {
+    $scope.addSubject = function(param, param2) {
         switch (param) {
             case -1:
                 $http({
@@ -55,11 +55,26 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
                     },
                 })
                 .then(function(response) {
+                    if (param2 != null && param2 != "") {
+                        Upload.upload({
+                            url: './updateSubjectImg',
+                            data: {
+                                id: response.data['id'],
+                                file: param2,
+                            }
+                        }).then(function (resp) {
+                            //location.reload();
+                        }, function (resp) {
+                            console.log('Error status: ' + resp.status);
+                        }, function (evt) {
+                            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                        });
+                    }
                     $scope.init();
                     $.toaster(response.data['msg'], '', response.data['type']);
                 }, function(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
                 break;
             default:
@@ -73,11 +88,26 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
                     },
                 })
                 .then(function(response) {
+                    if (param2 != null && param2 != "") {
+                        Upload.upload({
+                            url: './updateSubjectImg',
+                            data: {
+                                id: param,
+                                file: param2,
+                            }
+                        }).then(function (resp) {
+                            //location.reload();
+                        }, function (resp) {
+                            console.log('Error status: ' + resp.status);
+                        }, function (evt) {
+                            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                        });
+                    }
                     $scope.init();
                     $.toaster(response.data['msg'], '', response.data['type']);
                 }, function(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
                 break;
         }
@@ -95,8 +125,7 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
                 $scope.init();
                 $.toaster(response.data['msg'], '', response.data['type']);
             }, function(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
+                $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
             });
         }
     }

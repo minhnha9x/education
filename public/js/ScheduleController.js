@@ -7,8 +7,7 @@ angular.module('educationApp').controller('ScheduleController', function($scope,
         .then(function(response) {
             $scope.subjectInfo = response.data;
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
         $http({
             url: './getAllOffice',
@@ -17,8 +16,7 @@ angular.module('educationApp').controller('ScheduleController', function($scope,
         .then(function(response) {
             $scope.officeInfo = response.data;
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
     $scope.init();
@@ -34,8 +32,7 @@ angular.module('educationApp').controller('ScheduleController', function($scope,
         .then(function(response) {
             $scope.courseInfo = response.data;
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
 
@@ -54,8 +51,7 @@ angular.module('educationApp').controller('ScheduleController', function($scope,
             $scope.scheduleInfo = response.data.schedule;
             $('#scheduleTable').show();
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
 
@@ -92,8 +88,7 @@ angular.module('educationApp').controller('ScheduleController', function($scope,
             $.toaster(response.data['msg'], '', response.data['type']);
             //location.href = './profile';
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
 });

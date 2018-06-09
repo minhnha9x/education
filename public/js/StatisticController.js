@@ -34,8 +34,7 @@ angular.module('educationApp').controller('StatisticController', function($scope
             chart.options.data[0].dataPoints = $scope.dataPoints;
             chart.render();
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
     $scope.init();
@@ -81,8 +80,7 @@ angular.module('educationApp').controller('StatisticController', function($scope
                     chart.options.data[0].dataPoints = $scope.dataPoints;
                     chart.render();
                 }, function(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
                 break;
             case '2':
@@ -113,8 +111,7 @@ angular.module('educationApp').controller('StatisticController', function($scope
                     chart.render();
                     
                 }, function(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
                 break;
             case '3':
@@ -144,8 +141,7 @@ angular.module('educationApp').controller('StatisticController', function($scope
                     chart.options.data[0].dataPoints = $scope.dataPoints;
                     chart.render();
                 }, function(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
                 break
             default:

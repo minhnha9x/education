@@ -8,8 +8,7 @@ angular.module('educationApp').controller('PromotionController', function($scope
             $scope.promotionInfo = response.data;
             $('#promotionModal').modal('hide');
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
         $http({
@@ -19,8 +18,7 @@ angular.module('educationApp').controller('PromotionController', function($scope
         .then(function(response) {
             $scope.courseInfo = response.data;
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     $scope.init();
     $scope.showModal = function(param1, param2) {
@@ -46,8 +44,7 @@ angular.module('educationApp').controller('PromotionController', function($scope
                     $scope.promotionBenefit = response.data[0].benefit;
                     $scope.courseName = response.data[0].course + '';
                 }, function(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
                 break;
             default:
@@ -71,8 +68,7 @@ angular.module('educationApp').controller('PromotionController', function($scope
                     $scope.init();
                     $.toaster(response.data['msg'], '', response.data['type']);
                 }, function(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
                 break;
             default:
@@ -89,8 +85,7 @@ angular.module('educationApp').controller('PromotionController', function($scope
                     $scope.init();
                     $.toaster(response.data['msg'], '', response.data['type']);
                 }, function(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
                 break;
         }
@@ -108,8 +103,7 @@ angular.module('educationApp').controller('PromotionController', function($scope
                 $scope.init();
                 $.toaster(response.data['msg'], '', response.data['type']);
             }, function(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
+                $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
             });
         }
     }

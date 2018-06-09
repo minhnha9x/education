@@ -13,8 +13,7 @@ angular.module('educationApp').controller('SalaryController', function($scope, $
             $scope.salaryInfo = response.data;
             $('#salaryTable').show();
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
 });

@@ -75,6 +75,7 @@
 .subject-wrapper {
   padding: 40px 0; }
   .subject-wrapper .subject .course-wrapper {
+    width: 100%;
     margin-bottom: 30px;
     cursor: pointer;
     -webkit-box-shadow: 3px 3px 5px -1px #706c70;

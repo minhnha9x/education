@@ -304,7 +304,7 @@ class ProfileController extends Controller
         return back()->withInput();
     }
 
-    public function doUpload(Request $request)
+    public function updateAvatar(Request $request)
     {
         $data = User::findOrFail(Auth::user()->id);
         File::delete($data->avatar);

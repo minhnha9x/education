@@ -26,7 +26,7 @@ Route::get('/get_available_office', 'AdminController@getAvailableOffice');
 Route::post('/addteacherdayoff', 'ProfileController@addTeacherDayoff');
 Route::post('/addteachingoffset', 'ProfileController@addTeachingOffset');
 Route::post('/updateProfile', 'ProfileController@updateProfile');
-Route::post('/updateAvatar','ProfileController@doUpload');
+Route::post('/updateAvatar','ProfileController@updateAvatar');
 Route::post('/updatePassword','ProfileController@updatePassword');
 
 Route::get('/getSalary', 'AdminController@getSalaryInMonth');
@@ -38,12 +38,14 @@ Route::get('/deleteRegister', 'AdminController@deleteRegister');
 Route::get('/getAllSubject', 'AdminController@getAllSubject');
 Route::get('/getSubject', 'AdminController@getSubject');
 Route::post('/addSubject', 'AdminController@addSubject');
+Route::post('/updateSubjectImg','AdminController@updateSubjectImg');
 Route::get('/deleteSubject', 'AdminController@deleteSubject');
 
 Route::get('/getAllCourse', 'AdminController@getAllCourse');
 Route::get('/getCourseFromSub', 'AdminController@getCourseFromSub');
 Route::get('/getCourse', 'AdminController@getCourse');
 Route::post('/addCourse', 'AdminController@addCourse');
+Route::post('/updateCourseImg','AdminController@updateCourseImg');
 Route::get('/deleteCourse', 'AdminController@deleteCourse');
 
 Route::get('/getAllOffice', 'AdminController@getAllOffice');

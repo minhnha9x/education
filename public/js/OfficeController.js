@@ -8,8 +8,7 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
             $scope.officeInfo = response.data;
             $('#officeModal').modal('hide');
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
     $scope.init();
@@ -41,8 +40,7 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
                     $scope.officeMail = response.data[0].mail;
                     $scope.Googlemap = response.data[0].location;
                 }, function(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
                 break;
             default:
@@ -68,8 +66,7 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
                     $scope.init();
                     $.toaster(response.data['msg'], '', response.data['type']);
                 }, function(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
                 break;
             default:
@@ -89,8 +86,7 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
                     $scope.init();
                     $.toaster(response.data['msg'], '', response.data['type']);
                 }, function(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
                 break;
         }
@@ -108,8 +104,7 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
                 $scope.init();
                 $.toaster(response.data['msg'], '', response.data['type']);
             }, function(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
+                $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
             });
         }
     }

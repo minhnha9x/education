@@ -8,8 +8,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
             $scope.employeeInfo = response.data;
             $('#employeeModal').modal('hide');
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
         $http({
             url: './getAllTeacher',
@@ -19,8 +18,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
             $scope.teacherInfo = response.data;
             $('#teacherModal').modal('hide');
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
         $http({
             url: './getAllWorker',
@@ -30,8 +28,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
             $scope.workerInfo = response.data;
             $('#workerModal').modal('hide');
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
         $http({
             url: './getAllOffice',
@@ -40,8 +37,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         .then(function(response) {
             $scope.officeInfo = response.data;
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
         $http({
             url: './getAllCourse',
@@ -50,8 +46,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         .then(function(response) {
             $scope.courseInfo = response.data;
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
         $http({
             url: './getAllPosition',
@@ -60,8 +55,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         .then(function(response) {
             $scope.positionInfo = response.data;
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
     $scope.init();
@@ -139,8 +133,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         .then(function(response) {
             $scope.listEmployeeInfo = response.data;
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
         switch (param1) {
             case 1:
@@ -186,8 +179,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         .then(function(response) {
             $scope.listEmployeeInfo = response.data;
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
         switch (param1) {
             case 1:

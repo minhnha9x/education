@@ -4,7 +4,9 @@ angular.module('educationApp').controller('ProfileController', function($scope, 
     $scope.upload = function (file) {
         Upload.upload({
             url: './updateAvatar',
-            data: {file: file}
+            data: {
+                file: file
+            }
         }).then(function (resp) {
             location.reload();
         }, function (resp) {

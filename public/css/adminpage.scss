@@ -317,6 +317,15 @@ $blue: #337ab7;
 											color: #8BC34A;
 											text-align: center;
 										}
+										label {
+											line-height: 45px;
+											padding: 0;
+											font-family: 'Roboto', sans-serif;
+											font-size: 15px;
+										}
+									}
+									img {
+										max-width: 100%;
 									}
 									.flexcenter {
 										display: flex;

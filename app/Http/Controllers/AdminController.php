@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use DB;
+use File;
 use Auth;
 use App\Http\Requests;
 use App\Course;
@@ -112,14 +114,27 @@ class AdminController extends Controller
     }
 
     public function addSubject(Request $r) {
-        if ($r->id != null)
+        if ($r->id != null) {
             $data = Subject::findOrFail($r->id);
-        else 
+            $result = array('msg' => 'Đã cập nhật danh sách môn học.', 'type' => 'success');
+        }
+        else {
             $data = new Subject;
+            $result = array('msg' => 'Đã cập nhật danh sách môn học.', 'type' => 'success', 'id' => $data->id);
+        }
         $data->name = $r->name;
         $data->description = $r->desc;
         $data->save();
-        return array('msg' => 'Đã cập nhật danh sách môn học.', 'type' => 'success');
+        return $result;
+    }
+
+    public function updateSubjectImg(Request $r) {
+        $data = Subject::findOrFail($r->id);
+        File::delete($data->img);
+        $file = $r->file;
+        $file->move('./img/subject/',  $r->id . '.' . $file->getClientOriginalExtension());
+        $data->img = './img/subject/' . $r->id . '.' . $file->getClientOriginalExtension();
+        $data->save();
     }
 
     public function deleteSubject(Request $r) {
@@ -159,18 +174,32 @@ class AdminController extends Controller
     }
 
     public function addCourse(Request $r) {
-        if ($r->id != null)
+        if ($r->id != null) {
             $data = Course::findOrFail($r->id);
-        else 
+            $result = array('msg' => 'Đã cập nhật danh sách khóa học.', 'type' => 'success');
+
+        }
+        else { 
             $data = new Course;
+            $result = array('msg' => 'Đã cập nhật danh sách khóa học.', 'type' => 'success', 'id' => $data->id);
+        }
         $data->name = $r->name;
         $data->subject = $r->subject;
         $data->price = $r->price;
         $data->total_of_period = $r->total_of_period;
         $data->description = $r->description;
-        $data->certificate_required = $r->certificate_required;
+        $data->certificate_required = $r->certificate_required;        
         $data->save();
-        return array('msg' => 'Đã cập nhật danh sách khóa học.', 'type' => 'success');
+        return $result;
+    }
+
+    public function updateCourseImg(Request $r) {
+        $data = Course::findOrFail($r->id);
+        File::delete($data->img_url);
+        $file = $r->file;
+        $file->move('./img/course/',  $r->id . '.' . $file->getClientOriginalExtension());
+        $data->img_url = './img/course/' . $r->id . '.' . $file->getClientOriginalExtension();
+        $data->save();
     }
 
     public function deleteCourse(Request $r) {

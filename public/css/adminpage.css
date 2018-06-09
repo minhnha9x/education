@@ -264,6 +264,13 @@
                 .adminpage .tab-content .tab-pane .admin-modal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 .success {
                   color: #8BC34A;
                   text-align: center; }
+                .adminpage .tab-content .tab-pane .admin-modal .modal-dialog .modal-content .main-agileits .form-w3-agile form .form-sub-w3 label {
+                  line-height: 45px;
+                  padding: 0;
+                  font-family: 'Roboto', sans-serif;
+                  font-size: 15px; }
+              .adminpage .tab-content .tab-pane .admin-modal .modal-dialog .modal-content .main-agileits .form-w3-agile form img {
+                max-width: 100%; }
               .adminpage .tab-content .tab-pane .admin-modal .modal-dialog .modal-content .main-agileits .form-w3-agile form .flexcenter {
                 display: flex;
                 align-items: center;

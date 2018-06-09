@@ -13,8 +13,7 @@ angular.module('educationApp').controller('HomepageController', function($scope,
             $scope.scheduleInfo = response.data.schedule;
             $('#classInfoModal').modal('show', 300);
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
 
@@ -58,8 +57,7 @@ angular.module('educationApp').controller('HomepageController', function($scope,
             $.toaster(response.data['msg'], '', response.data['type']);
             //location.href = './profile';
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
 });

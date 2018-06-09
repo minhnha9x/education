@@ -9,8 +9,7 @@ angular.module('educationApp').controller('RegisterController', function($scope,
             $('.loading').hide();
             $('#registerTable').show();
         }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
     $scope.init();
@@ -27,8 +26,7 @@ angular.module('educationApp').controller('RegisterController', function($scope,
                 $scope.init();
                 $.toaster(response.data['msg'], '', response.data['type']);
             }, function(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
+                $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
             });
         }
     }
