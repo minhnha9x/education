@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 09, 2018 lúc 01:33 PM
+-- Thời gian đã tạo: Th6 10, 2018 lúc 10:29 AM
 -- Phiên bản máy phục vụ: 10.1.31-MariaDB
 -- Phiên bản PHP: 7.2.3
 
@@ -156,6 +156,7 @@ CREATE TABLE `course_teacher` (
 INSERT INTO `course_teacher` (`course`, `teacher`) VALUES
 (1, 1),
 (1, 2),
+(1, 3),
 (1, 4),
 (2, 2),
 (3, 2),
@@ -241,6 +242,7 @@ CREATE TABLE `main_teacher` (
 INSERT INTO `main_teacher` (`id`, `degree`) VALUES
 (1, 'Professor'),
 (2, 'Senior Lecturer'),
+(3, 'aa'),
 (4, 'Musician'),
 (5, 'Artist'),
 (6, 'Master of Maths');
@@ -293,7 +295,8 @@ INSERT INTO `office_main_teacher` (`id`, `teacher`, `office`) VALUES
 (4, 2, 1),
 (5, 1, 1),
 (6, 1, 3),
-(7, 6, 4);
+(7, 6, 4),
+(9, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -614,7 +617,7 @@ CREATE TABLE `users` (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` enum('admin','member','teacher','') NOT NULL DEFAULT 'member',
+  `role` enum('admin','member','teacher','ta') NOT NULL DEFAULT 'member',
   `avatar` varchar(100) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -629,7 +632,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`, `teacher`) VALUES
 (1, 'admin', 'admin@gmail.com', '$2y$10$k70eXjqMBJRqSbQOC4TXIepNCHPn16G9qgvVwOoxpYy2PLhtAXhgW', 'admin', './img/user/1.png', 'SpiAtOmUKSmwUphQAzuWMFybpUp4yUIOs1S3xTHz9e6oK9Rb9qJfhwk2oNhk', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
 (2, 'Ho Minh Nha', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', './img/user/2.jpg', 'Q8FtW7Uu5NhZyzvBLqD038AeNTwSmmqcZljUmBXx2HLWLsyUwb1AMxKkRhRf', NULL, NULL, NULL),
-(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', '2FhtZycWbmBmwoirnsMooNKuKom6Xn5E85nQqmY4fDUPr6iauyjXhmUxtn37', NULL, NULL, 1);
+(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', '2FhtZycWbmBmwoirnsMooNKuKom6Xn5E85nQqmY4fDUPr6iauyjXhmUxtn37', NULL, NULL, 1),
+(6, 'Dương Vũ Thông', 'anhnguBen@gmail.com', '$2y$10$UAbMrnRN/YgRNIafrMA6Re8nvxW2WP0vKlW4vGAJWIZJkSKYODyo6', 'teacher', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -833,7 +837,7 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT cho bảng `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `course_room`
@@ -869,7 +873,7 @@ ALTER TABLE `office`
 -- AUTO_INCREMENT cho bảng `office_main_teacher`
 --
 ALTER TABLE `office_main_teacher`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `office_ta`
@@ -953,7 +957,7 @@ ALTER TABLE `teaching_offset`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
