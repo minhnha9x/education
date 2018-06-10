@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 use DB;
 use File;
 use Auth;
@@ -27,6 +28,7 @@ use App\Course_TA;
 use App\Class_Room;
 use App\Room_Schedule;
 use App\Room_TA;
+use App\User;
 use DateTime;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
@@ -555,6 +557,14 @@ class AdminController extends Controller
         foreach ($r->coursedel as $c) {
             $this->deleteCourseTeacher($teacher->id, $c);
         }
+
+        $employee = Employee::findOrFail($r->id);
+        $data = new User;
+        $data->name = $employee->name;
+        $data->email = $employee->mail;
+        $data->password = Hash::make('12345678');
+        $data->role = 'teacher';
+        $data->save();
         return $result;
     }
 
@@ -585,6 +595,14 @@ class AdminController extends Controller
         foreach ($r->coursedel as $c) {
             $this->deleteCourseTA($teacher->id, $c);
         }
+
+        $employee = Employee::findOrFail($r->id);
+        $data = new User;
+        $data->name = $employee->name;
+        $data->email = $employee->mail;
+        $data->password = Hash::make('12345678');
+        $data->role = 'ta';
+        $data->save();
         return $result;
     }
 
