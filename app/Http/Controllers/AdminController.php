@@ -564,6 +564,7 @@ class AdminController extends Controller
         $data->email = $employee->mail;
         $data->password = Hash::make('12345678');
         $data->role = 'teacher';
+        $data->teacher = $employee->id;
         $data->save();
         return $result;
     }
@@ -602,6 +603,7 @@ class AdminController extends Controller
         $data->email = $employee->mail;
         $data->password = Hash::make('12345678');
         $data->role = 'ta';
+        $data->teacher = $employee->id;
         $data->save();
         return $result;
     }
@@ -732,6 +734,8 @@ class AdminController extends Controller
             ->delete();
             $data = Course_Teacher::where('teacher', $r->id)
             ->delete();
+            $data = User::where('teacher', $r->id)
+            ->delete();
             $data = Teacher::where('id', $r->id)
             ->delete();
         }
@@ -746,6 +750,8 @@ class AdminController extends Controller
             $data = Office_TA::where('teaching_assistant', $r->id)
             ->delete();
             $data = Course_TA::where('TA', $r->id)
+            ->delete();
+            $data = User::where('teacher', $r->id)
             ->delete();
             $data = TA::where('id', $r->id)
             ->delete();
