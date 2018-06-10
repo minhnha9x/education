@@ -2,12 +2,10 @@
     <title>{{ $title }}</title>
     <link href="./css/header.css" rel="stylesheet" type="text/css">
     <link href="./css/font.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="./css/bootstrap.css" rel="stylesheet" crossorigin="anonymous">
     <link href="./css/jquery.flipster.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
 
     <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
@@ -17,8 +15,9 @@
     <script type="text/javascript" src="./js/jquery.toaster.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script type="text/javascript" src="./js/ng-file-upload.min.js"></script>
+    <script type="text/javascript" src="./js/sweetalert.min.js"></script>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.8/smart-table.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.8/smart-table.js"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

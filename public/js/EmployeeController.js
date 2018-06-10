@@ -533,7 +533,15 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
     }
 
     $scope.deleteEmployee = function(param) {
-        if (confirm("Are you sure you want to delete this employee?")) {
+        swal({
+          title: "Xóa nhân viên",
+          text: "Hành động sẽ xóa toàn bộ thông tin của nhân viên này, bạn có chắc không!!!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
             $http({
                 url: './deleteEmployee',
                 method: 'GET',
@@ -548,11 +556,20 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
-        }
+          }
+        });
     }
 
     $scope.deleteWorker = function(param) {
-        if (confirm("Are you sure you want to delete this worker?")) {
+        swal({
+          title: "Xóa nhân viên văn phòng",
+          text: "Hành động này sẽ chỉ xóa thông tin làm việc của nhân viên văn phòng, thông tin cá nhân của nhân viên vẫn sẽ an toàn!!!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
             $http({
                 url: './deleteWorker',
                 method: 'GET',
@@ -567,11 +584,20 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
-        }
+          }
+        });
     }
 
     $scope.deleteTeacher = function(param) {
-        if (confirm("Are you sure you want to delete this teacher?")) {
+        swal({
+          title: "Xóa giáo viên",
+          text: "Hành động này sẽ chỉ xóa thông tin giảng dạy của giáo viên, thông tin nhân viên vẫn sẽ an toàn!!!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
             $http({
                 url: './deleteTeacher',
                 method: 'GET',
@@ -586,11 +612,20 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
-        }
+          }
+        });
     }
 
     $scope.deleteTA = function(param) {
-        if (confirm("Are you sure you want to delete this TA?")) {
+        swal({
+          title: "Xóa trợ giảng",
+          text: "Hành động này sẽ chỉ xóa thông tin giảng dạy của trợ giảng, thông tin nhân viên vẫn sẽ an toàn!!!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
             $http({
                 url: './deleteTA',
                 method: 'GET',
@@ -605,6 +640,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
-        }
+          }
+        });
     }
 });

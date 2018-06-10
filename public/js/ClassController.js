@@ -323,7 +323,15 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
     }
 
     $scope.deleteClass =function(class_id) {
-        if (confirm("Are you sure you want to delete class " + class_id + " ?")) {
+        swal({
+          title: "Xóa lớp học",
+          text: "Khi đã xóa lớp học, các đăng ký học liên quan cũng sẽ bị xóa!!!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
             $http({
                 url: './deleteclass',
                 method: 'POST',
@@ -332,7 +340,8 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
             .then(function(response) {
                 location.reload();
             });
-        }
+          }
+        });
     }
 
     $scope.subjectUpdated = function() {

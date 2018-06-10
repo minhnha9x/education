@@ -130,7 +130,15 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
         }
     }
     $scope.delete = function(param) {
-        if (confirm("Are you sure you want to delete this room?")) {
+        swal({
+          title: "Xóa phòng học",
+          text: "Khi đã xóa phòng học, các lớp học liên quan cũng sẽ bị xóa!!!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
             $http({
                 url: './deleteRoom',
                 method: 'GET',
@@ -144,6 +152,7 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
             }, function(response) {
                 $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
             });
-        }
+          }
+        });
     }
 });

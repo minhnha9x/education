@@ -91,7 +91,15 @@ angular.module('educationApp').controller('PromotionController', function($scope
         }
     }
     $scope.delete = function(param) {
-        if (confirm("Are you sure you want to delete this promotion?")) {
+        swal({
+          title: "Xóa mã giảm giá",
+          text: "Khi đã xóa mã giảm giá, các ưu đãi liên quan sẽ không còn tác dụng!!!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
             $http({
                 url: './deletePromotion',
                 method: 'GET',
@@ -105,6 +113,7 @@ angular.module('educationApp').controller('PromotionController', function($scope
             }, function(response) {
                 $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
             });
-        }
+          }
+        });
     }
 });

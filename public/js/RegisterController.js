@@ -14,7 +14,15 @@ angular.module('educationApp').controller('RegisterController', function($scope,
     }
     $scope.init();
     $scope.delete = function(param) {
-        if (confirm("Are you sure you want to delete this register?")) {
+        swal({
+          title: "Xóa đăng ký học",
+          text: "Khi đã xóa đăng ký học, hãy liên hệ với học viên để thông báo đăng ký lại!!!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
             $http({
                 url: './deleteRegister',
                 method: 'GET',
@@ -28,6 +36,7 @@ angular.module('educationApp').controller('RegisterController', function($scope,
             }, function(response) {
                 $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
             });
-        }
+          }
+        });
     }
 });

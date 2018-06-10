@@ -113,7 +113,15 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
         }
     }
     $scope.delete = function(param) {
-        if (confirm("Are you sure you want to delete this subject?")) {
+        swal({
+          title: "Xóa môn học",
+          text: "Khi đã xóa môn học, các khóa học, lớp học, đăng ký học của môn học cũng sẽ bị mất!!!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
             $http({
                 url: './deleteSubject',
                 method: 'GET',
@@ -127,6 +135,7 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
             }, function(response) {
                 $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
             });
-        }
+          }
+        });
     }
 });

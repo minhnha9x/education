@@ -92,7 +92,15 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
         }
     }
     $scope.delete = function(param) {
-        if (confirm("Are you sure you want to delete this office?")) {
+        swal({
+          title: "Xóa trung tâm",
+          text: "Khi đã xóa trung tâm, các phòng học, các lớp học và đăng ký học của trung tâm đó cũng sẽ bị mất!!!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
             $http({
                 url: './deleteOffice',
                 method: 'GET',
@@ -106,6 +114,7 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
             }, function(response) {
                 $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
             });
-        }
+          }
+        });
     }
 });

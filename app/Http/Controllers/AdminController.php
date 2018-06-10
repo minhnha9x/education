@@ -42,9 +42,13 @@ class AdminController extends Controller
             ->get();
 
             $class = DB::table('class')
-            ->select('class.*', 'course.name as course')
+            ->select('*', 'course.name as course', DB::raw('count(register.id) as count'))
+            ->leftjoin('register', 'register.class', 'class.id')
             ->leftjoin('course', 'course.id', 'class.course')
+            ->leftjoin('room_schedule', 'class.id', 'room_schedule.class')
+            ->leftjoin('room', 'room_schedule.room', 'room.id')
             ->orderby('course.name')
+            ->groupBy('class.id')
             ->get();
 
             $schedule = DB::table('room_schedule')

@@ -65,8 +65,9 @@ class ScheduleController extends Controller
         ->leftjoin('room', 'room_schedule.room', 'room.id')
         ->leftjoin('office', 'room.office', 'office.id')
         ->leftjoin('subject', 'course.subject', 'subject.id')
+        ->leftjoin('register', 'register.class', 'class.id')
         ->groupBy('class.id')
-        ->select('*', 'course.name as course', 'class.id as id', 'course.id as courseid', 'office.name as office');
+        ->select('*', 'course.name as course', 'class.id as id', 'course.id as courseid', 'office.name as office', DB::raw('count(register.id) as count'));
         if ($r->course != null) {
             $class = $class->where('course', $r->course);
         }
