@@ -1026,21 +1026,33 @@ class AdminController extends Controller
         return $data;
     }
 
+    public function countRegisterBySubjectInRange($start_day, $end_day) {
+        $end_day = Carbon::parse($end_day)->startOfDay();
+        $start_day = Carbon::parse($start_day)->startOfDay();
+        $data = DB::table('register')
+        ->select('subject.name', DB::raw('count(class.id) as count'))
+        ->leftjoin('class','class.id', 'register.class')
+        ->leftjoin('course','course.id', 'class.course')
+        ->rightjoin('subject','subject.id', 'course.subject')
+        ->whereBetween('register.created_date', [$start_day->startOfDay(), $end_day->endOfDay()])
+        ->groupBy('subject.id')
+        ->get();
+        return $data;
+    }
+
     public function countRegisterBySubjectInYear(Request $r) {
         $year = $r->year;
-        $result = array();
-        for ($month = 1; $month <= 12; $month++) {
-            $result[$month] = $this->countRegisterBySubjectInMonth($year, $month);
-        }
+        $end_day = date('Y-m-t', strtotime($year.'-12-01'));
+        $start_day = date('Y-m-d', strtotime($year.'-01-01'));
+        $result = $this->countRegisterBySubjectInRange($start_day, $end_day);
         return $result;
     }
 
     public function countRegisterByOfficeInYear(Request $r) {
         $year = $r->year;
-        $result = array();
-        for ($month = 1; $month <= 12; $month++) {
-            $result[$month] = $this->countRegisterByOfficeInMonth($year, $month);
-        }
+        $end_day = date('Y-m-t', strtotime($year.'-12-01'));
+        $start_day = date('Y-m-d', strtotime($year.'-01-01'));
+        $result = $this->countRegisterByOfficeInRange($start_day, $end_day);
         return $result;
     }
 
@@ -1048,6 +1060,26 @@ class AdminController extends Controller
         $end_day = date('Y-m-t', strtotime($year.'-'.$month.'-01'));
         $start_day = date('Y-m-d', strtotime($year.'-'.$month.'-01'));
 
+        $end_day = Carbon::parse($end_day)->startOfDay();
+        $start_day = Carbon::parse($start_day)->startOfDay();
+        $data = DB::table('register')
+        ->select('register.id as register', 'office.name as office')
+        ->leftjoin('class','class.id', 'register.class')
+        ->leftjoin('room_schedule','room_schedule.class', 'class.id')
+        ->leftjoin('room','room.id', 'room_schedule.room')
+        ->rightjoin('office', 'office.id', 'room.office')
+        ->whereRaw('register.created_date between ? and ?')
+        ->groupBy('office.id', 'register.id');
+
+        $new_data = DB::table(DB::raw("({$data->toSql()}) as register_office"))
+        ->select('register_office.office', DB::raw('count(register_office.register) as count'))
+        ->groupBy('register_office.office')
+        ->setBindings([$start_day->startOfDay(), $end_day->endOfDay()])
+        ->get();
+        return $new_data;
+    }
+
+    public function countRegisterByOfficeInRange($start_day, $end_day) {
         $end_day = Carbon::parse($end_day)->startOfDay();
         $start_day = Carbon::parse($start_day)->startOfDay();
         $data = DB::table('register')
