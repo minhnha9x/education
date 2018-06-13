@@ -35,6 +35,12 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission');
+    }
+
     public function getData() {
         if(Auth::check() && Auth::user()->role == 'admin') {
             $subjects = DB::table('subject')
