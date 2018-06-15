@@ -214,6 +214,12 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 $scope.button = "Sửa giáo viên";
                 $scope.editTeacher = param2;
                 $scope.showSelect = false;
+                $('#teacherModal .office-wrapper input[type="checkbox"]').each(function(){
+                    $(this).removeAttr('checked');
+                });
+                $('#teacherModal .course-wrapper input[type="checkbox"]').each(function(){
+                    $(this).removeAttr('checked');
+                });
                 $http({
                     url: './getTeacher',
                     method: 'GET',
@@ -224,12 +230,14 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 .then(function(response) {
                     $scope.teacherDegree = response.data[0].degree;
                     $scope.teacherName = response.data[0].name;
-                    for (var i=0; i < response.data[0].office.length; i++) {
-                        $('#teacherModal .office-wrapper input[type="checkbox"][value="' + response.data[0].office[i] + '"]').attr('checked', 'checked');
-                    }
-                    for (var i=0; i < response.data[0].course.length; i++) {
-                        $('#teacherModal .course-wrapper input[type="checkbox"][value="' + response.data[0].course[i] + '"]').attr('checked', 'checked');
-                    }
+                    if (response.data[0].office != null)
+                        for (var i=0; i < response.data[0].office.length; i++) {
+                            $('#teacherModal .office-wrapper input[type="checkbox"][value="' + response.data[0].office[i] + '"]').attr('checked', 'checked');
+                        }
+                    if (response.data[0].course != null)
+                        for (var i=0; i < response.data[0].course.length; i++) {
+                            $('#teacherModal .course-wrapper input[type="checkbox"][value="' + response.data[0].course[i] + '"]').attr('checked', 'checked');
+                        }
                     $('#teacherModal input[type=submit]').removeAttr('disabled');
                 }, function(response) {
                     // called asynchronously if an error occurs
@@ -278,6 +286,12 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 $scope.button = "Sửa trợ giảng";
                 $scope.editTA = param2;
                 $scope.showSelect = false;
+                $('#taModal .office-wrapper input[type="checkbox"]').each(function(){
+                    $(this).removeAttr('checked');
+                });
+                $('#taModal .course-wrapper input[type="checkbox"]').each(function(){
+                    $(this).removeAttr('checked');
+                });
                 $http({
                     url: './getTA',
                     method: 'GET',
@@ -288,12 +302,14 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 .then(function(response) {
                     $scope.taDegree = response.data[0].degree;
                     $scope.taName = response.data[0].name;
-                    for (var i=0; i < response.data[0].office.length; i++) {
-                        $('#taModal .office-wrapper input[type="checkbox"][value="' + response.data[0].office[i] + '"]').attr('checked', 'checked');
-                    }
-                    for (var i=0; i < response.data[0].course.length; i++) {
-                        $('#taModal .course-wrapper input[type="checkbox"][value="' + response.data[0].course[i] + '"]').attr('checked', 'checked');
-                    }
+                    if (response.data[0].office != null)
+                        for (var i=0; i < response.data[0].office.length; i++) {
+                            $('#taModal .office-wrapper input[type="checkbox"][value="' + response.data[0].office[i] + '"]').attr('checked', 'checked');
+                        }
+                    if (response.data[0].course != null)
+                        for (var i=0; i < response.data[0].course.length; i++) {
+                            $('#taModal .course-wrapper input[type="checkbox"][value="' + response.data[0].course[i] + '"]').attr('checked', 'checked');
+                        }
                     $('#taModal input[type=submit]').removeAttr('disabled');
                 }, function(response) {
                     // called asynchronously if an error occurs

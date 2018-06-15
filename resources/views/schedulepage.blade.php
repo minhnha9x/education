@@ -60,7 +60,7 @@
 								<% y.current_date %>: <% y.start_time %> - <% y.end_time %> (Phòng <% y.room %>)<br>
 							</span>
 						</td>
-						<td></td>
+						<td><% x.count %> / <% x.max_student %></td>
 						<td><% x.start_date %></td>
 						@if (Auth::check())
 							<td class="action">

@@ -29,7 +29,7 @@
             <tr ng-repeat="x in employeeCollection">
                 <td><% x.name %></td>
                 <td class="email"><% x.mail %></td>
-                <td style="white-space: nowrap;"><% x.birthday | date: "dd/MM/yyyy" %></td>
+                <td style="white-space: nowrap;"><% x.birthday | date: "dd/MM/y" %></td>
                 <td><% x.address %></td>
                 <td><% x.phone %></td>
                 <td class="action">

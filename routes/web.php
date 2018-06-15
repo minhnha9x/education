@@ -17,17 +17,26 @@ Route::post('/forgotPassword', 'UtilController@sendMail');
 
 Route::get('/', 'HomeController@get');
 
-Route::get('/admin', 'AdminController@getData');
-Route::get('/getlistfreeteacher', 'AdminController@getAvailableTeacher');
-
-Route::get('/postroomlist', 'AdminController@postRoomList');
-Route::get('/get_available_office', 'AdminController@getAvailableOffice');
-
 Route::post('/addteacherdayoff', 'ProfileController@addTeacherDayoff');
 Route::post('/addteachingoffset', 'ProfileController@addTeachingOffset');
 Route::post('/updateProfile', 'ProfileController@updateProfile');
 Route::post('/updateAvatar','ProfileController@updateAvatar');
 Route::post('/updatePassword','ProfileController@updatePassword');
+
+Route::get('/profile', 'ProfileController@get');
+Route::get('/getscorelist', 'ProfileController@getScoreList');
+Route::get('/getSlot', 'ProfileController@getSlot');
+Route::get('/getTeacherSchedule', 'ProfileController@getTeacherSchedule');
+Route::get('/getTASchedule', 'ProfileController@getTASchedule');
+Route::post('/getlistfreeteacher2', 'ProfileController@getAvailableTeacher');
+Route::post('/updatescorelist', 'ProfileController@updateScoreList');
+
+Route::get('/admin', 'AdminController@getData');
+Route::post('/getlistfreeteacher', 'AdminController@getAvailableTeacher');
+Route::get('/getlistfreeta', 'AdminController@getAvailableTA');
+
+Route::get('/postroomlist', 'AdminController@postRoomList');
+Route::get('/get_available_office', 'AdminController@getAvailableOffice');
 
 Route::get('/getSalary', 'AdminController@getSalaryInMonth');
 Route::get('/getScore', 'AdminController@getScore');
@@ -100,12 +109,12 @@ Route::get('/getReisterInMonth', 'AdminController@getRegisterInMonth');
 
 Route::get('/{range_date}&{room_ids}', 'AdminController@getRoomScheduleList');
 
-Route::get('/profile', 'ProfileController@get');
-Route::get('/getscorelist', 'ProfileController@getScoreList');
-
 Route::get('/schedule', 'ScheduleController@get');
 Route::get('/getSchedule', 'ScheduleController@getSchedule');
 Route::post('/addClassRegister', 'ScheduleController@classRegister');
+Route::get('/getAllSubject2', 'ScheduleController@getAllSubject');
+Route::get('/getCourseFromSub2', 'ScheduleController@getCourseFromSub');
+Route::get('/getAllOffice2', 'ScheduleController@getAllOffice');
 
 Route::get('/office', 'OfficeController@get');
 
@@ -113,12 +122,7 @@ Route::get('/getsupervisors', 'AdminController@getSupervisors');
 
 Route::post('/addclass', 'AdminController@addClass');
 
-Route::get('/test1', 'AdminController@countRegisterBySubjectInYear');
-
-Route::get('/test2', 'AdminController@countRegisterByOfficeInYear');
-
 Route::post('/deleteclass', 'ClassManageController@deleteClass');
-Route::post('/updatescorelist', 'ProfileController@updateScoreList');
 
 Route::get('/sendmail', 'UtilController@sendMail');
 

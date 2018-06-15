@@ -111,7 +111,7 @@ class AdminController extends Controller
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return array('msg' => 'Xóa đăng ký thành công.', 'type' => 'success');
     }
@@ -158,7 +158,7 @@ class AdminController extends Controller
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return array('msg' => 'Xóa môn học thành công.', 'type' => 'success');
     }
@@ -254,7 +254,7 @@ class AdminController extends Controller
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return array('msg' => 'Xóa trung tâm thành công.', 'type' => 'success');
     }
@@ -305,12 +305,12 @@ class AdminController extends Controller
             if ($course_room == null) {
                 $course_room = new Course_Room;
             }
-            $course_room->room = $room_id;
-            $course_room->course = $course_id;
-            $course_room->save();
+                $course_room->room = $room_id;
+                $course_room->course = $course_id;
+                $course_room->save();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
     }
 
@@ -321,7 +321,7 @@ class AdminController extends Controller
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return back()->withInput();
     }
@@ -334,7 +334,7 @@ class AdminController extends Controller
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return array('msg' => 'Xóa phòng học thành công.', 'type' => 'success');
     }
@@ -418,7 +418,7 @@ class AdminController extends Controller
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return array('msg' => 'Xóa nhân viên văn phòng thành công.', 'type' => 'success');
     }
@@ -437,7 +437,7 @@ class AdminController extends Controller
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return array('msg' => 'Xóa nhân viên thành công.', 'type' => 'success');
     }
@@ -453,12 +453,12 @@ class AdminController extends Controller
             'employee.mail as mail',
             DB::raw("GROUP_CONCAT(office.name SEPARATOR ', ') as office"))
         ->leftjoin('employee', 'employee.id', 'main_teacher.id')
-        ->join('office_main_teacher', 'office_main_teacher.teacher', 'main_teacher.id')
+        ->leftjoin('office_main_teacher', 'office_main_teacher.teacher', 'main_teacher.id')
         ->leftjoin('office', 'office.id', 'office_main_teacher.office')
         ->groupBy('main_teacher.id');
         $data = DB::table(DB::raw("({$main_teacher->toSql()}) as main_teacher"))
         ->select('main_teacher.*', DB::raw("GROUP_CONCAT(course.name SEPARATOR ', ') as course"))
-        ->join('course_teacher', 'course_teacher.teacher', 'main_teacher.id')
+        ->leftjoin('course_teacher', 'course_teacher.teacher', 'main_teacher.id')
         ->leftjoin('course', 'course_teacher.course', 'course.id')
         ->groupBy('main_teacher.id')
         ->get();
@@ -499,12 +499,12 @@ class AdminController extends Controller
             'employee.mail as mail',
             DB::raw("GROUP_CONCAT(office.id SEPARATOR ', ') as office"))
         ->leftjoin('employee', 'employee.id', 'main_teacher.id')
-        ->join('office_main_teacher', 'office_main_teacher.teacher', 'main_teacher.id')
+        ->leftjoin('office_main_teacher', 'office_main_teacher.teacher', 'main_teacher.id')
         ->leftjoin('office', 'office.id', 'office_main_teacher.office')
         ->groupBy('main_teacher.id');
         $data = DB::table(DB::raw("({$main_teacher->toSql()}) as main_teacher"))
         ->select('main_teacher.*', DB::raw("GROUP_CONCAT(course.id SEPARATOR ', ') as course"))
-        ->join('course_teacher', 'course_teacher.teacher', 'main_teacher.id')
+        ->leftjoin('course_teacher', 'course_teacher.teacher', 'main_teacher.id')
         ->leftjoin('course', 'course_teacher.course', 'course.id')
         ->groupBy('main_teacher.id')
         ->where('main_teacher.id', $r->id)
@@ -523,13 +523,13 @@ class AdminController extends Controller
             'employee.mail as mail',
             DB::raw("GROUP_CONCAT(office.id SEPARATOR ', ') as office"))
         ->leftjoin('employee', 'employee.id', 'teaching_assistant.id')
-        ->join('office_main_teacher', 'office_main_teacher.teacher', 'teaching_assistant.id')
-        ->leftjoin('office', 'office.id', 'office_main_teacher.office')
+        ->leftjoin('office_ta', 'office_ta.teaching_assistant', 'teaching_assistant.id')
+        ->leftjoin('office', 'office.id', 'office_ta.office')
         ->groupBy('teaching_assistant.id');
         $data = DB::table(DB::raw("({$teaching_assistant->toSql()}) as teaching_assistant"))
         ->select('teaching_assistant.*', DB::raw("GROUP_CONCAT(course.id SEPARATOR ', ') as course"))
-        ->join('course_teacher', 'course_teacher.teacher', 'teaching_assistant.id')
-        ->leftjoin('course', 'course_teacher.course', 'course.id')
+        ->leftjoin('course_ta', 'course_ta.TA', 'teaching_assistant.id')
+        ->leftjoin('course', 'course_ta.course', 'course.id')
         ->groupBy('teaching_assistant.id')
         ->where('teaching_assistant.id', $r->id)
         ->get();
@@ -544,6 +544,17 @@ class AdminController extends Controller
         else {
             $teacher = new Teacher;
             $teacher->id = $r->id;
+            $employee = Employee::findOrFail($r->id);
+            $temp = User::findOrFail($employee->mail);
+            if ($temp == null) {
+                $data = new User;
+                $data->name = $employee->name;
+                $data->email = $employee->mail;
+                $data->password = Hash::make('12345678');
+                $data->role = 'teacher';
+                $data->teacher = $employee->id;
+                $data->save();
+            }
             $result = array('msg' => 'Thêm giáo viên thành công.', 'type' => 'success');
         }
 
@@ -563,54 +574,47 @@ class AdminController extends Controller
         foreach ($r->coursedel as $c) {
             $this->deleteCourseTeacher($teacher->id, $c);
         }
-
-        $employee = Employee::findOrFail($r->id);
-        $data = new User;
-        $data->name = $employee->name;
-        $data->email = $employee->mail;
-        $data->password = Hash::make('12345678');
-        $data->role = 'teacher';
-        $data->teacher = $employee->id;
-        $data->save();
         return $result;
     }
 
     public function addTA(Request $r) {
         if ($r->employeeid != null) {
-            $teacher = TA::findOrFail($r->employeeid);
+            $ta = TA::findOrFail($r->employeeid);
             $result = array('msg' => 'Đã cập nhật thông tin trợ giảng.', 'type' => 'success');
         }
         else {
-            $teacher = new TA;
-            $teacher->id = $r->id;
+            $ta = new TA;
+            $ta->id = $r->id;
+            $employee = Employee::findOrFail($r->id);
+            $temp = User::where('email', $employee->mail)->first();
+            if ($temp == null) {
+                $data = new User;
+                $data->name = $employee->name;
+                $data->email = $employee->mail;
+                $data->password = Hash::make('12345678');
+                $data->role = 'teacher';
+                $data->teacher = $employee->id;
+                $data->save();
+            }
             $result = array('msg' => 'Thêm trợ giảng thành công.', 'type' => 'success');
         }
 
-        $teacher->degree = $r->degree;
-        $teacher->save();
+        $ta->degree = $r->degree;
+        $ta->save();
 
         foreach ($r->office as $o) {
-            $this->addOfficeTA($teacher->id, $o);
+            $this->addOfficeTA($ta->id, $o);
         }
         foreach ($r->officedel as $o) {
-            $this->deleteOfficeTA($teacher->id, $o);
+            $this->deleteOfficeTA($ta->id, $o);
         }
 
         foreach ($r->course as $c) {
-            $this->addCourseTA($teacher->id, $c);
+            $this->addCourseTA($ta->id, $c);
         }
         foreach ($r->coursedel as $c) {
-            $this->deleteCourseTA($teacher->id, $c);
+            $this->deleteCourseTA($ta->id, $c);
         }
-
-        $employee = Employee::findOrFail($r->id);
-        $data = new User;
-        $data->name = $employee->name;
-        $data->email = $employee->mail;
-        $data->password = Hash::make('12345678');
-        $data->role = 'ta';
-        $data->teacher = $employee->id;
-        $data->save();
         return $result;
     }
 
@@ -622,13 +626,13 @@ class AdminController extends Controller
 
             if ($data == null) {
                 $data = new Office_Teacher;
+                $data->office = $office_id;
+                $data->teacher = $teacher_id;
+                $data->save();
             }
-            $data->office = $office_id;
-            $data->teacher = $teacher_id;
-            $data->save();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
     }
 
@@ -640,13 +644,13 @@ class AdminController extends Controller
 
             if ($data == null) {
                 $data = new Office_TA;
+                $data->office = $office_id;
+                $data->teacher = $teacher_id;
+                $data->save();
             }
-            $data->office = $office_id;
-            $data->teacher = $teacher_id;
-            $data->save();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
     }
 
@@ -658,31 +662,31 @@ class AdminController extends Controller
 
             if ($data == null) {
                 $data = new Course_Teacher;
+                $data->course = $course_id;
+                $data->teacher = $teacher_id;
+                $data->save();
             }
-            $data->course = $course_id;
-            $data->teacher = $teacher_id;
-            $data->save();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
     }
 
     public function addCourseTA($teacher_id, $course_id) {
         try {
-            $data = Course_TA::where('teaching_assistant', $teacher_id)
+            $data = Course_TA::where('TA', $teacher_id)
             ->where('course', $course_id)
             ->first();
 
             if ($data == null) {
                 $data = new Course_TA;
+                $data->course = $course_id;
+                $data->teacher = $teacher_id;
+                $data->save();
             }
-            $data->course = $course_id;
-            $data->teacher = $teacher_id;
-            $data->save();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
     }
 
@@ -693,7 +697,7 @@ class AdminController extends Controller
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return back()->withInput();
     }
@@ -705,7 +709,7 @@ class AdminController extends Controller
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return back()->withInput();
     }
@@ -717,19 +721,19 @@ class AdminController extends Controller
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return back()->withInput();
     }
 
     public function deleteCourseTA($teacher_id, $course_id) {
         try {
-            $data = Course_TA::where('teaching_assistant', $teacher_id)
+            $data = Course_TA::where('TA', $teacher_id)
             ->where('course', $course_id)
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return back()->withInput();
     }
@@ -740,13 +744,11 @@ class AdminController extends Controller
             ->delete();
             $data = Course_Teacher::where('teacher', $r->id)
             ->delete();
-            $data = User::where('teacher', $r->id)
-            ->delete();
             $data = Teacher::where('id', $r->id)
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return array('msg' => 'Xóa giáo viên thành công.', 'type' => 'success');
     }
@@ -757,13 +759,13 @@ class AdminController extends Controller
             ->delete();
             $data = Course_TA::where('TA', $r->id)
             ->delete();
-            $data = User::where('teacher', $r->id)
+            $data = DB::table('room_ta')->where('TA', $r->id)
             ->delete();
             $data = TA::where('id', $r->id)
             ->delete();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return array('msg' => 'Xóa trợ giảng thành công.', 'type' => 'success');
     }
@@ -1004,17 +1006,6 @@ class AdminController extends Controller
         return $data;
     }
 
-    public function countRegisterBySubject() {
-        $data = DB::table('register')
-        ->select('subject.name', DB::raw('count(class.id) as count'))
-        ->leftjoin('class','class.id', 'register.class')
-        ->leftjoin('course','course.id', 'class.course')
-        ->rightjoin('subject','subject.id', 'course.subject')
-        ->groupBy('subject.id')
-        ->get();
-        return $data;
-    }
-
     public function countRegisterBySubjectInMonth($year, $month) {
         $end_day = date('Y-m-t', strtotime($year.'-'.$month.'-01'));
         $start_day = date('Y-m-d', strtotime($year.'-'.$month.'-01'));
@@ -1105,28 +1096,12 @@ class AdminController extends Controller
         return $new_data;
     }
 
-    public function countRegisterByOffice() {
-        $data = DB::table('register')
-        ->select('register.id as register', 'office.name as office')
-        ->leftjoin('class','class.id', 'register.class')
-        ->leftjoin('room_schedule','room_schedule.class', 'class.id')
-        ->leftjoin('room','room.id', 'room_schedule.room')
-        ->rightjoin('office', 'office.id', 'room.office')
-        ->groupBy('office.id', 'register.id');
-
-        $new_data = DB::table(DB::raw("({$data->toSql()}) as register_office"))
-        ->select('register_office.office', DB::raw('count(register_office.register) as count'))
-        ->groupBy('register_office.office')
-        ->get();
-        return $new_data;
-    }
-
     public function getAvailableTeacher(Request $r) {
         // Replace this with param in get request
         $office = $r->office;
         $course = $r->course;
         $slot_in_day = $r->slot;
-        $date = $r->date;;
+        $date = $r->date;
         //#
 
         $date_formated = Carbon::parse($date)->startOfDay();
@@ -1154,6 +1129,45 @@ class AdminController extends Controller
         ->where('office_main_teacher.office','=', '?')
         ->having('count', '=', 0)
         ->groupBy('main_teacher.id')
+        ->setBindings([$date_formated, $date_formated, $day_in_week, $slot_in_day, $course, $office])
+        ->get();
+        return $data;
+    }
+
+    public function getAvailableTA(Request $r) {
+        // Replace this with param in get request
+        $office = $r->office;
+        $course = $r->course;
+        $slot_in_day = $r->slot;
+        $date = $r->date;;
+        //#
+
+        $date_formated = Carbon::parse($date)->startOfDay();
+
+        $validate = strtotime($date);
+        $day_in_week = date('l', $validate);
+        $data = DB::table('teaching_assistant')
+        ->select('employee.name',
+            'employee.id',
+            'teaching_assistant.degree',
+            'course_ta.course',
+            'office_ta.office',
+            'room_schedule.schedule',
+            'room_schedule.current_date',
+            'class.start_date',
+            'class.end_date',
+            DB::raw('COUNT( CASE WHEN (class.start_date <= ? and class.end_date >= ? and room_schedule.current_date = ? and room_schedule.schedule = ?) THEN employee.id ELSE NULL END) as count')
+        )
+        ->leftjoin('employee', 'employee.id', 'teaching_assistant.id')
+        ->leftjoin('course_ta','course_ta.TA', 'teaching_assistant.id')
+        ->leftjoin('office_ta', 'office_ta.teaching_assistant', 'teaching_assistant.id')
+        ->leftjoin('room_ta', 'room_ta.TA', 'teaching_assistant.id')
+        ->leftjoin('room_schedule', 'room_schedule.id', 'room_ta.room_schedule')
+        ->leftjoin('class', 'room_schedule.class', 'class.id')
+        ->where('course_ta.course', '=', '?')
+        ->where('office_ta.office','=', '?')
+        ->having('count', '=', 0)
+        ->groupBy('teaching_assistant.id')
         ->setBindings([$date_formated, $date_formated, $day_in_week, $slot_in_day, $course, $office])
         ->get();
         return $data;

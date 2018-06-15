@@ -1,7 +1,7 @@
 angular.module('educationApp').controller('ScheduleController', function($scope, $http) {
     $scope.init = function () {
         $http({
-            url: './getAllSubject',
+            url: './getAllSubject2',
             method: 'GET',
         })
         .then(function(response) {
@@ -10,7 +10,7 @@ angular.module('educationApp').controller('ScheduleController', function($scope,
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
         $http({
-            url: './getAllOffice',
+            url: './getAllOffice2',
             method: 'GET',
         })
         .then(function(response) {
@@ -23,7 +23,7 @@ angular.module('educationApp').controller('ScheduleController', function($scope,
 
     $scope.updateCourse = function() {
         $http({
-            url: './getCourseFromSub',
+            url: './getCourseFromSub2',
             method: 'GET',
             params: {
                 id: $scope.subjectSelected

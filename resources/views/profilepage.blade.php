@@ -8,7 +8,7 @@
             </div>
 
             <div class="profile-wrapper col-md-6">
-                <div class="row">
+                <div>
                     <div class="avatar-wrapper">
                         <div class="avatar" style="background-image: url('{{Auth::user()->avatar}}')">
                         </div>
@@ -204,9 +204,10 @@
                                 <thead>
                                     <tr>
                                         <th>Lớp</th>
-                                        <th>Khóa học</th>
+                                        <th>Vị trí</th>
+                                        <th style="white-space: nowrap;">Khóa học</th>
                                         <th>Trung tâm</th>
-                                        <th>Ngày bắt đầu</th>
+                                        <th style="white-space: nowrap;">Ngày bắt đầu</th>
                                         <th>Tuần học</th>
                                     </tr>
                                 </thead>
@@ -214,12 +215,31 @@
                                     @foreach ($class as $c)
                                         <tr>
                                             <td>{{$c->class}}</td>
+                                            <td style="white-space: nowrap;">Giáo viên</td>
                                             <td>{{$c->course}}</td>
                                             <td>{{$c->name}}</td>
-                                            <td>{{$c->start_date}}</td>
+                                            <td>{{ date('d/m/Y', strtotime($c->start_date)) }}</td>
                                             <td>
                                                 @for ($i = 1; $i <= $week[$c->class]['totalweek']; $i++)
                                                     @if ($i == $week[$c->class]['currentweek'])
+                                                        <span style="color:red">{{$i}}</span>
+                                                    @else
+                                                        {{$i}}
+                                                    @endif
+                                                @endfor
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    @foreach ($class2 as $c)
+                                        <tr>
+                                            <td>{{$c->class}}</td>
+                                            <td style="white-space: nowrap;">Trợ giảng</td>
+                                            <td>{{$c->course}}</td>
+                                            <td>{{$c->name}}</td>
+                                            <td>{{ date('d/m/Y', strtotime($c->start_date)) }}</td>
+                                            <td>
+                                                @for ($i = 1; $i <= $week2[$c->class]['totalweek']; $i++)
+                                                    @if ($i == $week2[$c->class]['currentweek'])
                                                         <span style="color:red">{{$i}}</span>
                                                     @else
                                                         {{$i}}
@@ -255,7 +275,7 @@
                                             @php $check = true; @endphp
                                             @foreach ($tschedule as $t)
                                                 @if ($t->schedule == $s->slot_in_day && $t->current_date == $w)
-                                                    <td class="text" id="{{$c}}{{$d}}" data-slot="{{$c}}" data-date="{{$d}}" data-class="{{$t->class}}">
+                                                    <td class="text" id="{{$c}}{{$d}}" data-class="{{$t->class}}" ng-click="showDayoffModal({{Auth::user()->teacher}}, {{$c}}, {{$d}})">
                                                         <div class="course">Lớp {{$t->class}}</div>
                                                         <div class="course">{{$t->course}}</div>
                                                         <strong>{{$t->name}}</strong>
@@ -265,8 +285,26 @@
                                                     @break;
                                                 @endif
                                             @endforeach
+
                                             @if ($check)
-                                                <td id="{{$c}}{{$d}}" data-slot="{{$c}}" data-date="{{$d}}"></td>
+                                                @php $check2 = true; @endphp
+                                                @foreach ($taschedule as $ta)
+                                                    @if ($ta->schedule == $s->slot_in_day && $ta->current_date == $w)
+                                                        <td class="text" id="{{$c}}{{$d}}" data-class="{{$ta->class}}" ng-click="showDayoffModal({{Auth::user()->teacher}}, {{$c}}, {{$d}})">
+                                                            <div class="course">Lớp {{$ta->class}}</div>
+                                                            <div class="course">{{$ta->course}}</div>
+                                                            <strong>{{$ta->name}}</strong>
+                                                            <div class="course">Phòng {{$ta->room}}</div>
+                                                            <div class="course">(Trợ giảng)</div>
+                                                        </td>
+                                                        @php $check2 = false; @endphp
+                                                        @break;
+                                                    @endif
+                                                @endforeach
+
+                                                @if ($check2)
+                                                    <td></td>
+                                                @endif
                                             @endif
                                             <?php $d += 1; ?>
                                         @endforeach
@@ -297,8 +335,8 @@
                                             <td>{{$t->course}}</td>
                                             <td>{{$t->office}}</td>
                                             <td>{{$t->current_date}}</td>
-                                            <td>{{$t->start_time}} - {{$t->end_time}}</td>
-                                            <td class="dayoffid" data-id="{{$t->id}}" data-schedule="{{$t->room_schedule}}">{{$t->date}}</td>
+                                            <td>{{substr($t->start_time, 0, strlen($t->start_time) - 3)}} - {{substr($t->end_time, 0, strlen($t->end_time) - 3)}}</td>
+                                            <td class="dayoffid" data-id="{{$t->id}}" data-schedule="{{$t->room_schedule}}">{{ date('d/m/Y', strtotime($t->start_date)) }}</td>
                                             @if ($t->backup_teacher == null)
                                                 @php $check = false; @endphp
                                                 @foreach ($teaching_offset as $t2)
@@ -318,6 +356,24 @@
                                                         <a>Đăng kí dạy bù</a>
                                                     </td>
                                                 @endif
+                                            @else
+                                                <td>{{$t->name}}</td>
+                                                <td></td>
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                    @foreach ($ta_dayoff as $t)
+                                        <tr>
+                                            <td>{{$t->class}}</td>
+                                            <td>{{$t->course}}</td>
+                                            <td>{{$t->office}}</td>
+                                            <td>{{$t->current_date}}</td>
+                                            <td>{{substr($t->start_time, 0, strlen($t->start_time) - 3)}} - {{substr($t->end_time, 0, strlen($t->end_time) - 3)}}</td>
+                                            <td class="dayoffid" data-id="{{$t->id}}" data-schedule="{{$t->room_schedule}}">{{ date('d/m/Y', strtotime($t->start_date)) }}</td>
+                                            @if ($t->backup_teacher == null)
+                                            
+                                                <td><img src="./img/invalid.png"></td>
+                                                <td></td>
                                             @else
                                                 <td>{{$t->name}}</td>
                                                 <td></td>
@@ -346,9 +402,9 @@
                                             <td>{{$t->class}}</td>
                                             <td>{{$t->course}}</td>
                                             <td>{{$t->office}}</td>
-                                            <td>{{$t->dayoff}}</td>
-                                            <td>{{$t->date}}</td>
-                                            <td>{{$t->start_time}} - {{$t->end_time}}</td>
+                                            <td>{{ date('d/m/Y', strtotime($t->dayoff)) }}</td>
+                                            <td>{{ date('d/m/Y', strtotime($t->date)) }}</td>
+                                            <td>{{substr($t->start_time, 0, strlen($t->start_time) - 3)}} - {{substr($t->end_time, 0, strlen($t->end_time) - 3)}}</td>
                                             <td>{{$t->room}}</td>
                                         </tr>
                                     @endforeach
@@ -356,7 +412,7 @@
                             </table>
                         </div>
                         <script type="text/javascript">
-                            console.log(<?= json_encode($week); ?>)
+                            console.log(<?= json_encode($tschedule); ?>)
                         </script>
                         <div id="menu5" class="tab-pane">
                             <table class="table table-bordered table-hover">
@@ -379,7 +435,7 @@
                                             <td>{{$t->office}}</td>
                                             <td>{{$t->teacher_off}}</td>
                                             <td>{{$t->date}}</td>
-                                            <td>{{$t->start_time}} - {{$t->end_time}}</td>
+                                            <td>{{substr($t->start_time, 0, strlen($t->start_time) - 3)}} - {{substr($t->end_time, 0, strlen($t->end_time) - 3)}}</td>
                                             <td>{{$t->room}}</td>
                                         </tr>
                                     @endforeach
@@ -420,15 +476,12 @@
                                                             <th>Tên học viên</th>
                                                             <th>Điểm</th>
                                                             <th>Nhận xét giáo viên</th>
-                                                            <th>Nhận xét giám thị</th>
                                                         </tr>
                                                         <tr ng-repeat="memberScore in scopeList[{{$c->class}}]">
                                                             <td><% memberScore.id %></td>
                                                             <td><% memberScore.name %></td>
                                                             <td><input type="number" ng-model="memberScore.score"></td>
                                                             <td><textarea style="resize:none" rows="4" cols="40" name="comment" ng-model="memberScore.teacher_feedback"></textarea></td>
-                                                            <td><textarea disabled style="resize:none" rows="4" cols="40" name="comment" ng-model="memberScore.supervisor_feedback"></textarea></td>
-
                                                         </tr>
                                                     </table>
                                                 </div>

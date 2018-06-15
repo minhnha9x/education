@@ -142,7 +142,19 @@ class ProfileController extends Controller
                 ->groupby('class.id')
                 ->get();
 
+                $class2 = DB::table('class')
+                ->leftjoin('course', 'course.id', 'class.course')
+                ->leftjoin('room_schedule', 'room_schedule.class', 'class.id')
+                ->leftjoin('room_ta', 'room_ta.room_schedule', 'room_schedule.id')
+                ->leftjoin('room', 'room_schedule.room', 'room.id')
+                ->leftjoin('office', 'room.office', 'office.id')
+                ->where('room_ta.TA', Auth::user()->teacher)
+                ->select('*', 'course.name as course', 'course.id as courseid')
+                ->groupby('class.id')
+                ->get();
+
                 $week = array();
+                $week2 = array();
                 $day_off = array();
                 $day_offset = array();
                 foreach ($class as $c) {
@@ -188,7 +200,34 @@ class ProfileController extends Controller
                     $day_offset += array($c->class => $temp2);
                 }
 
-                $teacher_schedule = $this->getTeacherSchedule(Auth::user()->id);
+                foreach ($class2 as $c) {
+                    $firstweekdays = ($this->getWeekday($c->start_date) == 0 ? 1 : 7 - $this->getWeekday($c->start_date) + 1);
+
+                    $today = new DateTime('now');
+                    $formattedDate = new DateTime($c->start_date);
+                    $formattedDate2 = new DateTime($c->end_date);
+                    $diff = date_diff($today, $formattedDate);
+                    $currentweek = floor($diff->format('%a')/7) + 1;
+
+                    $diff2 = date_diff($formattedDate, $formattedDate2);
+                    $diff2 = $diff2->format('%a');
+
+                    $lastweekdays = ($diff2 - $firstweekdays) % 7 ;
+
+                    $totalweek = 1 + floor(($diff2 - $firstweekdays) / 7 ) + ($lastweekdays == 0 ? 0 : 1);
+
+                    $data = array('currentweek' => $currentweek, 
+                        'firstweekdays' => $firstweekdays,
+                        'lastweekdays' => $lastweekdays,
+                        'totalweek' => $totalweek,
+                    );
+
+                    $week2 += array($c->class => $data);
+                }
+
+                $teacher_schedule = $this->getTeacherSchedule2(Auth::user()->teacher);
+
+                $ta_schedule = $this->getTASchedule2(Auth::user()->teacher);
 
                 $teacher_dayoff = DB::table('teacher_dayoff')
                 ->leftjoin('room_schedule', 'teacher_dayoff.room_schedule', 'room_schedule.id')
@@ -199,6 +238,20 @@ class ProfileController extends Controller
                 ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
                 ->leftjoin('employee', 'teacher_dayoff.backup_teacher', 'employee.id')
                 ->where('room_schedule.teacher', Auth::user()->teacher)
+                ->select('*', 'course.name as course', 'course.id as courseid', 'office.name as office', 'teacher_dayoff.id as id')
+                ->orderby('teacher_dayoff.date')
+                ->get();
+
+                $ta_dayoff = DB::table('teacher_dayoff')
+                ->leftjoin('room_schedule', 'teacher_dayoff.room_schedule', 'room_schedule.id')
+                ->leftjoin('room_ta', 'room_ta.room_schedule', 'room_schedule.id')
+                ->leftjoin('class', 'room_schedule.class', 'class.id')
+                ->leftjoin('room', 'room_schedule.room', 'room.id')
+                ->leftjoin('office', 'room.office', 'office.id')
+                ->leftjoin('course', 'class.course', 'course.id')
+                ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
+                ->leftjoin('employee', 'teacher_dayoff.backup_teacher', 'employee.id')
+                ->where('room_ta.TA', Auth::user()->teacher)
                 ->select('*', 'course.name as course', 'course.id as courseid', 'office.name as office', 'teacher_dayoff.id as id')
                 ->orderby('teacher_dayoff.date')
                 ->get();
@@ -231,13 +284,17 @@ class ProfileController extends Controller
 
                 $data = array('slot' => $slot, 
                     'class' => $class,
+                    'class2' => $class2,
                     'courses' => $courses,
                     'teacher_dayoff' => $teacher_dayoff,
+                    'ta_dayoff' => $ta_dayoff,
                     'teacher_backup' => $teacher_backup,
                     'teaching_offset' => $teaching_offset,
                     'tschedule' => $teacher_schedule,
+                    'taschedule' => $ta_schedule,
                     'weekday' => $weekday,
                     'week' => $week,
+                    'week2' => $week2,
                     'teacher_dayoff_count' => $day_off,
                     'teaching_offset_count' => $day_offset,
                     'userInfo' => (object) $user_info[0]
@@ -248,6 +305,49 @@ class ProfileController extends Controller
         else {
             abort(404);
         }
+    }
+
+    public function getAvailableTeacher(Request $r) {
+        // Replace this with param in get request
+        $office = $r->office;
+        $course = $r->course;
+        $slot_in_day = $r->slot;
+        $date = $r->date;
+        //#
+
+        $date_formated = Carbon::parse($date)->startOfDay();
+
+        $validate = strtotime($date);
+        $day_in_week = date('l', $validate);
+        $data = DB::table('main_teacher')
+        ->select('employee.name',
+            'employee.id',
+            'employee.mail',
+            'main_teacher.degree',
+            'course_teacher.course',
+            'office_main_teacher.office',
+            'room_schedule.schedule',
+            'room_schedule.current_date',
+            'class.start_date',
+            'class.end_date',
+            DB::raw('COUNT( CASE WHEN (class.start_date <= ? and class.end_date >= ? and room_schedule.current_date = ? and room_schedule.schedule = ?) THEN employee.id ELSE NULL END) as count')
+        )
+        ->leftjoin('employee', 'employee.id', 'main_teacher.id')
+        ->leftjoin('course_teacher','course_teacher.teacher', 'main_teacher.id')
+        ->leftjoin('office_main_teacher', 'office_main_teacher.teacher', 'main_teacher.id')
+        ->leftjoin('room_schedule', 'room_schedule.teacher', 'main_teacher.id')
+        ->leftjoin('class', 'room_schedule.class', 'class.id')
+        ->where('course_teacher.course', '=', '?')
+        ->where('office_main_teacher.office','=', '?')
+        ->having('count', '=', 0)
+        ->groupBy('main_teacher.id')
+        ->setBindings([$date_formated, $date_formated, $day_in_week, $slot_in_day, $course, $office])
+        ->get();
+        return $data;
+    }
+
+    public function getSlot() {
+        return  DB::table('schedule')->get();
     }
 
     public function getWeekday($date) {
@@ -276,9 +376,9 @@ class ProfileController extends Controller
         return back()->withInput();
     }
 
-    public function getTeacherSchedule(Int $r) {
+    public function getTeacherSchedule2(Int $r) {
         $teacher_id = 1;
-        $current_date = '05/15/2018';
+        $current_date = '06/15/2018';
         $date_formated = Carbon::parse($current_date)->startOfDay();
 
         $data = DB::table('room_schedule')
@@ -288,6 +388,62 @@ class ProfileController extends Controller
         ->leftjoin('office', 'office.id', 'room.office')
         ->select('*', 'course.name as course', 'course.id as courseid', 'room_schedule.id as room_schedule')
         ->where('room_schedule.teacher', $teacher_id)
+        ->whereRaw('(class.start_date <= ? and class.end_date >= ?)', [$date_formated, $date_formated])
+        ->get();
+
+        return $data;
+    }
+
+     public function getTeacherSchedule(Request $r) {
+        $teacher_id = 1;
+        $current_date = '06/15/2018';
+        $date_formated = Carbon::parse($current_date)->startOfDay();
+
+        $data = DB::table('room_schedule')
+        ->leftjoin('class', 'class.id', 'room_schedule.class')
+        ->leftjoin('course', 'class.course', 'course.id')
+        ->leftjoin('room', 'room_schedule.room', 'room.id')
+        ->leftjoin('office', 'office.id', 'room.office')
+        ->select('*', 'course.name as course', 'course.id as courseid', 'room_schedule.id as room_schedule')
+        ->where('room_schedule.teacher', $teacher_id)
+        ->whereRaw('(class.start_date <= ? and class.end_date >= ?)', [$date_formated, $date_formated])
+        ->get();
+
+        return $data;
+    }
+
+    public function getTASchedule(Request $r) {
+        $ta_id = 1;
+        $current_date = '05/15/2018';
+        $date_formated = Carbon::parse($current_date)->startOfDay();
+
+        $data = DB::table('room_ta')
+        ->leftjoin('room_schedule', 'room_ta.room_schedule', 'room_schedule.id')
+        ->leftjoin('class', 'class.id', 'room_schedule.class')
+        ->leftjoin('course', 'class.course', 'course.id')
+        ->leftjoin('room', 'room_schedule.room', 'room.id')
+        ->leftjoin('office', 'office.id', 'room.office')
+        ->select('*', 'course.name as course', 'course.id as courseid', 'room_schedule.id as room_schedule')
+        ->where('room_ta.TA', $ta_id)
+        ->whereRaw('(class.start_date <= ? and class.end_date >= ?)', [$date_formated, $date_formated])
+        ->get();
+
+        return $data;
+    }
+
+    public function getTASchedule2(Int $r) {
+        $ta_id = 1;
+        $current_date = '05/15/2018';
+        $date_formated = Carbon::parse($current_date)->startOfDay();
+
+        $data = DB::table('room_ta')
+        ->leftjoin('room_schedule', 'room_ta.room_schedule', 'room_schedule.id')
+        ->leftjoin('class', 'class.id', 'room_schedule.class')
+        ->leftjoin('course', 'class.course', 'course.id')
+        ->leftjoin('room', 'room_schedule.room', 'room.id')
+        ->leftjoin('office', 'office.id', 'room.office')
+        ->select('*', 'course.name as course', 'course.id as courseid', 'room_schedule.id as room_schedule')
+        ->where('room_ta.TA', $ta_id)
         ->whereRaw('(class.start_date <= ? and class.end_date >= ?)', [$date_formated, $date_formated])
         ->get();
 

@@ -50,14 +50,15 @@
     -webkit-box-shadow: 3px 3px 5px -1px #706c70;
     -moz-box-shadow: 3px 3px 5px -1px #706c70;
     box-shadow: 3px 3px 5px -1px #706c70;
-    padding: 15px;
+    padding: 30px 15px;
     border: 1px solid #ccc;
     text-align: center;
     margin-bottom: 30px;
     background-color: #fff; }
     .profilepage .profile-wrapper .avatar-wrapper {
       display: inline-block;
-      padding: 0 10px; }
+      padding: 0 10px;
+      margin-right: 20px; }
       .profilepage .profile-wrapper .avatar-wrapper .avatar {
         width: 150px;
         height: 150px;
@@ -71,7 +72,7 @@
         cursor: pointer; }
     .profilepage .profile-wrapper .text-wrapper {
       display: inline-block;
-      width: calc(100% - 170px);
+      width: calc(100% - 190px);
       float: right; }
       .profilepage .profile-wrapper .text-wrapper .text {
         padding: 20px 20px 0; }
@@ -81,7 +82,7 @@
             font-weight: bold;
             float: left; }
     .profilepage .profile-wrapper .button-wrapper {
-      margin-top: 20px; }
+      margin-top: 30px; }
       .profilepage .profile-wrapper .button-wrapper .button {
         border: 1px solid #337ab7;
         border-radius: 5px;

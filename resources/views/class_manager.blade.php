@@ -35,8 +35,8 @@
                         @endforeach
                     </td>
                     <td style="white-space: nowrap;">{{$class->count}} / {{$class->max_student}}</td>
-                    <td>{{$class->start_date}}</td>
-                    <td>{{$class->end_date}}</td>
+                    <td>{{ date('d/m/Y', strtotime($class->start_date)) }}</td>
+                    <td>{{ date('d/m/Y', strtotime($class->end_date)) }}</td>
                     <td><a ng-click="showScore({{$class->id}})"><i class="fas fa-eye"></i></a></td>
                     <td class="action">
                         <a id='edit' data-name="Sửa khóa học" data-id='{{$class->id}}'>

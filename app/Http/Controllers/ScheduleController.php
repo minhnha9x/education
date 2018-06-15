@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use App\Office;
+use App\Subject;
+use App\Course;
 use App\Register;
 
 class ScheduleController extends Controller
@@ -98,6 +101,26 @@ class ScheduleController extends Controller
         $schedule = $schedule->get();
 
         $data = array('class' => $class, 'schedule' => $schedule);
+        return $data;
+    }
+
+    public function getAllSubject() {
+        $data = Subject::select('subject.*', DB::raw('count(course.id) as count'))
+        ->leftjoin('course', 'course.subject', 'subject.id')
+        ->groupBy('subject.id')
+        ->get();
+        return $data;
+    }
+
+    public function getCourseFromSub(Request $r) {
+        $data = Course::select("*")
+        ->where('subject', $r->id)
+        ->get();
+        return $data;
+    }
+
+    public function getAllOffice() {
+        $data = Office::get();
         return $data;
     }
 
