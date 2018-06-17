@@ -15,26 +15,26 @@
 			<div class="filter-wrapper">
 				<form class="clearfix">
 					<div class="form-sub-w3 col-md-3">
-			            <select ng-model="subjectSelected" ng-change="updateCourse()">
-			                <option disabled selected hidden value="">Môn học</option>
-			                <option ng-repeat="x in subjectInfo" value="<% x.id %>"><% x.name %></option>
-			            </select>
-			        </div>
-			        <div class="form-sub-w3 col-md-3">
-			            <select ng-model="courseSelected">
-			                <option disabled selected hidden value="">Khóa học</option>
-			                <option ng-repeat="x in courseInfo" value="<% x.id %>"><% x.name %></option>
-			            </select>
-			        </div>
-			        <div class="form-sub-w3 col-md-3">
-			            <select ng-model="officeSelected">
-			                <option disabled selected hidden value="">Trung tâm</option>
-			                <option ng-repeat="x in officeInfo" value="<% x.id %>"><% x.name %></option>
-			            </select>
-			        </div>
-			        <div class="form-sub-w3 col-md-3">
-			        	<input type="button" value="Xem lịch học" ng-click="getSchedule()">
-			        </div>
+						<select ng-model="subjectSelected" ng-change="updateCourse()">
+							<option disabled selected hidden value="">Môn học</option>
+							<option ng-repeat="x in subjectInfo" value="<% x.id %>"><% x.name %></option>
+						</select>
+					</div>
+					<div class="form-sub-w3 col-md-3">
+						<select ng-model="courseSelected">
+							<option disabled selected hidden value="">Khóa học</option>
+							<option ng-repeat="x in courseInfo" value="<% x.id %>"><% x.name %></option>
+						</select>
+					</div>
+					<div class="form-sub-w3 col-md-3">
+						<select ng-model="officeSelected">
+							<option disabled selected hidden value="">Trung tâm</option>
+							<option ng-repeat="x in officeInfo" value="<% x.id %>"><% x.name %></option>
+						</select>
+					</div>
+					<div class="form-sub-w3 col-md-3">
+						<input type="button" value="Xem lịch học" ng-click="getSchedule()">
+					</div>
 				</form>
 			</div>
 

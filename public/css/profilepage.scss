@@ -39,6 +39,35 @@ $blue: #337ab7;
   transform: scaleX(1);
 }
 
+.my-button {
+	background-color: white;
+	color: black; 
+	border: 2px solid #008CBA;
+	padding: 10px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 0 0 15px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.my-button:hover {
+	background-color: #008CBA;
+	color: white;
+}
+
+.my-button.left {
+	float: right;
+}
+
+.my-button:disabled {
+	cursor: not-allowed;
+	opacity: 0.4;
+}
+
 .profilepage {
 	padding-top: 100px;
 	padding-bottom: 40px;
@@ -193,7 +222,7 @@ $blue: #337ab7;
 	input:-moz-placeholder, textarea:-moz-placeholder { /* Firefox 18- */
 		color: #040404 !important;  
 	}
-	input::-moz-placeholder, textarea::-moz-placeholder {  /* Firefox 19+ */
+	input::-moz-placeholder, textarea::-moz-placeholder {  /* Firefox 19 */
 		color: #040404 !important;  
 	}
 	input:-ms-input-placeholder, textarea:-ms-input-placeholder {  
@@ -208,7 +237,7 @@ $blue: #337ab7;
 			box-shadow: none;
 			border: 0;
 			.main-agileits {
-			    font-family: 'Roboto', sans-serif;
+				font-family: 'Roboto', sans-serif;
 				position: relative;
 				width: 100%;
 				background: #fff;
@@ -220,43 +249,43 @@ $blue: #337ab7;
 				background-position: center bottom;
 				.error {
 					padding: 0 15px;
-				    font-style: italic;
-				    color: red;
-				    margin-bottom: 10px;
+					font-style: italic;
+					color: red;
+					margin-bottom: 10px;
 				}
-			    .form-w3-agile {
-				    background: #fff;
-				    -webkit-box-shadow: 0px 35px 44px -22px rgba(0,0,0,0.72);
-				    -moz-box-shadow: 0px 35px 44px -22px rgba(0,0,0,0.72);
-				    box-shadow: 0px 35px 44px -22px #1f181b;
-				    padding: 30px;
+				.form-w3-agile {
+					background: #fff;
+					-webkit-box-shadow: 0px 35px 44px -22px rgba(0,0,0,0.72);
+					-moz-box-shadow: 0px 35px 44px -22px rgba(0,0,0,0.72);
+					box-shadow: 0px 35px 44px -22px #1f181b;
+					padding: 30px;
 					form {
-					    margin: 0 auto;
-					    width: 100%;
-					    h2 {
-						    color: #040404;
-						    font-size: 25px;
-						    text-align: center;
-						    margin-bottom: 40px;
-						    letter-spacing: 2px;
-						    margin-top: 0;
-						    text-transform: capitalize;
+						margin: 0 auto;
+						width: 100%;
+						h2 {
+							color: #040404;
+							font-size: 25px;
+							text-align: center;
+							margin-bottom: 40px;
+							letter-spacing: 2px;
+							margin-top: 0;
+							text-transform: capitalize;
 						}
 						.form-sub-w3 {
 							display: flex;
 							align-items: center;
 							justify-content: space-between;
-						    margin-bottom: 20px;
-						    height: 55px;
-						    select, input {
-							    outline: none;
-							    font-size: 15px;
-							    color: #000;
-							    padding: 10px;
-							    letter-spacing: 2px;
-							    width: 100%;
-							    border: 1px solid #DCCBCF;
-							    background: transparent;
+							margin-bottom: 20px;
+							height: 55px;
+							select, input {
+								outline: none;
+								font-size: 15px;
+								color: #000;
+								padding: 10px;
+								letter-spacing: 2px;
+								width: 100%;
+								border: 1px solid #DCCBCF;
+								background: transparent;
 								font-family: 'FontAwesome', 'Roboto', sans-serif;
 								text-transform: capitalize;
 								option {
@@ -288,31 +317,31 @@ $blue: #337ab7;
 							margin-bottom: 20px;
 						}
 						input[type="submit"] {
-						    background: $blue;
-						    color: #fff;
-						    outline: none;
-						    float: right;
-						    border: none;
-						    cursor: pointer;
-						    padding: 7px 35px;
-						    font-size: 16px;
-						    font-weight: bold;
-						    text-transform: uppercase;
+							background: $blue;
+							color: #fff;
+							outline: none;
+							float: right;
+							border: none;
+							cursor: pointer;
+							padding: 7px 35px;
+							font-size: 16px;
+							font-weight: bold;
+							text-transform: uppercase;
 							font-family: 'Roboto', sans-serif;
 							transition: 0.3s all;
-						    -webkit-transition: 0.3s all;
-						    -moz-transition: 0.3s all;
-						    -o-transition: 0.3s all;
-						    -ms-transition: 0.3s all;
+							-webkit-transition: 0.3s all;
+							-moz-transition: 0.3s all;
+							-o-transition: 0.3s all;
+							-ms-transition: 0.3s all;
 						}
 						input[type="submit"]:hover{
-						    background: #4CAF50;
+							background: #4CAF50;
 							color:#ffffff;
 							transition: 0.3s all;
-						    -webkit-transition: 0.3s all;
-						    -moz-transition: 0.3s all;
-						    -o-transition: 0.3s all;
-						    -ms-transition: 0.3s all;
+							-webkit-transition: 0.3s all;
+							-moz-transition: 0.3s all;
+							-o-transition: 0.3s all;
+							-ms-transition: 0.3s all;
 						}
 						input:disabled {
 							background-color: #EBEBE4 !important;

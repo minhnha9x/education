@@ -5,10 +5,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Teacher_Backup;
 
 class Teaching_Offset extends Model {
-    protected $table = 'teaching_offset';
-    public $timestamps = false;
+	protected $table = 'teaching_offset';
+	public $timestamps = false;
 
-    protected $guarded = [];
+	protected $guarded = [];
 }
 
 ?>

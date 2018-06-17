@@ -37,6 +37,32 @@
   -webkit-transform: scaleX(1);
   transform: scaleX(1); }
 
+.my-button {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0 0 15px;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer; }
+
+.my-button:hover {
+  background-color: #008CBA;
+  color: white; }
+
+.my-button.left {
+  float: right; }
+
+.my-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4; }
+
 .profilepage {
   padding-top: 100px;
   padding-bottom: 40px;
@@ -160,7 +186,7 @@
   /* Firefox 18- */
   color: #040404 !important; }
 .profile-modal input::-moz-placeholder, .profile-modal textarea::-moz-placeholder {
-  /* Firefox 19+ */
+  /* Firefox 19 */
   color: #040404 !important; }
 .profile-modal input:-ms-input-placeholder, .profile-modal textarea:-ms-input-placeholder {
   color: #040404 !important; }

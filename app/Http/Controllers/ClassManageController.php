@@ -9,10 +9,10 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 
 class ClassManageController extends Controller
 {
-    public function deleteClass(Request $r) {
-        $class = DB::table('class')
-        ->where('id', $r->id)
-        ->delete();
-        return back()->withInput();
-    }
+	public function deleteClass(Request $r) {
+		$class = DB::table('class')
+		->where('id', $r->id)
+		->delete();
+		return back()->withInput();
+	}
 }
