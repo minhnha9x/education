@@ -601,7 +601,6 @@ class AdminController extends Controller
 
         $ta->degree = $r->degree;
         $ta->save();
-
         foreach ($r->office as $o) {
             $this->addOfficeTA($ta->id, $o);
         }
@@ -641,11 +640,10 @@ class AdminController extends Controller
             $data = Office_TA::where('teaching_assistant', $teacher_id)
             ->where('office', $office_id)
             ->first();
-
             if ($data == null) {
                 $data = new Office_TA;
                 $data->office = $office_id;
-                $data->teacher = $teacher_id;
+                $data->teaching_assistant = $teacher_id;
                 $data->save();
             }
         }
@@ -681,7 +679,7 @@ class AdminController extends Controller
             if ($data == null) {
                 $data = new Course_TA;
                 $data->course = $course_id;
-                $data->teacher = $teacher_id;
+                $data->TA = $teacher_id;
                 $data->save();
             }
         }
@@ -1203,9 +1201,17 @@ class AdminController extends Controller
             $day_off = $this->getNumberOfDayOff($start_day, $end_day, $teacher->id);
             $teaching_backup = $this->getNumberOfTeachingBackup($start_day, $end_day, $teacher->id);
             $teaching_offset = $this->getNumberOfTeachingOffSet($start_day, $end_day, $teacher->id);
-            $salary_rate = 200000;
+            $mt_salary_rate = 200000;
+            $ta_salary_rate = 100000;
+            $officer_basic_salary = 5000000;
 
-            $teacher->salary = $salary_rate*($teaching_day - $day_off + $teaching_backup + $teaching_offset);
+            $teacher->salary = $mt_salary_rate*($teaching_day - $day_off + $teaching_backup + $teaching_offset);
+            $teacher->salary += $teacher->rate_salary*$officer_basic_salary;
+
+            $ta_teaching_day = $this->getNumberOfTATeachingDay($start_day, $end_day, $teacher->id);
+            $ta_day_off = $this->getNumberOfTADayOff($start_day, $end_day, $teacher->id);
+            $teacher->salary += $ta_salary_rate*($ta_teaching_day - $ta_day_off);
+
         }
         return $main_teacher_salary;
     }
@@ -1239,6 +1245,15 @@ class AdminController extends Controller
         return $teacher_dayoff[0]->count;
     }
 
+    public function getNumberOfTADayOff($start_date, $end_date, $ta_id) {
+        $ta_dayoff = DB::table('ta_dayoff')
+        ->select(DB::raw('count(*) as count'))
+        ->where('ta_dayoff.ta_id', $ta_id)
+        ->whereRaw('ta_dayoff.date between ? and ?', [$start_date, $end_date])
+        ->get();
+        return $ta_dayoff[0]->count;
+    }
+
     public function getNumberOfTeachingDay($start_date, $end_date, $teacher_id) {
         $teacher_schedule = DB::table('room_schedule')
         ->select('room_schedule.current_date', 'class.start_date', 'class.end_date')
@@ -1248,7 +1263,42 @@ class AdminController extends Controller
         ->get();
 
         $day_count = 0;
-        $day_in_week = array(       
+        $day_in_week = array(
+            "Monday"=>1,
+            "Tuesday"=>2,
+            "Wednesday"=>3,
+            "Thursday"=>4,
+            "Friday"=>5,
+            "Saturday"=>6,
+            "Sunday"=>7,
+        );
+        foreach ($teacher_schedule as $schedule) {
+            $from = $start_date;
+            $to = $end_date;
+
+            if ($schedule->start_date > $start_date) {
+                $from = $schedule->start_date;
+            }
+
+            if ($schedule->end_date < $end_date) {
+                $to = $schedule->end_date;
+            }
+            $day_count += $this->dayCount($from, $to, $day_in_week[$schedule->current_date]);
+        };
+        return $day_count;
+    }
+
+    public function getNumberOfTATeachingDay($start_date, $end_date, $ta_id) {
+        $teacher_schedule = DB::table('room_schedule')
+        ->select('room_schedule.current_date', 'class.start_date', 'class.end_date')
+        ->leftjoin('class', 'class.id', 'room_schedule.class')
+        ->leftjoin('room_ta', 'room_ta.room_schedule', 'room_schedule.id')
+        ->where('room_ta.TA', $ta_id)
+        ->whereRaw('not (class.start_date >= ? or class.end_date <= ?)', [$end_date, $start_date])
+        ->get();
+
+        $day_count = 0;
+        $day_in_week = array(
             "Monday"=>1,
             "Tuesday"=>2,
             "Wednesday"=>3,

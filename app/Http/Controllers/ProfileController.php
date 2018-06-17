@@ -68,6 +68,7 @@ class ProfileController extends Controller
                     $week += array($c->class => $data);
                 }
 
+                $date_formated = Carbon::now()->startOfDay();
                 $schedule = DB::table('register')
                 ->leftjoin('class', 'register.class', 'class.id')
                 ->leftjoin('course', 'class.course', 'course.id')
@@ -76,6 +77,7 @@ class ProfileController extends Controller
                 ->leftjoin('office', 'room.office', 'office.id')
                 ->select('*', 'course.name as course')
                 ->where('register.user', Auth::user()->id)
+                ->whereRaw('(class.start_date <= ? and class.end_date >= ?)', [$date_formated, $date_formated])
                 ->get();
 
                 $teacher_dayoff = DB::table('teacher_dayoff')
@@ -112,8 +114,6 @@ class ProfileController extends Controller
                 ->where('register.user', Auth::user()->id)
                 ->get()
                 ->keyBy('class');
-
-                Debugbar::info($result);
 
                 $data = array('user' => $user, 
                     'schedule' => $schedule,
@@ -225,9 +225,9 @@ class ProfileController extends Controller
                     $week2 += array($c->class => $data);
                 }
 
-                $teacher_schedule = $this->getTeacherSchedule2(Auth::user()->teacher);
+                $teacher_schedule = $this->getTeacherScheduleById(Auth::user()->teacher);
 
-                $ta_schedule = $this->getTASchedule2(Auth::user()->teacher);
+                $ta_schedule = $this->getTASchedulebyId(Auth::user()->teacher);
 
                 $teacher_dayoff = DB::table('teacher_dayoff')
                 ->leftjoin('room_schedule', 'teacher_dayoff.room_schedule', 'room_schedule.id')
@@ -376,10 +376,9 @@ class ProfileController extends Controller
         return back()->withInput();
     }
 
-    public function getTeacherSchedule2(Int $r) {
-        $teacher_id = 1;
-        $current_date = '06/15/2018';
-        $date_formated = Carbon::parse($current_date)->startOfDay();
+    public function getTeacherScheduleById(Int $id) {
+        $teacher_id = $id;
+        $date_formated = Carbon::now()->startOfDay();
 
         $data = DB::table('room_schedule')
         ->leftjoin('class', 'class.id', 'room_schedule.class')
@@ -395,46 +394,18 @@ class ProfileController extends Controller
     }
 
      public function getTeacherSchedule(Request $r) {
-        $teacher_id = 1;
-        $current_date = '06/15/2018';
-        $date_formated = Carbon::parse($current_date)->startOfDay();
-
-        $data = DB::table('room_schedule')
-        ->leftjoin('class', 'class.id', 'room_schedule.class')
-        ->leftjoin('course', 'class.course', 'course.id')
-        ->leftjoin('room', 'room_schedule.room', 'room.id')
-        ->leftjoin('office', 'office.id', 'room.office')
-        ->select('*', 'course.name as course', 'course.id as courseid', 'room_schedule.id as room_schedule')
-        ->where('room_schedule.teacher', $teacher_id)
-        ->whereRaw('(class.start_date <= ? and class.end_date >= ?)', [$date_formated, $date_formated])
-        ->get();
-
-        return $data;
+        $teacher_id = $r->id;
+        return $this->getTeacherScheduleById($teacher_id);
     }
 
     public function getTASchedule(Request $r) {
-        $ta_id = 1;
-        $current_date = '05/15/2018';
-        $date_formated = Carbon::parse($current_date)->startOfDay();
-
-        $data = DB::table('room_ta')
-        ->leftjoin('room_schedule', 'room_ta.room_schedule', 'room_schedule.id')
-        ->leftjoin('class', 'class.id', 'room_schedule.class')
-        ->leftjoin('course', 'class.course', 'course.id')
-        ->leftjoin('room', 'room_schedule.room', 'room.id')
-        ->leftjoin('office', 'office.id', 'room.office')
-        ->select('*', 'course.name as course', 'course.id as courseid', 'room_schedule.id as room_schedule')
-        ->where('room_ta.TA', $ta_id)
-        ->whereRaw('(class.start_date <= ? and class.end_date >= ?)', [$date_formated, $date_formated])
-        ->get();
-
-        return $data;
+        $ta_id = $r->id;
+        return $this->getTASchedulebyId($ta_id);
     }
 
-    public function getTASchedule2(Int $r) {
-        $ta_id = 1;
-        $current_date = '05/15/2018';
-        $date_formated = Carbon::parse($current_date)->startOfDay();
+    public function getTASchedulebyId(Int $id) {
+        $ta_id = $id;
+        $date_formated = Carbon::now()->startOfDay();
 
         $data = DB::table('room_ta')
         ->leftjoin('room_schedule', 'room_ta.room_schedule', 'room_schedule.id')

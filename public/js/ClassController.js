@@ -157,7 +157,7 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
         var tempTeacher = $scope.checkEmptyTeacher(slot, day);
         var tempRoom = $scope.checkEmptyRoom(slot, day);
         var tempTa = $scope.checkEmptyTA(slot, day);
-        if (tempTeacher.length == 0 || tempRoom.length == 0 || (tempTa.length == 0 && $scope.TAList.length > 0)) {
+        if (tempTeacher.length == 0 || tempRoom.length == 0 || (tempTa.length < $scope.TAList.length)) {
             return "./img/invalid.png";
         }
         return "./img/uncheck.png";

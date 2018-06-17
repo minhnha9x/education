@@ -86,7 +86,7 @@ angular.module('educationApp').controller('ProfileController', function($scope, 
         $http({
             url: './getTeacherSchedule',
             method: 'GET',
-            param: {
+            params: {
                 'id': param,
             },
         })
@@ -95,7 +95,7 @@ angular.module('educationApp').controller('ProfileController', function($scope, 
             $http({
                 url: './getTASchedule',
                 method: 'GET',
-                param: {
+                params: {
                     'id': param,
                 },
             })
