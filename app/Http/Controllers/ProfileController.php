@@ -70,6 +70,7 @@ class ProfileController extends Controller
                 }
 
                 $date_formated = Carbon::now()->startOfDay();
+                
                 $schedule = DB::table('register')
                 ->leftjoin('class', 'register.class', 'class.id')
                 ->leftjoin('course', 'class.course', 'course.id')

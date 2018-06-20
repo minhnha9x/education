@@ -7,6 +7,7 @@
                 <th>Môn học</th>
                 <th>Số buổi học</th>
                 <th>Số lớp học</th>
+                <th>Số trợ giảng mỗi lớp</th>
                 <th>Học phí</th>
                 <th>Môn tiên quyết</th>
                 <th>Hành động</th>
@@ -22,6 +23,7 @@
                 <td><% x.subject %></td>
                 <td><% x.total_of_period %></td>
                 <td><% x.count %></td>
+                <td><% x.teaching_assistant %></td>
                 <td><% x.price | number: 0 %> VNĐ</td>
                 <td><% x.certificate_required %></td>
                 <td class="action">

@@ -93,6 +93,25 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @else
+                                    <tr>
+                                        <td colspan="5" ng-show="!ishown[{{$u->class}}]">
+                                            <div style="text-align: left;">
+                                                <p>
+                                                    <span style="font-weight: bold;">Điểm Thi: </span>
+                                                </p>
+                                                <p>
+                                                    <span style="font-weight: bold;">Nhận xét giáo viên: </span>
+                                                </p>
+                                                <p>
+                                                    <span style="font-weight: bold;">Nhận xét giám thị: </span>
+                                                </p>
+                                                <p>
+                                                    <span style="font-weight: bold;">Kết quả: </span>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
                                     @endif
                                 @endforeach
                             </table>

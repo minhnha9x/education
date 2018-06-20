@@ -24,6 +24,7 @@ angular.module('educationApp').controller('CourseController', function($scope, $
                 $scope.certificate_required = '';
                 $scope.subjectName = '';
                 $scope.picFile = '';
+                $scope.ta_count = '';
                 break;
             case 2:
                 $scope.button = "Sửa khóa học";
@@ -41,6 +42,7 @@ angular.module('educationApp').controller('CourseController', function($scope, $
                     $scope.coursePrice = response.data[0].price;
                     $scope.total_of_period = response.data[0].total_of_period;
                     $scope.picFile = response.data[0].img_url;
+                    $scope.ta_count = response.data[0].teaching_assistant;
                     if (response.data[0].certificate_required != null)
                         $scope.certificate_required = response.data[0].certificate_required + "";
                     else
@@ -101,6 +103,7 @@ angular.module('educationApp').controller('CourseController', function($scope, $
                         'total_of_period': $scope.total_of_period,
                         'subject': $scope.subjectName,
                         'certificate_required': $scope.certificate_required,
+                        'teaching_assistant': $scope.ta_count,
                     },
                 })
                 .then(function(response) {
@@ -138,6 +141,7 @@ angular.module('educationApp').controller('CourseController', function($scope, $
                         'total_of_period': $scope.total_of_period,
                         'subject': $scope.subjectName,
                         'certificate_required': $scope.certificate_required,
+                        'teaching_assistant': $scope.ta_count,
                     },
                 })
                 .then(function(response) {

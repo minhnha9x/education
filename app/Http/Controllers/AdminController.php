@@ -202,7 +202,8 @@ class AdminController extends Controller
         $data->price = $r->price;
         $data->total_of_period = $r->total_of_period;
         $data->description = $r->description;
-        $data->certificate_required = $r->certificate_required;     
+        $data->certificate_required = $r->certificate_required;
+        $data->teaching_assistant = $r->teaching_assistant;
         $data->save();
         return $result;
     }

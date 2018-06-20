@@ -1,5 +1,5 @@
 <div id="courseModal" class="modal admin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" style="width: 650px">
+    <div class="modal-dialog" role="document" style="width: 850px">
         <div class="modal-content">
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
@@ -20,6 +20,9 @@
                             </div>
                             <div class="form-sub-w3 col-md-12">
                                 <input type="number" placeholder="Tổng số buổi học" ng-model="total_of_period" required>
+                            </div>
+                            <div class="form-sub-w3 col-md-12">
+                                <input type="number" placeholder="Số trợ giảng mỗi lớp" ng-model="ta_count" required>
                             </div>
                             <div class="form-sub-w3 col-md-12">
                                 <select ng-model="certificate_required">
