@@ -40,7 +40,6 @@ class ProfileController extends Controller
                 ->leftjoin('class', 'register.class', 'class.id')
                 ->leftjoin('course', 'class.course', 'course.id')
                 ->where('users.id', Auth::user()->id)
-                ->groupby('course.id')
                 ->get();
 
                 $week = array();
@@ -251,7 +250,7 @@ class ProfileController extends Controller
                 ->leftjoin('office', 'room.office', 'office.id')
                 ->leftjoin('course', 'class.course', 'course.id')
                 ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
-                ->leftjoin('employee', 'ta_dayoff.backup_ta', 'employee.id')
+                ->leftjoin('employee', 'ta_dayoff.ta_id', 'employee.id')
                 ->where('ta_dayoff.ta_id', Auth::user()->teacher)
                 ->select('*', 'course.name as course', 'course.id as courseid', 'office.name as office', 'ta_dayoff.id as id')
                 ->orderby('ta_dayoff.date')
@@ -384,7 +383,6 @@ class ProfileController extends Controller
         $data->room_schedule = $r->room_schedule;
         $data->teacher_dayoff = $r->id;
         $data->date = $r->date;
-        Debugbar::info($r->date);
         $data->save();
         return back()->withInput();
     }
@@ -479,7 +477,6 @@ class ProfileController extends Controller
         return $data;
     }
     public function updateScoreList(Request $r) {
-        Debugbar::info($r->data);
         foreach ($r->data as $score) {
             $score = (object) $score;
             if ($score->exam != null){
