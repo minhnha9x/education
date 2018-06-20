@@ -605,17 +605,17 @@ class AdminController extends Controller
 		foreach ($r->office as $o) {
 			$this->addOfficeTA($ta->id, $o);
 		}
-		foreach ($r->officedel as $o) {
-			$this->deleteOfficeTA($ta->id, $o);
-		}
+		// foreach ($r->officedel as $o) {
+		// 	$this->deleteOfficeTA($ta->id, $o);
+		// }
 
 		foreach ($r->course as $c) {
 			$this->addCourseTA($ta->id, $c);
 		}
-		foreach ($r->coursedel as $c) {
-			$this->deleteCourseTA($ta->id, $c);
-		}
-		return $result;
+		// foreach ($r->coursedel as $c) {
+		// 	$this->deleteCourseTA($ta->id, $c);
+		// }
+		// return $result;
 	}
 
 	public function addOfficeTeacher($teacher_id, $office_id) {
