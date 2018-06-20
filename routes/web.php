@@ -18,6 +18,7 @@ Route::post('/forgotPassword', 'UtilController@sendMail');
 Route::get('/', 'HomeController@get');
 
 Route::post('/addteacherdayoff', 'ProfileController@addTeacherDayoff');
+Route::post('/addtadayoff', 'ProfileController@addTADayoff');
 Route::post('/addteachingoffset', 'ProfileController@addTeachingOffset');
 Route::post('/updateProfile', 'ProfileController@updateProfile');
 Route::post('/updateAvatar','ProfileController@updateAvatar');
