@@ -74,6 +74,7 @@
                                             <i class="fas fa-plus-square" ng-show="ishown[{{$u->class}}]"></i>
                                         </td>
                                     </tr>
+                                    @if ($result->has($u->class))
                                     <tr>
                                         <td colspan="5" ng-show="!ishown[{{$u->class}}]">
                                             <div style="text-align: left;">
@@ -92,6 +93,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @endif
                                 @endforeach
                             </table>
                         </div>
