@@ -139,7 +139,7 @@ class ScheduleController extends Controller
             else {
                 $check = $this->validateNewRegister(Auth::user()->id, $request->class);
                 switch ($check) {
-                    case 'false':
+                    case false:
                         return array('msg' => 'Đăng ký thất bại. Vui lòng kiểm tra lại thời khóa biểu hoặc môn học tiên quyết của khóa học.', 'type' => 'danger');
                         break;
                     default:
@@ -155,7 +155,7 @@ class ScheduleController extends Controller
         else {
             $check = $this->validateNewRegister(Auth::user()->id, $request->class);
             switch ($check) {
-                case 'false':
+                case false:
                     return array('msg' => 'Đăng ký thất bại. Vui lòng kiểm tra lại thời khóa biểu hoặc môn học tiên quyết của khóa học.', 'type' => 'danger');
                     break;
                 default:

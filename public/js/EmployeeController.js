@@ -332,11 +332,12 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
     $scope.addEmployee = function(param) {
         switch (param) {
             case -1:
+                console.log("hoho", $scope.employeeNameSelected);
                 $http({
                     url: './addEmployee',
                     method: 'POST',
                     data: {
-                        'name': $scope.employeeNameSelected,
+                        'name': $scope.employeeName,
                         'address': $scope.employeeAddr,
                         'phone': $scope.employeePhone,
                         'mail': $scope.employeeMail,
@@ -354,12 +355,13 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                 });
                 break;
             default:
+                console.log("asdad", $scope.employeeName);
                 $http({
                     url: './addEmployee',
                     method: 'POST',
                     data: {
                         'id': param,
-                        'name': $scope.employeeName,
+                        'name': $scope.employeeNameSelected,
                         'address': $scope.employeeAddr,
                         'phone': $scope.employeePhone,
                         'mail': $scope.employeeMail,

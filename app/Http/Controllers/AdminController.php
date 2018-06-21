@@ -357,6 +357,7 @@ class AdminController extends Controller
     }
 
     public function addEmployee(Request $r) {
+        Debugbar::info('aa', $r);
         if ($r->id != null) {
             $data = Employee::findOrFail($r->id);
             $result = array('msg' => 'Đã cập nhật thông tin nhân viên.', 'type' => 'success');
@@ -537,15 +538,17 @@ class AdminController extends Controller
     }
 
     public function addTeacher(Request $r) {
+        Debugbar::info("aaa", $r);
         if ($r->employeeid != null) {
             $teacher = Teacher::findOrFail($r->employeeid);
             $result = array('msg' => 'Đã cập nhật thông tin giáo viên.', 'type' => 'success');
         }
         else {
+            Debugbar::info("aaa", $r);
             $teacher = new Teacher;
             $teacher->id = $r->id;
             $employee = Employee::findOrFail($r->id);
-            $temp = User::findOrFail($employee->mail);
+            $temp = User::where('email', $employee->mail)->first();
             if ($temp == null) {
                 $data = new User;
                 $data->name = $employee->name;
