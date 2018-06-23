@@ -4,10 +4,10 @@
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
                     <form method="POST" role="form">
-                        <h2 id="form-title">Create class schedule</h2>
+                        <h2 id="form-title">Tạo lịch học</h2>
                         <table class="table table-bordered table-hover">
                             <tr>
-                                <th>Schedule</th>
+                                <th>Giờ học</th>
                                 <th ng-repeat="key in checkedList " style="width: 150px;"><% key %></th>
                             </tr>
                             <tr ng-repeat="(key, value) in slot_in_day">
@@ -19,8 +19,8 @@
                         </table>
                         {!! csrf_field() !!}
                         <div class="submit-w3l col-md-12">
-                            <input type="button" name="back" ng-click="backAddClass()" value='back'>
-                            <input type="submit" ng-disabled="checkFillFull()" ng-click="storeClass()" value="Save schedule">
+                            <input type="button" name="back" ng-click="backAddClass()" value='Trở lại'>
+                            <input type="submit" ng-disabled="checkFillFull()" ng-click="storeClass()" value="Lưu lịch học">
                         </div>
                     </form>
                 </div>      

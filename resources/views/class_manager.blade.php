@@ -21,7 +21,7 @@
                 <td><% x.course %></td>
                 <td>
                     <div ng-repeat="y in scheduleInfo" ng-if="(y.class == x.id)" style="white-space: nowrap;">
-                        <% y.current_date %>: <% date('H:i', strtotime(y.start_time)) %> - <% date('H:i', strtotime(y.end_time)) %> (Phòng <% y.room %>)
+                        <% y.current_date | strReplace:'Monday': 'Thứ Hai' | strReplace: 'Tuesday': 'Thứ Ba' | strReplace: 'Wednesday': 'Thứ Tư' | strReplace: 'Thursday': 'Thứ Năm' | strReplace: 'Friday': 'Thứ Sáu' | strReplace: 'Saturday': 'Thứ Bảy' | strReplace: 'Sunday': 'Chủ Nhật' %>: <% y.start_time | limitTo: 5 %> - <% y.end_time | limitTo: 5 %> (Phòng <% y.room %>)
                     </div>
                 </td>
                 <td><% x.office %></td>
@@ -45,7 +45,7 @@
 
     @include('popup.add_class_modal_step_2')
 
-    @include('popup.schedule_detail_modal')
+    @include('popup.add_class_modal_step_3')
 
     @include('popup.score_modal')
 </div>

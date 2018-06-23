@@ -4,7 +4,7 @@
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
                     <form method="POST" role="form">
-                        <h2 id="form-title">Add class</h2>
+                        <h2 id="form-title">Thêm lớp học</h2>
                         <div class="form-sub-w3 col-md-4">
                             <select name="subject" class="checkchange" ng-model="subjectSelected" ng-change="subjectUpdated()">
                                 <option value="" disabled selected hidden>Môn học</option>
@@ -49,7 +49,7 @@
                         </div>
                         {!! csrf_field() !!}
                         <div class="submit-w3l col-md-12">
-                            <input type="button" ng-disabled="checkAddingClass()" ng-click="getCheckedList(); getRoomAvailable(); getTeacherAvailable(); getTAAvailable(); addClassDetail()" style="float: right;" value="Create Class">
+                            <input type="button" ng-disabled="checkAddingClass()" ng-click="getCheckedList(); getRoomAvailable(); getTeacherAvailable(); getTAAvailable(); addClassDetail()" style="float: right;" value="Tạo lớp học">
                         </div>
                     </form>
                 </div>

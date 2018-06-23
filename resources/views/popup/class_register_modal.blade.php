@@ -14,7 +14,7 @@
                                 <div class="schedule">
                                     Giờ học<br>
                                     <span ng-repeat="y in scheduleInfo" ng-if="y.class == classId">
-                                        <% y.current_date %>: <% y.start_time %> - <% y.end_time %> (Phòng <% y.room %>)<br>
+                                        <% y.current_date | strReplace:'Monday': 'Thứ Hai' | strReplace: 'Tuesday': 'Thứ Ba' | strReplace: 'Wednesday': 'Thứ Tư' | strReplace: 'Thursday': 'Thứ Năm' | strReplace: 'Friday': 'Thứ Sáu' | strReplace: 'Saturday': 'Thứ Bảy' | strReplace: 'Sunday': 'Chủ Nhật' %>: <% y.start_time %> - <% y.end_time %> (Phòng <% y.room %>)<br>
                                     </span>
                                 </div>
                             </div>

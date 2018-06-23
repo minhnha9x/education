@@ -4,7 +4,7 @@
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
                     <form method="POST" role="form">
-                        <h2 id="form-title">Add class</h2>
+                        <h2 id="form-title">Thông tin buổi học</h2>
                         <div class="form-sub-w3 col-md-6">
                             <select name="subject" class="checkchange" ng-model="room_in_cell">
                                 <option value="" disabled selected hidden>Phòng học</option>
@@ -24,8 +24,8 @@
                             </select>
                         </div>   
                         <div class="submit-w3l col-md-12">
-                            <input type="button" ng-click="unSelected()" style="float: left;" value="Reset">
-                            <input type="button" name="ok" ng-click="setSelected()" style="float: right;" value="OK">
+                            <input type="button" ng-click="unSelected()" style="float: left;" value="Nhập lại">
+                            <input type="button" name="ok" ng-click="setSelected()" style="float: right;" value="Lưu">
                         </div>
                     </form>
                 </div>
