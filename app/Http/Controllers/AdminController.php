@@ -93,6 +93,64 @@ class AdminController extends Controller
         }
     }
 
+    public function getAllClass() {
+        $class = DB::table('class')
+        ->select('*', 'class.id as id', 'course.name as course', 'office.name as office', DB::raw('count(register.id) as count'))
+        ->leftjoin('register', 'register.class', 'class.id')
+        ->leftjoin('course', 'course.id', 'class.course')
+        ->leftjoin('room_schedule', 'class.id', 'room_schedule.class')
+        ->leftjoin('room', 'room_schedule.room', 'room.id')
+        ->leftjoin('office', 'room.office', 'office.id')
+        ->orderby('course.name')
+        ->groupBy('class.id')
+        ->get();
+
+        $schedule = DB::table('room_schedule')
+        ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
+        ->leftjoin('room', 'room_schedule.room', 'room.id')
+        ->leftjoin('office', 'room.office', 'office.id')
+        ->get();
+
+        return array('class' => $class,
+            'schedule' => $schedule);
+    }
+
+    function addClass(Request $r) {
+        $class_obj = new Class_Room;
+        $class_obj->course = $r->course;
+        $class_obj->supervisor = $r->supervisor;
+        $class_obj->start_date = date('Y-m-d', strtotime($r->start_date));
+        $class_obj->end_date = date('Y-m-d', strtotime($r->end_date));
+        $class_obj->save();
+        foreach ($r->schedule as $schedule => $detail) {
+            $slot_and_day = explode('_', $schedule, 2);
+            $slot = $slot_and_day[0];
+            $day = $slot_and_day[1];
+
+            $room_schedule_obj = new Room_Schedule;
+            $room_schedule_obj->class = $class_obj->id;
+            $room_schedule_obj->schedule = $slot;
+            $room_schedule_obj->current_date = $day;
+            $room_schedule_obj->teacher = $detail[1];
+            $room_schedule_obj->room = $detail[0];
+            $room_schedule_obj->save();
+            foreach ($detail[2] as $ta) {
+                $room_ta = new Room_TA;
+                $room_ta->TA = $ta['TASelected'];
+                $room_ta->room_schedule = $room_schedule_obj->id;
+                $room_ta->save();
+            }
+        }
+        return $result = array('msg' => 'Đã cập nhật danh sách lớp học.', 'type' => 'success');
+    }
+
+    public function deleteClass(Request $r) {
+        $class = DB::table('class')
+        ->where('id', $r->id)
+        ->delete();
+        return array('msg' => 'Xóa lớp học thành công.', 'type' => 'success');
+    }
+
     public function getAllRegister() {
         $data = DB::table('register')
         ->leftjoin('users', 'register.user', 'users.id')
@@ -1369,32 +1427,5 @@ class AdminController extends Controller
         ->get();
 
         return $supervisorList;
-    }
-    function addClass(Request $r) {
-        $class_obj = new Class_Room;
-        $class_obj->course = $r->course;
-        $class_obj->supervisor = $r->supervisor;
-        $class_obj->start_date = date('Y-m-d', strtotime($r->start_date));
-        $class_obj->end_date = date('Y-m-d', strtotime($r->end_date));
-        $class_obj->save();
-        foreach ($r->schedule as $schedule => $detail) {
-            $slot_and_day = explode('_', $schedule, 2);
-            $slot = $slot_and_day[0];
-            $day = $slot_and_day[1];
-
-            $room_schedule_obj = new Room_Schedule;
-            $room_schedule_obj->class = $class_obj->id;
-            $room_schedule_obj->schedule = $slot;
-            $room_schedule_obj->current_date = $day;
-            $room_schedule_obj->teacher = $detail[1];
-            $room_schedule_obj->room = $detail[0];
-            $room_schedule_obj->save();
-            foreach ($detail[2] as $ta) {
-                $room_ta = new Room_TA;
-                $room_ta->TA = $ta['TASelected'];
-                $room_ta->room_schedule = $room_schedule_obj->id;
-                $room_ta->save();
-            }
-        }
     }
 }

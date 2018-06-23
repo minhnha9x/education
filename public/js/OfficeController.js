@@ -1,17 +1,24 @@
 angular.module('educationApp').controller('OfficeController', function($scope, $http) {
     $scope.init = function () {
+        $('#officeModal').modal('hide');
+        $('#officeTable').hide();
+        $('#menu4 .loading').show();
         $http({
             url: './getAllOffice',
             method: 'GET',
         })
         .then(function(response) {
             $scope.officeInfo = response.data;
-            $('#officeModal').modal('hide');
+            $('#menu4 .loading').hide();
+            $('#officeTable').show();
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
-    $scope.init();
+    $scope.$on('load-4', function(event, args) {
+        if ($scope.officeInfo == null)
+            $scope.init();
+    });
     $scope.showModal = function(param1, param2) {
         switch (param1) {
             case 1:

@@ -1,12 +1,49 @@
 angular.module('educationApp').controller('EmployeeController', function($scope, $http) {
+    $http({
+        url: './getAllOffice',
+        method: 'GET',
+    })
+    .then(function(response) {
+        $scope.officeInfo = response.data;
+    }, function(response) {
+        $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+    });
+    $http({
+        url: './getAllCourse',
+        method: 'GET',
+    })
+    .then(function(response) {
+        $scope.courseInfo = response.data;
+    }, function(response) {
+        $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+    });
+    $http({
+        url: './getAllPosition',
+        method: 'GET',
+    })
+    .then(function(response) {
+        $scope.positionInfo = response.data;
+    }, function(response) {
+        $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+    });
+    
     $scope.init = function () {
+        $('#employeeModal').modal('hide');
+        $('#teacherModal').modal('hide');
+        $('#taModal').modal('hide');
+        $('#workerModal').modal('hide');
+        $('#employee_manager_wrapper table').each(function() {
+            $(this).hide();
+        });
+        $('#menu6 .loading').show();
         $http({
             url: './getAllEmployee',
             method: 'GET',
         })
         .then(function(response) {
             $scope.employeeInfo = response.data;
-            $('#employeeModal').modal('hide');
+            $('#menu6 .loading').hide();
+            $scope.changeTable();
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
@@ -16,7 +53,8 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         })
         .then(function(response) {
             $scope.teacherInfo = response.data;
-            $('#teacherModal').modal('hide');
+            $('#menu6 .loading').hide();
+            $scope.changeTable();
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
@@ -26,7 +64,8 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         })
         .then(function(response) {
             $scope.TAInfo = response.data;
-            $('#taModal').modal('hide');
+            $('#menu6 .loading').hide();
+            $scope.changeTable();
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
@@ -36,39 +75,17 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         })
         .then(function(response) {
             $scope.workerInfo = response.data;
-            $('#workerModal').modal('hide');
-        }, function(response) {
-            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-        });
-        $http({
-            url: './getAllOffice',
-            method: 'GET',
-        })
-        .then(function(response) {
-            $scope.officeInfo = response.data;
-        }, function(response) {
-            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-        });
-        $http({
-            url: './getAllCourse',
-            method: 'GET',
-        })
-        .then(function(response) {
-            $scope.courseInfo = response.data;
-        }, function(response) {
-            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-        });
-        $http({
-            url: './getAllPosition',
-            method: 'GET',
-        })
-        .then(function(response) {
-            $scope.positionInfo = response.data;
+            $('#menu6 .loading').hide();
+            $scope.changeTable();
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
-    $scope.init();
+
+    $scope.$on('load-6', function(event, args) {
+        if ($scope.employeeInfo == null)
+            $scope.init();
+    });
 
     $scope.changeTable = function() {
         switch ($scope.employeeType) {

@@ -25,7 +25,7 @@
                                     </span>
                                 </td>
                                 <td><% x.count %> / <% x.max_student %></td>
-                                <td><% x.start_date %></td>
+                                <td><% x.start_date | date: "dd/MM/y" %></td>
                                 @if (Auth::check())
                                     <td class="action">
                                         <a ng-click="modalRegisterShow(x.id)">Đăng kí</a>

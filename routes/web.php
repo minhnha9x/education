@@ -45,6 +45,10 @@ Route::get('/getScore', 'AdminController@getScore');
 Route::get('/getAllRegister', 'AdminController@getAllRegister');
 Route::get('/deleteRegister', 'AdminController@deleteRegister');
 
+Route::get('/getAllClass', 'AdminController@getAllClass');
+Route::post('/addclass', 'AdminController@addClass');
+Route::post('/deleteClass', 'AdminController@deleteClass');
+
 Route::get('/getAllSubject', 'AdminController@getAllSubject');
 Route::get('/getSubject', 'AdminController@getSubject');
 Route::post('/addSubject', 'AdminController@addSubject');
@@ -121,13 +125,4 @@ Route::get('/office', 'OfficeController@get');
 
 Route::get('/getsupervisors', 'AdminController@getSupervisors');
 
-Route::post('/addclass', 'AdminController@addClass');
-
-Route::post('/deleteclass', 'ClassManageController@deleteClass');
-
 Route::get('/sendmail', 'UtilController@sendMail');
-
-
-
-
-

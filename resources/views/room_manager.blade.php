@@ -1,6 +1,7 @@
 <div ng-controller="RoomController">
     <div class="addbutton hvr-sweep-to-right" ng-click="showModal(1, -1)">Thêm phòng học</div>
-    <table class="table table-hover" st-table="roomCollection" st-safe-src="roomInfo">
+    <div class="loading"></div>
+    <table id="roomTable" class="table table-hover" st-table="roomCollection" st-safe-src="roomInfo" hidden>
         <thead>
             <tr>
                 <th>Mã phòng</th>

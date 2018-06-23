@@ -1,6 +1,7 @@
 <div class="" ng-controller="ClassController">
     <div ng-click="addClass()" class="addbutton hvr-sweep-to-right">Thêm lớp học</div>
-    <table id="class_table" class="table table-bordered table-hover">
+    <div class="loading"></div>
+    <table id="classTable" class="table table-bordered table-hover" hidden>
         <thead>
             <tr>
                 <th>Mã lớp</th>
@@ -15,39 +16,28 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($all_class as $class)
-                <tr>
-                    <td>{{$class->id}}</td>
-                    <td>{{$class->course}}</td>
-                    <td>
-                        @foreach ($schedule as $s)
-                            @if ($s->class == $class->id)
-                                {{$s->current_date}}: {{date('H:i', strtotime($s->start_time))}} - {{date('H:i', strtotime($s->end_time))}} (Phòng {{$s->room}})<br>
-                            @endif
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($schedule as $s)
-                            @if ($s->class == $class->id)
-                                {{$s->name}}
-                                @break
-                            @endif
-                        @endforeach
-                    </td>
-                    <td style="white-space: nowrap;">{{$class->count}} / {{$class->max_student}}</td>
-                    <td>{{ date('d/m/Y', strtotime($class->start_date)) }}</td>
-                    <td>{{ date('d/m/Y', strtotime($class->end_date)) }}</td>
-                    <td><a ng-click="showScore({{$class->id}})"><i class="fas fa-eye"></i></a></td>
-                    <td class="action">
-                        <a id='edit' data-name="Sửa khóa học" data-id='{{$class->id}}'>
-                            <i class="fas fa-edit"></i>Sửa
-                        </a>
-                        <a ng-click="deleteClass({{$class->id}})">
-                            <i class="fas fa-trash-alt"></i>Xóa
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
+            <tr ng-repeat="x in classInfo">
+                <td><% x.id %></td>
+                <td><% x.course %></td>
+                <td>
+                    <div ng-repeat="y in scheduleInfo" ng-if="(y.class == x.id)" style="white-space: nowrap;">
+                        <% y.current_date %>: <% date('H:i', strtotime(y.start_time)) %> - <% date('H:i', strtotime(y.end_time)) %> (Phòng <% y.room %>)
+                    </div>
+                </td>
+                <td><% x.office %></td>
+                <td style="white-space: nowrap;"><% x.count %> / <% x.max_student %></td>
+                <td><% x.start_date | date: "dd/MM/y" %></td>
+                <td><% x.end_date | date: "dd/MM/y" %></td>
+                <td><a ng-click="showScore(x.id)"><i class="fas fa-eye"></i></a></td>
+                <td class="action">
+                    <a id='edit' data-name="Sửa khóa học" data-id='<% x.id %>'>
+                        <i class="fas fa-edit"></i>Sửa
+                    </a>
+                    <a ng-click="deleteClass(x.id)">
+                        <i class="fas fa-trash-alt"></i>Xóa
+                    </a>
+                </td>
+            </tr>
         </tbody>
     </table>
 

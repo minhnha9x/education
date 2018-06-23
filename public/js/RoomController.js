@@ -1,35 +1,45 @@
 angular.module('educationApp').controller('RoomController', function($scope, $http) {
+    $http({
+        url: './getAllCourse',
+        method: 'GET',
+    })
+    .then(function(response) {
+        $scope.courseInfo = response.data;
+    }, function(response) {
+        $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+    });
+    $http({
+        url: './getAllOffice',
+        method: 'GET',
+    })
+    .then(function(response) {
+        $scope.officeInfo = response.data;
+    }, function(response) {
+        $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+    });
+
     $scope.init = function () {
+        $('#roomModal').modal('hide');
+        $('#roomTable').hide();
+        $('#menu5 .loading').show();
         $http({
             url: './getAllRoom',
             method: 'GET',
         })
         .then(function(response) {
             $scope.roomInfo = response.data;
-            $('#roomModal').modal('hide');
-        }, function(response) {
-            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-        });
-        $http({
-            url: './getAllCourse',
-            method: 'GET',
-        })
-        .then(function(response) {
-            $scope.courseInfo = response.data;
-        }, function(response) {
-            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-        });
-        $http({
-            url: './getAllOffice',
-            method: 'GET',
-        })
-        .then(function(response) {
-            $scope.officeInfo = response.data;
+            $('#menu5 .loading').hide();
+            $('#roomTable').show();
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
-    $scope.init();
+
+    $scope.$on('load-5', function(event, args) {
+        if ($scope.roomInfo == null)
+            $scope.init();
+    });
+
     $scope.showModal = function(param1, param2) {
         switch (param1) {
             case 1:

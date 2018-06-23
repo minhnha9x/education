@@ -1,26 +1,35 @@
 angular.module('educationApp').controller('PromotionController', function($scope, $http) {
+    $http({
+        url: './getAllCourse',
+        method: 'GET',
+    })
+    .then(function(response) {
+        $scope.courseInfo = response.data;
+    }, function(response) {
+        $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+    });
+    
     $scope.init = function () {
+        $('#promotionModal').modal('hide');
+        $('#promotionTable').hide();
+        $('#menu8 .loading').show();
         $http({
             url: './getAllPromotion',
             method: 'GET',
         })
         .then(function(response) {
             $scope.promotionInfo = response.data;
-            $('#promotionModal').modal('hide');
+            $('#menu8 .loading').hide();
+            $('#promotionTable').show();
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
-        $http({
-            url: './getAllCourse',
-            method: 'GET',
-        })
-        .then(function(response) {
-            $scope.courseInfo = response.data;
-        }, function(response) {
-            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-        });
-    $scope.init();
+
+    $scope.$on('load-8', function(event, args) {
+        if ($scope.promotionInfo == null)
+            $scope.init();
+    });
     $scope.showModal = function(param1, param2) {
         switch (param1) {
             case 1:

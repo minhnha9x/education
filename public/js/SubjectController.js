@@ -1,17 +1,23 @@
 angular.module('educationApp').controller('SubjectController', function($scope, $http, Upload) {
     $scope.init = function () {
+        $('#subjectModal').modal('hide');
+        $('#menu3 .loading').show();
         $http({
             url: './getAllSubject',
             method: 'GET',
         })
         .then(function(response) {
             $scope.subjectInfo = response.data;
-            $('#subjectModal').modal('hide');
+            $('#menu3 .loading').hide();
+            $('#subjectTable').show();
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
-    $scope.init();
+    $scope.$on('load-3', function(event, args) {
+        if ($scope.subjectInfo == null)
+            $scope.init();
+    });
     $scope.showModal = function(param1, param2) {
         switch (param1) {
             case 1:

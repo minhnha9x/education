@@ -1,6 +1,7 @@
 <div ng-controller="OfficeController">
     <div class="addbutton hvr-sweep-to-right" ng-click="showModal(1, -1)">Thêm Trung tâm</div>
-    <table class="table table-bordered table-hover">
+    <div class="loading"></div>
+    <table id="officeTable" class="table table-bordered table-hover" hidden>
         <thead>
             <tr>
                 <th>Tên trung tâm</th>

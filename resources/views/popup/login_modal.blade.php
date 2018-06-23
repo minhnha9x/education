@@ -85,7 +85,7 @@
                         {!! csrf_field() !!}
                         <div class="clearfix">
                             <p class="p-bottom-w3ls">Đã có tài khoản?<button id="register_login_btn" type="button">Đăng nhập ngay</button></p>
-                            <p class="p-bottom-w3ls">Quên mật khẩu?<button id="register_lost_btn" type="button">Click tại đây</button></p>
+                            <p class="p-bottom-w3ls1">Quên mật khẩu?<button id="register_lost_btn" type="button">Click tại đây</button></p>
                         </div>
                         <div class="submit-w3l">
                             <input type="submit" value="Đăng ký" name="register-submit">

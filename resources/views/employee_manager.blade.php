@@ -10,7 +10,9 @@
     <div class="addbutton hvr-sweep-to-right" ng-click="showTeacherModal(1, -1)">Thêm giáo viên</div>
     <div class="addbutton hvr-sweep-to-right" ng-click="showTAModal(1, -1)">Thêm trợ giảng</div>
 
-    <table id="employeeTable" class="table table-hover" st-table="employeeCollection" st-safe-src="employeeInfo">
+    <div class="loading"></div>
+
+    <table id="employeeTable" class="table table-hover" st-table="employeeCollection" st-safe-src="employeeInfo" hidden>
         <thead>
             <tr>
                 <th>Tên nhân viên</th>

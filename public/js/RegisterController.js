@@ -6,7 +6,7 @@ angular.module('educationApp').controller('RegisterController', function($scope,
         })
         .then(function(response) {
             $scope.registerInfo = response.data;
-            $('.loading').hide();
+            $('#menu0 .loading').hide();
             $('#registerTable').show();
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');

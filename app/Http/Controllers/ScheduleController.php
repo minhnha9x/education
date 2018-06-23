@@ -9,6 +9,7 @@ use App\Office;
 use App\Subject;
 use App\Course;
 use App\Register;
+use App\Student_Level;
 
 class ScheduleController extends Controller
 {

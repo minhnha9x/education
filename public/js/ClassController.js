@@ -31,6 +31,28 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
         $scope.updateStartDate();
     }, true); // watching properties
 
+    $scope.init = function () {
+        $('#classTable').hide();
+        $('#menu2 .loading').show();
+        $http({
+            url: './getAllClass',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.classInfo = response.data['class'];
+            $scope.scheduleInfo = response.data['schedule'];
+            $('#menu2 .loading').hide();
+            $('#classTable').show();
+        }, function(response) {
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+        });
+    }
+
+    $scope.$on('load-2', function(event, args) {
+        if ($scope.classInfo == null)
+            $scope.init();
+    });
+
     $scope.cleanForm = function() {
         $scope.subjectSelected = undefined;
         $scope.courseList = [];
@@ -333,12 +355,13 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
         .then((willDelete) => {
           if (willDelete) {
             $http({
-                url: './deleteclass',
+                url: './deleteClass',
                 method: 'POST',
                 params: {id: class_id},
             })
             .then(function(response) {
-                location.reload();
+                $.toaster(response.data['msg'], '', response.data['type']);
+                $scope.init();
             });
           }
         });
@@ -402,7 +425,8 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
             },
         })
         .then(function(response) {
-            location.reload();
+            $scope.init();
+            $.toaster(response.data['msg'], '', response.data['type']);
         }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.

@@ -1,6 +1,7 @@
 <div ng-controller="PromotionController">
     <div class="addbutton hvr-sweep-to-right" ng-click="showModal(1, -1)">Thêm mã giảm giá</div>
-    <table class="table table-hover" st-table="promotionCollection" st-safe-src="promotionInfo"">
+    <div class="loading"></div>
+    <table id="promotionTable" class="table table-hover" st-table="promotionCollection" st-safe-src="promotionInfo" hidden>
         <thead>
             <tr>
                 <th>Mã giảm giá</th>
