@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 17, 2018 lúc 06:19 PM
--- Phiên bản máy phục vụ: 10.1.30-MariaDB
--- Phiên bản PHP: 7.2.2
+-- Thời gian đã tạo: Th6 25, 2018 lúc 01:24 AM
+-- Phiên bản máy phục vụ: 10.1.31-MariaDB
+-- Phiên bản PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,11 +41,11 @@ CREATE TABLE `class` (
 --
 
 INSERT INTO `class` (`id`, `start_date`, `end_date`, `course`, `supervisor`) VALUES
-(1, '2018-03-06', '2018-06-01', 1, NULL),
+(1, '2018-06-21', '2018-12-27', 1, NULL),
 (15, '2018-05-08', '2019-05-07', 1, 4),
-(18, '2018-05-08', '2019-05-07', 1, 4),
 (20, '2018-05-09', '2018-11-14', 5, 8),
-(21, '2018-06-14', '2018-10-11', 6, 3);
+(21, '2018-06-14', '2018-10-11', 6, 3),
+(23, '2018-06-23', '2018-11-24', 2, 4);
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,7 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`id`, `name`, `subject`, `price`, `certificate_required`, `total_of_period`, `description`, `img_url`, `teaching_assistant`) VALUES
-(1, 'English for fresher', 1, 5000000, NULL, 50, 'Cras ultricies ligula sed magna dictum porta. Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Cras ultricies ligula sed magna dictum porta. Nulla porttitor accumsan tincidunt. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/course/1.jpg', 2),
+(1, 'English for fresher', 1, 5000000, NULL, 50, 'Cras ultricies ligula sed magna dictum porta. Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Cras ultricies ligula sed magna dictum porta. Nulla porttitor accumsan tincidunt. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/course/1.jpg', 1),
 (2, 'English for fresher 2', 1, 2000000, 1, 60, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum porta. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', './img/course/2.jpg', NULL),
 (3, 'English for fresher 3', 1, 3000000, 2, 20, 'Vivamus suscipit tortor eget felis porttitor volutpat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Cras ultricies ligula sed magna dictum porta. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/course/3.jpg', NULL),
 (4, 'Basic Maths', 2, 2000000, NULL, 30, 'Vivamus suscipit tortor eget felis porttitor volutpat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Cras ultricies ligula sed magna dictum porta. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/course/4.jpg', NULL),
@@ -111,7 +111,9 @@ INSERT INTO `course_room` (`id`, `course`, `room`) VALUES
 (12, 5, 6),
 (13, 7, 7),
 (14, 8, 7),
-(15, 6, 8);
+(15, 6, 8),
+(16, 1, 1),
+(17, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -139,7 +141,10 @@ INSERT INTO `course_ta` (`course`, `TA`) VALUES
 (8, 9),
 (7, 9),
 (6, 3),
-(6, 8);
+(6, 8),
+(2, 1),
+(1, 2),
+(6, 2);
 
 -- --------------------------------------------------------
 
@@ -161,6 +166,7 @@ INSERT INTO `course_teacher` (`course`, `teacher`) VALUES
 (1, 2),
 (1, 3),
 (1, 4),
+(1, 8),
 (2, 2),
 (3, 2),
 (4, 1),
@@ -194,9 +200,9 @@ CREATE TABLE `employee` (
 INSERT INTO `employee` (`id`, `name`, `address`, `phone`, `mail`, `birthday`) VALUES
 (1, 'Tran Phong Phu', '113 Ky Con, Phuong Nguyen Thai Binh, Quan 1, TP Ho Chi Minh', '09056421560', 'phutp@gmail.com', '1945-04-25'),
 (2, 'Nguyen Thi Hanh', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', '1236546794', 'hanhtn@gmail.com', NULL),
-(3, 'Dương Vũ Thông', 'test', '0986781993', 'anhnguBen@gmail.com', '1993-01-13'),
-(4, 'Tran Binh Trong', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', '11111111', 'test@gmail.com', '1993-01-13'),
-(5, 'Nguyen Thi Ai Nhi', 'So 15 Nguyen Giai, Phuong Binh Tho, Quan Thu Duc, TP Ho Chi Minh', '166231567', 'nhiatn@gmail.com', NULL),
+(3, 'Dương Vũ Thông', 'test demo', '0986781993', 'anhnguBen@gmail.com', '1993-01-13'),
+(4, 'Tran Binh Trong', 'So 31 Nguyen Van Giai, Phuong Da Kao, Quan 1, TP Ho Chi Minh', '0911111111', 'test@gmail.com', '1993-01-13'),
+(5, 'Nguyen Thi Ai Nhi', 'So 15 Nguyen Giai, Phuong Binh Tho, Quan Thu Duc, TP Ho Chi Minh', '0166231567', 'nhiatn@gmail.com', '1969-01-12'),
 (6, 'Ho Minh Nha', '270A-Ly Thuong Kiet, P14, Q10, TPHCM', '01662319176', 'minhnha93@gmai.com', '1993-09-18'),
 (7, 'Ho Minh Tin', '270 Lac Long Quan, Q10, TPHCM', '01235487125', 'tinkhung11@gmail.com', '1994-05-01'),
 (8, 'Nguyen Thi Mai', 'TP Ho Chi Minha', '016654227', 'mainguyen@gmail.com', '1990-08-08'),
@@ -224,7 +230,6 @@ CREATE TABLE `exam` (
 INSERT INTO `exam` (`id`, `register`, `score`, `teacher_feedback`, `supervisor_feedback`, `result`) VALUES
 (12, 30, 5, 'Lười học qua', 'Đi học đều', 'Pass'),
 (15, 29, 4, 'Học rất ngu', 'Lười đi học', 'Fail'),
-(16, 28, 6, 'Học chưa tốt', NULL, 'Pass'),
 (20, 31, 1, 'Yếu kém', NULL, '');
 
 -- --------------------------------------------------------
@@ -245,10 +250,11 @@ CREATE TABLE `main_teacher` (
 INSERT INTO `main_teacher` (`id`, `degree`) VALUES
 (1, 'Professor'),
 (2, 'Senior Lecturer'),
-(3, 'aa'),
+(3, 'Demo'),
 (4, 'Musician'),
 (5, 'Artist'),
-(6, 'Master of Maths');
+(6, 'Master of Maths'),
+(8, 'DEmo');
 
 -- --------------------------------------------------------
 
@@ -299,7 +305,8 @@ INSERT INTO `office_main_teacher` (`id`, `teacher`, `office`) VALUES
 (5, 1, 1),
 (6, 1, 3),
 (7, 6, 4),
-(9, 3, 1);
+(14, 3, 1),
+(15, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -322,7 +329,10 @@ INSERT INTO `office_ta` (`id`, `teaching_assistant`, `office`) VALUES
 (2, 7, 1),
 (3, 9, 3),
 (4, 3, 2),
-(5, 8, 2);
+(5, 8, 2),
+(6, 1, 1),
+(7, 2, 1),
+(8, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -342,8 +352,11 @@ CREATE TABLE `office_worker` (
 --
 
 INSERT INTO `office_worker` (`id`, `position`, `office`, `experience`) VALUES
+(1, 1, 1, 2),
+(2, 1, 1, 3),
 (3, 1, 2, 1),
 (4, 1, 1, 1),
+(5, 1, 2, 4),
 (8, 1, 4, 1);
 
 -- --------------------------------------------------------
@@ -396,18 +409,21 @@ CREATE TABLE `register` (
   `class` bigint(20) NOT NULL,
   `promotion` varchar(20) DEFAULT NULL,
   `user` bigint(20) NOT NULL,
-  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fee_status` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `register`
 --
 
-INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `created_date`) VALUES
-(28, 1, NULL, 1, '2018-05-15 10:21:02'),
-(29, 20, NULL, 2, '2018-05-25 16:31:08'),
-(30, 1, NULL, 2, '2018-05-25 16:32:10'),
-(31, 15, NULL, 2, '2018-05-25 21:55:31');
+INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `created_date`, `fee_status`) VALUES
+(29, 20, NULL, 2, '2018-05-25 16:31:08', 1),
+(30, 1, NULL, 2, '2018-05-25 16:32:10', 1),
+(31, 15, NULL, 2, '2018-05-25 21:55:31', 1),
+(37, 23, 'eng50', 1, '2018-06-21 10:14:01', 0),
+(38, 1, NULL, 1, '2018-06-21 10:14:20', 0),
+(39, 15, NULL, 1, '2018-06-21 11:07:09', 0);
 
 -- --------------------------------------------------------
 
@@ -445,7 +461,7 @@ CREATE TABLE `room_schedule` (
   `id` bigint(20) NOT NULL,
   `class` bigint(20) NOT NULL,
   `schedule` bigint(20) NOT NULL,
-  `current_date` enum('Monday','Tuesday','Wednesday','Thursday','Friday','Sartuday','Sunday') NOT NULL,
+  `current_date` enum('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday') NOT NULL,
   `teacher` bigint(20) NOT NULL,
   `room` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -456,13 +472,15 @@ CREATE TABLE `room_schedule` (
 
 INSERT INTO `room_schedule` (`id`, `class`, `schedule`, `current_date`, `teacher`, `room`) VALUES
 (1, 1, 1, 'Monday', 1, 3),
-(2, 1, 2, 'Wednesday', 1, 4),
+(2, 1, 2, 'Wednesday', 2, 4),
 (14, 15, 1, 'Wednesday', 1, 3),
-(17, 18, 1, 'Thursday', 1, 3),
 (20, 20, 1, 'Wednesday', 6, 1),
 (21, 20, 4, 'Thursday', 6, 6),
 (22, 21, 1, 'Tuesday', 5, 8),
-(23, 21, 3, 'Thursday', 5, 8);
+(23, 21, 3, 'Thursday', 5, 8),
+(27, 23, 4, 'Tuesday', 2, 3),
+(28, 23, 4, 'Thursday', 2, 3),
+(29, 23, 4, 'Saturday', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -482,11 +500,9 @@ CREATE TABLE `room_ta` (
 
 INSERT INTO `room_ta` (`id`, `TA`, `room_schedule`) VALUES
 (1, 4, 1),
-(4, 4, 17),
-(5, 7, 17),
 (6, 8, 22),
 (7, 3, 22),
-(8, 8, 23),
+(8, 1, 23),
 (9, 3, 23);
 
 -- --------------------------------------------------------
@@ -531,7 +547,6 @@ CREATE TABLE `student_level` (
 --
 
 INSERT INTO `student_level` (`id`, `course`, `member`) VALUES
-(1, 1, 1),
 (3, 1, 2);
 
 -- --------------------------------------------------------
@@ -565,10 +580,18 @@ INSERT INTO `subject` (`id`, `name`, `description`, `img`) VALUES
 
 CREATE TABLE `ta_dayoff` (
   `id` bigint(20) NOT NULL,
+  `backup_ta` bigint(20) DEFAULT NULL,
   `date` date NOT NULL,
   `room_schedule` bigint(20) NOT NULL,
   `ta_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `ta_dayoff`
+--
+
+INSERT INTO `ta_dayoff` (`id`, `backup_ta`, `date`, `room_schedule`, `ta_id`) VALUES
+(1, NULL, '2018-10-11', 23, 1);
 
 -- --------------------------------------------------------
 
@@ -588,7 +611,8 @@ CREATE TABLE `teacher_dayoff` (
 --
 
 INSERT INTO `teacher_dayoff` (`id`, `backup_teacher`, `date`, `room_schedule`) VALUES
-(1, NULL, '2018-06-13', 14);
+(1, NULL, '2018-06-13', 14),
+(2, 3, '2018-10-17', 14);
 
 -- --------------------------------------------------------
 
@@ -606,6 +630,8 @@ CREATE TABLE `teaching_assistant` (
 --
 
 INSERT INTO `teaching_assistant` (`id`, `degree`) VALUES
+(1, 'aa'),
+(2, 'q'),
 (3, 'Trung Cấp'),
 (4, 'Master of assistant'),
 (7, 'College'),
@@ -656,11 +682,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`, `teacher`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$k70eXjqMBJRqSbQOC4TXIepNCHPn16G9qgvVwOoxpYy2PLhtAXhgW', 'admin', './img/user/1.png', '4rR5Wqqls9DovWQYNbhBhSgux3936Qctx1tLu48yBfGtYDQitlLEhXl9LC6Q', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
+(1, 'admin', 'admin@gmail.com', '$2y$10$k70eXjqMBJRqSbQOC4TXIepNCHPn16G9qgvVwOoxpYy2PLhtAXhgW', 'admin', './img/user/1.jpg', '8ajk0MVTaNLGEgazRfEBzkAsuQvozOISZsmPPTDh9Au1QYpnL9hgUISoHvqA', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
 (2, 'Ho Minh Nha', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', './img/user/2.jpg', 'MWzasQxg3pQEeVXHnlWDHczPpYxVvEPPcUTUgJA818ePTmghIYOIZHJFPxA6', NULL, NULL, NULL),
-(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', 'NIVHGmksAXXEOGiXTaTOtyNu07KVi2ykc858qyZ5OyrsYAnkvVsEKJD9w21L', NULL, NULL, 1),
+(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', 'W1Ie20dFQ5l8qSBZ3yUwwXM4pRqglNHOnx7Bf6xT4UIFmSJxMKPEEApXp9yo', NULL, NULL, 1),
 (6, 'Dương Vũ Thông', 'anhnguBen@gmail.com', '$2y$10$UAbMrnRN/YgRNIafrMA6Re8nvxW2WP0vKlW4vGAJWIZJkSKYODyo6', 'teacher', NULL, 'l7ARGalipMo2Q3PxRncoLZLl7AZ4y7VJ8EOX0PtiKGZD4Bjawa1mSiAUNPGn', NULL, NULL, 3),
-(7, 'Nguyen Thi Mai', 'mainguyen@gmail.com', '$2y$10$ZxARNHYxcCKeLdlkbQxNS.R5kuenwk2uXDI4hTh9JfTgFAT/PeVLW', 'teacher', NULL, NULL, NULL, NULL, 8);
+(7, 'Nguyen Thi Mai', 'mainguyen@gmail.com', '$2y$10$ZxARNHYxcCKeLdlkbQxNS.R5kuenwk2uXDI4hTh9JfTgFAT/PeVLW', 'teacher', NULL, NULL, NULL, NULL, 8),
+(8, 'Tran Phong Phu', 'phutp@gmail.com', '$2y$10$Ci1wFPaa1Y/LMtsyyV9x1ukm9/tBMUs5.cVjT.ryX7TOGTAKkHMxi', 'teacher', NULL, NULL, NULL, NULL, 1),
+(9, 'Ho Minh Tin', 'tinkhung11@gmail.com', '$2y$10$PXYhFKCPO/Ew0QcuUch0xuTHw5u60hUS4z5fEKflo76aGiSarwWOy', 'teacher', NULL, NULL, NULL, NULL, 7),
+(10, 'Nguyen Thi Hanh', 'teacher2@gmail.com', '$2y$10$60ENdu6k6uyihuVEKTus2OwmcNprsXrVbhviFQca0COIGR1mWqRz6', 'teacher', './img/user/10.jpg', NULL, NULL, NULL, 2);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -827,7 +856,8 @@ ALTER TABLE `subject`
 ALTER TABLE `ta_dayoff`
   ADD PRIMARY KEY (`id`),
   ADD KEY `room_schedule_fk01` (`room_schedule`),
-  ADD KEY `ta_fk01` (`ta_id`);
+  ADD KEY `ta_fk01` (`ta_id`),
+  ADD KEY `backup_ta` (`backup_ta`);
 
 --
 -- Chỉ mục cho bảng `teacher_dayoff`
@@ -866,7 +896,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `class`
 --
 ALTER TABLE `class`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `course`
@@ -878,7 +908,7 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT cho bảng `course_room`
 --
 ALTER TABLE `course_room`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `employee`
@@ -896,7 +926,7 @@ ALTER TABLE `exam`
 -- AUTO_INCREMENT cho bảng `main_teacher`
 --
 ALTER TABLE `main_teacher`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `office`
@@ -908,13 +938,13 @@ ALTER TABLE `office`
 -- AUTO_INCREMENT cho bảng `office_main_teacher`
 --
 ALTER TABLE `office_main_teacher`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `office_ta`
 --
 ALTER TABLE `office_ta`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `office_worker`
@@ -932,7 +962,7 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT cho bảng `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT cho bảng `room`
@@ -944,7 +974,7 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT cho bảng `room_schedule`
 --
 ALTER TABLE `room_schedule`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT cho bảng `room_ta`
@@ -974,13 +1004,13 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT cho bảng `ta_dayoff`
 --
 ALTER TABLE `ta_dayoff`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `teacher_dayoff`
 --
 ALTER TABLE `teacher_dayoff`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `teaching_assistant`
@@ -998,7 +1028,7 @@ ALTER TABLE `teaching_offset`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -1121,6 +1151,7 @@ ALTER TABLE `student_level`
 --
 ALTER TABLE `ta_dayoff`
   ADD CONSTRAINT `room_schedule_fk01` FOREIGN KEY (`room_schedule`) REFERENCES `room_schedule` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ta_dayoff_ibfk_1` FOREIGN KEY (`backup_ta`) REFERENCES `teaching_assistant` (`id`),
   ADD CONSTRAINT `ta_fk01` FOREIGN KEY (`ta_id`) REFERENCES `teaching_assistant` (`id`) ON DELETE CASCADE;
 
 --
