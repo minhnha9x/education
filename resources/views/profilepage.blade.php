@@ -53,6 +53,9 @@
                                 <tr>
                                     <th>Khóa học</th>
                                     <th>Lớp</th>
+                                    <th>Mã giảm giá</th>
+                                    <th>Học phí</th>
+                                    <th>Tình trạng học phí</th>
                                     <th>Tuần học</th>
                                     <th>Kết quả</th>
                                 </tr>
@@ -60,6 +63,14 @@
                                     <tr>
                                         <td>{{$u->name}}</td>
                                         <td>{{$u->class}}</td>
+                                        <td>{{$u->promotion}}</td>
+                                        <td style="white-space: nowrap;">
+                                            {{number_format($u->price * (100 - $u->benefit) / 100)}} VNĐ
+                                        </td>
+                                        <td>
+                                            <img src="./img/checked.png" ng-show="x.fee_status">
+                                            <img src="./img/uncheck.png" ng-show="!x.fee_status">
+                                        </td>
                                         <td>
                                             @for ($i = 1; $i <= $week[$u->class]['totalweek']; $i++)
                                                 @if ($i == $week[$u->class]['currentweek'])
@@ -217,7 +228,8 @@
                         <li><a data-toggle="tab" href="#menu3">Nghỉ dạy</a></li>
                         <li><a data-toggle="tab" href="#menu4">Dạy bù</a></li>
                         <li><a data-toggle="tab" href="#menu5">Dạy thay</a></li>
-                        <li><a data-toggle="tab" href="#menu6">Tình hình giảng dạy</a></li>
+                        <li><a data-toggle="tab" href="#menu6">Nhập bảng điểm</a></li>
+                        <li><a data-toggle="tab" href="#menu7">Tình hình giảng dạy</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="menu1" class="tab-pane in active">
@@ -468,10 +480,8 @@
                                     <tr>
                                         <th>Lớp</th>
                                         <th>Khóa học</th>
-                                        <th>Số buổi nghỉ dạy</th>
-                                        <th>Nghỉ dạy đã bù</th>
-                                        <th>Còn thiếu</th>
-                                        <th>Điểm số</th>
+                                        <th>Trung tâm</th>
+                                        <th>Nhập điểm</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -479,9 +489,7 @@
                                         <tr>
                                             <td>{{$c->class}}</td>
                                             <td>{{$c->course}}</td>
-                                            <td>{{$teacher_dayoff_count[$c->id]}}</td>
-                                            <td>{{$teaching_offset_count[$c->id]}}</td>
-                                            <td>{{$teacher_dayoff_count[$c->id] - $teaching_offset_count[$c->id]}} buổi</td>
+                                            <td>{{$c->office}}</td>
                                             <td ng-click="ishown[{{$c->class}}]=!ishown[{{$c->class}}]; expandScore({{$c->class}}, ishown[{{$c->class}}])" ng-init="ishown[{{$c->class}}]=false">
                                                 <i class="fas fa-minus-square" ng-show="ishown[{{$c->class}}]"></i>
                                                 <i class="fas fa-plus-square" ng-show="!ishown[{{$c->class}}]"></i>
@@ -509,6 +517,30 @@
                                                     <button class="my-button left" ng-click="updateScore({{$c->class}})" ng-disabled="scopeList[{{$c->class}}].status" >Update</button>
                                                 </div>
                                             </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="menu7" class="tab-pane">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Lớp</th>
+                                        <th>Khóa học</th>
+                                        <th>Số buổi nghỉ dạy</th>
+                                        <th>Nghỉ dạy đã bù</th>
+                                        <th>Còn thiếu</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($class as $c)
+                                        <tr>
+                                            <td>{{$c->class}}</td>
+                                            <td>{{$c->course}}</td>
+                                            <td>{{$teacher_dayoff_count[$c->id]}}</td>
+                                            <td>{{$teaching_offset_count[$c->id]}}</td>
+                                            <td>{{$teacher_dayoff_count[$c->id] - $teaching_offset_count[$c->id]}} buổi</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

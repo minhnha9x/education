@@ -11,6 +11,8 @@ angular.module('educationApp').controller('HomepageController', function($scope,
             console.log(response.data.class);
             $scope.scheduleClassInfo = response.data.class;
             $scope.scheduleInfo = response.data.schedule;
+            $scope.teacherInfo = response.data.teacher;
+            console.log($scope.teacherInfo);
             $('#classInfoModal').modal('show', 300);
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');

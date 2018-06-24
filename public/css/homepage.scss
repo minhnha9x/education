@@ -1,67 +1,105 @@
 $blue: #337ab7;
 @-webkit-keyframes hvr-bob {
-  0% {
-    -webkit-transform: translateY(-8px);
-    transform: translateY(-8px);
-  }
-  50% {
-    -webkit-transform: translateY(-4px);
-    transform: translateY(-4px);
-  }
-  100% {
-    -webkit-transform: translateY(-8px);
-    transform: translateY(-8px);
-  }
+	0% {
+		-webkit-transform: translateY(-8px);
+		transform: translateY(-8px);
+	}
+	50% {
+		-webkit-transform: translateY(-4px);
+		transform: translateY(-4px);
+	}
+	100% {
+		-webkit-transform: translateY(-8px);
+		transform: translateY(-8px);
+	}
 }
 @keyframes hvr-bob {
-  0% {
-    -webkit-transform: translateY(-8px);
-    transform: translateY(-8px);
-  }
-  50% {
-    -webkit-transform: translateY(-4px);
-    transform: translateY(-4px);
-  }
-  100% {
-    -webkit-transform: translateY(-8px);
-    transform: translateY(-8px);
-  }
+	0% {
+		-webkit-transform: translateY(-8px);
+		transform: translateY(-8px);
+	}
+	50% {
+		-webkit-transform: translateY(-4px);
+		transform: translateY(-4px);
+	}
+	100% {
+		-webkit-transform: translateY(-8px);
+		transform: translateY(-8px);
+	}
 }
 @-webkit-keyframes hvr-bob-float {
-  100% {
-    -webkit-transform: translateY(-8px);
-    transform: translateY(-8px);
-  }
+	100% {
+		-webkit-transform: translateY(-8px);
+		transform: translateY(-8px);
+	}
 }
 @keyframes hvr-bob-float {
-  100% {
-    -webkit-transform: translateY(-8px);
-    transform: translateY(-8px);
-  }
+	100% {
+		-webkit-transform: translateY(-8px);
+		transform: translateY(-8px);
+	}
 }
 .hvr-bob {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	display: inline-block;
+	vertical-align: middle;
+	-webkit-transform: perspective(1px) translateZ(0);
+	transform: perspective(1px) translateZ(0);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
 }
 .hvr-bob:hover, .hvr-bob:focus, .hvr-bob:active {
-  -webkit-animation-name: hvr-bob-float, hvr-bob;
-  animation-name: hvr-bob-float, hvr-bob;
-  -webkit-animation-duration: .3s, 1.5s;
-  animation-duration: .3s, 1.5s;
-  -webkit-animation-delay: 0s, .3s;
-  animation-delay: 0s, .3s;
-  -webkit-animation-timing-function: ease-out, ease-in-out;
-  animation-timing-function: ease-out, ease-in-out;
-  -webkit-animation-iteration-count: 1, infinite;
-  animation-iteration-count: 1, infinite;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-direction: normal, alternate;
-  animation-direction: normal, alternate;
+	-webkit-animation-name: hvr-bob-float, hvr-bob;
+	animation-name: hvr-bob-float, hvr-bob;
+	-webkit-animation-duration: .3s, 1.5s;
+	animation-duration: .3s, 1.5s;
+	-webkit-animation-delay: 0s, .3s;
+	animation-delay: 0s, .3s;
+	-webkit-animation-timing-function: ease-out, ease-in-out;
+	animation-timing-function: ease-out, ease-in-out;
+	-webkit-animation-iteration-count: 1, infinite;
+	animation-iteration-count: 1, infinite;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+	-webkit-animation-direction: normal, alternate;
+	animation-direction: normal, alternate;
 }
+.speech {
+	position: absolute;
+	display: none;
+	top: -190px;
+	left: -5px;
+	width: 200px;
+	padding: 10px;
+	text-align: center;
+	background-color: #fff;
+	border: 2px solid #666;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 20px;
+	-webkit-box-shadow: 2px 2px 4px #888;
+	-moz-box-shadow: 2px 2px 4px #888;
+	box-shadow: 2px 2px 4px #888;
+}
+.speech:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 30px;
+	top: 167px;
+	border: 9px solid;
+	border-color: #666 transparent transparent #666;
+}
+.speech:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 32px;
+	top: 167px;
+	border: 6px solid;
+	border-color: #fff transparent transparent #fff;
+}
+
 .homepage {
 	padding-top: 140px;
 	background-color: #eee;
@@ -209,7 +247,6 @@ $blue: #337ab7;
 				position: relative;
 				width: 100%;
 				background: #fff;
-				overflow: hidden;
 				background-size: cover;
 				background-position: center center;
 				z-index: 1;
@@ -302,6 +339,9 @@ $blue: #337ab7;
 					}
 					table {
 						tr {
+							th {
+								white-space: nowrap;
+							}
 							td, th {
 								text-align: center;
 								vertical-align: middle;
@@ -310,6 +350,29 @@ $blue: #337ab7;
 								color: $blue;
 								cursor: pointer;
 							}
+						}
+						.img {
+							width: 40px;
+							height: 40px;
+							border-radius: 50%;
+							background-size: cover;
+							background-position: center;
+							display: inline-block;
+							margin: 0 5px;
+							cursor: pointer;
+							.speech {
+								.img {
+									width: 100px;
+									height: 100px;
+									margin-bottom: 5px;
+								}
+								.info {
+									line-height: initial;
+								}
+							}
+						}
+						.img:hover .speech {
+							display: initial;
 						}
 					}
 				}

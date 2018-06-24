@@ -44,6 +44,7 @@ Route::get('/getScore', 'AdminController@getScore');
 
 Route::get('/getAllRegister', 'AdminController@getAllRegister');
 Route::get('/deleteRegister', 'AdminController@deleteRegister');
+Route::get('/updateFee', 'AdminController@updateFee');
 
 Route::get('/getAllClass', 'AdminController@getAllClass');
 Route::post('/addclass', 'AdminController@addClass');

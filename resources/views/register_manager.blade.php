@@ -9,6 +9,7 @@
                 <th>Mã giảm giá</th>
                 <th>Khóa học</th>
                 <th>Thời gian đăng kí</th>
+                <th>Học phí</th>
                 <th>Hành động</th>
             </tr>
             <tr>
@@ -25,6 +26,10 @@
                 <td><% x.promotion %></td>
                 <td><% x.course %></td>
                 <td><% x.created_date | date: "dd/MM/y (hh:mm:ss)" %></td>
+                <td>
+                    <img src="./img/checked.png" ng-show="x.fee_status">
+                    <img src="./img/uncheck.png" ng-show="!x.fee_status" ng-click="updateFee(x.id)">
+                </td>
                 <td class="action">
                     <a ng-click="delete(x.id)"><i class="fas fa-trash-alt"></i>Xóa</a>
                 </td>

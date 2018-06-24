@@ -1,5 +1,7 @@
 angular.module('educationApp').controller('RegisterController', function($scope, $http) {
     $scope.init = function () {
+        $('#menu0 .loading').show();
+        $('#registerTable').hide();
         $http({
             url: './getAllRegister',
             method: 'GET',
@@ -37,6 +39,21 @@ angular.module('educationApp').controller('RegisterController', function($scope,
                 $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
             });
           }
+        });
+    }
+    $scope.updateFee = function(param) {
+        $http({
+            url: './updateFee',
+            method: 'GET',
+            params: {
+                'id': param,
+            },
+        })
+        .then(function(response) {
+            $scope.init();
+            $.toaster(response.data['msg'], '', response.data['type']);
+        }, function(response) {
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
 });

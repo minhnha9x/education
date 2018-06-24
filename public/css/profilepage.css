@@ -154,6 +154,8 @@
         margin-bottom: 20px;
         text-transform: capitalize;
         float: right; }
+      .profilepage .tab-wrapper .tab-content table tr th {
+        white-space: nowrap; }
       .profilepage .tab-wrapper .tab-content table tr td, .profilepage .tab-wrapper .tab-content table tr th {
         vertical-align: middle;
         text-align: center; }

@@ -62,7 +62,6 @@ class ScheduleController extends Controller
     }
 
     public function getSchedule(Request $r) {
-
         $class = DB::table('class')
         ->leftjoin('course', 'class.course', 'course.id')
         ->leftjoin('room_schedule', 'class.id', 'room_schedule.class')
@@ -90,6 +89,15 @@ class ScheduleController extends Controller
         ->leftjoin('office', 'room.office', 'office.id')
         ->leftjoin('course', 'course.id', 'class.course')
         ->select("*");
+
+        $teacher = DB::table('room_schedule')
+        ->leftjoin('class', 'class.id', 'room_schedule.class')
+        ->leftjoin('users', 'room_schedule.teacher', 'users.teacher')
+        ->leftjoin('main_teacher', 'users.teacher', 'main_teacher.id')
+        ->groupBy('users.teacher')
+        ->groupBy('class.id')
+        ->get();
+
         if ($r->subject != null){
             $schedule = $schedule->where('subject', $r->subject);
         }
@@ -101,7 +109,7 @@ class ScheduleController extends Controller
         }
         $schedule = $schedule->get();
 
-        $data = array('class' => $class, 'schedule' => $schedule);
+        $data = array('class' => $class, 'schedule' => $schedule, 'teacher' => $teacher);
         return $data;
     }
 

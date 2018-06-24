@@ -49,6 +49,43 @@
   -webkit-animation-direction: normal, alternate;
   animation-direction: normal, alternate; }
 
+.speech {
+  position: absolute;
+  display: none;
+  top: -190px;
+  left: -5px;
+  width: 200px;
+  padding: 10px;
+  text-align: center;
+  background-color: #fff;
+  border: 2px solid #666;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 20px;
+  -webkit-box-shadow: 2px 2px 4px #888;
+  -moz-box-shadow: 2px 2px 4px #888;
+  box-shadow: 2px 2px 4px #888; }
+
+.speech:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 30px;
+  top: 167px;
+  border: 9px solid;
+  border-color: #666 transparent transparent #666; }
+
+.speech:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 32px;
+  top: 167px;
+  border: 6px solid;
+  border-color: #fff transparent transparent #fff; }
+
 .homepage {
   padding-top: 140px;
   background-color: #eee; }
@@ -170,7 +207,6 @@
       position: relative;
       width: 100%;
       background: #fff;
-      overflow: hidden;
       background-size: cover;
       background-position: center center;
       z-index: 1;
@@ -248,11 +284,30 @@
           -moz-transition: 0.3s all;
           -o-transition: 0.3s all;
           -ms-transition: 0.3s all; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile table tr th {
+          white-space: nowrap; }
         .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile table tr td, .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile table tr th {
           text-align: center;
           vertical-align: middle; }
         .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile table tr .action {
           color: #337ab7;
           cursor: pointer; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile table .img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-size: cover;
+          background-position: center;
+          display: inline-block;
+          margin: 0 5px;
+          cursor: pointer; }
+          .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile table .img .speech .img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 5px; }
+          .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile table .img .speech .info {
+            line-height: initial; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile table .img:hover .speech {
+          display: initial; }
 
 /*# sourceMappingURL=homepage.css.map */

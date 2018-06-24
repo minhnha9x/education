@@ -177,6 +177,9 @@ $blue: #337ab7;
 			}
 			table {
 				tr {
+					th {
+						white-space: nowrap;
+					}
 					td, th {
 						vertical-align: middle;
 						text-align: center;

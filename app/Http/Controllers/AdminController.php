@@ -29,6 +29,7 @@ use App\Class_Room;
 use App\Room_Schedule;
 use App\Room_TA;
 use App\User;
+use App\Register;
 use DateTime;
 use Carbon\Carbon;
 use Barryvdh\Debugbar\Facade as Debugbar;
@@ -152,25 +153,32 @@ class AdminController extends Controller
     }
 
     public function getAllRegister() {
-        $data = DB::table('register')
-        ->leftjoin('users', 'register.user', 'users.id')
+        $data = Register::leftjoin('users', 'register.user', 'users.id')
         ->leftjoin('class', 'register.class', 'class.id')
         ->leftjoin('course', 'class.course', 'course.id')
         ->leftjoin('subject', 'course.subject', 'subject.id')
-        ->select('users.name as name', 'course.name as course', 'register.created_date', 'register.promotion as promotion', 'users.email as mail', 'class.id as class', 'register.id as id')
+        ->select('users.name as name', 'course.name as course', 'register.created_date', 'register.promotion as promotion', 'register.fee_status', 'users.email as mail', 'class.id as class', 'register.id as id')
         ->get();
         return $data;
     }
 
     public function deleteRegister(Request $r) {
         try {
-            $subject = DB::table('register')->where('id', $r->id)
+            $subject = Register::where('id', $r->id)
             ->delete();
         }
         catch (\Exception $e) {
             return array('msg' => $e->getMessage(), 'type' => 'danger');
         }
         return array('msg' => 'Xóa đăng ký thành công.', 'type' => 'success');
+    }
+
+    public function updateFee(Request $r) {
+        $data = Register::where('id', $r->id)
+        ->first();
+        $data->fee_status = 1;
+        $data->save();
+        return array('msg' => 'Đã cập nhật tình trạng học phí của học viên.', 'type' => 'success');
     }
 
     public function getAllSubject() {

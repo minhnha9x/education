@@ -36,6 +36,7 @@ class ProfileController extends Controller
             if (Auth::user()->role != 'teacher')
             {
                 $user = DB::table('register')
+                ->leftjoin('promotion', 'register.promotion', 'promotion.code')
                 ->leftjoin('users', 'register.user', 'users.id')
                 ->leftjoin('class', 'register.class', 'class.id')
                 ->leftjoin('course', 'class.course', 'course.id')
@@ -139,7 +140,7 @@ class ProfileController extends Controller
                 ->leftjoin('room', 'room_schedule.room', 'room.id')
                 ->leftjoin('office', 'room.office', 'office.id')
                 ->where('room_schedule.teacher', Auth::user()->teacher)
-                ->select('*', 'course.name as course', 'course.id as courseid')
+                ->select('*', 'course.name as course', 'course.id as courseid', 'office.name as office')
                 ->groupby('class.id')
                 ->get();
 
