@@ -7,6 +7,10 @@
                 <th>Mã giảm giá</th>
                 <th>% giảm giá</th>
                 <th>Khóa học áp dụng</th>
+                <th>Giới hạn</th>
+                <th>Đã sử dụng</th>
+                <th>Ngày bắt đầu</th>
+                <th>Ngày kết thúc</th>
                 <th>Hành động</th>
             </tr>
             <tr>
@@ -20,6 +24,10 @@
                 <td><% x.code %></td>
                 <td><% x.benefit %></td>
                 <td><% x.name %></td>
+                <td><% x.limited %></td>
+                <td><% x.used %></td>
+                <td><% x.start_date %></td>
+                <td><% x.end_date %></td>
                 <td class="action">
                     <a id='edit' ng-click="showModal(2, x.code)"><i class="fas fa-edit"></i>Sửa</a><a ng-click="delete(x.code)"><i class="fas fa-trash-alt"></i>Xóa</a>
                 </td>

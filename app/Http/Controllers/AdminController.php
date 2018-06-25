@@ -857,6 +857,9 @@ class AdminController extends Controller
         $data->code = $r->code;
         $data->benefit = $r->benefit;
         $data->course = $r->course;
+        $data->limited = $r->limited;
+        $data->start_date = $r->start_date;
+        $data->end_date = $r->end_date;
         $data->save();
         return array('msg' => 'Đã cập nhật danh sách mã giảm giá.', 'type' => 'success');
     }
@@ -866,6 +869,9 @@ class AdminController extends Controller
         if ($data != null) {
             $data->benefit = $r->benefit;
             $data->course = $r->course;
+            $data->limited = $r->limited;
+            $data->start_date = $r->start_date;
+            $data->end_date = $r->end_date;
             $data->save();
         }
         return array('msg' => 'Đã cập nhật danh sách mã giảm giá.', 'type' => 'success');
@@ -931,7 +937,7 @@ class AdminController extends Controller
                     if (!array_key_exists($schedule->current_date, $result[$schedule->id]['schedule'])){
                         $result[$schedule->id]['schedule'][$schedule->current_date] = array();
                     }
-                    array_push($result[$schedule->id]['schedule'][$schedule->current_date], $schedule->schedule);
+                    $result[$schedule->id]['schedule'][$schedule->current_date][$schedule->schedule] = $schedule->office;
                 }
             }
         }
@@ -990,10 +996,12 @@ class AdminController extends Controller
             'room_schedule.schedule',
             'class.start_date',
             'class.end_date',
-            'employee.name')
+            'employee.name',
+            'room.office')
         ->leftjoin('employee', 'employee.id', 'main_teacher.id')
         ->leftjoin('room_schedule', 'room_schedule.teacher', 'main_teacher.id')
         ->leftjoin('class', 'class.id', 'room_schedule.class')
+        ->leftjoin('room', 'room_schedule.room', 'room.id')
         ->whereIn('main_teacher.id', json_decode($teacher_ids, TRUE))
         ->get();
 

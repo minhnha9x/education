@@ -10,6 +10,7 @@ use App\Subject;
 use App\Course;
 use App\Register;
 use App\Student_Level;
+use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
@@ -135,11 +136,15 @@ class ScheduleController extends Controller
 
     public function classRegister(Request $request) {
         if ($request->promotion != '') {
+            $today = Carbon::now();
+
             $promotion = DB::table('promotion')
             ->leftjoin('class', 'promotion.course', 'class.course')
             ->where('promotion.code', $request->promotion)
             ->where('class.course', $request->course)
             ->where('class.id', $request->class)
+            ->where('promotion.limited', '>', 'promotion.used')
+            ->whereRaw('? between promotion.start_date and promotion.end_date', [$today])
             ->get();
 
             if ($promotion->isEmpty()) {
@@ -156,6 +161,9 @@ class ScheduleController extends Controller
                         $register->class = $request->class;
                         $register->user = Auth::user()->id;
                         $register->save();
+
+                        $promotion->used += 1;
+                        $promotion->save();
                         return array('msg' => 'Bạn đã đăng kí khóa học thành công! Hãy vào trang cá nhân để xem các khóa học đã đăng kí.', 'type' => 'success');
                         break;
                 }

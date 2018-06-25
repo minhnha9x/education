@@ -155,8 +155,20 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
     };
 
     $scope.setCheckTag = function(id) {
-        $("#" + id).html('<img src="./img/checked.png">');
+        var res = id.split("_");
+        if ($scope.checkSoCloseTeacherSchedule($scope.teacher_in_cell, res[0], res[1]))
+            $("#" + id).html('<img src="./img/warning.png">');
+        else 
+            $("#" + id).html('<img src="./img/checked.png">');
         $scope.scheduleList[id] = [$scope.room_in_cell, $scope.teacher_in_cell, JSON.parse(JSON.stringify($scope.TAList))];
+    };
+
+    $scope.checkSoCloseTeacherSchedule = function(teacher_id, slot_in_day, day_in_week) {
+        if (teacher_id in $scope.teacherScheduleList)
+            if (day_in_week in $scope.teacherScheduleList[teacher_id].schedule)
+                if (slot_in_day+1 in $scope.teacherScheduleList[teacher_id].schedule[day_in_week] || slot_in_day-1 in $scope.teacherScheduleList[teacher_id].schedule[day_in_week])
+                    return true;
+        return false;
     };
 
     $scope.setUnCheckTag = function(id) {
@@ -191,7 +203,7 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
             if (!(day in $scope.teacherScheduleList[key].schedule)) {
                 tempTeacher.push([key, $scope.teacherScheduleList[key].name]);
             }
-            else if ($scope.teacherScheduleList[key].schedule[day].indexOf(parseInt(slot)) == -1) {
+            else if ($scope.teacherScheduleList[key].schedule[day].hasOwnProperty(parseInt(slot)) == false) {
                 tempTeacher.push([key, $scope.teacherScheduleList[key].name]);
             }
         }

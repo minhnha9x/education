@@ -12,6 +12,17 @@
                             <input type="number" placeholder="% giảm giá" ng-model="promotionBenefit" required>
                         </div>
                         <div class="form-sub-w3 col-md-6">
+                            <span>Bắt đầu:</span>
+                            <input type="date" ng-model="start_date" required>
+                        </div>
+                        <div class="form-sub-w3 col-md-6">
+                            <span>Kết thúc:</span>
+                            <input type="date" ng-model="end_date" required>
+                        </div>
+                        <div class="form-sub-w3 col-md-6">
+                            <input type="number" placeholder="Giới hạn" ng-model="limited" required>
+                        </div>
+                        <div class="form-sub-w3 col-md-6">
                             <select required ng-model="courseName">
                                 <option value="" disabled selected hidden>Khóa học áp dụng</option>
                                 <option ng-repeat="x in courseInfo" value="<% x.id %>"><% x.name %></option>
