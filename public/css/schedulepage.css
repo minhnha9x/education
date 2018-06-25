@@ -60,6 +60,8 @@
     -webkit-box-shadow: 3px 3px 5px -1px #706c70;
     -moz-box-shadow: 3px 3px 5px -1px #706c70;
     box-shadow: 3px 3px 5px -1px #706c70; }
+    .schedulepage table th {
+      white-space: nowrap; }
     .schedulepage table td, .schedulepage table th {
       text-align: center;
       vertical-align: middle !important;

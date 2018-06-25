@@ -122,7 +122,8 @@
       .adminpage .tab-content .tab-pane table th {
         background: #337ab7;
         color: #fff;
-        font-weight: normal; }
+        font-weight: normal;
+        white-space: nowrap; }
       .adminpage .tab-content .tab-pane table th.search {
         background: transparent;
         border: none !important; }

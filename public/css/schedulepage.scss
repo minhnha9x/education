@@ -71,6 +71,9 @@ $blue: #337ab7;
 		-webkit-box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
 		-moz-box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
 		box-shadow: 3px 3px 5px -1px rgba(112,108,112,1);
+		th {
+			white-space: nowrap;
+		}
 		td, th {
 			text-align: center;
 			vertical-align: middle !important;

@@ -1,18 +1,17 @@
 angular.module('educationApp').controller('PromotionController', function($scope, $http) {
-    $http({
-        url: './getAllCourse',
-        method: 'GET',
-    })
-    .then(function(response) {
-        $scope.courseInfo = response.data;
-    }, function(response) {
-        $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-    });
-    
     $scope.init = function () {
         $('#promotionModal').modal('hide');
         $('#promotionTable').hide();
         $('#menu8 .loading').show();
+        $http({
+            url: './getAllCourse',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.courseInfo = response.data;
+        }, function(response) {
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+        });
         $http({
             url: './getAllPromotion',
             method: 'GET',

@@ -1,27 +1,26 @@
 angular.module('educationApp').controller('RoomController', function($scope, $http) {
-    $http({
-        url: './getAllCourse',
-        method: 'GET',
-    })
-    .then(function(response) {
-        $scope.courseInfo = response.data;
-    }, function(response) {
-        $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-    });
-    $http({
-        url: './getAllOffice',
-        method: 'GET',
-    })
-    .then(function(response) {
-        $scope.officeInfo = response.data;
-    }, function(response) {
-        $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-    });
-
     $scope.init = function () {
         $('#roomModal').modal('hide');
         $('#roomTable').hide();
         $('#menu5 .loading').show();
+        $http({
+            url: './getAllCourse',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.courseInfo = response.data;
+        }, function(response) {
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+        });
+        $http({
+            url: './getAllOffice',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.officeInfo = response.data;
+        }, function(response) {
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+        });
         $http({
             url: './getAllRoom',
             method: 'GET',

@@ -1,32 +1,4 @@
 angular.module('educationApp').controller('EmployeeController', function($scope, $http) {
-    $http({
-        url: './getAllOffice',
-        method: 'GET',
-    })
-    .then(function(response) {
-        $scope.officeInfo = response.data;
-    }, function(response) {
-        $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-    });
-    $http({
-        url: './getAllCourse',
-        method: 'GET',
-    })
-    .then(function(response) {
-        $scope.courseInfo = response.data;
-    }, function(response) {
-        $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-    });
-    $http({
-        url: './getAllPosition',
-        method: 'GET',
-    })
-    .then(function(response) {
-        $scope.positionInfo = response.data;
-    }, function(response) {
-        $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-    });
-    
     $scope.init = function () {
         $('#employeeModal').modal('hide');
         $('#teacherModal').modal('hide');
@@ -36,6 +8,33 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
             $(this).hide();
         });
         $('#menu6 .loading').show();
+        $http({
+            url: './getAllOffice',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.officeInfo = response.data;
+        }, function(response) {
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+        });
+        $http({
+            url: './getAllCourse',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.courseInfo = response.data;
+        }, function(response) {
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+        });
+        $http({
+            url: './getAllPosition',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.positionInfo = response.data;
+        }, function(response) {
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+        });
         $http({
             url: './getAllEmployee',
             method: 'GET',
