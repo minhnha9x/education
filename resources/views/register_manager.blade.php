@@ -27,7 +27,7 @@
                 <td><% x.course %></td>
                 <td><% x.created_date | date: "dd/MM/y (hh:mm:ss)" %></td>
                 <td>
-                    <img src="./img/checked.png" ng-show="x.fee_status">
+                    <img src="./img/checked.png" ng-show="x.fee_status" ng-click="updateFee(x.id)">
                     <img src="./img/uncheck.png" ng-show="!x.fee_status" ng-click="updateFee(x.id)">
                 </td>
                 <td class="action">

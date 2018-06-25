@@ -176,7 +176,10 @@ class AdminController extends Controller
     public function updateFee(Request $r) {
         $data = Register::where('id', $r->id)
         ->first();
-        $data->fee_status = 1;
+        if ($data->fee_status == 1)
+            $data->fee_status = 0;
+        else
+            $data->fee_status = 1;
         $data->save();
         return array('msg' => 'Đã cập nhật tình trạng học phí của học viên.', 'type' => 'success');
     }
