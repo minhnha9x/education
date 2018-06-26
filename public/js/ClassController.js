@@ -155,18 +155,34 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
 
     $scope.setCheckTag = function(id) {
         var res = id.split("_");
-        if ($scope.checkSoCloseTeacherSchedule($scope.teacher_in_cell, res[0], res[1]))
+        $("#" + id).html('<img src="./img/checked.png">');
+        if ($scope.checkSoCloseSchedule($scope.teacher_in_cell, res[0], res[1], $scope.teacherScheduleList))
+        {
             $("#" + id).html('<img src="./img/warning.png">');
-        else 
-            $("#" + id).html('<img src="./img/checked.png">');
+            $("#" + id).attr('title', "Cảnh báo: Giáo viên có tiết liền kề ở trung tâm khác");
+        }
+        for (var i in $scope.TAList) {
+            if ($scope.checkSoCloseSchedule($scope.TAList[i].TASelected, res[0], res[1], $scope.taScheduleList))
+            {
+                $("#" + id).html('<img src="./img/warning.png">');
+                $("#" + id).attr('title', "Cảnh báo: Trợ giảng có tiết liền kề ở trung tâm khác");
+            }
+        }
         $scope.scheduleList[id] = [$scope.room_in_cell, $scope.teacher_in_cell, JSON.parse(JSON.stringify($scope.TAList))];
     };
 
-    $scope.checkSoCloseTeacherSchedule = function(teacher_id, slot_in_day, day_in_week) {
-        if (teacher_id in $scope.teacherScheduleList)
-            if (day_in_week in $scope.teacherScheduleList[teacher_id].schedule)
-                if (slot_in_day+1 in $scope.teacherScheduleList[teacher_id].schedule[day_in_week] || slot_in_day-1 in $scope.teacherScheduleList[teacher_id].schedule[day_in_week])
-                    return true;
+    $scope.checkSoCloseSchedule = function(teacher_id, slot_in_day, day_in_week, teacherScheduleList) {
+        slot_in_day = parseInt(slot_in_day);
+        if (teacher_id in teacherScheduleList)
+            if (day_in_week in teacherScheduleList[teacher_id].schedule)
+            {
+                if (slot_in_day+1 in teacherScheduleList[teacher_id].schedule[day_in_week])
+                    if (teacherScheduleList[teacher_id].schedule[day_in_week][slot_in_day+1] != $scope.officeSelected)
+                        return true;
+                if (slot_in_day-1 in teacherScheduleList[teacher_id].schedule[day_in_week])
+                    if (teacherScheduleList[teacher_id].schedule[day_in_week][slot_in_day-1] != $scope.officeSelected)
+                        return true;
+            }
         return false;
     };
 
@@ -174,6 +190,7 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
         var res = id.split("_");
         var src = $scope.getSrc(res[0], res[1]);
         $("#" + id).html('<img src="'+ src +'">');
+        $("#" + id).attr('title', '');
         delete $scope.scheduleList[id];
     };
 
@@ -215,7 +232,7 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
             if (!(day in $scope.taScheduleList[key].schedule)) {
                 tempTeacher.push([key, $scope.taScheduleList[key].name]);
             }
-            else if ($scope.taScheduleList[key].schedule[day].indexOf(parseInt(slot)) == -1) {
+            else if ($scope.taScheduleList[key].schedule[day].hasOwnProperty(parseInt(slot)) == false) {
                 tempTeacher.push([key, $scope.taScheduleList[key].name]);
             }
         }

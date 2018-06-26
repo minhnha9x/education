@@ -19,7 +19,7 @@
                             <p>Dạy những trung tâm:</p>
                             <div class="checkbox-wrapper office-wrapper" style="display: block">
                                 <div class="checkbox" ng-repeat="x in officeInfo" style="margin-bottom: 0">
-                                    <label><input type="checkbox" value="<% x.id %>"><% x.name %></label>
+                                    <label><input type="checkbox" ng-model='x.checked' ng-click='clickOfficeEvent(x)' value="<% x.id %>"><% x.name %></label>
                                 </div>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                             <p>Dạy những khóa học:</p>
                             <div class="checkbox-wrapper course-wrapper" style="display: block">
                                 <div class="checkbox" ng-repeat="x in courseInfo" style="margin-bottom: 0">
-                                    <label><input type="checkbox" value="<% x.id %>"><% x.name %></label>
+                                    <label><input type="checkbox" ng-disabled='x.stack==0' ng-model='x.checked' value="<% x.id %>"><% x.name %></label>
                                 </div>
                             </div>
                         </div>
