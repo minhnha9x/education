@@ -1,4 +1,5 @@
 <div ng-controller="RegisterController">
+    <div id="updateFeeButton" ng-click="updateFee()" class="addbutton hvr-sweep-to-right" hidden>Cập nhật tình trạng học phí</div>
     <div class="loading"></div>
     <table id="registerTable" class="table table-hover" st-table="registerCollection" st-safe-src="registerInfo" hidden>
         <thead>
@@ -19,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="x in registerCollection">
+            <tr ng-repeat="x in registerCollection" data-id="<% x.id %>">
                 <td><% x.name %></td>
                 <td><% x.mail %></td>
                 <td><% x.class %></td>
@@ -27,8 +28,8 @@
                 <td><% x.course %></td>
                 <td><% x.created_date | date: "dd/MM/y (hh:mm:ss)" %></td>
                 <td>
-                    <img src="./img/checked.png" ng-show="x.fee_status" ng-click="updateFee(x.id)">
-                    <img src="./img/uncheck.png" ng-show="!x.fee_status" ng-click="updateFee(x.id)">
+                    <img src="./img/checked.png" ng-show="x.fee_status">
+                    <img src="./img/uncheck.png" ng-show="!x.fee_status">
                 </td>
                 <td class="action">
                     <a ng-click="delete(x.id)"><i class="fas fa-trash-alt"></i>Xóa</a>
@@ -44,3 +45,15 @@
         </tfoot>
     </table>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#registerTable tbody').on('click', 'tr', function () {
+            $(this).toggleClass('selected');
+            if ($('#registerTable tr.selected').length > 0)
+                $('#updateFeeButton').show();
+            else
+                $('#updateFeeButton').hide();
+        });
+    });
+</script>

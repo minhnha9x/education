@@ -43,7 +43,7 @@
                     <td class="email"><% obj.mail %></td>
                     <td><% obj.position %></td>
                     <td><% obj.rate_salary %></td>
-                    <td><% obj.salary %></td>
+                    <td><% obj.salary | number: 0 %> VNĐ</td>
                 </tr>
             </tbody>
             <tfoot>

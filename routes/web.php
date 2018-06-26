@@ -35,6 +35,8 @@ Route::post('/updatescorelist', 'ProfileController@updateScoreList');
 Route::get('/admin', 'AdminController@getData');
 Route::post('/getlistfreeteacher', 'AdminController@getAvailableTeacher');
 Route::get('/getlistfreeta', 'AdminController@getAvailableTA');
+Route::get('/getAllCertification', 'AdminController@getAllCertification');
+Route::get('/updateCertification', 'AdminController@updateCertification');
 
 Route::get('/postroomlist', 'AdminController@postRoomList');
 Route::get('/get_available_office', 'AdminController@getAvailableOffice');

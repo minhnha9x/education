@@ -26,6 +26,7 @@ use App\Office_TA;
 use App\Course_Teacher;
 use App\Course_TA;
 use App\Class_Room;
+use App\Student_level;
 use App\Room_Schedule;
 use App\Room_TA;
 use App\User;
@@ -91,6 +92,28 @@ class AdminController extends Controller
         }
         else {
             abort(404);
+        }
+    }
+
+    public function getAllCertification() {
+        $data = User::select('users.id', 'users.name', 'users.email', DB::raw("GROUP_CONCAT(course.name SEPARATOR ', ') as course"))
+        ->leftjoin('student_level', 'student_level.member', 'users.id')
+        ->leftjoin('course', 'student_level.course', 'course.id')
+        ->groupBy('users.id')
+        ->get();
+        return $data;
+    }
+
+    public function updateCertification(Request $r) {
+        $data = Student_level::where('member', $r->id)
+        ->where('course', $r->course)
+        ->first();
+        if ($data == null)
+        {
+            $t = new Student_level;
+            $t->course = $r->course;
+            $t->member = $r->id;
+            $t->save();
         }
     }
 
@@ -857,6 +880,9 @@ class AdminController extends Controller
         $data->code = $r->code;
         $data->benefit = $r->benefit;
         $data->course = $r->course;
+        $data->limited = $r->limited;
+        $data->start_date = $r->start_date;
+        $data->end_date = $r->end_date;
         $data->save();
         return array('msg' => 'Đã cập nhật danh sách mã giảm giá.', 'type' => 'success');
     }
@@ -866,6 +892,9 @@ class AdminController extends Controller
         if ($data != null) {
             $data->benefit = $r->benefit;
             $data->course = $r->course;
+            $data->limited = $r->limited;
+            $data->start_date = $r->start_date;
+            $data->end_date = $r->end_date;
             $data->save();
         }
         return array('msg' => 'Đã cập nhật danh sách mã giảm giá.', 'type' => 'success');
@@ -931,7 +960,7 @@ class AdminController extends Controller
                     if (!array_key_exists($schedule->current_date, $result[$schedule->id]['schedule'])){
                         $result[$schedule->id]['schedule'][$schedule->current_date] = array();
                     }
-                    array_push($result[$schedule->id]['schedule'][$schedule->current_date], $schedule->schedule);
+                    $result[$schedule->id]['schedule'][$schedule->current_date][$schedule->schedule] = $schedule->office;
                 }
             }
         }
@@ -990,10 +1019,12 @@ class AdminController extends Controller
             'room_schedule.schedule',
             'class.start_date',
             'class.end_date',
-            'employee.name')
+            'employee.name',
+            'room.office')
         ->leftjoin('employee', 'employee.id', 'main_teacher.id')
         ->leftjoin('room_schedule', 'room_schedule.teacher', 'main_teacher.id')
         ->leftjoin('class', 'class.id', 'room_schedule.class')
+        ->leftjoin('room', 'room_schedule.room', 'room.id')
         ->whereIn('main_teacher.id', json_decode($teacher_ids, TRUE))
         ->get();
 

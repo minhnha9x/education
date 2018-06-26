@@ -151,6 +151,12 @@ $blue: #337ab7;
 					background: transparent;
 					border: none !important;
 				}
+				tr {
+					cursor: pointer;
+				}
+				tr.selected {
+					background-color: #B0BED9;
+				}
 				td, th {
 					text-align: center;
 					text-transform: capitalize;

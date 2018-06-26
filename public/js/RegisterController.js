@@ -45,19 +45,20 @@ angular.module('educationApp').controller('RegisterController', function($scope,
           }
         });
     }
-    $scope.updateFee = function(param) {
-        $http({
-            url: './updateFee',
-            method: 'GET',
-            params: {
-                'id': param,
-            },
-        })
-        .then(function(response) {
-            $scope.init();
-            $.toaster(response.data['msg'], '', response.data['type']);
-        }, function(response) {
-            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+    $scope.updateFee = function() {
+        $('#registerTable tr.selected').each(function(){
+            $http({
+                url: './updateFee',
+                method: 'GET',
+                params: {
+                    'id': $(this).data('id'),
+                },
+            })
+            .then(function(response) {
+                $scope.init();
+            }, function(response) {
+                $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+            });
         });
     }
 });

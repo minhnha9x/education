@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 25, 2018 lúc 01:24 AM
--- Phiên bản máy phục vụ: 10.1.31-MariaDB
--- Phiên bản PHP: 7.2.3
+-- Thời gian đã tạo: Th6 25, 2018 lúc 07:32 PM
+-- Phiên bản máy phục vụ: 10.1.30-MariaDB
+-- Phiên bản PHP: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -369,15 +369,18 @@ CREATE TABLE `position` (
   `id` bigint(20) NOT NULL,
   `name` char(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `salary` bigint(20) NOT NULL,
-  `rate_salary` bigint(20) NOT NULL
+  `rate_salary` bigint(20) NOT NULL,
+  `unit` set('month','lesson','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `position`
 --
 
-INSERT INTO `position` (`id`, `name`, `salary`, `rate_salary`) VALUES
-(1, 'Class Supervisor', 5000000, 1);
+INSERT INTO `position` (`id`, `name`, `salary`, `rate_salary`, `unit`) VALUES
+(1, 'Class Supervisor', 5000000, 1, 'month'),
+(2, 'Main Teacher', 200000, 1, 'lesson'),
+(5, 'Teaching Assistant', 100000, 1, 'month');
 
 -- --------------------------------------------------------
 
@@ -388,15 +391,21 @@ INSERT INTO `position` (`id`, `name`, `salary`, `rate_salary`) VALUES
 CREATE TABLE `promotion` (
   `code` varchar(20) NOT NULL,
   `benefit` tinyint(3) UNSIGNED NOT NULL,
-  `course` bigint(20) NOT NULL
+  `course` bigint(20) NOT NULL,
+  `limited` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `used` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `promotion`
 --
 
-INSERT INTO `promotion` (`code`, `benefit`, `course`) VALUES
-('eng50', 50, 1);
+INSERT INTO `promotion` (`code`, `benefit`, `course`, `limited`, `start_date`, `end_date`, `used`) VALUES
+('end10', 10, 3, 15, '2018-06-25', '2018-06-29', 0),
+('eng50', 10, 1, 20, '2018-06-24', '2018-06-30', 3),
+('mt20', 20, 6, 3, '2018-06-25', '2018-06-28', 0);
 
 -- --------------------------------------------------------
 
@@ -420,7 +429,7 @@ CREATE TABLE `register` (
 INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `created_date`, `fee_status`) VALUES
 (29, 20, NULL, 2, '2018-05-25 16:31:08', 1),
 (30, 1, NULL, 2, '2018-05-25 16:32:10', 1),
-(31, 15, NULL, 2, '2018-05-25 21:55:31', 1),
+(31, 15, NULL, 2, '2018-05-25 21:55:31', 0),
 (37, 23, 'eng50', 1, '2018-06-21 10:14:01', 0),
 (38, 1, NULL, 1, '2018-06-21 10:14:20', 0),
 (39, 15, NULL, 1, '2018-06-21 11:07:09', 0);
@@ -956,7 +965,7 @@ ALTER TABLE `office_worker`
 -- AUTO_INCREMENT cho bảng `position`
 --
 ALTER TABLE `position`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `register`

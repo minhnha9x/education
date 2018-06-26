@@ -133,6 +133,10 @@
       .adminpage .tab-content .tab-pane table th.search {
         background: transparent;
         border: none !important; }
+      .adminpage .tab-content .tab-pane table tr {
+        cursor: pointer; }
+      .adminpage .tab-content .tab-pane table tr.selected {
+        background-color: #B0BED9; }
       .adminpage .tab-content .tab-pane table td, .adminpage .tab-content .tab-pane table th {
         text-align: center;
         text-transform: capitalize;

@@ -5,6 +5,7 @@
 
     <ul class="nav nav-tabs" ng-controller="MenuController">
         <li class="active" ng-click="loadData(0)"><a data-toggle="tab" href="#menu0"><div class="arrow-left"></div><img src="./img/register.png">Quản lí học viên</a></li>
+        <li ng-click="loadData(10)"><a data-toggle="tab" href="#menu10"><div class="arrow-left"></div><img src="./img/student_level.png">Quản lí chứng chỉ</a></li>
         <li ng-click="loadData(1)"><a data-toggle="tab" href="#menu1"><div class="arrow-left"></div><img src="./img/course.png">Quản lí khóa học</a></li>
         <li ng-click="loadData(2)"><a data-toggle="tab" href="#menu2"><div class="arrow-left"></div><img src="./img/class.png">Quản lí lớp học</a></li>
         <li ng-click="loadData(3)"><a data-toggle="tab" href="#menu3"><div class="arrow-left"></div><img src="./img/subject.png">Quản lí môn học</a></li>
@@ -22,6 +23,9 @@
         </div>
         <div id="menu1" class="tab-pane">
             @include('course_manager')
+        </div>
+        <div id="menu10" class="tab-pane">
+            @include('student_level_manager')
         </div>
         <div id="menu2" class="tab-pane">
             @include('class_manager')
@@ -51,6 +55,7 @@
 </div>
 <script src="js/myApp.js"></script>
 <script src="js/MenuController.js"></script>
+<script src="js/StudentLevelController.js"></script>
 <script src="js/SalaryController.js"></script>
 <script src="js/RegisterController.js"></script>
 <script src="js/ClassController.js"></script>

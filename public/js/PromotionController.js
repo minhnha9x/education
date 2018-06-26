@@ -35,6 +35,9 @@ angular.module('educationApp').controller('PromotionController', function($scope
                 $scope.edit = -1;
                 $scope.promotionCode = '';
                 $scope.promotionBenefit = '';
+                $scope.limited = '';
+                $scope.start_date = undefined;
+                $scope.end_date = undefined;
                 break;
             case 2:
                 $scope.button = "Sửa mã giảm giá";
@@ -50,6 +53,9 @@ angular.module('educationApp').controller('PromotionController', function($scope
                     $scope.promotionCode = response.data[0].code;
                     $scope.promotionBenefit = response.data[0].benefit;
                     $scope.courseName = response.data[0].course + '';
+                    $scope.limited = response.data[0].limited;
+                    $scope.start_date = new Date(response.data[0].start_date);
+                    $scope.end_date = new Date(response.data[0].end_date);
                 }, function(response) {
                     $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
@@ -69,6 +75,9 @@ angular.module('educationApp').controller('PromotionController', function($scope
                         'code': $scope.promotionCode,
                         'benefit': $scope.promotionBenefit,
                         'course': $scope.courseName,
+                        'limited':$scope.limited,
+                        'start_date':$scope.start_date,
+                        'end_date':$scope.end_date,
                     },
                 })
                 .then(function(response) {
@@ -86,6 +95,9 @@ angular.module('educationApp').controller('PromotionController', function($scope
                         'code': $scope.promotionCode,
                         'benefit': $scope.promotionBenefit,
                         'course': $scope.courseName,
+                        'limited':$scope.limited,
+                        'start_date':$scope.start_date,
+                        'end_date':$scope.end_date,
                     },
                 })
                 .then(function(response) {

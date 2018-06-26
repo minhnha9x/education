@@ -38,7 +38,9 @@ angular.module('educationApp').controller('StatisticController', function($scope
         });
     }
 
-    $scope.$on('load-10', function(event, args) {
+    $scope.init();
+
+    $scope.$on('load-9', function(event, args) {
         $scope.init();
     });
 

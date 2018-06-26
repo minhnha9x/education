@@ -31,6 +31,9 @@ angular.module('educationApp').controller('MenuController', function($scope, $ro
             case 9:
                 $rootScope.$broadcast('load-9');
                 break;
+            case 10:
+                $rootScope.$broadcast('load-10');
+                break;
             default:
                 break;
         }
