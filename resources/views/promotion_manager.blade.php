@@ -4,9 +4,9 @@
     <table id="promotionTable" class="table table-hover" st-table="promotionCollection" st-safe-src="promotionInfo" hidden>
         <thead>
             <tr>
-                <th>Mã giảm giá</th>
-                <th>% giảm giá</th>
-                <th>Khóa học áp dụng</th>
+                <th st-sort="code">Mã giảm giá</th>
+                <th st-sort="benefit">% giảm giá</th>
+                <th st-sort="name">Khóa học áp dụng</th>
                 <th>Hành động</th>
             </tr>
             <tr>

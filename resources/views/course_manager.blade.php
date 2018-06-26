@@ -4,12 +4,12 @@
     <table id="courseTable" class="table table-hover" st-table="courseCollection" st-safe-src="courseInfo" hidden>
         <thead>
             <tr>
-                <th>Tên khóa học</th>
-                <th>Môn học</th>
-                <th>Số buổi học</th>
-                <th>Số lớp học</th>
-                <th>Số trợ giảng mỗi lớp</th>
-                <th>Học phí</th>
+                <th st-sort="name">Tên khóa học</th>
+                <th st-sort="subject">Môn học</th>
+                <th st-sort="total_of_period">Số buổi học</th>
+                <th st-sort="count">Số lớp học</th>
+                <th st-sort="teaching_assistant">Số trợ giảng mỗi lớp</th>
+                <th st-sort="price">Học phí</th>
                 <th>Môn tiên quyết</th>
                 <th>Hành động</th>
             </tr>

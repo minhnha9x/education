@@ -15,8 +15,7 @@ angular.module('educationApp').controller('SubjectController', function($scope, 
         });
     }
     $scope.$on('load-3', function(event, args) {
-        if ($scope.subjectInfo == null)
-            $scope.init();
+        $scope.init();
     });
     $scope.showModal = function(param1, param2) {
         switch (param1) {

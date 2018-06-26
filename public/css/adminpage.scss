@@ -38,6 +38,12 @@ $blue: #337ab7;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
+.st-sort-ascent:after {
+    content: '  \2193';
+}
+.st-sort-descent:after {
+    content: '  \2191';
+}
 .adminpage {
 	padding-top: 60px;
 	display: flex;

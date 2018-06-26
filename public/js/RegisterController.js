@@ -15,6 +15,10 @@ angular.module('educationApp').controller('RegisterController', function($scope,
         });
     }
     $scope.init();
+    $scope.$on('load-0', function(event, args) {
+        $scope.init();
+    });
+
     $scope.delete = function(param) {
         swal({
           title: "Xóa đăng ký học",

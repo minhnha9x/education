@@ -26,8 +26,7 @@ angular.module('educationApp').controller('PromotionController', function($scope
     }
 
     $scope.$on('load-8', function(event, args) {
-        if ($scope.promotionInfo == null)
-            $scope.init();
+        $scope.init();
     });
     $scope.showModal = function(param1, param2) {
         switch (param1) {

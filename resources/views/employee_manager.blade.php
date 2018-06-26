@@ -15,9 +15,9 @@
     <table id="employeeTable" class="table table-hover" st-table="employeeCollection" st-safe-src="employeeInfo" hidden>
         <thead>
             <tr>
-                <th>Tên nhân viên</th>
-                <th>Email</th>
-                <th>Ngày sinh</th>
+                <th st-sort="name">Tên nhân viên</th>
+                <th st-sort="mail">Email</th>
+                <th st-sort="birthday">Ngày sinh</th>
                 <th>Địa chỉ</th>
                 <th>Số điện thoại</th>
                 <th>Hành động</th>
@@ -51,11 +51,11 @@
     <table id="workerTable" class="table table-hover" st-table="workerCollection" st-safe-src="workerInfo" hidden>
         <thead>
             <tr>
-                <th>Tên nhân viên</th>
-                <th>Email</th>
+                <th st-sort="name">Tên nhân viên</th>
+                <th st-sort="mail">Email</th>
                 <th>Trung tâm</th>
                 <th>Vị trí</th>
-                <th>Kinh nghiệm</th>
+                <th st-sort="experience">Kinh nghiệm</th>
                 <th>Hành động</th>
             </tr>
             <tr>
@@ -88,8 +88,8 @@
     <table id="teacherTable" class="table table-hover" st-table="teacherCollection" st-safe-src="teacherInfo" hidden>
         <thead>
             <tr>
-                <th>Tên giáo viên</th>
-                <th>Email</th>
+                <th st-sort="name">Tên giáo viên</th>
+                <th st-sort="mail">Email</th>
                 <th>Bằng cấp</th>
                 <th>Dạy các khóa</th>
                 <th>Làm việc tại các trung tâm</th>
@@ -127,8 +127,8 @@
     <table id="taTable" class="table table-hover" st-table="taCollection" st-safe-src="TAInfo" hidden>
         <thead>
             <tr>
-                <th>Tên trợ giảng</th>
-                <th>Email</th>
+                <th st-sort="name">Tên trợ giảng</th>
+                <th st-sort="mail">Email</th>
                 <th>Bằng cấp</th>
                 <th>Dạy các khóa</th>
                 <th>Làm việc tại các trung tâm</th>

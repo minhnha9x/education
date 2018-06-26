@@ -1,22 +1,28 @@
 <div class="" ng-controller="ClassController">
     <div ng-click="addClass()" class="addbutton hvr-sweep-to-right">Thêm lớp học</div>
     <div class="loading"></div>
-    <table id="classTable" class="table table-bordered table-hover" hidden>
+    <table id="classTable" class="table table-bordered table-hover" st-table="classCollection" st-safe-src="classInfo" hidden>
         <thead>
             <tr>
-                <th>Mã lớp</th>
-                <th>Khóa học</th>
+                <th st-sort="id">Mã lớp</th>
+                <th st-sort="course">Khóa học</th>
                 <th>Lịch học</th>
-                <th>Trung tâm</th>
-                <th>Sĩ số</th>
-                <th>Ngày khai giảng</th>
-                <th>Ngày kết thúc</th>
+                <th st-sort="office">Trung tâm</th>
+                <th st-sort="count">Sĩ số</th>
+                <th st-sort="start_date">Ngày khai giảng</th>
+                <th st-sort="end_date">Ngày kết thúc</th>
                 <th>Bảng điểm</th>
                 <th>Hành động</th>
             </tr>
+            <tr>
+                <th class="search"><input st-search="id" placeholder="Tìm theo Mã lớp" class="input-sm form-control" type="search"/></th>
+                <th class="search"><input st-search="course" placeholder="Tìm theo Khóa học" class="input-sm form-control" type="search"/></th>
+                <th class="search"></th>
+                <th class="search"><input st-search="office" placeholder="Tìm theo Trung tâm" class="input-sm form-control" type="search"/></th>
+            </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="x in classInfo">
+            <tr ng-repeat="x in classCollection">
                 <td><% x.id %></td>
                 <td><% x.course %></td>
                 <td>
@@ -39,6 +45,13 @@
                 </td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="7" class="text-center">
+                    <div st-pagination="" st-items-by-page="10"></div>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 
     @include('popup.add_class_modal')

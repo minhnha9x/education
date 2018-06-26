@@ -49,8 +49,7 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
     }
 
     $scope.$on('load-2', function(event, args) {
-        if ($scope.classInfo == null)
-            $scope.init();
+        $scope.init();
     });
 
     $scope.cleanForm = function() {

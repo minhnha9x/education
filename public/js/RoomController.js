@@ -35,8 +35,7 @@ angular.module('educationApp').controller('RoomController', function($scope, $ht
     }
 
     $scope.$on('load-5', function(event, args) {
-        if ($scope.roomInfo == null)
-            $scope.init();
+        $scope.init();
     });
 
     $scope.showModal = function(param1, param2) {

@@ -82,8 +82,7 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
     }
 
     $scope.$on('load-6', function(event, args) {
-        if ($scope.employeeInfo == null)
-            $scope.init();
+        $scope.init();
     });
 
     $scope.changeTable = function() {

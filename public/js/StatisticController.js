@@ -37,7 +37,10 @@ angular.module('educationApp').controller('StatisticController', function($scope
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
     }
-    $scope.init();
+
+    $scope.$on('load-10', function(event, args) {
+        $scope.init();
+    });
 
     $scope.updateChartType = function() {
         chart.data[0].set("type", $scope.typeSelected);

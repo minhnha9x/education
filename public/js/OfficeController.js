@@ -16,8 +16,7 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
         });
     }
     $scope.$on('load-4', function(event, args) {
-        if ($scope.officeInfo == null)
-            $scope.init();
+        $scope.init();
     });
     $scope.showModal = function(param1, param2) {
         switch (param1) {
