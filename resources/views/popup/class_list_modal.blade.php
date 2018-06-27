@@ -4,10 +4,10 @@
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
                     <h2 class="col-xs-12">Khóa học <% courseInfo['name'] %></h2>
-                    <div class="col-md-5 col-wrapper">
+                    <div class="col-md-6 col-wrapper">
                         <div class="img" style="background-image: url(<% courseInfo['img_url'] %>)"></div>
                     </div>
-                    <div class="col-md-7 col-wrapper">
+                    <div class="col-md-6 col-wrapper">
                         <div class="info">Số buổi học: <% courseInfo['total_of_period'] %></div>
                         <div class="info">Học phí: <% courseInfo['price'] | number: 0 %> VNĐ</div>
                         <div class="info" ng-show="courseInfo['certificate_required'] != null">Khóa học tiên quyết: <% courseInfo['certificate_required'] %></div>
