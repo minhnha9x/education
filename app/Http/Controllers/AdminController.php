@@ -327,6 +327,15 @@ class AdminController extends Controller
         return $data;
     }
 
+    public function updateOfficeImg(Request $r) {
+        $data = Office::findOrFail($r->id);
+        File::delete($data->location);
+        $file = $r->file;
+        $file->move('./img/office/',  $r->id . '.' . $file->getClientOriginalExtension());
+        $data->location = './img/office/' . $r->id . '.' . $file->getClientOriginalExtension();
+        $data->save();
+    }
+
     public function addOffice(Request $r) {
         if ($r->id != null)
             $data = Office::findOrFail($r->id);
@@ -336,7 +345,6 @@ class AdminController extends Controller
         $data->address = $r->address;
         $data->phone = $r->phone;
         $data->mail = $r->mail;
-        $data->location = $r->location;
         $data->save();
         return array('msg' => 'Đã cập nhật danh sách trung tâm.', 'type' => 'success');
     }

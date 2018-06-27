@@ -1,7 +1,7 @@
 <div class="" ng-controller="ClassController">
     <div ng-click="addClass()" class="addbutton hvr-sweep-to-right">Thêm lớp học</div>
     <div class="loading"></div>
-    <table id="classTable" class="table table-bordered table-hover" st-table="classCollection" st-safe-src="classInfo" hidden>
+    <table id="classTable" class="table table-hover" st-table="classCollection" st-safe-src="classInfo" hidden>
         <thead>
             <tr>
                 <th st-sort="id">Mã lớp</th>
@@ -47,7 +47,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="7" class="text-center">
+                <td colspan="9" class="text-center">
                     <div st-pagination="" st-items-by-page="10"></div>
                 </td>
             </tr>

@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    {!!$o->location!!}
+                    <div class="google-img" style="background-image: url('{!!$o->location!!}')"></div>
                 </div>
             </div>
         @endforeach

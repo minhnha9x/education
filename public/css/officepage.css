@@ -31,7 +31,10 @@
           margin-bottom: 10px; }
           .officepage .office-wrapper .info .address div i {
             margin-right: 10px; }
-  .officepage iframe {
+  .officepage .google-img {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
     -webkit-box-shadow: 3px 3px 5px -1px #706c70;
     -moz-box-shadow: 3px 3px 5px -1px #706c70;
     box-shadow: 3px 3px 5px -1px #706c70; }

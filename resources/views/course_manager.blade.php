@@ -34,7 +34,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="7" class="text-center">
+                <td colspan="8" class="text-center">
                     <div st-pagination="" st-items-by-page="10"></div>
                 </td>
             </tr>

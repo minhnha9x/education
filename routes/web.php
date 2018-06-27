@@ -68,6 +68,7 @@ Route::get('/deleteCourse', 'AdminController@deleteCourse');
 Route::get('/getAllOffice', 'AdminController@getAllOffice');
 Route::get('/getOffice', 'AdminController@getOffice');
 Route::post('/addOffice', 'AdminController@addOffice');
+Route::post('/updateOfficeImg','AdminController@updateOfficeImg');
 Route::get('/deleteOffice', 'AdminController@deleteOffice');
 
 Route::get('/getAllRoom', 'AdminController@getAllRoom');

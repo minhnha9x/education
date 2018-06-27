@@ -1,4 +1,4 @@
-angular.module('educationApp').controller('OfficeController', function($scope, $http) {
+angular.module('educationApp').controller('OfficeController', function($scope, $http, Upload) {
     $scope.init = function () {
         $('#officeModal').modal('hide');
         $('#officeTable').hide();
@@ -27,7 +27,7 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
                 $scope.officeAddr = '';
                 $scope.officePhone = '';
                 $scope.officeMail = '';
-                $scope.Googlemap = '';
+                $scope.picFile = '';
                 break;
             case 2:
                 $scope.button = "Sửa trung tâm";
@@ -44,7 +44,7 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
                     $scope.officeAddr = response.data[0].address;
                     $scope.officePhone = response.data[0].phone;
                     $scope.officeMail = response.data[0].mail;
-                    $scope.Googlemap = response.data[0].location;
+                    $scope.picFile = response.data[0].location;
                 }, function(response) {
                     $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
                 });
@@ -54,7 +54,7 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
         $('#officeModal').modal('show', 300);
     }
 
-    $scope.addOffice = function(param) {
+    $scope.addOffice = function(param, param2) {
         switch (param) {
             case -1:
                 $http({
@@ -69,6 +69,22 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
                     },
                 })
                 .then(function(response) {
+                    if (param2 != null && param2 != "") {
+                        Upload.upload({
+                            url: './updateOfficeImg',
+                            data: {
+                                id: response.data['id'],
+                                file: param2,
+                            }
+                        }).then(function (resp) {
+                            //location.reload();
+                        }, function (resp) {
+                            console.log('Error status: ' + resp.status);
+                        }, function (evt) {
+                            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                        });
+                    }
                     $scope.init();
                     $.toaster(response.data['msg'], '', response.data['type']);
                 }, function(response) {
@@ -89,6 +105,22 @@ angular.module('educationApp').controller('OfficeController', function($scope, $
                     },
                 })
                 .then(function(response) {
+                    if (param2 != null && param2 != "") {
+                        Upload.upload({
+                            url: './updateOfficeImg',
+                            data: {
+                                id: param,
+                                file: param2,
+                            }
+                        }).then(function (resp) {
+                            //location.reload();
+                        }, function (resp) {
+                            console.log('Error status: ' + resp.status);
+                        }, function (evt) {
+                            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                        });
+                    }
                     $scope.init();
                     $.toaster(response.data['msg'], '', response.data['type']);
                 }, function(response) {
