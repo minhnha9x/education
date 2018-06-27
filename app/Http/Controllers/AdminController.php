@@ -994,7 +994,7 @@ class AdminController extends Controller
                     if (!array_key_exists($schedule->current_date, $result[$schedule->id]['schedule'])){
                         $result[$schedule->id]['schedule'][$schedule->current_date] = array();
                     }
-                    array_push($result[$schedule->id]['schedule'][$schedule->current_date], $schedule->schedule);
+                    $result[$schedule->id]['schedule'][$schedule->current_date][$schedule->schedule] = $schedule->office;
                 }
             }
         }
@@ -1046,11 +1046,13 @@ class AdminController extends Controller
             'room_schedule.schedule',
             'class.start_date',
             'class.end_date',
-            'employee.name')
+            'employee.name',
+            'room.office')
         ->leftjoin('employee', 'employee.id', 'teaching_assistant.id')
         ->leftjoin('room_ta', 'room_ta.TA', 'teaching_assistant.id')
         ->leftjoin('room_schedule', 'room_schedule.id', 'room_ta.room_schedule')
         ->leftjoin('class', 'class.id', 'room_schedule.class')
+        ->leftjoin('room', 'room_schedule.room', 'room.id')
         ->whereIn('teaching_assistant.id', json_decode($ta_ids, TRUE))
         ->get();
 
@@ -1113,6 +1115,21 @@ class AdminController extends Controller
         ->groupBy('office.id')
         ->get();
         return $data;
+    }
+
+    public function getCourseOffice(Request $r) {
+        $data = DB::table('course_room')
+        ->select('office.id', 'office.name', 'course_room.course')
+        ->leftjoin('room', 'room.id', 'course_room.room')
+        ->leftjoin('office', 'office.id', 'room.office')
+        ->groupBy('office.id')
+        ->groupBy('course_room.course');
+
+        $format_data = DB::table(DB::raw("({$data->toSql()}) as course_office"))
+        ->select('course_office.id as office', DB::raw("GROUP_CONCAT(course_office.course SEPARATOR ', ') as course"))
+        ->groupBy('course_office.id')
+        ->get();
+        return $format_data;
     }
 
     public function countRegisterBySubjectInMonth($year, $month) {

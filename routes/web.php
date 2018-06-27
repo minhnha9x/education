@@ -130,3 +130,5 @@ Route::get('/office', 'OfficeController@get');
 Route::get('/getsupervisors', 'AdminController@getSupervisors');
 
 Route::get('/sendmail', 'UtilController@sendMail');
+
+Route::get('/getcourseoffice', 'AdminController@getCourseOffice');

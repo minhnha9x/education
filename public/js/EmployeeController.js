@@ -14,6 +14,18 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         })
         .then(function(response) {
             $scope.officeInfo = response.data;
+            for (var i in $scope.officeInfo) {
+                $scope.officeInfo[i]['checked'] = false;
+            }
+        }, function(response) {
+            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
+        });
+        $http({
+            url: './getcourseoffice',
+            method: 'GET',
+        })
+        .then(function(response) {
+            $scope.courseOffice = response.data;
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
@@ -23,6 +35,10 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
         })
         .then(function(response) {
             $scope.courseInfo = response.data;
+            for (var i in $scope.courseInfo) {
+                $scope.courseInfo[i]['stack'] = 0;
+                $scope.courseInfo[i]['checked'] = false;
+            }
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
         });
@@ -499,6 +515,25 @@ angular.module('educationApp').controller('EmployeeController', function($scope,
                     // or server returns response with an error status.
                 });
                 break;
+        }
+    }
+
+    $scope.clickOfficeEvent = function(office) {
+        for (var i in $scope.courseOffice) {
+            if ($scope.courseOffice[i].office == office.id) {
+                var list_course = $scope.courseOffice[i].course.split(', ');
+                for (var i in $scope.courseInfo) {
+                    if (list_course.indexOf(String($scope.courseInfo[i].id)) > -1) {
+                        if (office.checked)
+                            $scope.courseInfo[i].stack += 1;
+                        else {
+                            $scope.courseInfo[i].stack -= 1;
+                            if ($scope.courseInfo[i].stack == 0)
+                                $scope.courseInfo[i].checked = false;
+                        }
+                    }
+                }
+            }
         }
     }
 
