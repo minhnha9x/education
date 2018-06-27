@@ -99,6 +99,7 @@ class AdminController extends Controller
         $data = User::select('users.id', 'users.name', 'users.email', DB::raw("GROUP_CONCAT(course.name SEPARATOR ', ') as course"))
         ->leftjoin('student_level', 'student_level.member', 'users.id')
         ->leftjoin('course', 'student_level.course', 'course.id')
+        ->where('users.role', 'member')
         ->groupBy('users.id')
         ->get();
         return $data;
@@ -908,6 +909,13 @@ class AdminController extends Controller
 
     public function getAllPosition() {
         $data = DB::table('position')
+        ->get();
+        return $data;
+    }
+
+    public function getPosition(Request $r) {
+        $data = DB::table('position')
+        ->where('id', $r->id)
         ->get();
         return $data;
     }

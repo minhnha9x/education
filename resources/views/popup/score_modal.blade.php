@@ -9,11 +9,13 @@
                             <th>Mã học viên</th>
                             <th>Họ và tên</th>
                             <th>Điểm</th>
+                            <th>Nhận xét của giáo viên</th>
                         </tr>
                         <tr ng-repeat="x in scoreInfo">
                             <td><% x.user %></td>
                             <td><% x.name %></td>
                             <td><% x.score %></td>
+                            <td><% x.teacher_feedback %></td>
                         </tr>
                     </table>
                 </div>

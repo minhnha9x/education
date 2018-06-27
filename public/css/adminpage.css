@@ -47,7 +47,6 @@
   padding-top: 60px;
   display: flex; }
   .adminpage .nav-tabs {
-    width: 130px;
     padding: 0;
     list-style-type: none;
     display: inline-block;
@@ -61,7 +60,8 @@
         font-family: 'Roboto', sans-serif;
         font-size: 14px;
         display: block;
-        position: relative; }
+        position: relative;
+        white-space: nowrap; }
       .adminpage .nav-tabs li img {
         max-width: 40px;
         margin: 0 auto 5px;

@@ -1,19 +1,19 @@
 <link href="./css/adminpage.css" rel="stylesheet" type="text/css">
 
 <div class="adminpage" ng-app="educationApp">
-    @include('header', [$title='Trang Quản lí'])
+    @include('header', [$title='Trang Quản trị'])
 
     <ul class="nav nav-tabs" ng-controller="MenuController">
-        <li class="active" ng-click="loadData(0)"><a data-toggle="tab" href="#menu0"><div class="arrow-left"></div><img src="./img/register.png">Quản lí học viên</a></li>
-        <li ng-click="loadData(10)"><a data-toggle="tab" href="#menu10"><div class="arrow-left"></div><img src="./img/student_level.png">Quản lí chứng chỉ</a></li>
-        <li ng-click="loadData(1)"><a data-toggle="tab" href="#menu1"><div class="arrow-left"></div><img src="./img/course.png">Quản lí khóa học</a></li>
-        <li ng-click="loadData(2)"><a data-toggle="tab" href="#menu2"><div class="arrow-left"></div><img src="./img/class.png">Quản lí lớp học</a></li>
-        <li ng-click="loadData(3)"><a data-toggle="tab" href="#menu3"><div class="arrow-left"></div><img src="./img/subject.png">Quản lí môn học</a></li>
-        <li ng-click="loadData(4)"><a data-toggle="tab" href="#menu4"><div class="arrow-left"></div><img src="./img/office.png">Quản lí trung tâm</a></li>
-        <li ng-click="loadData(5)"><a data-toggle="tab" href="#menu5"><div class="arrow-left"></div><img src="./img/room.png">Quản lí phòng học</a></li>
-        <li ng-click="loadData(6)"><a data-toggle="tab" href="#menu6"><div class="arrow-left"></div><img src="./img/employee.png">Quản lí nhân viên</a></li>
-        <li ng-click="loadData(7)"><a data-toggle="tab" href="#menu7"><div class="arrow-left"></div><img src="./img/salary.png">Quản lí lương</a></li>
-        <li ng-click="loadData(8)"><a data-toggle="tab" href="#menu8"><div class="arrow-left"></div><img src="./img/promotion.png">Quản lí mã ưu đãi</a></li>
+        <li class="active" ng-click="loadData(0)"><a data-toggle="tab" href="#menu0"><div class="arrow-left"></div><img src="./img/register.png">Quản lý học viên</a></li>
+        <li ng-click="loadData(10)"><a data-toggle="tab" href="#menu10"><div class="arrow-left"></div><img src="./img/student_level.png">Quản lý chứng chỉ</a></li>
+        <li ng-click="loadData(1)"><a data-toggle="tab" href="#menu1"><div class="arrow-left"></div><img src="./img/course.png">Quản lý khóa học</a></li>
+        <li ng-click="loadData(2)"><a data-toggle="tab" href="#menu2"><div class="arrow-left"></div><img src="./img/class.png">Quản lý lớp học</a></li>
+        <li ng-click="loadData(3)"><a data-toggle="tab" href="#menu3"><div class="arrow-left"></div><img src="./img/subject.png">Quản lý môn học</a></li>
+        <li ng-click="loadData(4)"><a data-toggle="tab" href="#menu4"><div class="arrow-left"></div><img src="./img/office.png">Quản lý trung tâm</a></li>
+        <li ng-click="loadData(5)"><a data-toggle="tab" href="#menu5"><div class="arrow-left"></div><img src="./img/room.png">Quản lý phòng học</a></li>
+        <li ng-click="loadData(6)"><a data-toggle="tab" href="#menu6"><div class="arrow-left"></div><img src="./img/employee.png">Quản lý nhân viên</a></li>
+        <li ng-click="loadData(7)"><a data-toggle="tab" href="#menu7"><div class="arrow-left"></div><img src="./img/salary.png">Quản lý lương</a></li>
+        <li ng-click="loadData(8)"><a data-toggle="tab" href="#menu8"><div class="arrow-left"></div><img src="./img/promotion.png">Quản lý mã ưu đãi</a></li>
         <li ng-click="loadData(9)"><a data-toggle="tab" href="#menu9"><div class="arrow-left"></div><img src="./img/statistic.png">Thống kê</a></li>
     </ul>
 
