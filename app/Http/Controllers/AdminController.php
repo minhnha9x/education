@@ -242,7 +242,6 @@ class AdminController extends Controller
 
     public function updateSubjectImg(Request $r) {
         $data = Subject::findOrFail($r->id);
-        File::delete($data->img);
         $file = $r->file;
         $file->move('./img/subject/',  $r->id . '.' . $file->getClientOriginalExtension());
         $data->img = './img/subject/' . $r->id . '.' . $file->getClientOriginalExtension();
@@ -308,7 +307,6 @@ class AdminController extends Controller
 
     public function updateCourseImg(Request $r) {
         $data = Course::findOrFail($r->id);
-        File::delete($data->img_url);
         $file = $r->file;
         $file->move('./img/course/',  $r->id . '.' . $file->getClientOriginalExtension());
         $data->img_url = './img/course/' . $r->id . '.' . $file->getClientOriginalExtension();
@@ -334,7 +332,6 @@ class AdminController extends Controller
 
     public function updateOfficeImg(Request $r) {
         $data = Office::findOrFail($r->id);
-        File::delete($data->location);
         $file = $r->file;
         $file->move('./img/office/',  $r->id . '.' . $file->getClientOriginalExtension());
         $data->location = './img/office/' . $r->id . '.' . $file->getClientOriginalExtension();

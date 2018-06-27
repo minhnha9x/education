@@ -130,7 +130,8 @@
         font-size: 18px;
         font-weight: bold;
         text-align: center;
-        margin-bottom: 10px; }
+        margin-bottom: 10px;
+        text-transform: capitalize; }
       .subject-wrapper .subject .course-wrapper .info .price {
         font-family: 'Roboto', sans-serif;
         margin-bottom: 10px; }
@@ -217,7 +218,7 @@
         -moz-box-shadow: 0px 35px 44px -22px rgba(0, 0, 0, 0.72);
         box-shadow: 0px 35px 44px -22px #1f181b;
         padding: 40px 30px; }
-        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile h2 {
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile h2, .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile h3 {
           color: #040404;
           font-size: 25px;
           text-align: center;
@@ -225,6 +226,8 @@
           letter-spacing: 2px;
           margin-top: 0;
           text-transform: capitalize; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile h3 {
+          font-size: 22px; }
         .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .info .course, .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .info .schedule {
           color: #040404;
           font-size: 18px;
@@ -236,6 +239,18 @@
             color: #337ab7; }
         .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .info .schedule {
           font-size: 16px; }
+        .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .col-wrapper {
+          margin-bottom: 40px; }
+          .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .col-wrapper .img {
+            height: 50%;
+            background-size: cover; }
+          .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .col-wrapper .info {
+            font-size: 15px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            margin-top: 0;
+            text-align: justify;
+            color: #040404; }
         .homepage-modal .modal-dialog .modal-content .main-agileits .form-w3-agile .form-sub-w3 {
           position: relative;
           margin-bottom: 15px; }

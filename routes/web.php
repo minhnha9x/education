@@ -16,6 +16,7 @@ Route::post('/adduser', 'LoginController@addUser');
 Route::post('/forgotPassword', 'UtilController@sendMail');
 
 Route::get('/', 'HomeController@get');
+Route::get('/getCourse2', 'HomeController@getCourse');
 
 Route::post('/addteacherdayoff', 'ProfileController@addTeacherDayoff');
 Route::post('/addtadayoff', 'ProfileController@addTADayoff');

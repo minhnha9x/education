@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 25, 2018 lúc 07:32 PM
--- Phiên bản máy phục vụ: 10.1.30-MariaDB
--- Phiên bản PHP: 7.2.2
+-- Thời gian đã tạo: Th6 27, 2018 lúc 02:29 PM
+-- Phiên bản máy phục vụ: 10.1.31-MariaDB
+-- Phiên bản PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -70,15 +70,15 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`id`, `name`, `subject`, `price`, `certificate_required`, `total_of_period`, `description`, `img_url`, `teaching_assistant`) VALUES
-(1, 'English for fresher', 1, 5000000, NULL, 50, 'Cras ultricies ligula sed magna dictum porta. Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Cras ultricies ligula sed magna dictum porta. Nulla porttitor accumsan tincidunt. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', './img/course/1.jpg', 1),
-(2, 'English for fresher 2', 1, 2000000, 1, 60, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum porta. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', './img/course/2.jpg', NULL),
-(3, 'English for fresher 3', 1, 3000000, 2, 20, 'Vivamus suscipit tortor eget felis porttitor volutpat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Cras ultricies ligula sed magna dictum porta. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/course/3.jpg', NULL),
+(1, 'Tiếng anh Beginner', 1, 5000000, NULL, 50, 'Đối tượng của khóa học là những người yếu và mất căn bản tiếng Anh trong một thời gian dài, có nhu cầu học lại. Sau khóa học, học viên sẽ tự tin hơn khi giao tiếp tiếng Anh. Khóa học cung cấp những kiến thức cơ bản nhất khi giao tiếp Tiếng Anh.', './img/course/1.jpg', 1),
+(2, 'Tiếng anh Elementary', 1, 2000000, 1, 60, 'Mục tiêu của khóa học là giúp học viên củng cố lại ngữ pháp, phát âm, cách đặt câu, cách diễn đạt ý chính trong quá trình giao tiếp. Khóa học dành cho các học viên có khả năng diễn đạt ý còn chậm, hay mắc lỗi và gặp khó khăn trong việc diễn đạt ý tưởng phức tạp.', './img/course/2.jpg', 1),
+(3, 'tiếng anh Intermediate', 1, 3000000, 2, 20, 'Khóa học này dành cho các học viên muốn nâng cấp nhanh các kỹ năng để hoàn thiện ngôn ngữ tiếng Anh, chủ động trong giao tiếp. Rèn luyện phản xạ nhanh, nâng cao từ vựng, ngữ pháp và phát âm hoàn thiện khi nói chuyện là phương pháp của lớp này. Kết thúc khóa học, học viên sẽ tự tin khi giao tiếp với người nước ngoài, trao đổi công việc bằng tiếng Anh và tự tin diễn thuyết trước đám đông.', './img/course/3.jpg', 1),
 (4, 'Basic Maths', 2, 2000000, NULL, 30, 'Vivamus suscipit tortor eget felis porttitor volutpat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Cras ultricies ligula sed magna dictum porta. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/course/4.jpg', NULL),
 (5, 'Advance Maths', 2, 3000000, 4, 50, 'Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit.', './img/course/5.jpg', NULL),
-(6, 'Art for beginer', 3, 6000000, NULL, 30, 'Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit.', './img/course/6.jpg', 2),
-(7, 'Piano', 4, 6000000, 9, 40, 'Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit.', './img/course/7.jpg', 1),
-(8, 'Guitar', 4, 4000000, 9, 30, 'Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/course/8.jpg', 1),
-(9, 'Music Theory', 4, 600000, NULL, 60, 'Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', './img/course/9.jpg', 1);
+(6, 'Mỹ thuật căn bản', 3, 6000000, NULL, 30, 'Khóa học hỗ trợ rất tốt cho các bạn đang theo ngành thiết kế game nhân vật, đồ họa, thời trang, các bạn hành nghề xăm nghệ thuật, dạy học tại các trường mầm non và chuẩn bị du học…', './img/course/6.jpg', 2),
+(7, 'Piano', 4, 6000000, 9, 40, 'Kỹ thuật xếp ngón trên đàn piano. Những bài tập vỡ lòng piano theo giáo trình quốc tế. Thực hành các tác phẩm Piano quen thuộc, Học viên có thể học theo yêu cầu các tác phẩm mình yêu thích.', './img/course/7.jpg', 1),
+(8, 'Guitar', 4, 4000000, 9, 30, 'Biết cách đọc và bấm tốt các hợp âm trên đàn guitar. Tự chơi được các bản nhạc yêu thích với các tiết điệu rất thông dụng như: Boston, Valse, Ballad, Fox, Disco…\nCác bài học được biên tập bài bản, rõ ràng, có thể xem đi xem lại nhiều lần sẽ giúp bạn luyện tập cho đến khi thành thạo.', './img/course/8.jpg', 1),
+(9, 'Nhạc lý - Hòa âm', 4, 600000, NULL, 60, 'Bạn đam mê nghệ thuật đặc biệt là âm nhạc, nhưng bạn chưa hiểu rõ về nhạc lý hòa âm. Bạn đang muốn bắt đầu một cách nghiêm túc với môn nghệ thuật này hay bạn đã có trong mình chút năng khiếu âm nhạc muốn củng cố kiến thức về nhạc lý, thanh âm thì đây là khóa học phù hợp cho bạn.', './img/course/9.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -265,9 +265,9 @@ INSERT INTO `main_teacher` (`id`, `degree`) VALUES
 CREATE TABLE `office` (
   `id` bigint(20) NOT NULL,
   `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `location` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `phone` bigint(20) NOT NULL,
-  `mail` char(100) NOT NULL,
+  `location` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `mail` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -276,10 +276,10 @@ CREATE TABLE `office` (
 --
 
 INSERT INTO `office` (`id`, `address`, `location`, `phone`, `mail`, `name`) VALUES
-(1, 'Trung Tam Anh Ngu B.E.N, Le Dai Hanh, phuong 15, Quan 11, Ho Chi Minh', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.5468212243677!2d106.65046171480061!3d10.769366892326317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e9552b97111%3A0x3e81a87c9948d39e!2zVHJ1bmcgVMOibSBBbmggTmfhu68gQkVO!5e0!3m2!1svi!2s!4v1528255517795\" width=\"500\" height=\"300\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>', 1332546548, 'anhnguBen@gmail.com', 'Trung Tam Anh Ngu B.E.N'),
-(2, 'Trung Tam Ve Sang Tao Wow Art Quan 11 Lac Long Quan phuong 10 Tan Binh Ho Chi Minh', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62712.83486721857!2d106.63586513955914!3d10.768955106642673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e90cb12a473%3A0x4a615d2ca3247431!2zVHJ1bmcgVMOibSBW4bq9IFPDoW5nIFThuqFvIFdvdyBBcnQgUXXhuq1uIDEx!5e0!3m2!1svi!2s!4v1528255787880\" width=\"500\" height=\"300\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>', 166326414, 'wowart@gmail.com', 'Trung Tam Ve Sang Tao Wow Art'),
-(3, 'Trung Tam Am Nhac FASOL Luy Ban Bich Tan Thoi Hoa Tan Phu Ho Chi Minh', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.57922474091!2d106.6297982148007!3d10.766876292327991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e9e6035f40d%3A0x42fb1314b4fbf63c!2zVHJ1bmcgVMOibSDDgm0gTmjhuqFjIEZBU09M!5e0!3m2!1svi!2s!4v1528255822349\" width=\"500\" height=\"300\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>', 91564856, 'fasolmusic@gmail.com', 'Trung Tam Am Nhac FASOL'),
-(4, 'Trung tam toan TITAN EDUCATION Mac Dinh Chi Da Kao Quan 1 Ho Chi Minh', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.2994894715684!2d106.69361651480081!3d10.788358592313465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f499401b65b%3A0x8978b8f612b5e3b6!2sTrung+t%C3%A2m+to%C3%A1n+TITAN+EDUCATION!5e0!3m2!1svi!2s!4v1528255841547\" width=\"500\" height=\"300\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>', 904221635, 'titaneducation@gmail.com', 'Trung tam toan TITAN EDUCATION');
+(1, 'Trung Tam Anh Ngu B.E.N, Le Dai Hanh, phuong 15, Quan 11, Ho Chi Minh', './img/office/1.png', '01332546548', 'anhnguBen@gmail.com', 'Trung Tam Anh Ngu B.E.N'),
+(2, 'Trung Tam Ve Sang Tao Wow Art Quan 11 Lac Long Quan phuong 10 Tan Binh Ho Chi Minh', './img/office/2.png', '0166326414', 'wowart@gmail.com', 'Trung Tam Ve Sang Tao Wow Art'),
+(3, 'Trung Tam Am Nhac FASOL Luy Ban Bich Tan Thoi Hoa Tan Phu Ho Chi Minh', './img/office/3.png', '091564856', 'fasolmusic@gmail.com', 'Trung Tam Am Nhac FASOL'),
+(4, 'Trung tam toan TITAN EDUCATION Mac Dinh Chi Da Kao Quan 1 Ho Chi Minh', './img/office/4.png', '0904221635', 'titaneducation@gmail.com', 'Trung tam toan TITAN EDUCATION');
 
 -- --------------------------------------------------------
 
@@ -428,7 +428,7 @@ CREATE TABLE `register` (
 
 INSERT INTO `register` (`id`, `class`, `promotion`, `user`, `created_date`, `fee_status`) VALUES
 (29, 20, NULL, 2, '2018-05-25 16:31:08', 1),
-(30, 1, NULL, 2, '2018-05-25 16:32:10', 1),
+(30, 1, NULL, 2, '2018-05-25 16:32:10', 0),
 (31, 15, NULL, 2, '2018-05-25 21:55:31', 0),
 (37, 23, 'eng50', 1, '2018-06-21 10:14:01', 0),
 (38, 1, NULL, 1, '2018-06-21 10:14:20', 0),
@@ -556,7 +556,11 @@ CREATE TABLE `student_level` (
 --
 
 INSERT INTO `student_level` (`id`, `course`, `member`) VALUES
-(3, 1, 2);
+(3, 1, 2),
+(4, 2, 2),
+(5, 2, 1),
+(6, 4, 5),
+(7, 7, 6);
 
 -- --------------------------------------------------------
 
@@ -691,9 +695,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `remember_token`, `created_at`, `updated_at`, `teacher`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$k70eXjqMBJRqSbQOC4TXIepNCHPn16G9qgvVwOoxpYy2PLhtAXhgW', 'admin', './img/user/1.jpg', '8ajk0MVTaNLGEgazRfEBzkAsuQvozOISZsmPPTDh9Au1QYpnL9hgUISoHvqA', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
+(1, 'admin', 'admin@gmail.com', '$2y$10$k70eXjqMBJRqSbQOC4TXIepNCHPn16G9qgvVwOoxpYy2PLhtAXhgW', 'admin', './img/user/1.jpg', '0sMIYWTzGVN9VRLVi7egpvBleGJGmZS4uVfjcVgNwynFBzwG7ArGI7R6j2iO', '2018-03-16 02:49:36', '2018-03-16 02:49:36', NULL),
 (2, 'Ho Minh Nha', 'minhnha9z@gmail.com', '$2y$10$OEqomicQymWMLknNUyqAa.QNAmR2owCmxp9z13eMipl3ejYqnMRf6', 'member', './img/user/2.jpg', 'MWzasQxg3pQEeVXHnlWDHczPpYxVvEPPcUTUgJA818ePTmghIYOIZHJFPxA6', NULL, NULL, NULL),
-(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', 'W1Ie20dFQ5l8qSBZ3yUwwXM4pRqglNHOnx7Bf6xT4UIFmSJxMKPEEApXp9yo', NULL, NULL, 1),
+(5, 'Teacher', 'teacher@gmail.com', '$2y$10$KIJY16Dlgxc0nVUV5j6VTOIG8ur.b0H3fkFEyEqF6lQnpUk4l1Q12', 'teacher', './img/user/5.jpg', 'sGxpeOx95Gb2qrMcFKaTpWCwklIi21BkHxPZXHSGSijUrdpnfFgP5dBQsHim', NULL, NULL, 1),
 (6, 'Dương Vũ Thông', 'anhnguBen@gmail.com', '$2y$10$UAbMrnRN/YgRNIafrMA6Re8nvxW2WP0vKlW4vGAJWIZJkSKYODyo6', 'teacher', NULL, 'l7ARGalipMo2Q3PxRncoLZLl7AZ4y7VJ8EOX0PtiKGZD4Bjawa1mSiAUNPGn', NULL, NULL, 3),
 (7, 'Nguyen Thi Mai', 'mainguyen@gmail.com', '$2y$10$ZxARNHYxcCKeLdlkbQxNS.R5kuenwk2uXDI4hTh9JfTgFAT/PeVLW', 'teacher', NULL, NULL, NULL, NULL, 8),
 (8, 'Tran Phong Phu', 'phutp@gmail.com', '$2y$10$Ci1wFPaa1Y/LMtsyyV9x1ukm9/tBMUs5.cVjT.ryX7TOGTAKkHMxi', 'teacher', NULL, NULL, NULL, NULL, 1),
@@ -941,7 +945,7 @@ ALTER TABLE `main_teacher`
 -- AUTO_INCREMENT cho bảng `office`
 --
 ALTER TABLE `office`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `office_main_teacher`
@@ -1001,7 +1005,7 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT cho bảng `student_level`
 --
 ALTER TABLE `student_level`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `subject`

@@ -3,8 +3,18 @@
         <div class="modal-content">
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
-                    <h2 id="form-title">Danh sách lớp học</h2>
-                    <table id="example" class="table table-bordered table-hover">
+                    <h2 class="col-xs-12">Khóa học <% courseInfo['name'] %></h2>
+                    <div class="col-md-5 col-wrapper">
+                        <div class="img" style="background-image: url(<% courseInfo['img_url'] %>)"></div>
+                    </div>
+                    <div class="col-md-7 col-wrapper">
+                        <div class="info">Số buổi học: <% courseInfo['total_of_period'] %></div>
+                        <div class="info">Học phí: <% courseInfo['price'] | number: 0 %> VNĐ</div>
+                        <div class="info" ng-show="courseInfo['certificate_required'] != null">Khóa học tiên quyết: <% courseInfo['certificate_required'] %></div>
+                        <div class="info">Mô tả khóa học: <% courseInfo['description'] %></div>
+                    </div>
+                    <h3 class="col-xs-12">Danh sách lớp học</h2>
+                    <table id="example" class="table table-bordered table-hover col-xs-12">
                         <thead>
                             <tr>
                                 <th>Mã lớp</th>
@@ -36,7 +46,11 @@
                                         </div>
                                     </span>
                                 </td>
-                                <td><% x.count %> / <% x.max_student %></td>
+                                <td>
+                                    <span ng-repeat="y in countInfo" ng-if="y.id == x.id">
+                                        <% y.count %> / <% x.max_student %>
+                                    </span>
+                                </td>
                                 <td><% x.start_date | date: "dd/MM/y" %></td>
                                 @if (Auth::check())
                                     <td class="action">

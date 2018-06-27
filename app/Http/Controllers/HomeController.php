@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use App\Course;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
 class HomeController extends Controller
@@ -46,5 +47,13 @@ class HomeController extends Controller
         );
         Debugbar::info($data);
         return view('homepage')->with($data);
+    }
+
+    public function getCourse(Request $r) {
+        $data = Course::where('course.id', $r->id)
+        ->leftjoin('course as course2', 'course.certificate_required', 'course2.id')
+        ->select('course.*', 'course2.name as certificate_required')
+        ->get();
+        return $data;
     }
 }
