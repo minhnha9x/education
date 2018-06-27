@@ -126,7 +126,6 @@ class AdminController extends Controller
         ->leftjoin('room_schedule', 'class.id', 'room_schedule.class')
         ->leftjoin('room', 'room_schedule.room', 'room.id')
         ->leftjoin('office', 'room.office', 'office.id')
-        ->orderby('course.name')
         ->groupBy('class.id')
         ->get();
 
@@ -1308,13 +1307,12 @@ class AdminController extends Controller
     }
 
     public function getScore(Request $r) {
-        $id = $r->id;
         $data = DB::table('register')
         ->leftjoin('exam','exam.register', 'register.id')
         ->leftjoin('class','register.class', 'class.id')
         ->leftjoin('users','register.user', 'users.id')
         ->select('*', 'users.id as user', 'exam.score as score', 'register.id as register', 'exam.id as id')
-        ->where('register.class', $id)
+        ->where('register.class', $r->id)
         ->get();
         return $data;
     }

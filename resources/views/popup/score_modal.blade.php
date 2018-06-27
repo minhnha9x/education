@@ -4,7 +4,7 @@
             <div class="main-agileits">
                 <div class="form-w3-agile clearfix">
                     <h2>Bảng điểm lớp <% className %></h2>
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-hover">
                         <tr>
                             <th>Mã học viên</th>
                             <th>Họ và tên</th>

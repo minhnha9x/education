@@ -1,3 +1,40 @@
+.speech {
+  position: absolute;
+  display: none;
+  top: -180px;
+  left: -5px;
+  width: 200px;
+  padding: 10px;
+  text-align: center;
+  background-color: #fff;
+  border: 2px solid #666;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 20px;
+  -webkit-box-shadow: 2px 2px 4px #888;
+  -moz-box-shadow: 2px 2px 4px #888;
+  box-shadow: 2px 2px 4px #888; }
+
+.speech:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 30px;
+  top: 161px;
+  border: 9px solid;
+  border-color: #666 transparent transparent #666; }
+
+.speech:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 32px;
+  top: 161px;
+  border: 6px solid;
+  border-color: #fff transparent transparent #fff; }
+
 .schedulepage {
   padding-top: 60px;
   padding-bottom: 40px;
@@ -69,6 +106,23 @@
     .schedulepage table .action {
       cursor: pointer;
       color: #337ab7; }
+    .schedulepage table .img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      display: inline-block;
+      margin: 0 5px;
+      cursor: pointer; }
+      .schedulepage table .img .speech .img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 5px; }
+      .schedulepage table .img .speech .info {
+        line-height: initial; }
+    .schedulepage table .img:hover .speech {
+      display: initial; }
   .schedulepage #classregisterModal a {
     text-decoration: none !important; }
   .schedulepage #classregisterModal input::-webkit-input-placeholder, .schedulepage #classregisterModal textarea::-webkit-input-placeholder {
