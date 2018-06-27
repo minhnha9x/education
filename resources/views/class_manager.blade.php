@@ -31,7 +31,11 @@
                     </div>
                 </td>
                 <td><% x.office %></td>
-                <td style="white-space: nowrap;"><% x.count %> / <% x.max_student %></td>
+                <td style="white-space: nowrap;">
+                    <span ng-repeat="y in countInfo" ng-if="y.id == x.id">
+                        <% y.count %> / <% x.max_student %>
+                    </span>
+                </td>
                 <td><% x.start_date | date: "dd/MM/y" %></td>
                 <td><% x.end_date | date: "dd/MM/y" %></td>
                 <td><a ng-click="showScore(x.id)"><i class="fas fa-eye"></i></a></td>

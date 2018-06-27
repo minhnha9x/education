@@ -120,12 +120,17 @@ class AdminController extends Controller
 
     public function getAllClass() {
         $class = DB::table('class')
-        ->select('*', 'class.id as id', 'course.name as course', 'office.name as office', DB::raw('count(register.id) as count'))
-        ->leftjoin('register', 'register.class', 'class.id')
+        ->select('*', 'class.id as id', 'course.name as course', 'office.name as office')
         ->leftjoin('course', 'course.id', 'class.course')
         ->leftjoin('room_schedule', 'class.id', 'room_schedule.class')
         ->leftjoin('room', 'room_schedule.room', 'room.id')
         ->leftjoin('office', 'room.office', 'office.id')
+        ->groupBy('class.id')
+        ->get();
+
+        $count = DB::table('class')
+        ->select('*', 'class.id as id', DB::raw('count(register.id) as count'))
+        ->leftjoin('register', 'register.class', 'class.id')
         ->groupBy('class.id')
         ->get();
 
@@ -136,7 +141,8 @@ class AdminController extends Controller
         ->get();
 
         return array('class' => $class,
-            'schedule' => $schedule);
+            'schedule' => $schedule,
+            'count' => $count);
     }
 
     function addClass(Request $r) {

@@ -41,6 +41,7 @@ angular.module('educationApp').controller('ClassController', function($scope, $h
         .then(function(response) {
             $scope.classInfo = response.data['class'];
             $scope.scheduleInfo = response.data['schedule'];
+            $scope.countInfo = response.data['count'];
             $('#menu2 .loading').hide();
             $('#classTable').show();
         }, function(response) {

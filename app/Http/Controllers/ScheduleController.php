@@ -69,9 +69,8 @@ class ScheduleController extends Controller
         ->leftjoin('room', 'room_schedule.room', 'room.id')
         ->leftjoin('office', 'room.office', 'office.id')
         ->leftjoin('subject', 'course.subject', 'subject.id')
-        ->leftjoin('register', 'register.class', 'class.id')
         ->groupBy('class.id')
-        ->select('*', 'course.name as course', 'class.id as id', 'course.id as courseid', 'office.name as office', DB::raw('count(register.id) as count'));
+        ->select('*', 'course.name as course', 'class.id as id', 'course.id as courseid', 'office.name as office');
         if ($r->course != null) {
             $class = $class->where('course', $r->course);
         }
@@ -82,6 +81,12 @@ class ScheduleController extends Controller
             $class = $class->where('office', $r->office);
         }
         $class = $class->get();
+
+        $count = DB::table('class')
+        ->select('*', 'class.id as id', DB::raw('count(register.id) as count'))
+        ->leftjoin('register', 'register.class', 'class.id')
+        ->groupBy('class.id')
+        ->get();
 
         $schedule = DB::table('room_schedule')
         ->leftjoin('schedule', 'room_schedule.schedule', 'schedule.id')
@@ -110,7 +115,7 @@ class ScheduleController extends Controller
         }
         $schedule = $schedule->get();
 
-        $data = array('class' => $class, 'schedule' => $schedule, 'teacher' => $teacher);
+        $data = array('class' => $class, 'schedule' => $schedule, 'teacher' => $teacher, 'count' => $count);
         return $data;
     }
 

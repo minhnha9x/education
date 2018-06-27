@@ -72,7 +72,11 @@
                                 </div>
                             </span>
                         </td>
-                        <td><% x.count %> / <% x.max_student %></td>
+                        <td>
+                            <span ng-repeat="y in countInfo" ng-if="y.id == x.id">
+                                <% y.count %> / <% x.max_student %>
+                            </span>
+                        </td>
                         <td><% x.start_date %></td>
                         @if (Auth::check())
                             <td class="action">
