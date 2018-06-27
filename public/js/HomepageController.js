@@ -1,18 +1,6 @@
 angular.module('educationApp').controller('HomepageController', function($scope, $http) {
     $scope.showModal = function(param) {
         $http({
-            url: './getCourse2',
-            method: 'GET',
-            params: {
-                id: param,
-            }
-        })
-        .then(function(response) {
-            $scope.courseInfo = response.data[0];
-        }, function(response) {
-            $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');
-        });
-        $http({
             url: './getSchedule',
             method: 'GET',
             params: {
@@ -24,6 +12,7 @@ angular.module('educationApp').controller('HomepageController', function($scope,
             $scope.scheduleInfo = response.data.schedule;
             $scope.teacherInfo = response.data.teacher;
             $scope.countInfo = response.data.count;
+            $scope.courseInfo = response.data.course[0];
             $('#classInfoModal').modal('show', 300);
         }, function(response) {
             $.toaster('Lỗi kết nối server, vui lòng thử lại sau.', '', 'danger');

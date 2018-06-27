@@ -104,6 +104,11 @@ class ScheduleController extends Controller
         ->groupBy('class.id')
         ->get();
 
+        $course = Course::where('course.id', $r->course)
+        ->leftjoin('course as course2', 'course.certificate_required', 'course2.id')
+        ->select('course.*', 'course2.name as certificate_required')
+        ->get();
+
         if ($r->subject != null){
             $schedule = $schedule->where('subject', $r->subject);
         }
@@ -115,7 +120,7 @@ class ScheduleController extends Controller
         }
         $schedule = $schedule->get();
 
-        $data = array('class' => $class, 'schedule' => $schedule, 'teacher' => $teacher, 'count' => $count);
+        $data = array('class' => $class, 'schedule' => $schedule, 'teacher' => $teacher, 'count' => $count, 'course' => $course);
         return $data;
     }
 
